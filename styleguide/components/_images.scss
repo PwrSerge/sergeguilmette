@@ -1,0 +1,88 @@
+/* ==========================================================================
+   IMAGES
+   ========================================================================== */
+// background img using compass mixins
+.cover {
+  @include background-size(cover);
+}
+
+.contain {
+  @include background-size(contain);
+}
+
+.ui-img,
+%ui-img {
+  background-image: url('#{$img}/sprites/sprite.svg');
+  background-repeat: no-repeat;
+
+  .no-svg & {
+    background-image: url('#{$img}/ui-separate-std-sprite.png');
+  }
+}
+
+.no-bleed {
+  position: relative;
+
+  &:after {
+    @extend %ui-img;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 260px;
+    height: 380px;
+    content: ' ';
+    background-position: 0 0;
+    background-size: 380px;
+  }
+}
+
+/*
+   Utiliy class for SVG
+   ========================================================================== */
+
+//padding hack
+//@cudos: Sarah Soueidan
+.my-svg-container {
+  position: relative;
+  width: 10%;
+  height: 0;
+  padding-top: 10%;
+}
+
+.my-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  //width: 100%; //only required for <img />
+}
+
+// icons
+svg {
+  fill: currentColor;
+}
+
+// svg init
+.icon {
+  width: 1em;
+  height: 1em;
+}
+
+// #icon-gd-logo2 {
+//     path:nth-of-type(1) {
+//         fill: $color-base;
+//     }
+
+//     path:nth-of-type(2) {
+//         fill: $color-secondary;
+//     }
+// }
+.icon--big {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.icon--colorprimary {
+  color: $color-secondary;
+}

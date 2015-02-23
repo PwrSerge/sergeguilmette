@@ -1,0 +1,84 @@
+// ==========================================================================
+//    MAIN
+//    Based on SMACSS, OOCS, the Sass Way of structuring Sass projects
+//    ==========================================================================
+
+
+// ==========================================================================
+//    VENDOR FRAMEWORKS
+//    ==========================================================================
+
+@import 'compass';
+@import 'compass/css3';
+@import 'breakpoint';
+@import 'modular-scale';
+@import 'susy';
+//@import 'vendor/normalize';
+//@import "vendor/_web-fonts";
+
+// ==========================================================================
+//    UTILS
+//    Doesn't cause Sass to output CSS
+//    Variables/mixins/placeholders/etc
+//    ==========================================================================
+
+@import 'utils/_vars';
+@import 'utils/_functions';
+@import 'utils/_mixins';
+@import 'utils/_placeholders';
+//@import "utils/_animations";
+
+// ==========================================================================
+//    BASE
+//    Plain semantic HTML
+//    No classes/IDs are introduced yet
+//    ==========================================================================
+
+@import 'base/_base';
+@import 'base/_typography';
+
+
+// ==========================================================================
+//    COMPONENTS / PARTIALS
+//    ==========================================================================
+
+@import 'components/_forms';
+@import 'components/_buttons';
+@import 'components/_media';
+@import 'components/_images';
+
+// ==========================================================================
+//    LAYOUT
+//    Defining the gloabal wireframe
+//    ==========================================================================
+
+@import 'layout/_grid';
+@import 'layout/_navigation';
+@import 'layout/_footer';
+@import 'layout/_header';
+@import 'layout/_sidebar';
+
+
+// ==========================================================================
+//    PAGES
+//    page specific styles
+//    ==========================================================================
+
+//@import 'pages/resume';
+@import 'pages/_home';
+
+// ==========================================================================
+//    THEMES
+//    ==========================================================================
+//@import "themes/_light";
+//@import "themes/_dark";
+//@import "themes/_orangina";
+
+
+// ==========================================================================
+//    TOOLS
+//    ==========================================================================
+
+//<% if Rails.env.development? %>
+//@import "show-grid";
+//<% end %>

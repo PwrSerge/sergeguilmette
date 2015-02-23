@@ -1,0 +1,22 @@
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+@include gwf($font-p, $font-s, $font-t);
+
+// Text styles
+.headline {
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+.txt-left {
+  text-align: left;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.txt-center {
+  text-align: center;
+}

@@ -1,0 +1,1482 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sass",
+				"sassdoc"
+			],
+			[
+				"style",
+				"styleguide"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"gz",
+				"gzip"
+			],
+			[
+				"moder",
+				"modernizr"
+			],
+			[
+				"moden",
+				"modernizr"
+			],
+			[
+				"fa",
+				"false"
+			],
+			[
+				"paddin",
+				"padding-top: "
+			],
+			[
+				"b",
+				"bgp	background-position"
+			],
+			[
+				"padding",
+				"padding-right: "
+			],
+			[
+				"magin",
+				"margin-top"
+			],
+			[
+				"bl",
+				"inline-block"
+			],
+			[
+				"z",
+				"z-index: "
+			],
+			[
+				"bor",
+				"border-color: "
+			],
+			[
+				"bo",
+				"border-color: "
+			],
+			[
+				"border",
+				"border-bottom: "
+			],
+			[
+				"inner",
+				"inner-wrapper"
+			],
+			[
+				"translate",
+				"translateY"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"ali",
+				"text-align: "
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"dis",
+				"display: "
+			],
+			[
+				"al",
+				"text-align: "
+			],
+			[
+				"pa",
+				"padding-right: "
+			],
+			[
+				"ba",
+				"background-color: "
+			],
+			[
+				"com",
+				"compass"
+			],
+			[
+				"alig",
+				"text-align: "
+			],
+			[
+				"wi",
+				"window"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"bc",
+				"background-color"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"sg",
+				"svg"
+			],
+			[
+				"bord",
+				"apply-side-rhythm-border"
+			],
+			[
+				"repea",
+				"background-repeat"
+			],
+			[
+				"cler",
+				"Clearfix"
+			],
+			[
+				"bac",
+				"background-image"
+			],
+			[
+				"st",
+				"stylesheets"
+			],
+			[
+				"sc",
+				"scss"
+			],
+			[
+				"in",
+				"inside"
+			],
+			[
+				"wid",
+				"widelayout"
+			],
+			[
+				"hr",
+				"href	Attr"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"d",
+				"d:ib	display:inline-block"
+			],
+			[
+				"f",
+				"f+	font+"
+			],
+			[
+				"ch",
+				"chrome"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 13876,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/styleguide/_buttons.scss",
+			"settings":
+			{
+				"buffer_size": 2365,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/stylesheets/utils/_mixins.scss",
+			"settings":
+			{
+				"buffer_size": 4296,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 2374,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 123,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Remote:   origin @ https://PwrSerge@bitbucket.org/PwrSerge/guilmette-design.git\nLocal:    master ~\\Desktop\\Serge\\guilmette-design\nHead:     3fca5b1 change in node modules and bower components\n\n\nStashes:\n	0: WIP on master: afbe28b changed modernizr and javascript tasks\n	1: On master: with anomyzer.scss\n	2: On master: work01\n\nUntracked files:\n	src/stylesheets/vendor/\n\nChanges:\n	Modified   guilmettedesign.sublime-workspace\n\n\n# Movement:\n#    r = refresh status\n#    1-5 = jump to section\n#    n = next item, N = next section\n#    p = previous item, P = previous section\n#\n# Staging:\n#    s = stage file/section, S = stage all unstaged files\n#    ctrl+shift+s = stage all unstaged and untracked files\n#    u = unstage file/section, U = unstage all files\n#    backspace = discard file/section, shift+backspace = discard everything\n#\n# Commit:\n#    c = commit, C = commit -a (add unstaged)\n#    ctrl+shift+c = commit --amend (amend previous commit)\n#\n# Other:\n#    i = ignore file, I = ignore pattern\n#    enter = open file\n#    d = view diff\n#\n# Stashes:\n#    a = apply stash, A = pop stash\n#    z = create stash, Z = create stash including untracked files\n#    backspace = discard stash",
+			"settings":
+			{
+				"buffer_size": 1186,
+				"line_ending": "Windows",
+				"name": "*git-status*: guilmette-design",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n",
+			"settings":
+			{
+				"buffer_size": 16135,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"status",
+				"Git: Status"
+			],
+			[
+				"git quick",
+				"Git: Quick Commit"
+			],
+			[
+				"git sta",
+				"Git: Status"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git pull",
+				"Git: Pull"
+			],
+			[
+				"git ch",
+				"Git: Checkout Commit"
+			],
+			[
+				"git che",
+				"Git: Checkout"
+			],
+			[
+				"git",
+				"Git: Diff"
+			],
+			[
+				"git pop",
+				"Git: Pop Stash"
+			],
+			[
+				"git ",
+				"Git: Pop Stash"
+			],
+			[
+				"beaui",
+				"SassBeautify"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"git pu",
+				"Git: Pull"
+			],
+			[
+				"git stash",
+				"Git: Stash"
+			],
+			[
+				"git p",
+				"Git: Pull"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"qui",
+				"Git: Quick Commit"
+			],
+			[
+				"GIT QUI",
+				"Git: Quick Commit"
+			],
+			[
+				"git mer",
+				"Git: Merge"
+			],
+			[
+				"git qui",
+				"Git: Quick Commit"
+			],
+			[
+				"git reset",
+				"Git-flow: Release Start From Commit"
+			],
+			[
+				"git m",
+				"Git: Merge"
+			],
+			[
+				"htm",
+				"HTMLBeautify"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"git st",
+				"Git: Stash Include Untracked"
+			],
+			[
+				"quic",
+				"Git: Quick Commit"
+			],
+			[
+				"sas",
+				"SassBeautify"
+			],
+			[
+				"sass",
+				"SassBeautify"
+			],
+			[
+				"git q",
+				"Git: Quick Commit"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				" sta",
+				"Git: Stash"
+			],
+			[
+				"git c",
+				"Git: Commit"
+			],
+			[
+				"git ad",
+				"Git: Quick Add"
+			],
+			[
+				"git  push",
+				"Git: Push"
+			],
+			[
+				"git  qui",
+				"Git: Quick Commit"
+			],
+			[
+				"bea",
+				"Javascript Beautify"
+			],
+			[
+				"git fetc",
+				"Git: Fetch"
+			],
+			[
+				"git fe",
+				"Git: Fetch"
+			],
+			[
+				"git s",
+				"Git: Stash"
+			],
+			[
+				"pull",
+				"Git: Pull Current Branch"
+			],
+			[
+				"ja",
+				"Javascript Beautify"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"java",
+				"Javascript Beautify"
+			],
+			[
+				"pu",
+				"Git: Push"
+			],
+			[
+				"git pus",
+				"Git: Push"
+			],
+			[
+				"git  p",
+				"Git: Pull"
+			],
+			[
+				"git re",
+				"Git: Remote"
+			],
+			[
+				"git add",
+				"Git: Add Remote"
+			],
+			[
+				"git  pull",
+				"Git: Pull"
+			],
+			[
+				"git   pu",
+				"Git: Pull Current Branch"
+			],
+			[
+				"git  sw",
+				"Git: Switch Repo"
+			],
+			[
+				"git co",
+				"Git: Commit"
+			],
+			[
+				"git remo",
+				"Git: Remote"
+			],
+			[
+				"git init",
+				"Git: Init"
+			],
+			[
+				" git pu",
+				"Git: Pull"
+			],
+			[
+				"git br",
+				"Git: Pull Current Branch"
+			],
+			[
+				"git bra",
+				"Git: Checkout New Branch"
+			],
+			[
+				"git sw",
+				"Git: Switch Repo"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git remote",
+				"Git: Remote"
+			],
+			[
+				"git r",
+				"Git: Remote"
+			],
+			[
+				"git  co",
+				"Git: Commit"
+			],
+			[
+				"git a",
+				"Git: Add Remote"
+			],
+			[
+				"git fetch",
+				"Git: Fetch"
+			],
+			[
+				"git f",
+				"Git: Fetch"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"use",
+				"Preferences: Settings - User"
+			],
+			[
+				"user",
+				"Preferences: Settings - User"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"sublime lint",
+				"Preferences: SublimeLint Settings – Default"
+			],
+			[
+				"css lin",
+				"Preferences: SublimeLint Settings – Default"
+			],
+			[
+				"css lint",
+				"Preferences: SublimeLint Settings – Default"
+			],
+			[
+				"fet",
+				"Fetch: File"
+			],
+			[
+				"fetch",
+				"Fetch: File"
+			],
+			[
+				"sy",
+				"Set Syntax: Sass"
+			],
+			[
+				"syn",
+				"Set Syntax: Sass"
+			],
+			[
+				"col",
+				"Color Picker"
+			],
+			[
+				"colo",
+				"Color Picker"
+			],
+			[
+				"in",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"lint",
+				"JSLint"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				" git commi",
+				"Git: Quick Commit"
+			],
+			[
+				"sni",
+				"Snippet: html"
+			],
+			[
+				"Snippet: ",
+				"Snippet: html"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"gist",
+				"Gist: Open Gist"
+			],
+			[
+				"remove ",
+				"Emmet: Remove Tag"
+			],
+			[
+				"syn sa",
+				"Set Syntax: Sass"
+			],
+			[
+				"isntall",
+				"Git: Reset (unstage) All"
+			],
+			[
+				"git branch",
+				"Git: New Branch"
+			],
+			[
+				"INSTA",
+				"Package Control: Install Package"
+			],
+			[
+				"markd",
+				"Set Syntax: Markdown"
+			],
+			[
+				"pack insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 536.0
+	},
+	"console":
+	{
+		"height": 219.0,
+		"history":
+		[
+			"git remote set-url origin https://PwrSerge@bitbucket.org/PwrSerge/guilmette-design.git",
+			"git init",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/guilmets/Documents/guilmette-design",
+		"/C/Users/guilmets/Documents/guilmette-design/src/css",
+		"/C/Users/guilmets/Documents/guilmette-design/src/styleguide",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/components"
+	],
+	"file_history":
+	[
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/base/_base.scss",
+		"/C/Users/guilmets/Documents/guilmette-design/src/styleguide/styleguide.html.lsg",
+		"/C/Users/guilmets/Documents/guilmette-design/gulpfile.js",
+		"/C/Users/guilmets/AppData/Roaming/Adobe/Dreamweaver CS5.5/en_US/Configuration/SiteCache/app-acq_webdev01.dws",
+		"/C/Users/guilmets/Documents/guilmette-design/src/sassdoc/index.html",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/guilmets/Documents/guilmette-design/node_modules/browsernizr/test/pagevisibility-api.js",
+		"/C/Users/guilmets/Documents/guilmette-design/package.json",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Package Syncing.sublime-settings",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/overview.md",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/components/_buttons.scss",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/helpers/_mixins.scss",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/helpers/_vars.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/bower.json",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/styleguide/css/styleguide.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/main.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/components/_typography.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/main.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/package.json",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/base/_base.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/vendor/normalize.min.css",
+		"/C/Documents and Settings/guilmets/My Documents/Downloads/csstyle (2).scss",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/styleguide/overview.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/css/main.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/styleguide/css/styleguide_helper_elements.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/styleguide/index.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/main.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/styleguide/main.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/guilmettedesign.sublime-project",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/guilmettedesign.sublime-workspace",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.awspublish-guilmettedesign.com",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/gulpfile.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/components/_images.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/layout/_header.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/components/_buttons.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/Guilmette-design-site.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/index.html",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Documents and Settings/guilmets/Local Settings/Temp/Snap.svg-0.3.0/demos/snap-ad/src/js/vendor/snap.svg.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/index.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/sprites/svg-symbols.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/sprites/svg-symbols.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/test.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/layout/_grid.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/components/_navigation.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/GD-logo2.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/global.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.jshintignore",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.jshintrc",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/aws-credentials.json",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/bundle.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.gitignore",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/scripts/bundle.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/scripts/vendor/modernizr.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/scripts/main.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/scripts/master.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/scripts/test.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/main.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/vendor/jquery.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/vendor/snap.svg-min.js",
+		"/C/Documents and Settings/guilmets/My Documents/Downloads/svg4everybody-master/svg4everybody-master/svg4everybody.ie8.js",
+		"/C/Documents and Settings/guilmets/My Documents/Downloads/svg4everybody-master/svg4everybody-master/svg4everybody.ie8.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/svg-symbols.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/layout/_footer.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_mixins.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_placeholders.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_vars.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/twitter.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/github.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/sprites/svgsprite.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/sprites/svg-symbols.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/home.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/vendor/font-awesome.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/home.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/npm-debug.log",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/bower_components/trmix/.bower.json",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/templates/index.tpl.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/vendor/_normalize.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_animations.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_functions.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/bower_components/trmix/bower.json",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/print.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/vendor/trmix.min.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/pages/_resume.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/09cc5a257dce716df73455ff8b24a3ca1e7d5c4f/_vars.scssc",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/pages/_footer.scss",
+		"/C/Documents and Settings/guilmets/Desktop/cleanup.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/folder.svg",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/layout/function chkform().js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/config.rb",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-autoprefixer/node_modules/autoprefixer/ChangeLog.md",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-minify-css/node_modules/.bin/cleancss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/20ecaf8718ad1896008c0500d0df461986c04aef/_clearfix.scssc",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/User/LiveReload.sublime-settings",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.scss-lint.yml",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/14cb0164ea66349a3357af900aed2a1512df9b8b/_sprite-img.scssc",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/6839f11d411e28eaa3f8cb9a79a790b59ec9985a/_isolate.scssc",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/96f88c864c4f2cb1fe44454c39c64f7e2f1922f3/_sprite.scssc",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/browser-sync/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/xmlhttprequest/tests/test-events.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/browser-sync/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/xmlhttprequest/tests/test-constants.js",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/SG_resume.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/test.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/Resume_gulp.sublime-project",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/index",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/packed-refs",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/HEAD",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/config",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-svg-symbols/test/output/github-symbol.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/github.svg",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/SublimeGit/SublimeGit.sublime-settings",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.gitattributes",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/css/main.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/components/_media.scss",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/sprites/svg-defs.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/sprites/svg-sprite.svg",
+		"/C/Users/Sergio/AppData/Roaming/Sublime Text 3/Packages/sublime-github/GitHub.sublime-settings",
+		"/D/!PROJECTS/WebDesign/GuilmetteDesign/.git/config",
+		"/D/!PROJECTS/WebDesign/GuilmetteDesign/.git/sourcetreeconfig",
+		"/D/!PROJECTS/WebDesign/Resume_gulp/.git/config",
+		"/D/!PROJECTS/WebDesign/Resume_gulp/.git/HEAD"
+	],
+	"find":
+	{
+		"height": 49.0
+	},
+	"find_in_files":
+	{
+		"height": 234.0,
+		"where_history":
+		[
+			"",
+			"*.*",
+			"",
+			"C:\\Documents and Settings\\guilmets\\Desktop\\Serge\\guilmette-design",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"CLEAN",
+			"clean",
+			"gp.clean",
+			"\\",
+			"mainBowerFiles",
+			", minify ",
+			", minify and push in /",
+			"public",
+			"\\",
+			"\"",
+			"ename",
+			"\\",
+			"snap",
+			"eve.on",
+			"svg4e",
+			"Snap",
+			"snap",
+			"svg",
+			"scripts",
+			"source",
+			"browser",
+			"growlNotifier",
+			"lazypipe",
+			"changed",
+			"cache",
+			"growl",
+			"rimraf",
+			"concat",
+			"rename",
+			"jshint",
+			"imagemin",
+			"uglify",
+			"plumber",
+			".header-title",
+			"!default",
+			"box-sizing",
+			"box-border",
+			"apply-side-rhythm-border",
+			"pkg",
+			"header",
+			"packg",
+			"header",
+			"gp.plumber",
+			"plumber",
+			"gp.gulp.dest",
+			"size",
+			".pipe(",
+			" runSequence",
+			"_animations.scss",
+			"@media ",
+			"nav-activated",
+			"$brand-color",
+			"$base-color",
+			"$brand-color",
+			"$accent-color",
+			"$base-color",
+			"purple",
+			"0",
+			"255",
+			"alpha-attribute",
+			"Projects",
+			".main-navigation",
+			"$header",
+			"rimraf",
+			"\"),\n",
+			"rimraf",
+			"fa-stac",
+			"<i class=\"fa-li fa fa-square\"></i>",
+			"li",
+			"lazypipe",
+			".pipe(",
+			"var plugins = require('gulp-load-plugins')();",
+			"white",
+			"symbol",
+			"black",
+			"white",
+			"flex",
+			"zz",
+			"container",
+			"styles",
+			"</g>",
+			"<g",
+			"G",
+			"g",
+			"scritp",
+			"tp",
+			"imag",
+			"h2",
+			"summary",
+			"sasdcasda",
+			"breakpoint",
+			"_sprite",
+			"013ff52744984f485532472de568bae69d73dc20",
+			"\n//",
+			"layout",
+			"sprite.png",
+			"sprite",
+			"sprite.png",
+			"css/sprite.png",
+			"../css/sprite.png",
+			"sprite.png",
+			"image",
+			"images",
+			"Images",
+			"images",
+			"div",
+			"me",
+			"about",
+			"li",
+			"projects",
+			"GRID",
+			"src/stylesheets/main.scss",
+			"$color",
+			"$brand-color",
+			"beige",
+			"p",
+			"</hgroup>",
+			"<hgroup>",
+			"class",
+			"perferendis",
+			"amet"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"gp.notify",
+			"gp.plumber",
+			"gulp.dest",
+			".pipe(gp.",
+			".pipe(\n.pipe(gp.",
+			"$color-secondary",
+			" .pipe(gp.",
+			"#000",
+			"#fff",
+			"sass",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13876,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								507,
+								508
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/styleguide/_buttons.scss",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2365,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								660,
+								660
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 757.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/stylesheets/utils/_mixins.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4296,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4296,
+								4296
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2374,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1788,
+								1788
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1094.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 123,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								123,
+								123
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1186,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								437,
+								437
+							]
+						],
+						"settings":
+						{
+							"__vi_external_disable": true,
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"draw_white_space": "none",
+							"git_repo": "C:\\Documents and Settings\\guilmets\\Desktop\\Serge\\guilmette-design",
+							"git_status": true,
+							"git_view": "status",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/SublimeGit/syntax/SublimeGit Status.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16135,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16135,
+								16135
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 314.0
+	},
+	"output.find_results":
+	{
+		"height": 224.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"output.git-checkout":
+	{
+		"height": 135.0
+	},
+	"output.git-commit":
+	{
+		"height": 284.0
+	},
+	"output.git-fetch":
+	{
+		"height": 140.0
+	},
+	"output.git-init":
+	{
+		"height": 140.0
+	},
+	"output.git-pull":
+	{
+		"height": 448.0
+	},
+	"output.git-push":
+	{
+		"height": 158.0
+	},
+	"output.git-remote":
+	{
+		"height": 140.0
+	},
+	"project": "guilmettedesign.sublime-project",
+	"replace":
+	{
+		"height": 78.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"",
+				".awspublish-guilmettedesign.com"
+			],
+			[
+				"gul",
+				"gulpfile.js"
+			],
+			[
+				"gu",
+				"gulpfile.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\!PROJECTS\\WebDesign\\HTML5 site\\html5.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 287.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

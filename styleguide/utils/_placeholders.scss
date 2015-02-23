@@ -1,0 +1,115 @@
+//============================================================
+// Placeholders
+//============================================================
+
+// Clearfix
+// @cudos: http://nicolasgallagher.com/micro-clearfix-hack/
+%cf {
+    *zoom: 1;
+    /* IE 6/7 fallback */
+    &:before,
+    &:after {
+        content: ' ';
+        /* 1 */
+        display: table;
+        /* 2 */
+    }
+
+    &:after {
+        clear: both;
+        line-height: 0;
+    }
+}
+
+// Image Replacement - HTML5BP
+%ir {
+    border: 0;
+    color: transparent;
+    font: 0/0 a;
+    text-shadow: none;
+}
+
+// Responsive images
+// <figure class="ri"><img src="" alt=""></figure>
+%ri {
+    > img {
+        max-width: 100%;
+    }
+}
+
+// Scaling <img> elements in a responsive container. Similar vein to background-size: cover;
+// @cudos: http://appendto.com/2014/03/responsive-approach-image-scaling-css/
+%img-scale {
+    // set width & height
+    overflow: hidden;
+
+    > img {
+        left: 50%;
+        max-height: 100%;
+        position: relative;
+        @include transform(translateX(-50%));
+        // 800px has to be the width of the source of the image
+        @media (min-width: 800px) {
+            width: 100%;
+            // otherwise we get 'gaps' either side of the image
+            top: 50%;
+            left: 0;
+            max-height: none;
+            @include transform(translateY(-50%));
+        }
+    }
+}
+
+//centering
+%block-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//vertical-align
+//@cudos: http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
+ %vertical-align {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+// Elipsis and break text
+%txt--truncate {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+%txt--break {
+    word-break: break-all;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+// Webkit-style focus
+%tab-focus {
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+// Navigation
+%navigation-list {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+
+    > li {
+        display: block;
+        float: left;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

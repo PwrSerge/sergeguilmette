@@ -1,0 +1,114 @@
+/* ==========================================================================
+   BASE
+   Plain semantic HTML
+   ========================================================================== */
+@include establish-baseline;
+
+*,
+*:after,
+*:before {
+  @include box-sizing(border-box);
+}
+
+body {
+  font-family: $base-font-family;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  background: $color-base-background;
+  background-size: cover;
+}
+
+article {
+  line-height: 1.5em;
+}
+
+main {
+  // position: relative;
+  // margin-top: 6em;
+}
+
+footer {
+   background: #ccc;
+
+}
+
+h1 {
+  @include font-feature;
+  //@include type-scale(xxlarge);
+  @include type-scale(xxlarge);
+  @include type-weight(xtrabold);
+
+  font-family: $heading-font;
+  margin: 0;
+  color: $color-base;
+}
+
+h2 {
+  @include font-feature;
+  @include type-scale(xlarge);
+  @include type-weight(bold);
+  @include apply-side-rhythm-border(bottom, 2px, 1);
+
+  font-family: $heading-font;
+  color: $color-base;
+  border-color: darken(white, 50%);
+}
+
+h3 {
+  @include font-feature;
+  @include type-scale(large);
+  @include type-weight(regular);
+
+  font-family: $heading-font;
+  color: $color-secondary;
+}
+
+h4 {
+  @include font-feature;
+  @include type-scale(medium);
+  @include type-weight(regular);
+
+  font-family: $heading-font;
+}
+
+h5 {
+  @include font-feature;
+  @include type-scale(base);
+
+  font-family: $heading-font;
+}
+
+p {
+  @include type-scale(medium);
+  @include margin-trailer(1);
+  @include word-break(break-word);
+  @include hyphens(auto);
+}
+
+small {
+  @include type-scale(small);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+table {
+  max-width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: transparent;
+}
+
+img,
+object,
+embed {
+  max-width: 100%;
+}

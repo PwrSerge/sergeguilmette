@@ -1,0 +1,34 @@
+.btn.pseudo-class-hover {
+  background: #8cc63e;
+}
+
+.btn.pseudo-class-focus,
+.btn.pseudo-class-active {
+  background: #cff898;
+}
+
+.btn.pseudo-class-disabled {
+  cursor: default;
+  color: #fff;
+  background: #3b444f;
+}
+
+.btn--brand.pseudo-class-hover {
+  background: #1d508d;
+}
+
+.btn--highlight.pseudo-class-hover {
+  background: #ffc83c;
+}
+
+.btn--neutral.pseudo-class-hover {
+  background: #dbe6ec;
+}
+
+.nav-main__item.pseudo-class-hover {
+  background-color: #3e225b;
+}
+
+.flex-nav-item.pseudo-class-hover {
+  background-color: #aaa;
+}

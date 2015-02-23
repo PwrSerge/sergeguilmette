@@ -1,0 +1,765 @@
+@import url(http://fonts.googleapis.com/css?family=Kavoon|Wendy+One|Montserrat);
+
+.header-title, .header-logo {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* ==========================================================================
+   BASE
+   Plain semantic HTML
+   ========================================================================== */
+html {
+  font-size: 100%;
+  line-height: 1.625em;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  background: #f8f7f2;
+  background-size: cover;
+}
+
+article {
+  line-height: 1.5em;
+}
+
+h1 {
+  -webkit-font-feature-settings: "liga", "dlig", "onum";
+  -moz-font-feature-settings: "liga", "dlig", "onum";
+  -ms-font-feature-settings: "liga", "dlig", "onum";
+  font-feature-settings: "liga", "dlig", "onum";
+  font-size: 2.44141rem;
+  line-height: 3.25rem;
+  font-weight: 900;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: #3e225b;
+}
+
+h2 {
+  -webkit-font-feature-settings: "liga", "dlig", "onum";
+  -moz-font-feature-settings: "liga", "dlig", "onum";
+  -ms-font-feature-settings: "liga", "dlig", "onum";
+  font-feature-settings: "liga", "dlig", "onum";
+  font-size: 1.95313rem;
+  line-height: 2.4375rem;
+  font-weight: 700;
+  border-bottom-width: 0.125rem;
+  border-bottom-style: solid;
+  padding-bottom: 1.5rem;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #3e225b;
+  border-color: gray;
+}
+
+h3 {
+  -webkit-font-feature-settings: "liga", "dlig", "onum";
+  -moz-font-feature-settings: "liga", "dlig", "onum";
+  -ms-font-feature-settings: "liga", "dlig", "onum";
+  font-feature-settings: "liga", "dlig", "onum";
+  font-size: 1.5625rem;
+  line-height: 1.625rem;
+  font-weight: 400;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #8cc63e;
+}
+
+h4 {
+  -webkit-font-feature-settings: "liga", "dlig", "onum";
+  -moz-font-feature-settings: "liga", "dlig", "onum";
+  -ms-font-feature-settings: "liga", "dlig", "onum";
+  font-feature-settings: "liga", "dlig", "onum";
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  font-weight: 400;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h5 {
+  -webkit-font-feature-settings: "liga", "dlig", "onum";
+  -moz-font-feature-settings: "liga", "dlig", "onum";
+  -ms-font-feature-settings: "liga", "dlig", "onum";
+  font-feature-settings: "liga", "dlig", "onum";
+  font-size: 1rem;
+  line-height: 1.625rem;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  margin-bottom: 1.625rem;
+  word-break: break-word;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+small {
+  font-size: 0.8rem;
+  line-height: 1.21875rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+table {
+  max-width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: transparent;
+}
+
+img,
+object,
+embed {
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+.headline {
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+.txt-left {
+  text-align: left;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+button {
+  border: 0;
+}
+
+.btn {
+  font-size: 1rem;
+  line-height: 1.625rem;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  background: #3e225b;
+}
+
+.btn:hover {
+  background: #8cc63e;
+}
+
+.btn:focus, .btn:active {
+  background: #cff898;
+}
+
+.btn:disabled, .btn.is-disabled {
+  cursor: default;
+  color: #fff;
+  background: #3b444f;
+}
+
+.btn::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+.btn--full {
+  display: block;
+  width: 100%;
+}
+
+.btn.btn-medium {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+}
+
+.btn.btn-large {
+  font-size: 1.5625rem;
+  line-height: 1.625rem;
+}
+
+.btn--brand {
+  color: white;
+  background: #206fac;
+}
+
+.btn--brand:hover {
+  background: #1d508d;
+}
+
+.btn--highlight {
+  color: #3b444f;
+  background: #feef6d;
+}
+
+.btn--highlight:hover {
+  background: #ffc83c;
+}
+
+.btn--neutral {
+  color: #2c3643;
+  background: #99a9b3;
+}
+
+.btn--neutral:hover {
+  background: #dbe6ec;
+}
+
+/* ==========================================================================
+   MEDIA
+   ========================================================================== */
+/**
+ * Retina.
+ * Currently only set to 'double' retina, meaning,
+ * assets only have to be twice the normal size,
+ * @reference http://www.brettjankord.com/2012/11/28/cross-browser-retinahigh-resolution-media-queries/
+ */
+/* Ported from @stubbornella */
+.media {
+  overflow: hidden;
+}
+
+.media .media__obj {
+  float: left;
+}
+
+.media .media__obj img {
+  display: block;
+}
+
+.media .media__obj--ext {
+  float: right;
+}
+
+.media__bd {
+  overflow: hidden;
+}
+
+/* Flexible media styles  (videos, ifram, object) */
+.flex__container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+}
+
+.flex__container:before {
+  display: block;
+  width: 100%;
+  padding-bottom: 100%;
+  content: '';
+}
+
+.flex__container .flex__item,
+  .flex__container iframe,
+  .flex__container object,
+  .flex__container embed {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.flex__container--16x9:before {
+  padding-bottom: 56.25%;
+}
+
+.flex__container--4x3:before {
+  padding-bottom: 75%;
+}
+
+.element--invisible {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+}
+
+.container__centered-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 500px;
+  background-color: rgba(135, 206, 235, 0.2);
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   IMAGES
+   ========================================================================== */
+.cover {
+  background-size: cover;
+}
+
+.contain {
+  background-size: contain;
+}
+
+.ui-img,
+.no-bleed:after {
+  background-image: url("../image//sprites/sprite.svg");
+  background-repeat: no-repeat;
+}
+
+.no-svg .ui-img, .no-svg
+  .no-bleed:after {
+  background-image: url("../image//ui-separate-std-sprite.png");
+}
+
+.no-bleed {
+  position: relative;
+}
+
+.no-bleed:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 260px;
+  height: 380px;
+  content: ' ';
+  background-position: 0 0;
+  background-size: 380px;
+}
+
+/*
+   Utiliy class for SVG
+   ========================================================================== */
+.my-svg-container {
+  position: relative;
+  width: 10%;
+  height: 0;
+  padding-top: 10%;
+}
+
+.my-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+svg {
+  fill: currentColor;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+}
+
+.icon--big {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.icon--colorprimary {
+  color: #8cc63e;
+}
+
+/* ==========================================================================
+   GRID
+   ========================================================================== */
+/*
+   Small - Mobile first approach
+   ========================================================================== */
+header {
+  width: 100%;
+  float: left;
+  padding-left: 0.83333%;
+  padding-right: 0.83333%;
+}
+
+.header-wrapper {
+  width: 83.33333%;
+  float: left;
+  padding-left: 0.83333%;
+  padding-right: 0.83333%;
+}
+
+.nav-toggle {
+  width: 16.66667%;
+  float: right;
+  padding-left: 0.83333%;
+  padding-right: 0.83333%;
+}
+
+.nav-main,
+.footer-main {
+  width: 100%;
+  float: left;
+  padding-left: 0.83333%;
+  padding-right: 0.83333%;
+}
+
+main {
+  width: 83.33333%;
+  float: left;
+  padding-left: 0.83333%;
+  padding-right: 0.83333%;
+  margin-right: 9.16667%;
+  margin-left: 9.16667%;
+}
+
+/*
+   Medium
+   ========================================================================== */
+@media (min-width: 43.75em) {
+  .header-wrapper {
+    width: 41.66667%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+  }
+
+  .nav-main {
+    width: 58.33333%;
+    float: right;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+  }
+
+  main {
+    width: 66.66667%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+    margin-right: 17.5%;
+    margin-left: 17.5%;
+  }
+}
+/*
+   large
+   ========================================================================== */
+@media (min-width: 78.125em) {
+  .header-wrapper {
+    width: 58.33333%;
+    float: left;
+    padding-left: 0.41667%;
+    padding-right: 0.41667%;
+  }
+
+  .nav-main {
+    width: 41.66667%;
+    float: right;
+    padding-left: 0.41667%;
+    padding-right: 0.41667%;
+  }
+
+  main {
+    width: 50%;
+    float: left;
+    padding-left: 0.41667%;
+    padding-right: 0.41667%;
+    margin-right: 25%;
+    margin-left: 25%;
+  }
+
+  .footer-main {
+    width: 100%;
+    float: left;
+    padding-left: 0.41667%;
+    padding-right: 0.41667%;
+  }
+}
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+.inner-wrapper {
+  -webkit-transform: translate3d(0, 6em, 0);
+  transform: translate3d(0, 6em, 0);
+}
+
+.inner-wrapper.open {
+  -webkit-transform: translate3d(0, 18em, 0);
+  transform: translate3d(0, 18em, 0);
+}
+
+.nav-toggle {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  float: right;
+  height: 6em;
+  padding-top: 2em;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+@media (min-width: 43.75em) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+.nav-main {
+  position: relative;
+  z-index: 1;
+  height: 6em;
+  -webkit-transform: translate3d(0, -18em, 0);
+  transform: translate3d(0, -18em, 0);
+}
+
+@media (min-width: 43.75em) {
+  .nav-main {
+    height: 6em;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    background-color: #fff;
+  }
+}
+
+.nav-main.open {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.nav-main.nav-activated,
+.inner-wrapper.nav-activated {
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+}
+
+.nav-main__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  background-color: #8cc63e;
+}
+
+@media (min-width: 43.75em) {
+  .nav-main__list {
+    display: inline-block;
+    color: #3e225b;
+    background-color: transparent;
+  }
+}
+
+.nav-main__item {
+  width: 100%;
+  padding: 1em;
+}
+
+.nav-main__item:hover {
+  background-color: #3e225b;
+}
+
+@media (min-width: 43.75em) {
+  .nav-main__item {
+    line-height: 4em;
+    display: inline-block;
+    width: auto;
+    height: 6em;
+    padding: 0.75em;
+    -webkit-transition: background-position 0.5s ease-out;
+    transition: background-position 0.5s ease-out;
+    text-align: middle;
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #ffffff 51%, #ffffff 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #ffffff 51%, #ffffff 100%);
+    background-position: 0 -100%;
+    background-size: auto 200%;
+  }
+
+  .nav-main__item:hover {
+    background-color: #e6e6e6;
+    background-position: 0 0;
+  }
+}
+
+/*
+   Flex Navigation
+   ========================================================================== */
+.flex-nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.flex-nav-item, .flex-nav-item--search {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px 10px;
+  border-left: 1px solid #999;
+  background-color: #ccc;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.flex-nav-item:hover {
+  background-color: #aaa;
+}
+
+.flex-nav-item--search {
+  -webkit-flex: 1;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.flex-nav-item--search label {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.flex-nav-item--search input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer-main {
+  margin-top: 3.25rem;
+  padding: 1em 4em;
+  border-color: #e6e6e6;
+  background: #ccc;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header-container {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 6em;
+  background-color: #fff;
+}
+
+.header-container--fixed {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+.header-wrapper {
+  position: relative;
+  z-index: 2;
+  height: 6em;
+  word-wrap: break-word;
+  background-color: #fff;
+}
+
+.header-title {
+  font-size: 2em;
+  line-height: 0.9em;
+  padding-left: 2em;
+  vertical-align: middle;
+}
+
+@media (min-width: 78.125em) {
+  .header-title {
+    font-size: 2.95em;
+    line-height: 3.2em;
+  }
+}
+
+.header-title:after {
+  content: ' Design';
+  color: #8cc63e;
+}
+
+.header-logo {
+  float: left;
+  width: 3em;
+  height: 3em;
+}
+
+@media (min-width: 78.125em) {
+  .header-logo {
+    width: 4em;
+    height: 4em;
+  }
+}
+
+/* ==========================================================================
+   SIDEBAR
+   ========================================================================== */
+/* ==========================================================================
+   HOME
+   ========================================================================== */
+
+
