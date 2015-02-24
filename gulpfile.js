@@ -6,9 +6,10 @@ var gulp = require('gulp'),
     stylish        = require('jshint-stylish'),
     browserSync    = require('browser-sync'),
     mainBowerFiles = require('main-bower-files'),
-    styleguide = require('sc5-styleguide'),
+    styleguide     = require('sc5-styleguide'),
     gulpFilter     = require('gulp-filter'),
     runSequence    = require('run-sequence'),
+    deploy = require('gulp-gh-pages'),
     sass           = require('gulp-ruby-sass'),
     gutil          = require('gulp-load-utils')(['colors', 'env', 'log', 'pipeline', 'lazypipe']),
     gp             = require('gulp-load-plugins')({
@@ -301,7 +302,7 @@ gulp.task('image', ['sprites'], function() {
             optimizationLevel: 3,
             progressive: true,
             // use: [pngcrush()],
-            interlaced: true,
+            interlaced: true
         })))
         .pipe(gp.size())
         .pipe(gulp.dest(paths.image.dest))
@@ -366,46 +367,6 @@ gulp.task('clean', function() {
         .pipe(gp.rimraf());
 
 });
-/* ==========================================================================
-   AWS PUBLISH
-   ========================================================================== */
-gulp.task('publish', function() {
-
-    // create a new publisher
-    var publisher = gp.awspublish.create({
-        key: 'AKIAJXFBVOWZJCTIBP6Q',
-        secret: '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',
-        bucket: 'guilmettedesign.com'
-    });
-
-    // define custom headers
-    var headers = {
-        'Cache-Control': 'max-age=315360000, no-transform, public'
-    };
-
-    return gulp.src('./dist/**/*')
-
-    // gzip, Set Content-Encoding headers and add .gz extension
-    .pipe(gp.awspublish.gzip())
-        .pipe(gp.rename(function(path) {
-            path.dirname = '/' + path.dirname;
-        }))
-
-    // publisher will add Content-Length, Content-Type and Cache-Control headers
-    // and if not specified will set x-amz-acl to public-read by default
-    .pipe(publisher.publish(headers))
-
-    // create a cache file to speed up consecutive uploads
-    .pipe(publisher.cache())
-
-    //sync bucket files
-    //.pipe(publisher.sync())
-
-    // print upload updates to console
-    .pipe(gp.awspublish.reporter({
-        states: ['create', 'update', 'delete']
-    }));
-});
 
 /* ==========================================================================
    BUMP VERSION
@@ -444,11 +405,20 @@ gulp.task('watch', ['browser-sync'], function() {
     // Watch .html files
     gulp.watch('src/*.html', ['html']);
 });
+
+/* ==========================================================================
+   DEPLOY
+   ========================================================================== */
+gulp.task('deploy', function () {
+    return gulp.src('./dist/**/*')
+                .pipe(deploy());
+});
+
 /* ==========================================================================
    BUILD TASK
    ========================================================================== */
 gulp.task('build', function() {
-    runSequence('clean', ['browserify', 'modernizr', 'scripts', 'image', 'html']);
+    runSequence('clean', [ 'modernizr', 'scripts', 'image', 'html']);
 });
 /* ==========================================================================
    DEFAULT TASK
