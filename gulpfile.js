@@ -412,8 +412,12 @@ gulp.task('watch', ['browser-sync'], function() {
 /* ==========================================================================
    DEPLOY
    ========================================================================== */
-gulp.task('deploy', function () {
-    return gulp.src('./dist/**/*')
+var options = {
+    remoteUrl: "https://github.com/PwrSerge/serguilmette.github.io.git",
+    branch: "gh-pages"};
+
+gulp.task('deploy', function (options) {
+    return gulp.src('dist/**/*.*')
                 .pipe(deploy());
 });
 
