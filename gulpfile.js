@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     source         = require('vinyl-source-stream'),
     browserify     = require('browserify'),
     buffer         = require('vinyl-buffer'),
+    del = require('del'),
     stylish        = require('jshint-stylish'),
     browserSync    = require('browser-sync'),
     mainBowerFiles = require('main-bower-files'),
@@ -360,12 +361,14 @@ gulp.task('html', ['sass'], function() {
 /* ==========================================================================
    CLEAN
    ========================================================================== */
-gulp.task('clean', function() {
-    return gulp.src('./dist/*', {
-            read: false
-        })
-        .pipe(gp.rimraf());
-
+gulp.task('clean', function(cb) {
+    del([
+    'dist/css/**',
+     'dist/image/**',
+     'dist/scripts/**',
+     'dist/index.html',
+    '!dist/CNAME'
+  ], cb);
 });
 
 /* ==========================================================================
