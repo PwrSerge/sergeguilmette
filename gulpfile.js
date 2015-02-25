@@ -415,9 +415,9 @@ gulp.task('watch', ['browser-sync'], function() {
 var options = {
     remoteUrl: "https://github.com/PwrSerge/serguilmette.github.io.git",
     branch: "gh-pages",
-    cacheDir:"./.publish"};
+    cacheDir:"./publish"};
 
-gulp.task('deploy', function (options) {
+gulp.task('deploy', function () {
     return gulp.src('./dist/**/*')
                 .pipe(deploy());
 });
