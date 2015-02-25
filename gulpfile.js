@@ -416,7 +416,7 @@ var options = {
     remoteUrl: "https://github.com/PwrSerge/serguilmette.github.io.git",
     branch: "gh-pages"};
 
-gulp.task('deploy', function () {
+gulp.task('deploy', function (options) {
     return gulp.src('./dist/**/*')
                 .pipe(deploy());
 });
