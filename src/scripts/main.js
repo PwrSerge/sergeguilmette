@@ -9,11 +9,10 @@
  * Browserify bundle modules
  */
 var $ = require('jquery');
-var Modernizr = require('browsernizr');
-
+require('./plugins.js');
 //require('svg4everybody');
-var Snap = require('snapsvg')
-require('./plugins.js')
+//var Snap = require('snapsvg')
+
 
 // First lets create our drawing surface out of existing SVG element
 // If you want to create new surface just provide dimensions

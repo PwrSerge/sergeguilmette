@@ -275,7 +275,9 @@ gulp.task('scripts', function() {
                 loadMaps: true
             }))
             // Add transformation tasks to the pipeline here.
+            .pipe(gp.modernizr())
             .pipe(gulp.dest('./src/scripts/'))
+            .pipe(gp.modernizr())
             .pipe(gp.uglify())
             .pipe(gp.sourcemaps.write('./'))
             .pipe(gulp.dest('./dist/scripts/'))
@@ -284,12 +286,12 @@ gulp.task('scripts', function() {
     return bundle();
 });
 
-gulp.task('modernizr', function() {
-    return gulp.src('src/scripts/vendor/modernizr.js') // js that needs to be placed in the head
-        .pipe(jsminTasks())
-        .pipe(gulp.dest(paths.scripts.dest + '/vendor'))
-        .pipe(gp.notify(notifycfg('modernizr','modernizr task complete')));
-});
+// gulp.task('modernizr', function() {
+//     return gulp.src('src/scripts/vendor/modernizr.js') // js that needs to be placed in the head
+//         .pipe(jsminTasks())
+//         .pipe(gulp.dest(paths.scripts.dest + '/vendor'))
+//         .pipe(gp.notify(notifycfg('modernizr','modernizr task complete')));
+// });
 
 /* ==========================================================================
    IMAGES
@@ -426,11 +428,11 @@ gulp.task('deploy', function () {
    BUILD TASK
    ========================================================================== */
 gulp.task('build', function() {
-    runSequence('clean', [ 'modernizr', 'scripts', 'image', 'html']);
+    runSequence('clean', [ 'modernizr', 'scripts', 'image', 'html'],'deploy');
 });
 /* ==========================================================================
    DEFAULT TASK
    ========================================================================== */
 gulp.task('default', function() {
-    runSequence('clean', ['scripts', 'image', 'html'], 'watch');
+    runSequence('scripts', 'image', 'html', 'watch');
 });

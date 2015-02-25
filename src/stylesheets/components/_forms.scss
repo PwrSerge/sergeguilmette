@@ -3,15 +3,17 @@
    ========================================================================== */
 
 
-label,
-input,
-textarea {
+label {
   @include type-scale(medium);
   @include type-weight(bold);
-
   color: $color-base;
   font-family: $heading-font;
 }
+input,
+textarea {
+  @include type-scale(small);
+  color: #000;
+ }
 
 /*
     Basic form layouts
