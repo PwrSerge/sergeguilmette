@@ -4,18 +4,6 @@
 		"selected_items":
 		[
 			[
-				"com",
-				"com-section	Idiomatic CSS - Section Comment Block"
-			],
-			[
-				"text",
-				"textarea	Tag"
-			],
-			[
-				"styles",
-				"stylesheets"
-			],
-			[
 				"sass",
 				"sassdoc"
 			],
@@ -116,6 +104,10 @@
 				"background-color: "
 			],
 			[
+				"com",
+				"compass"
+			],
+			[
 				"alig",
 				"text-align: "
 			],
@@ -176,6 +168,10 @@
 				"href	Attr"
 			],
 			[
+				"text",
+				"text-decoration"
+			],
+			[
 				"tr",
 				"true"
 			],
@@ -196,26 +192,18 @@
 	"buffers":
 	[
 		{
+			"file": "src/scripts/SergeGuilmette-site.min.js",
+			"settings":
+			{
+				"buffer_size": 257753,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "gulpfile.js",
 			"settings":
 			{
-				"buffer_size": 13937,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/index.html",
-			"settings":
-			{
-				"buffer_size": 13673,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "dist/index.html",
-			"settings":
-			{
-				"buffer_size": 13671,
+				"buffer_size": 13805,
 				"line_ending": "Windows"
 			}
 		},
@@ -223,15 +211,7 @@
 			"file": "src/scripts/main.js",
 			"settings":
 			{
-				"buffer_size": 2718,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "dist/CNAME",
-			"settings":
-			{
-				"buffer_size": 21,
+				"buffer_size": 2719,
 				"line_ending": "Windows"
 			}
 		},
@@ -239,36 +219,24 @@
 			"file": "package.json",
 			"settings":
 			{
-				"buffer_size": 2430,
+				"buffer_size": 2463,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": ".gitignore",
-			"settings":
-			{
-				"buffer_size": 72,
-				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 363.0,
+		"height": 400.0,
 		"selected_items":
 		[
 			[
-				"git qui",
-				"Git: Quick Commit"
+				"remo",
+				"Package Control: Remove Package"
 			],
 			[
-				"",
-				"About"
-			],
-			[
-				"git stat",
-				"Git: Status"
+				"inst",
+				"Package Control: Install Package"
 			],
 			[
 				"git status",
@@ -285,6 +253,10 @@
 			[
 				"insta",
 				"Package Control: Install Package"
+			],
+			[
+				"",
+				"About"
 			],
 			[
 				"git push",
@@ -331,14 +303,6 @@
 				"SassBeautify"
 			],
 			[
-				"inst",
-				"Package Control: Install Package"
-			],
-			[
-				"remo",
-				"Package Control: Remove Package"
-			],
-			[
 				"git pu",
 				"Git: Pull"
 			],
@@ -359,6 +323,10 @@
 				"Package Control: Remove Package"
 			],
 			[
+				"git stat",
+				"Git: Status"
+			],
+			[
 				"qui",
 				"Git: Quick Commit"
 			],
@@ -369,6 +337,10 @@
 			[
 				"git mer",
 				"Git: Merge"
+			],
+			[
+				"git qui",
+				"Git: Quick Commit"
 			],
 			[
 				"git reset",
@@ -706,42 +678,29 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/guilmets/Documents/sergeguilmette",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts",
-		"/C/Users/guilmets/Documents/sergeguilmette/src",
-		"/C/Users/guilmets/Documents/sergeguilmette/src/scripts"
+		"/E/!PROJECTS/WebDesign/sergeguilmette"
 	],
 	"file_history":
 	[
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/index.html",
-		"/C/Users/guilmets/Documents/sergeguilmette/package.json",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/CNAME",
-		"/C/Users/guilmets/Documents/sergeguilmette/.gitignore",
-		"/C/Users/guilmets/Documents/sergeguilmette/bower.json",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Local/Session.sublime_session",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/guilmets/Documents/guilmette-design/bower.json",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/Guilmette-design-site.min.js.map",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/Guilmette-design-site.min.js",
-		"/C/Users/guilmets/Documents/sergeguilmette/src/image/icons/github.svg",
-		"/C/Users/guilmets/Documents/sergeguilmette/gulpfile.js",
+		"/E/!PROJECTS/WebDesign/sergeguilmette/sergeguilmette.sublime-project",
+		"/C/Users/Serge/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/E/!PROJECTS/WebDesign/sergeguilmette/gulpfile.js",
+		"/E/!PROJECTS/WebDesign/sergeguilmette/src/scripts/modernizr.js",
+		"/E/!PROJECTS/WebDesign/sergeguilmette/src/scripts/Guilmette-design-site.min.js",
+		"/E/!PROJECTS/WebDesign/sergeguilmette/npm-debug.log",
+		"/E/!PROJECTS/WebDesign/sergeguilmette/package.json",
+		"/E/!PROJECTS/WebDesign/guilmette-design/package.json",
+		"/E/!PROJECTS/WebDesign/guilmette-design/.gitignore",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/C/Users/guilmets/Documents/guilmette-design/package.json",
-		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/main.scss",
-		"/C/Users/guilmets/Documents/guilmette-design/src/styleguide/styleguide.html.lsg",
-		"/C/Users/guilmets/Documents/guilmette-design/styleguide/sg-styleguide.md",
-		"/C/Users/guilmets/Documents/guilmette-design/styleguide/index.html",
-		"/C/Users/guilmets/Documents/guilmette-design/styleguide/overview.html",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
-		"/C/Users/guilmets/Documents/guilmette-design/guilmettedesign.sublime-project",
-		"/C/Users/guilmets/Desktop/test.js",
 		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/base/_base.scss",
+		"/C/Users/guilmets/Documents/guilmette-design/src/styleguide/styleguide.html.lsg",
 		"/C/Users/guilmets/Documents/guilmette-design/gulpfile.js",
 		"/C/Users/guilmets/AppData/Roaming/Adobe/Dreamweaver CS5.5/en_US/Configuration/SiteCache/app-acq_webdev01.dws",
 		"/C/Users/guilmets/Documents/guilmette-design/src/sassdoc/index.html",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/guilmets/Documents/guilmette-design/node_modules/browsernizr/test/pagevisibility-api.js",
+		"/C/Users/guilmets/Documents/guilmette-design/package.json",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Package Syncing.sublime-settings",
@@ -841,11 +800,20 @@
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/96f88c864c4f2cb1fe44454c39c64f7e2f1922f3/_sprite.scssc",
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/browser-sync/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/xmlhttprequest/tests/test-events.js",
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/browser-sync/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/xmlhttprequest/tests/test-constants.js",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/SG_resume.html"
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/SG_resume.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/test.html",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/Resume_gulp.sublime-project",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/index",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/packed-refs",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/HEAD",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/config",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-svg-symbols/test/output/github-symbol.css",
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/github.svg",
+		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/SublimeGit/SublimeGit.sublime-settings"
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -864,11 +832,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"/dist",
-			"dist",
-			" = require('vinyl-source-stream'),",
-			"/",
-			"functions",
 			"CLEAN",
 			"clean",
 			"gp.clean",
@@ -1018,24 +981,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "gulpfile.js",
+					"file": "src/scripts/SergeGuilmette-site.min.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13937,
+						"buffer_size": 257753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12022,
-								12022
+								722,
+								722
 							]
 						],
 						"settings":
@@ -1046,89 +1009,58 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 9162.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13673,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								12319,
-								12319
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5730.0,
+						"translation.y": 576.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "dist/index.html",
+					"buffer": 1,
+					"file": "gulpfile.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13671,
+						"buffer_size": 13805,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12405,
-								12405
+								7962,
+								7962
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Seti_UI/Prefs/Langs/Gulpfile JS.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5874.0,
+						"translation.y": 6120.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "src/scripts/main.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2718,
+						"buffer_size": 2719,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								825,
-								173
+								1208,
+								1208
 							]
 						],
 						"settings":
@@ -1139,99 +1071,41 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 72.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "dist/CNAME",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 21,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								21,
-								21
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "package.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2430,
+						"buffer_size": 2463,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								846,
+								846
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"syntax": "Packages/Seti_UI/Prefs/Langs/npm JSON.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1008.0,
+						"translation.y": 168.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": ".gitignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 72,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								72,
-								72
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1349,7 +1223,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\guilmets\\Documents\\sergeguilmette\\sergeguilmette.sublime-project"
+				"E:\\!PROJECTS\\WebDesign\\guilmette-design\\guilmettedesign.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -1370,7 +1244,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 277.0,
+	"side_bar_width": 287.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

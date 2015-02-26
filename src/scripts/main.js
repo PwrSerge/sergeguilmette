@@ -10,6 +10,8 @@
  */
 var $ = require('jquery');
 require('./plugins.js');
+
+var Modernizr = require('browsernizr');
 //require('svg4everybody');
 //var Snap = require('snapsvg')
 
@@ -24,7 +26,6 @@ require('./plugins.js');
 // bigCircle.attr({
 //   fill: "#bada55",
 // });
-
 
 
 /*
