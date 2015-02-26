@@ -117,10 +117,9 @@ var sassconfig = function sassconfig (Container) {
    ========================================================================== */
   var notifycfg = function  (Title) {
    return {
-     title: Title,
+     title:  (gutil.colors.cyan(Title)),
      message:'<%= file.relative %>'+' is done',
-     wait: false
-     };
+          };
 };
 /*
    SVG symbol config
@@ -255,50 +254,40 @@ gulp.task('sass', ['sass-site', 'sass-print']);
 /* ==========================================================================
    SCRIPTS
    ========================================================================== */
-// var getBundleName = function() {
-//     var name = require('./package.json').name;
-//     return name + '.' + 'min';
-// };
+var getBundleName = function() {
+    var name = require('./package.json').name;
+    return name + '.' + 'min';
+};
 
-// gulp.task('scripts', function() {
-//     var bundler = browserify({
-//         entries: ['./src/scripts/main.js'],
-//         debug: true
-//     });
-
-//     var bundle = function() {
-//         return bundler
-//             .bundle()
-//             .pipe(source(getBundleName() + '.js'))
-//             .pipe(buffer())
-//             .pipe(gp.sourcemaps.init({
-//                 loadMaps: true
-//             }))
-//             // Add transformation tasks to the pipeline here.
-//             .pipe(gp.modernizr())
-//             .pipe(gulp.dest('./src/scripts/'))
-//             .pipe(gp.modernizr())
-//             .pipe(gp.uglify())
-//             .pipe(gp.sourcemaps.write('./'))
-//             .pipe(gulp.dest('./dist/scripts/'))
-//             .pipe(gp.notify(notifycfg('SCRIPTS','browserify task complete')));
-//     };
-//     return bundle();
-// });
 gulp.task('scripts', function() {
-    // Single entry point to browserify
-    gulp.src('./src/scripts/main.js')
-        .pipe(browserify({
-          insertGlobals : true,
-          debug : !gulp.env.production
-        }))
+    var bundler = browserify({
+        entries: ['./src/scripts/main.js'],
+        debug: true
+    });
 
-            .pipe(gulp.dest('./src/scripts/'))
-
+    var bundle = function() {
+        return bundler
+            .bundle()
+            .pipe(source(getBundleName() + '.js'))
+            .pipe(buffer())
+            .pipe(gp.sourcemaps.init({
+                loadMaps: true
+            }))
+            // Add transformation tasks to the pipeline here.
+           .pipe(gulp.dest('./src/scripts/'))
             .pipe(gp.uglify())
             .pipe(gp.sourcemaps.write('./'))
             .pipe(gulp.dest('./dist/scripts/'))
-            .pipe(gp.notify(notifycfg('SCRIPTS','browserify task complete')));
+            .pipe(gp.notify(notifycfg('SCRIPTS')));
+    };
+    return bundle();
+});
+
+gulp.task('modernizr', function() {
+gulp.src('./src/scripts/main.js')
+  .pipe(gp.modernizr())
+  .pipe(gulp.dest('./src/scripts/'));
+
 });
 
 // gulp.task('modernizr', function() {
@@ -327,7 +316,7 @@ gulp.task('image', ['sprites'], function() {
         .pipe(browserSync.reload({
             stream: true
         }))
-        .pipe(gp.notify(notifycfg('IMAGES','Image task complete')));
+        .pipe(gp.notify(notifycfg('IMAGES')));
 });
 
 /* ==========================================================================
@@ -339,7 +328,7 @@ gulp.task('sprites', function() {
         .pipe(gp.svgSymbols(svgconfig))
         .pipe(gp.size())
         .pipe(gulp.dest('dist/image/sprites'))
-        .pipe(gp.notify(notifycfg('IMAGES','Sprites task complete')));
+        .pipe(gp.notify(notifycfg('IMAGES')));
 });
 /* ==========================================================================
    HTML

@@ -1,17 +1,20 @@
 /**
- * Guilmette-design-site - GuilmetteDesign portfolio
- * @version v1.0.1
- * @link http://www.guilmettedesign.com
+ * SergeGuilmette-site
+ * @version v1.0.0
+ * @link http://www.sergeguilmette.me
  * @license ISC
  */
 
 /**
  * Browserify bundle modules
  */
-var $ = require('jquery');
-require('./plugins.js');
 
-var Modernizr = require('browsernizr');
+
+var $ = require('jquery');
+//require('./modernizr.js');
+require('./plugins.js');
+var Modernizr = require('modernizr');
+
 //require('svg4everybody');
 //var Snap = require('snapsvg')
 
@@ -33,6 +36,7 @@ var Modernizr = require('browsernizr');
 */
 
 $(function() {
+
     var $page = $('.inner-wrapper'),
         $navToggle = $('.nav-toggle'),
         $mainNavigation = $('.nav-main '),
@@ -41,7 +45,7 @@ $(function() {
         $menuHt = $mainNavigation.height(),
         $totalmenuHt = $headerHt + $menuHt,
         $main = $('main'),
-        $root = $('html, body');
+        $root = $('htnml, body');
 
     //fixed  header  on scroll
     // $(window).scroll(function() {
