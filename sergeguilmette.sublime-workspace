@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"com",
+				"com-section	Idiomatic CSS - Section Comment Block"
+			],
+			[
+				"text",
+				"textarea	Tag"
+			],
+			[
+				"styles",
+				"stylesheets"
+			],
+			[
 				"sass",
 				"sassdoc"
 			],
@@ -104,10 +116,6 @@
 				"background-color: "
 			],
 			[
-				"com",
-				"compass"
-			],
-			[
 				"alig",
 				"text-align: "
 			],
@@ -168,10 +176,6 @@
 				"href	Attr"
 			],
 			[
-				"text",
-				"text-decoration"
-			],
-			[
 				"tr",
 				"true"
 			],
@@ -192,35 +196,29 @@
 	"buffers":
 	[
 		{
-			"file": "src/scripts/SergeGuilmette-site.min.js",
+			"contents": "Package Control Messages\n========================\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nSublimeLinter-html-tidy:\n-----------------------\n\n  SublimeLinter-html-tidy\n  -------------------------------\n  This linter plugin for SublimeLinter provides an interface to tidy.\n  \n  ** IMPORTANT! **\n  \n  Before this plugin will activate, you *must*\n  follow the installation instructions here:\n  \n  https://github.com/SublimeLinter/SublimeLinter-html-tidy\n  \n\n\nMarkdown Preview:\n----------------\n\n  Sublime Text 2/3 Markdown Preview\n  =================================\n  \n  Preview and build your markdown files quickly in your web browser from sublime text 2/3. \n  \n  You can use builtin [python-markdown][10] parser or use the [github markdown API][5] for the conversion.\n  \n  **NOTE:** If you choose the GitHub API for conversion (set parser: github in your settings), your code will be sent through https to github for live conversion. You'll have [Github flavored markdown][6], syntax highlighting and EMOJI support for free :heart: :octocat: :gift:. If you make more than 60 calls a day, be sure to set your GitHub API key in the settings :). You can also get most of this in the default Markdown parser with by enabling certain extensions; see \"[Parsing Github Flavored Markdown](#parsing-github-flavored-markdown-)\"\" below for more information.\n  \n  **LINUX users:** If you want to use GitHub API for conversion, you'll need to have a custom Python install that includes python-ssl as its not built in the Sublime Text 2 Linux package. see [@dusteye comment][8]. If you use a custom window manager, also be sure to set a `BROWSER` environment variable. see [@PPvG comments][9]\n  \n  ## Features :\n  \n   - Markdown preview using the [Python-markdown][10] or the Github API just choose select the build commands.\n   - Syntax highlighting via Pygments. See \"[Configuring Pygments](#configuring-pygments)\" for more info.\n   - Build markdown file using Sublime Text build system. The build parser are config via the `\"parser\"` config.\n   - Browser preview auto reload on save if you have the [ST2 LiveReload plugin][7] installed.\n   - Builtin parser : supports `abbr`, `attr_list`, `def_list`, `fenced_code`, `footnotes`, `tables`, `smart_strong`, `smarty`,  `wikilinks`, `meta`, `sane_lists`, `codehilite`, `nl2br`, and `toc` markdown extensions.\n   - CSS search path for local and build-in CSS files (always enabled) and/or CSS overriding if you need\n   - YAML support thanks to @tommi\n   - Clipboard selection and copy to clipboard thanks to @hexatrope\n   - MathJax support : \\\\(\\frac{\\pi}{2}\\\\) thanks to @bps10\n   - HTML template customisation thanks to @hozaka\n   - Embed images as base64 (see [settings][settings] file for more info)\n   - Strip out multimarkdown critic marks (see [settings][settings] file for more info)\n   - 3rd party extensions for the Python Markdown parser:\n  \n      | Extension | Documentation |\n      |-----------|---------------|\n      | magiclink | Find and convert HTML links and email address to links ([MagicLink Documentation](http://facelessuser.github.io/PyMdown/Extensions/MagicLink.html)). |\n      | delete | Surround inline text with `~~crossed out~~` to get del tags ~~crossed out~~. |\n      | insert | Surround inline text with `^^underlined^^` to get ins tags <ins>underlined</ins>. |\n      | tasklist | Github Flavored Markdown tasklists ([Tasklist Documentation](http://facelessuser.github.io/PyMdown/Extensions/Tasklist.html)). |\n      | githubemoji | Support for Github Flavored Markdown emojis ([GithubEmoji Documentation](http://facelessuser.github.io/PyMdown/Extensions/GithubEmoji.html)). |\n      | headeranchor | Github Flavored Markdown style header anchors ([HeaderAnchor Documentation](http://facelessuser.github.io/PyMdown/Extensions/HeaderAnchor.html)). |\n      | github | A convenience extension to add: `magiclink`, `delete`, `tasklist`, `githubemoji`, `headeranchor`, `superfences`, and `nl2br` to parse and display Markdown in a github-ish way.  It is recommed to pair `github` with `extra` and `codehilite` (with language guessing off) to parse close to github's way.  Be aware of what extensions `github` loads, because you should not load extensions more than once. |\n      | progressbar | Create progress bars ([ProgressBar Documentation](http://facelessuser.github.io/PyMdown/Extensions/ProgressBar.html)). |\n      | superfences | Allow fenced blocks to be nested under lists, blockquotes, etc. and add special UML diagram blocks ([SuperFences Documentation](http://facelessuser.github.io/PyMdown/Extensions/SuperFences.html)). |\n  \n  ## Installation :\n  \n  ### Using [Package Control][3] (*Recommended*)\n  \n  For all Sublime Text 2/3 users we recommend install via [Package Control][3].\n  \n  1. [Install][11] Package Control if you haven't yet.\n  2. Use `cmd+shift+P` then `Package Control: Install Package`\n  3. Look for `Markdown Preview` and install it.\n  \n  ### Manual Install\n  \n  1. Click the `Preferences > Browse Packages…` menu\n  2. Browse up a folder and then into the `Installed Packages/` folder\n  3. Download [zip package][12] rename it to `Markdown Preview.sublime-package` and copy it into the `Installed Packages/` directory\n  4. Restart Sublime Text\n  \n  ## Usage :\n  \n  ### To preview :\n  \n   - optionally select some of your markdown for conversion\n   - use `cmd+shift+P` then `Markdown Preview` to show the follow commands (you will be prompted to select which parser you prefer):\n    - Markdown Preview: Preview in Browser\n    - Markdown Preview: Export HTML in Sublime Text\n    - Markdown Preview: Copy to Clipboard\n    - Markdown Preview: Open Markdown Cheat sheet\n   - or bind some key in your user key binding, using a line like this one:\n     `{ \"keys\": [\"alt+m\"], \"command\": \"markdown_preview\", \"args\": {\"target\": \"browser\", \"parser\":\"markdown\"} },` for a specific parser and target or `{ \"keys\": [\"alt+m\"], \"command\": \"markdown_preview_select\", \"args\": {\"target\": \"browser\"} },` to bring up the quick panel to select enabled parsers for a given target.\n   - once converted a first time, the output HTML will be updated on each file save (with LiveReload plugin)\n  \n  ### To build :\n  \n   - Just use `Ctrl+B` (Windows/Linux) or `cmd+B` (Mac) to build current file.\n  \n  ### To config :\n  \n  Using Sublime Text menu: `Preferences`->`Package Settings`->`Markdown Preview`\n  \n  - `Settings - User` is where you change your settings for Markdown Preview.\n  - `Settings - Default` is a good reference with detailed descriptions for each setting.\n  \n  ### Configuring Pygments\n  If you add the codehilite extension manually in the enabled extensions, you can override some of the default settings.\n  \n  * Turn language guessing *on* or *off* (*on* will highlight fenced blocks even if you don't specify a language)  `codehilite(guess_lang=False)` (True|False).\n  * Show line numbers: `codehilite(linenums=True)` (True|False).\n  * Change the higlight theme: `codehilite(pygments_style=emacs)`.\n  * Inline the CSS: `codehilite(noclasses=True)` (True|False).\n  * Use multiple: `codehilite(linenums=True, pygments_style-emacs)`.\n  \n  See [codehilte page](https://pythonhosted.org/Markdown/extensions/code_hilite.html) for more info.\n  \n  ### Meta Data Support\n  When the `meta` extension is enabled (https://pythonhosted.org/Markdown/extensions/meta_data.html), the results will be written to the HTML head in the form `<meta name=\"key\" content=\"value1,value2\">`.  `title` is the one exception, and its content will be written to the title tag in the HTML head.\n  \n  ### YAML Frontmatter Support\n  YAML frontmatter can be stripped out and read when `strip_yaml_front_matter` is set to  `true` in the settings file.  In general the, the fronmatter is handled the same as [meta data](#meta-data-support), but if both exist in a file, the YAML keys will override the `meta` extension keys.  There are a few special keys names that won't be handled as html meta data.\n  \n  #### Special YAML Key Names\n  Yaml frontmatter has a few special key names that are used that will not be handled as meta data:\n  \n  - **basepath**: An absolute path to configure the relative paths for images etc. (for when the markdown is supposed to reference images in a different location.)\n  - **references**: Can take a file path or an array of file paths for separate markdown files containing references, footnotes, etc.  Can be an absolute path or relative path.  Relative paths first use the source file's directory, and if the file cannot be found, it will use the `basepath` setting.\n  - **destination**: This is an absolute file path or relative file path for when the markdown is saved to html via the build command or the `Save to HTML` command.  Relative paths first use the source file's directory, and if the file cannot be found, it will use the `basepath` setting.\n  - **settings**: This is a dictionary where you can override settings that are in the settings file.\n  \n  #### Example\n  ```yaml\n  ---\n      # Builtin values\n      references:\n          - references.md\n          - abbreviations.md\n          - footnotes.md\n  \n      destination: destination.html\n  \n      # Meta Data\n      title: Test Page\n      author:\n          - John Doe\n          - Jane Doe\n  \n      # Settings overrides\n      settings:\n          enabled_extensions:\n          - extra\n          - github\n          - toc\n          - headerid\n          - smarty(smart_quotes=False) # smart quotes interferes with attr_list\n          - meta\n          - wikilinks\n          - admonition\n          - codehilite(guess_lang=False,pygments_style=github)\n  ---\n  ```\n  \n  ### Parsing Github Flavored Markdown :\n  Github Flavored Mardown (GFM) is a very popular markdown.  Markdown Preview can actually handle them in a couple of ways: online and offline.\n  \n  #### Online :\n  Parsing GFM using the online method requires using the Github API as the parser.  It may also require setting `github_mode` to `gfm` to get things like tasklists to render properly.\n  \n  #### Offline :\n  By default almost all extensions are enabled to help with the github feel, but there are some tweaks needed to get the full experience.\n  \n  GFM does not auto guess language in fenced blocks, but Markdown Preview does this by default.  You can fix this in one of two ways:\n  \n  1. Disable auto language guessing in the settings file `\"guess_language\": false,`\n  2. Or if you are manually defining extensions: `\"enabled_extensions\": [\"codehilite(guess_lang=False,pygments_style=github)\"]`\n  \n  \n  As mentioned earlier, almost all extensions are enabled by default, but as a reference, the minimum extensions that should be enabled are listed below:\n  \n  ```javascript\n    \"enabled_extensions\": [\n      \"extra\",\n      \"github\",\n      \"codehilite(guess_lang=False,pygments_style=github)\"\n    ]\n  ```\n  \n  This may be further enhanced in the future.\n  \n  \n  ## Support :\n  \n  - Any bugs about Markdown Preview please feel free to report [here][issue].\n  - And you are welcome to fork and submit pullrequests.\n  \n  \n  ## License :\n  \n  The code is available at github [project][home] under [MIT licence][4].\n  \n   [home]: https://github.com/revolunet/sublimetext-markdown-preview\n   [3]: https://sublime.wbond.net/\n   [4]: http://revolunet.mit-license.org\n   [5]: http://developer.github.com/v3/markdown\n   [6]: http://github.github.com/github-flavored-markdown/\n   [7]: https://github.com/dz0ny/LiveReload-sublimetext2\n   [8]: https://github.com/revolunet/sublimetext-markdown-preview/issues/27#issuecomment-11772098\n   [9]: https://github.com/revolunet/sublimetext-markdown-preview/issues/78#issuecomment-15644727\n   [10]: https://github.com/waylan/Python-Markdown\n   [11]: https://sublime.wbond.net/installation\n   [12]: https://github.com/revolunet/sublimetext-markdown-preview/archive/master.zip\n   [issue]: https://github.com/revolunet/sublimetext-markdown-preview/issues\n   [settings]: https://github.com/revolunet/sublimetext-markdown-preview/blob/master/MarkdownPreview.sublime-settings\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n",
 			"settings":
 			{
-				"buffer_size": 257753,
-				"line_ending": "Unix"
+				"buffer_size": 23936,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"scratch": true
 			}
 		},
 		{
-			"file": "gulpfile.js",
+			"file": "src/stylesheets/components/_buttons.scss",
 			"settings":
 			{
-				"buffer_size": 13805,
+				"buffer_size": 2365,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/scripts/main.js",
+			"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 2719,
+				"buffer_size": 0,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "package.json",
-			"settings":
-			{
-				"buffer_size": 2463,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -231,12 +229,20 @@
 		"selected_items":
 		[
 			[
-				"remo",
-				"Package Control: Remove Package"
+				"git sta",
+				"Git: Status"
 			],
 			[
-				"inst",
-				"Package Control: Install Package"
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"git qui",
+				"Git: Quick Commit"
+			],
+			[
+				"",
+				"About"
 			],
 			[
 				"git status",
@@ -255,10 +261,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"",
-				"About"
-			],
-			[
 				"git push",
 				"Git: Push"
 			],
@@ -269,10 +271,6 @@
 			[
 				"git quick",
 				"Git: Quick Commit"
-			],
-			[
-				"git sta",
-				"Git: Status"
 			],
 			[
 				"git pull",
@@ -303,6 +301,14 @@
 				"SassBeautify"
 			],
 			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
 				"git pu",
 				"Git: Pull"
 			],
@@ -323,10 +329,6 @@
 				"Package Control: Remove Package"
 			],
 			[
-				"git stat",
-				"Git: Status"
-			],
-			[
 				"qui",
 				"Git: Quick Commit"
 			],
@@ -337,10 +339,6 @@
 			[
 				"git mer",
 				"Git: Merge"
-			],
-			[
-				"git qui",
-				"Git: Quick Commit"
 			],
 			[
 				"git reset",
@@ -678,30 +676,56 @@
 	},
 	"expanded_folders":
 	[
-		"/E/!PROJECTS/WebDesign/sergeguilmette"
+		"/C/Users/guilmets/Documents/sergeguilmette",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/css",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts",
+		"/C/Users/guilmets/Documents/sergeguilmette/src",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/css",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components"
 	],
 	"file_history":
 	[
-		"/E/!PROJECTS/WebDesign/sergeguilmette/sergeguilmette.sublime-project",
-		"/C/Users/Serge/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
-		"/E/!PROJECTS/WebDesign/sergeguilmette/gulpfile.js",
-		"/E/!PROJECTS/WebDesign/sergeguilmette/src/scripts/modernizr.js",
-		"/E/!PROJECTS/WebDesign/sergeguilmette/src/scripts/Guilmette-design-site.min.js",
-		"/E/!PROJECTS/WebDesign/sergeguilmette/npm-debug.log",
-		"/E/!PROJECTS/WebDesign/sergeguilmette/package.json",
-		"/E/!PROJECTS/WebDesign/guilmette-design/package.json",
-		"/E/!PROJECTS/WebDesign/guilmette-design/.gitignore",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
+		"/C/Users/guilmets/Documents/sergeguilmette/gulpfile.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/index.html",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/scripts/main.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/layout/_header.scss",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/SergeGuilmette-site.min.js.map",
+		"/C/Users/guilmets/Documents/sergeguilmette/package.json",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/scripts/SergeGuilmette-site.min.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/modernizr.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/scripts/modernizr.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/modernizr.custom.97414.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components/_forms.scss",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/index.html",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/CNAME",
+		"/C/Users/guilmets/Documents/sergeguilmette/.gitignore",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/tyret.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/bower.json",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Local/Session.sublime_session",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/guilmets/Documents/guilmette-design/bower.json",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/Guilmette-design-site.min.js.map",
+		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/Guilmette-design-site.min.js",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/image/icons/github.svg",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/base/_base.scss",
+		"/C/Users/guilmets/Documents/guilmette-design/package.json",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/main.scss",
 		"/C/Users/guilmets/Documents/guilmette-design/src/styleguide/styleguide.html.lsg",
+		"/C/Users/guilmets/Documents/guilmette-design/styleguide/sg-styleguide.md",
+		"/C/Users/guilmets/Documents/guilmette-design/styleguide/index.html",
+		"/C/Users/guilmets/Documents/guilmette-design/styleguide/overview.html",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/C/Users/guilmets/Documents/guilmette-design/guilmettedesign.sublime-project",
+		"/C/Users/guilmets/Desktop/test.js",
+		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/base/_base.scss",
 		"/C/Users/guilmets/Documents/guilmette-design/gulpfile.js",
 		"/C/Users/guilmets/AppData/Roaming/Adobe/Dreamweaver CS5.5/en_US/Configuration/SiteCache/app-acq_webdev01.dws",
 		"/C/Users/guilmets/Documents/guilmette-design/src/sassdoc/index.html",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/guilmets/Documents/guilmette-design/node_modules/browsernizr/test/pagevisibility-api.js",
-		"/C/Users/guilmets/Documents/guilmette-design/package.json",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Package Syncing.sublime-settings",
 		"/C/Users/guilmets/Documents/guilmette-design/src/stylesheets/overview.md",
@@ -790,30 +814,11 @@
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/config.rb",
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-autoprefixer/node_modules/autoprefixer/ChangeLog.md",
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-minify-css/node_modules/.bin/cleancss",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/20ecaf8718ad1896008c0500d0df461986c04aef/_clearfix.scssc",
-		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/User/LiveReload.sublime-settings",
-		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
-		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.scss-lint.yml",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/14cb0164ea66349a3357af900aed2a1512df9b8b/_sprite-img.scssc",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/6839f11d411e28eaa3f8cb9a79a790b59ec9985a/_isolate.scssc",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/96f88c864c4f2cb1fe44454c39c64f7e2f1922f3/_sprite.scssc",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/browser-sync/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/xmlhttprequest/tests/test-events.js",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/browser-sync/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/xmlhttprequest/tests/test-constants.js",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/SG_resume.html",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/test.html",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/Resume_gulp.sublime-project",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/index",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/packed-refs",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/HEAD",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.git/config",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/node_modules/gulp-svg-symbols/test/output/github-symbol.css",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/github.svg",
-		"/C/Documents and Settings/guilmets/Application Data/Sublime Text 3/Packages/SublimeGit/SublimeGit.sublime-settings"
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/20ecaf8718ad1896008c0500d0df461986c04aef/_clearfix.scssc"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 47.0
 	},
 	"find_in_files":
 	{
@@ -832,6 +837,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"zindex",
+			"$zindex",
+			"mq",
+			"n.",
+			"n.mq",
+			"documentElement",
+			"css-beauti",
+			"modernizr",
+			"mq",
+			"Modernizr.mq",
+			"modernizr",
+			"!function e(t,n,r){",
+			"/dist",
+			"dist",
+			" = require('vinyl-source-stream'),",
+			"/",
+			"functions",
 			"CLEAN",
 			"clean",
 			"gp.clean",
@@ -942,17 +964,7 @@
 			"about",
 			"li",
 			"projects",
-			"GRID",
-			"src/stylesheets/main.scss",
-			"$color",
-			"$brand-color",
-			"beige",
-			"p",
-			"</hgroup>",
-			"<hgroup>",
-			"class",
-			"perferendis",
-			"amet"
+			"GRID"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -981,131 +993,185 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/scripts/SergeGuilmette-site.min.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 257753,
+						"buffer_size": 23936,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								722,
-								722
+								118,
+								118
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 576.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "gulpfile.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13805,
-						"regions":
-						{
-						},
-						"selection":
-						[
+							"auto_complete": true,
+							"codeintel": true,
+							"codeintel_database_dir": "~/.codeintel",
+							"codeintel_enabled_languages":
 							[
-								7962,
-								7962
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Seti_UI/Prefs/Langs/Gulpfile JS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6120.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/scripts/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2719,
-						"regions":
-						{
-						},
-						"selection":
-						[
+								"JavaScript",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Node.js",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_exclude_scopes_from_complete_triggers":
 							[
-								1208,
-								1208
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+								"comment"
+							],
+							"codeintel_language_settings":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_exclude_dir":
+									[
+										"/build/",
+										"/min/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": false,
+									"codeintel_selected_catalogs":
+									[
+										"jQuery"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 15,
+									"codeintel_scan_exclude_dir":
+									[
+										"/Applications/MAMP/bin/php/php5.5.3/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": true,
+									"php": "/Applications/MAMP/bin/php/php5.5.3/bin/php"
+								},
+								"Python3":
+								{
+									"codeintel_scan_extra_dir":
+									[
+										"/Applications/Sublime Text.app/Contents/MacOS",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/arch",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs"
+									],
+									"codeintel_scan_files_in_project": true,
+									"codeintel_selected_catalogs":
+									[
+									],
+									"python3": "/usr/local/bin/python3.3"
+								}
+							},
+							"codeintel_live": true,
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							[
+							],
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"codeintel_word_completions": "buffer",
+							"color_scheme": "Packages/User/Seti (SL).tmTheme",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "package.json",
-					"semi_transient": false,
+					"buffer": 1,
+					"file": "src/stylesheets/components/_buttons.scss",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2463,
+						"buffer_size": 2365,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								846,
-								846
+								522,
+								522
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Seti_UI/Prefs/Langs/npm JSON.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 168.0,
+						"translation.y": 72.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1223,7 +1289,7 @@
 		[
 			[
 				"",
-				"E:\\!PROJECTS\\WebDesign\\guilmette-design\\guilmettedesign.sublime-project"
+				"C:\\Users\\guilmets\\Documents\\sergeguilmette\\sergeguilmette.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -1244,7 +1310,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 287.0,
+	"side_bar_width": 290.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

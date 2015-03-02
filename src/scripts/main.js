@@ -103,5 +103,22 @@ $(function() {
         }
         return false;
     });
-});
 
+
+$('#submit_btn').click(function(e) {
+  $("#sgform").submit();
+//   $.ajax({
+//     url: "//formspree.io/sergeguilmette@gmail.com",
+//     method: "POST",
+//     data: {message: "hello!"},
+//     dataType: "json"
+// });
+
+
+
+})
+
+
+
+
+});

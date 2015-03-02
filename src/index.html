@@ -208,8 +208,7 @@
                 <article>
                     <h3>Modeling/Animation</h3>
                     <ul>
-                        <li>Discreet Maya v.2012</li>
-                        <li>Discreet Max v. 2012</li>
+                        <li>Discreet Maya v.2015</li>
                         <li>Luxololy Modo</li>
                         <li>Pixologic Z-brush v.4</li>
                         <li>Adobe Flash CS6</li>
@@ -219,22 +218,26 @@
         <footer id="a5" >
             <div class="footer-main" ><h2>Contact me Form</h2>
 
-                        <form  action="//formspree.io/sergeguilmette@gmail.com" method="POST">
+                        <form  id="sgform" action="//formspree.io/sergeguilmette@gmail.com" method="POST">
+                          <input type="hidden" name="_next" value="../thanks.html" />
                             <label for="email">Name</label>
                             <input id="name" type="text" name="name" required>
                             <label for="email">Email</label>
                             <input type="email" name="_replyto" required>
                            <label for="message">Message</label>
-                           <textarea  id="message"></textarea><br>
-                            <input class="btn btn-medium" type="submit" value="Send"></input>
-                            <br>
+                           <textarea  id="message"></textarea>  <br>
+                            <button id="submit_btn" class="btn btn-medium" type="submit" value="Send">Send</button>
+
+
+
+
                         </form></div>
 
         </footer>
         </div>
         <!--.inner-wrapper-->
         <!-- inject:js -->
-        <script src="scripts/Guilmette-design-site.min.js"></script>
+
         <!-- endinject -->
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <!-- <script>
