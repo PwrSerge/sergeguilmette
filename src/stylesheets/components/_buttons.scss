@@ -105,6 +105,22 @@ button {
 }
 
 
+.fancy-btn {
+  -webkit-appearance: none;
+  cursor: pointer; outline: none; border: none;
+  position: relative; top: 50%;
+  display: block; min-width: 10%;
+  line-height: 55px; font-size: 14px;
+  text-transform: uppercase;
+  margin: 0 auto; padding: 0 10px;
+  background-color: #F2594B;
+  color: #FFF;
+  border-radius: 3px;
+  @include transform(translateY(-50%));
+  &:hover {
+    background-color: lighten(#F2594B, 5%);
+  }
+}
 
 // // buttons using John W. Long alpha-attributes mixins
 
