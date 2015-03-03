@@ -8,6 +8,7 @@
 //    VENDOR FRAMEWORKS
 //    ==========================================================================
 
+
 @import 'compass';
 @import 'breakpoint';
 @import 'modular-scale';
@@ -21,10 +22,10 @@
 //    Variables/mixins/placeholders/etc
 //    ==========================================================================
 
-@import 'utils/_vars';
-@import 'utils/_functions';
-@import 'utils/_mixins';
-@import 'utils/_placeholders';
+@import 'utils/vars';
+@import 'utils/functions';
+@import 'utils/mixins';
+@import 'utils/placeholders';
 //@import "utils/_animations";
 
 // ==========================================================================
@@ -33,29 +34,29 @@
 //    No classes/IDs are introduced yet
 //    ==========================================================================
 
-@import 'base/_base';
-@import 'base/_typography';
+@import 'base/base';
+@import 'base/typography';
 
 
 // ==========================================================================
 //    COMPONENTS / PARTIALS
 //    ==========================================================================
-@import 'components/_modal';
-@import 'components/_forms';
-@import 'components/_buttons';
-@import 'components/_media';
-@import 'components/_images';
+//@import 'components/_modal';
+// @import 'components/_forms';
+@import 'components/buttons';
+@import 'components/media';
+@import 'components/images';
 
 // ==========================================================================
 //    LAYOUT
 //    Defining the gloabal wireframe
 //    ==========================================================================
 
-@import 'layout/_grid';
-@import 'layout/_navigation';
-@import 'layout/_footer';
-@import 'layout/_header';
-@import 'layout/_sidebar';
+@import 'layout/grid';
+@import 'layout/navigation';
+@import 'layout/footer';
+@import 'layout/header';
+@import 'layout/sidebar';
 
 
 // ==========================================================================
@@ -64,7 +65,7 @@
 //    ==========================================================================
 
 //@import 'pages/resume';
-@import 'pages/_home';
+@import 'pages/home';
 
 // ==========================================================================
 //    THEMES

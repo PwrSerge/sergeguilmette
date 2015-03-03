@@ -222,6 +222,7 @@ gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
    ========================================================================== */
 gulp.task('sass-site', function() {
   return sass('src/stylesheets/main.scss', sassconfig('gulp-ruby-sass-site'))
+    .pipe(gp.changed(paths.styles.dest))
     .pipe(gp.plumber())
     .pipe(sassTasks())
     .pipe(gp.rename('main.css'))
@@ -237,6 +238,7 @@ gulp.task('sass-site', function() {
 
 gulp.task('sass-print', function() {
   return sass('src/stylesheets/print.scss', sassconfig('gulp-ruby-sass-print'))
+    .pipe(gp.changed(paths.styles.dest))
     .pipe(gp.plumber())
     .pipe(sassTasks())
     .pipe(gp.rename('print.css'))
@@ -331,7 +333,7 @@ gulp.task('sprites', function() {
    ========================================================================== */
 gulp.task('html', ['sass'], function() {
   return gulp.src('src/*.html')
-    //.pipe(gp.changed(paths.html.src))
+    .pipe(gp.changed(paths.html.src))
     .pipe(gp.plumber())
     .pipe(gp.fileInclude(fileincludecfg))
     // stylesheet and main javascripts injection

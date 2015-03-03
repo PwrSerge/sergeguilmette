@@ -1,72 +1,44 @@
 //============================================================
 // VARIABLES
 //============================================================
-
 //
 // Project  paths
 //--------------------------------------------------------------------
-
 // Image directory. Change this to the optimised path when deploying
 $img: '../image/';
-
 //
 // Colours
 //--------------------------------------------------------------------
-
 // Neutral color palette
-$palette-neutral--xdark:  #2c3643;
-$palette-neutral--dark:   #3b444f;
-$palette-neutral--base:   #f8f7f2;
-$palette-neutral--light:  #99a9b3;
-$palette-neutral--xlight: #dbe6ec;
-
+$palette-neutral-xdark: #2c3643;
+$palette-neutral-dark: #3b444f;
+$palette-neutral-base: #f8f7f2;
+$palette-neutral-light: #99a9b3;
+$palette-neutral-xlight: #dbe6ec;
 // Primary color palette
-$palette-blue--dark:  #1d508d;
-$palette-blue--base:  #206fac;
-$palette-blue--light: #288ad6;
+$palette-blue-dark: #1d508d;
+$palette-blue-base: #206fac;
+$palette-blue-light: #288ad6;
 $palette-purple-dark: #140b1d;
 $palette-purple-base: #3e225b;
 $palette-purple-light: #9362c4;
 $palette-green-dark: #5f8728;
 $palette-green-base: #8cc63e;
 $palette-green-light: #cff898;
-
-$palette-red:         #fa5e5b;
-$palette-orange:      #ffc83c;
-$palette-yellow:      #feef6d;
-
+$palette-red: #fa5e5b;
+$palette-orange: #ffc83c;
+$palette-yellow: #feef6d;
 // Themes
-$themes: (
-  brand: (
-    primary: $palette-blue--base,
-    secondary: $palette-blue--dark,
-    contrast: white
-  ),
-  highlight: (
-    primary: $palette-yellow,
-    secondary: $palette-orange,
-    contrast: $palette-neutral--dark
-  ),
-  neutral: (
-    primary: $palette-neutral--light,
-    secondary: $palette-neutral--xlight,
-    contrast: $palette-neutral--xdark
-  )
-);
+$themes: ( brand: ( primary: $palette-blue--base, secondary: $palette-blue--dark, contrast: white ), highlight: ( primary: $palette-yellow, secondary: $palette-orange, contrast: $palette-neutral--dark ), neutral: ( primary: $palette-neutral--light, secondary: $palette-neutral--xlight, contrast: $palette-neutral--xdark ) );
 // main colors
-
-$base-background-image: url('/image/newBG-grey2.svg');
-
-$color-base:  $palette-purple-base;
-$color-base-background: $palette-neutral--base;
+$base-background-image: url("/image/newBG-grey2.svg");
+$color-base: $palette-purple-base;
+$color-base-background: $palette-neutral-base;
+$color-muted: $palette-neutral-light;
 $color-secondary: $palette-green-base;
-$color-tertiary:  $palette-green-light;
+$color-tertiary: $palette-green-light;
 $color-accent: $palette-orange;
-$color-attention: $palette-red;
-
-
-
-
+$color-error: $palette-red;
 //
 // Fonts
 //--------------------------------------------------------------------
@@ -75,136 +47,105 @@ $color-attention: $palette-red;
 $font-p: Kavoon;
 $font-s: Wendy One;
 $font-t: Montserrat;
-
-
 // Or directly:
 //$fonts: Kavoon, Wendy One, Bonbon;
 //undefined
-
 // Font Family
 $heading-font: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $sans-serif-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $serif-font: Georgia, Times, 'Times New Roman', serif;
-
 // Fixed Font
 $fixed-font-family: monospace;
 $fixed-font-size: 85%;
 $fixed-line-height: $base-line-height;
-
-// Font weights
+// type weights
 $type-weight: (thin: 200, light: 300, regular: 400, bold: 700, xtrabold: 900);
-
+//font size
+$font-size: (tiny: font-size: ms(-2), small: font-size: ms(-1), base: font-size: ms(0), medium: font-size: ms(1), large: font-size: ms(2), xlarge: font-size: ms(3), xxlarge: font-size: ms(4));
 // Base Font
 $base-font-family: $sans-serif-font;
 $base-font-size: 16px;
 $base-line-height: 26px;
-
 // Rhythm unit (Compass vertical rhythm)
-$round-to-nearest-half-line: true; // Allows compass to round to  multiples of 0.5x line height
-$rhythm-unit: 'rem';// Sets rhythm unit to rem. Remove to use default em unit.
+$round-to-nearest-half-line: true;
+// Allows compass to round to  multiples of 0.5x line height
+$rhythm-unit: 'rem';
+// Sets rhythm unit to rem. Remove to use default em unit.
 $rem-with-px-fallback: false;
-
 // configs for modular scale
 $ms-base: 1rem;
-$ms-ratio: $major-third;  // 1.25
-
-
+$ms-ratio: $major-third;
+// 1.25
 //Sass map (Sass v3.3) with different font sizes using scale
 $type-scale: (tiny: (font-size: ms(-2), base-lines: 0.5), small: (font-size: ms(-1), base-lines: 0.75), base: (font-size: ms(0), base-lines: 1), medium: (font-size: ms(1), base-lines: 1), large: (font-size: ms(2), base-lines: 1), xlarge: (font-size: ms(3), base-lines: 1.5), xxlarge: (font-size: ms(4), base-lines: 2));
-
 //
 // Dimensions
 //--------------------------------------------------------------------
-
+//Forms
+$form-input-height: 1rem;
 //breakpoint values
-
 $breakpoint-to-ems: true;
 $bp-verysmall: 250px;
 $bp-small: 500px;
 $bp-medium: 700px;
 $bp-large: 1250px;
 $bp-verylarge: 1600px;
-
 // breakpoint
 // assume min-width (by default) if only a number
 $breakpoint-medium-width: 500px;
 $breakpoint-medium-width-em: 30em;
-
 // set min-width/max-width if both values are numbers
 $breakpoint-medium-not-wide: 500px 700px;
-
 // set min/max of feature if there are two numbers
 $breakpoint-medium-height: height 300px 700px;
-
 // if one value is a string, assume a feature/value pair
 $breakpoint-kind-of-wide: min-width 700px;
 $breakpoint-not-too-wide: max-width 700px;
-
 // for multidimensional lists, assume each item is a feature value pair
 $breakpoint-wide-portrait: (max-width 700px) (orientation portrait);
-
 // handle one-sided features (ie. monochrome)
 $breakpoint-wide-portrait-mono: (max-width 700px) (orientation portrait) monochrome;
 $breakpoint-mono: monochrome;
 $breakpoint-hi-rez: min-resolution 1.5dppx;
-
 //undefined
 // Easing
 //undefined
 // @see http://robertpenner.com/
 // @see http://matthewlein.com/ceaser/
 //--------------------------------------------------------------------
-
 // Cubic
 $easein-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 $easout-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 $easeinout-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
-
 // Circ
 $easein-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
 $easeout-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
 $easeinout-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-
 // Expo
 $easein-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
 $easeout-expo: cubic-bezier(0.19, 1, 0.22, 1);
 $easeinout-expo: cubic-bezier(1, 0, 0, 1);
-
 // Quad
 $easein-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
 $easeout-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $easeinout-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-
 // Quart
 $easein-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
 $easeout-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
 $easeinout-quart: cubic-bezier(0.77, 0, 0.175, 1);
-
 // Quint
 $easein-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
 $easeout-quint: cubic-bezier(0.23, 1, 0.32, 1);
 $easeinout-quint: cubic-bezier(0.86, 0, 0.07, 1);
-
 // Sine
 $easein-sine: cubic-bezier(0.47, 0, 0.745, 0.715);
 $easeout-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
 $easeinout-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-
 // Back
 $easein-back: cubic-bezier(0.6, -0.28, 0.735, 0.045);
 $easeout-back: cubic-bezier(0.175, 0.885, 0.32, 10.275);
 $easeinout-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
 //Z-index
 //see http://css-tricks.com/handling-z-index/
 //--------------------------------------------------------------------
-
-$zindex: (
-  modal     : 9000,
-  overlay   : 8000,
-  dropdown  : 7000,
-  header    : 6000,
-  footer    : 5000
-);
-
-
+$zindex: ( modal : 9000, overlay : 8000, dropdown : 7000, header : 6000, footer : 5000 );

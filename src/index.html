@@ -237,7 +237,7 @@
         <h2>Contact me Form</h2>
 
         <form id="sgform" action="//formspree.io/sergeguilmette@gmail.com" method="POST">
-          <input type="hidden" name="_next" value="http://sergeguilmette.me/index.html" />
+          <!-- <input type="hidden" name="_next" value="http://sergeguilmette.me/index.html" /> -->
           <label for="email">Name</label>
           <input id="name" type="text" name="name" required>
           <label for="email">Email</label>
@@ -247,23 +247,28 @@
           <br>
           <button  class="btn btn-big open" id="submit_btn"  type="submit" value="Send">Send</button>
         </form>
-      </div>
-      <!-- Modal -->
-      <div class="modal-frame">
-  <div class="modal">
-		    <div class="modal-inset">
-      			<div class="button close"><i class="fa fa-close"></i></div>
+        <!-- Modal -->
+        <div class="modal-frame">
+    <div class="modal">
+          <div class="modal-inset">
+              <div class="button close"><svg role="img" class="icon icon--colorprimary icon--small">
+                <use xlink:href="image/sprites/svg-symbols.svg#icon-cancel-circle"></use>
+              </svg></div>
 
-      <div class="modal-body">
-				        <h3>Such Modal, Much Animate!</h3>
-        				<p>Nothing groundbreaking, but I hope you enjoyed <br /> the physics for the open/close animation =).</p>
-        <p class="ps">**I know the SASS is a bit messy, I did this on the fly and for fun <br /> and w.e. I DO WHAT I WANT!!</p>
-      			</div>
-    		</div>
-  	</div>
-</div>
-<div class="modal-overlay"></div>
-      <!-- /Modal -->
+        <div class="modal-body">
+                  <h3>Thank you for Contacting me!</h3>
+                  <p>
+                    I will be in touch with within the next day.
+                  </p>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal-overlay"></div>
+        <!-- /Modal -->
+      </div>
+
     </footer>
     </div>
     <!--.inner-wrapper-->

@@ -3,10 +3,9 @@
    ========================================================================== */
 
 .footer-main {
-  @include margin-leader(2);
-  padding: 1em 4em;
+  position: relative;
+  overflow: hidden;
+  padding: 1em 1em;
   border-color: darken(white, 10%);
 
 }
-
-

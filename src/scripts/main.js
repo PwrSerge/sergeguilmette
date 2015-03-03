@@ -108,20 +108,21 @@ $(function() {
   $('#submit_btn').click(function(e) {
     // $("#sgform").submit();
 
+    var $message =  $('textarea#message').val();
+    console.log ($message);
     $.ajax({
       url: "//formspree.io/sergeguilmette@gmail.com",
       method: "POST",
       data: {
-        message: "hello!"
+        message: "test"
       },
       dataType: "json"
 
-    });
-    e.preventDefault();
+    }).done(function(){
 
     // Modal event
-    $modal = $('.modal-frame');
-    $overlay = $('.modal-overlay');
+    var $modal = $('.modal-frame');
+    var $overlay = $('.modal-overlay');
 
     /* Need this to clear out the keyframe classes so they dont clash with each other between ener/leave. Cheers. */
     $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
@@ -140,7 +141,7 @@ $(function() {
       $modal.removeClass('state-leave').addClass('state-appear');
     });
 
-
+  });
 
 
   })
