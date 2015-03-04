@@ -29,21 +29,21 @@
       <h1 class="header-title">Serge</h1>
     </div>
     <div class="nav-toggle">
-      <svg role="img" class="icon icon--colorprimary icon--big">
+      <svg role="img" class="icon icon-primary icon-big">
         <use xlink:href="image/sprites/svg-symbols.svg#icon-menu"></use>
       </svg>
     </div>
     <nav class="nav-main">
-      <ul class="nav-main__list">
-        <li class="nav-main__item"><a href="#a1">Profile</a>
+      <ul class="nav-main-list">
+        <li class="nav-main-item"><a href="#a1">Profile</a>
         </li>
-        <li class="nav-main__item"><a href="#a2">Experience</a>
+        <li class="nav-main-item"><a href="#a2">Experience</a>
         </li>
-        <li class="nav-main__item"><a href="#a3">Education</a>
+        <li class="nav-main-item"><a href="#a3">Education</a>
         </li>
-        <li class="nav-main__item"><a href="#a4">Skills</a>
+        <li class="nav-main-item"><a href="#a4">Skills</a>
         </li>
-        <li class="nav-main__item"><a href="#a5">Contact</a>
+        <li class="nav-main-item"><a href="#a5">Contact</a>
         </li>
       </ul>
     </nav>
@@ -240,11 +240,11 @@
 
         <form id="sgform" action="//formspree.io/sergeguilmette@gmail.com" method="POST">
           <!-- <input type="hidden" name="_next" value="http://sergeguilmette.me/index.html" /> -->
-          <label for="email">Name</label>
-          <input id="name" type="text" name="name" required>
-          <label for="email">Email</label>
-          <input type="email" name="_replyto" required>
-          <label for="message">Message</label>
+          <label class="field-label" for="email">Name</label>
+          <input class="fields" id="name" type="text" name="name" required>
+          <label class="field-label" for="email">Email</label>
+          <input class="fields" type="email" name="_replyto" required>
+          <label class="field-label" for="message">Message</label>
           <textarea id="message"></textarea>
           <br>
           <button  class="btn btn-big open" id="submit_btn"  type="submit" value="Send">Send</button>
@@ -253,14 +253,14 @@
         <div class="modal-frame">
     <div class="modal">
           <div class="modal-inset">
-              <div class="button close"><svg role="img" class="icon icon--colorprimary icon--small">
+              <div class="button close"><svg role="img" class="icon icon-primary icon-small">
                 <use xlink:href="image/sprites/svg-symbols.svg#icon-cancel-circle"></use>
               </svg></div>
 
         <div class="modal-body">
                   <h3>Thank you for Contacting me!</h3>
                   <p>
-                    I will be in touch with within the next day.
+                    I will be in touch with you within the next day.
                   </p>
 
               </div>

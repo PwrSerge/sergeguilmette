@@ -3,8 +3,8 @@
    ========================================================================== */
 
 label {
-  @include type-scale(medium);
-  @include type-weight(bold);
+  //@include type-scale(medium);
+  //@include type-weight(bold);
   color: $color-base;
   font-family: $heading-font;
 }
@@ -25,7 +25,8 @@ textarea {
 
 .field-label {
   display: block;
-  color: $color-accent;
+
+
 }
 
 .field-instructions {
@@ -42,6 +43,7 @@ textarea {
 }
 
 .fields {
+
   @include breakpoint($bp-large) {
     position: relative;
 

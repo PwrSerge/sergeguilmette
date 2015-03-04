@@ -26,11 +26,14 @@
 }
 
 .nav-main {
-
   position: relative;
   z-index: 1;
   height: 6em;
   transform: translate3d(0, -18em, 0);
+
+  &.open {
+    transform: translate3d(0, 0, 0);
+  }
 
   @include breakpoint($bp-medium) {
     height: 6em;
@@ -38,9 +41,6 @@
     background-color: #fff;
   }
 
-  &.open {
-    transform: translate3d(0, 0, 0);
-  }
 }
 
 .nav-main.nav-activated,
@@ -67,6 +67,10 @@
 .nav-main-item {
   width: 100%;
   padding: 1em;
+  &:hover {
+    //@include hover-style (red, 15%);
+    background-color: $color-base;
+  }
 
   @include breakpoint($bp-medium) {
     line-height: 4em;
@@ -87,10 +91,6 @@
   }
 
 
-  &:hover {
-    //@include hover-style (red, 15%);
-    background-color: $color-base;
-  }
 
 
 }
