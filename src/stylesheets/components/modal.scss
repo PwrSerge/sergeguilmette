@@ -2,73 +2,97 @@
    MODAL
    ========================================================================== */
 .modal-overlay {
+  @include transition(opacity 0.25s ease 0s, visibility linear 0.35s);
+
+  background-color: #fff;
   position: absolute;
   top: 0;
   margin: auto;
-  background-color: #fff;
   opacity: 0;
   visibility: hidden;
   z-index: 40;
-  @include transition(opacity .25s ease 0s, visibility linear .35s);
+
   &.state-show {
+    @include transition-delay(0s);
+    @include transition-duration(0.2s, 0s);
     opacity: 0.7;
     visibility: visible;
-    @include transition-delay(0s);
-    @include transition-duration(.2s, 0s);
   }
 }
+
 .modal-frame {
-  //  @extend %vertical-align;
-  position: absolute;
-  top:2em;
-  margin: auto;
-  z-index: 50;
+  // @extend %vertical-align;
   /*     display: table; */
   @include display-flex;
   @include align-items(center);
+
+  margin: auto;
+  position: absolute;
+  top: 2em;
+  z-index: 50;
   justify-content: center;
   width: 100%;
   text-align: center;
   visibility: hidden;
+
   // animation classes and behavior
   &.state-appear {
     visibility: visible;
+
     .modal-inset {
-      @include animation(modalComeIn .25s ease);
+      @include animation(modalComeIn 0.25s ease);
       visibility: visible;
       /* to keep @ final state */
     }
+
     .modal-body {
+      @include transform(translateY(0) scale(1, 1));
+
       opacity: 1;
-      @include transform(translateY(0) scale(1,1));
     }
   }
+
   &.state-leave {
     visibility: visible;
+
     .modal-inset {
-      @include animation(modalHeadOut .35s ease .1s);
+      @include animation(modalHeadOut 0.35s ease 0.1s);
+
       visibility: visible;
     }
+
     .modal-body {
-      opacity: 0;
       @include transition-delay(0s);
-      @include transition-duration(.35s);
+      @include transition-duration(0.35s);
       @include transition-timing-function(ease);
       @include transform(translateY(25px));
+
+      opacity: 0;
     }
   }
 }
+
 @-moz-document url-prefix() {
   .modal-frame {
     height: calc(100% - 55px);
   }
 }
+
+
 .modal {
   display: block;
   vertical-align: middle;
   text-align: center;
 }
+
 .modal-inset {
+  @include box-shadow(2px 2px 8px 1px rgba(0, 0, 0, 0.2));
+  @include backface-visibility(hidden);
+  // helps render animation
+  @include transform(translate3d(0, 0, 0));
+  // helps render animation
+  @include transform-style(preserve-3d);
+
   position: relative;
   padding: 60px;
   background-color: white;
@@ -76,12 +100,7 @@
   min-height: 126px;
   margin: auto;
   visibility: hidden;
-  @include box-shadow(2px 2px 8px 1px rgba(0,0,0,.2));
-  @include backface-visibility(hidden);
-  // helps render animation
-  @include transform(translate3d(0,0,0));
-  // helps render animation
-  @include transform-style(preserve-3d);
+
   // helps render animation
   .close {
     display: block;
@@ -91,18 +110,22 @@
     right: 10px;
     padding: 10px;
     opacity: 0.4;
+
     &:hover {
       opacity: 1;
     }
   }
 }
+
 .modal-body {
+  @include transform(translateY(0) scale(0.8, 0.8));
+  @include transition-property(opacity, transform);
+  @include transition-duration(0.25s);
+  @include transition-delay(0.1s);
+
   margin: auto;
   opacity: 0;
-  @include transform(translateY(0) scale(.8, .8));
-  @include transition-property(opacity, transform);
-  @include transition-duration(.25s);
-  @include transition-delay(.1s);
+
   h3 {
     font-weight: 700;
     padding-bottom: 22px;
@@ -110,41 +133,42 @@
     text-align: center;
   }
 }
+
 @mixin keyframes($name) {
-  @-webkit-keyframes #{$name} {
-    @content;
-  }
-  @-moz-keyframes #{$name} {
-    @content;
-  }
   @keyframes #{$name} {
     @content;
   }
 }
+
 @include keyframes(modalComeIn) {
   0% {
+    @include transform(scale(0.8, 0.8));
     visibility: hidden;
     opacity: 0;
-    @include transform(scale(.8, .8));
   }
+
   65.5% {
     @include transform(scale(1.03, 1.03));
   }
+
   100% {
+    @include transform(scale(1, 1));
     visibility: visible;
     opacity: 1;
-    @include transform(scale(1, 1));
   }
 }
+
+
 @include keyframes(modalHeadOut) {
   0% {
+    @include transform(translateY(0) scale(1, 1));
     visibility: visible;
     opacity: 1;
-    @include transform(translateY(0) scale(1, 1));
   }
+
   100% {
+    @include transform(translateY(35px) scale(0.97, 0.97));
     visibility: hidden;
     opacity: 0;
-    @include transform(translateY(35px) scale(.97, .97));
   }
 }

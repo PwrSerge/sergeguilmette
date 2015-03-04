@@ -78,54 +78,29 @@ button {
   }
 
   // Button modifiers
-  &--full {
+  &-full {
     display: block;
     width: 100%;
   }
 
-  &.btn-medium {
+  &-medium {
     @include type-scale(medium);
   }
 
-  &.btn-large {
+  &-large {
     @include type-scale(large);
   }
 }
 
 // Button color variations
 @each $name, $theme in $themes {
-  .btn--#{$name} {
+  .btn-#{$name} {
     color: map-get($theme, contrast);
     background: map-get($theme, primary);
 
     &:hover {
       background: map-get($theme, secondary);
     }
-  }
-}
-
-
-.fancy-btn {
-  @include transform(translateY(-50%));
-
-  border: 0;
-  cursor: pointer;
-  outline: none;
-  position: relative;
-  top: 50%;
-  display: block;
-  min-width: 10%;
-  line-height: 55px;
-  font-size: 14px;
-  text-transform: uppercase;
-  margin: 0 auto;
-  padding: 0 10px;
-  background-color: #f2594b;
-  color: white;
-  border-radius: 3px;
-
-  &:hover {
-    background-color: lighten(#f2594b, 5%);
   }
 }
 
