@@ -117,7 +117,7 @@ var sassconfig = function sassconfig(Container) {
    ========================================================================== */
 var notifycfg = function(Title) {
   return {
-    title: (gutil.colors.cyan(Title)),
+    title: Title,
     message: '<%= file.relative %>' + ' is done',
   };
 };
@@ -376,7 +376,7 @@ gulp.task('bump', function() {
    BROWSER_SYNC
    ========================================================================== */
 gulp.task('browser-sync', function() {
-  browserSync.init(null, {
+  browserSync({
     server: {
       baseDir: './dist'
     }

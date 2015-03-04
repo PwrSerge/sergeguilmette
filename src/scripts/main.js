@@ -108,45 +108,41 @@ $(function() {
   $('#submit_btn').click(function(e) {
     // $("#sgform").submit();
 
-    var $message =  $('textarea#message').val();
-    console.log ($message);
+    var $message = $('textarea#message').val();
+    console.log($message);
     $.ajax({
       url: "//formspree.io/sergeguilmette@gmail.com",
       method: "POST",
       data: {
-        message: "test"
+        message: $message
       },
       dataType: "json"
 
-    }).done(function(){
+    }).done(function() {
 
-    // Modal event
-    var $modal = $('.modal-frame');
-    var $overlay = $('.modal-overlay');
+      // Modal event
+      var $modal = $('.modal-frame');
+      var $overlay = $('.modal-overlay');
 
-    /* Need this to clear out the keyframe classes so they dont clash with each other between ener/leave. Cheers. */
-    $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-      if ($modal.hasClass('state-leave')) {
-        $modal.removeClass('state-leave');
-      }
+      /* Need this to clear out the keyframe classes so they dont clash with each other between ener/leave. Cheers. */
+      $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+        if ($modal.hasClass('state-leave')) {
+          $modal.removeClass('state-leave');
+        }
+      });
+
+      $('.close').on('click', function() {
+        $overlay.removeClass('state-show');
+        $modal.removeClass('state-appear').addClass('state-leave');
+      });
+
+      $('.open').on('click', function() {
+        $overlay.addClass('state-show');
+        $modal.removeClass('state-leave').addClass('state-appear');
+      });
+
     });
-
-    $('.close').on('click', function() {
-      $overlay.removeClass('state-show');
-      $modal.removeClass('state-appear').addClass('state-leave');
-    });
-
-    $('.open').on('click', function() {
-      $overlay.addClass('state-show');
-      $modal.removeClass('state-leave').addClass('state-appear');
-    });
-
-  });
-
 
   })
-
-
-
 
 });

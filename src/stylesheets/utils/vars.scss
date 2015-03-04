@@ -31,7 +31,7 @@ $palette-yellow: #feef6d;
 // Themes
 $themes: (brand: (primary: $palette-blue-base, secondary: $palette-blue-dark, contrast: white), highlight: (primary: $palette-yellow, secondary: $palette-orange, contrast: $palette-neutral-dark), neutral: (primary: $palette-neutral-light, secondary: $palette-neutral-xlight, contrast: $palette-neutral-xdark));
 // main colors
-$base-background-image: url('/image/newBG-grey2.svg');
+$base-background-image: url('../image/newBG-grey2.svg');
 $color-base: $palette-purple-base;
 $color-base-background: $palette-neutral-base;
 $color-muted: $palette-neutral-light;
