@@ -2,6 +2,13 @@
    NAVIGATION
    ========================================================================== */
 
+.fix-body {
+/* this will adjust body top margin to prevent content jumping when nav gets fix  */
+  margin-top: 6em;
+}
+
+
+
 .inner-wrapper {
   transform: translate3d(0, 6em, 0);
 
@@ -15,7 +22,7 @@
   z-index: 2;
   display: inline-block;
   float: right;
-  height: 6em;
+  height: 14em;
   padding-top: 2em;
   cursor: pointer;
   background-color: #fff;
@@ -26,10 +33,10 @@
 }
 
 .nav-main {
+  height: 14em;
   position: relative;
-  z-index: 1;
-  height: 6em;
   transform: translate3d(0, -18em, 0);
+  z-index: 1;
 
   &.open {
     transform: translate3d(0, 0, 0);

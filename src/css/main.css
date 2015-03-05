@@ -405,8 +405,13 @@ embed {
    FORMS
    ========================================================================== */
 label {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  font-weight: 700;
+  width: 50%;
   color: #3e225b;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 1em;
 }
 
 input,
@@ -980,6 +985,11 @@ footer {
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
+.fix-body {
+  /* this will adjust body top margin to prevent content jumping when nav gets fix  */
+  margin-top: 10em;
+}
+
 .inner-wrapper {
   -webkit-transform: translate3d(0, 6em, 0);
   transform: translate3d(0, 6em, 0);
@@ -1008,11 +1018,11 @@ footer {
 }
 
 .nav-main {
-  position: relative;
-  z-index: 1;
   height: 6em;
+  position: relative;
   -webkit-transform: translate3d(0, -18em, 0);
   transform: translate3d(0, -18em, 0);
+  z-index: 1;
 }
 
 .nav-main.open {
@@ -1144,7 +1154,7 @@ footer {
 .footer-main {
   position: relative;
   overflow: hidden;
-  padding: 1em 1em;
+  padding: 1em;
   border-color: #e6e6e6;
 }
 
@@ -1153,7 +1163,6 @@ footer {
    ========================================================================== */
 .header-container {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: fixed;
   z-index: 2;
   top: 0;
   left: 0;
@@ -1163,11 +1172,6 @@ footer {
 
 .header-container-fixed {
   position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
 }
 
 .header-wrapper {

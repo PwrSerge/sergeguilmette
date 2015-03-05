@@ -3,10 +3,12 @@
    ========================================================================== */
 
 label {
-  //@include type-scale(medium);
-  //@include type-weight(bold);
+  @include type-scale(medium);
+  @include type-weight(bold);
+  width: 50%;
   color: $color-base;
   font-family: $heading-font;
+  margin-bottom: 1em;
 }
 
 input,
@@ -86,14 +88,14 @@ textarea {
 //    Left-aligned labels
 //    ========================================================================== */
 
-// @media screen and (min-width: $responsive-breakpoint) {
-
+// @include breakpoint($bp-medium) {
+//
 //   .labels-left {
-
+//
 //     .field-group {
 //       @include clearfix();
 //     }
-
+//
 //     .field-label {
 //       position: relative;
 //       left: $form-input-gutter / 2;

@@ -1,15 +1,11 @@
 /* ==========================================================================
    HEADER
    ========================================================================== */
-
 .header-container {
   font-family: $heading-font;
-  position: fixed;
   z-index: 2;
   top: 0;
   left: 0;
-
-  //@include cf($extend: false);
   height: 6em;
   background-color: #fff;
   //@include alpha-attribute("background-color", rgba(white, .8), black);
@@ -18,11 +14,7 @@
 
 .header-container-fixed {
   position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
+  width:100%
 }
 
 .header-wrapper {
