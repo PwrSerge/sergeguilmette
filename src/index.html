@@ -48,8 +48,7 @@
   </header>
 
   <div class="inner-wrapper">
-    <main >
-
+    <main>
       <article>
         <h2 id="a1">
           <!-- <svg role="img" class="icon">
@@ -61,10 +60,10 @@
       <article>
         <h2 id="a2">Experience</h2>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">July 2012</span>
             <span class="job-end">present</span>
-          </div>PersonnelForce (contract)</h3>
+          </span>PersonnelForce (contract)</h3>
         <h4 class="job-title">Web developer, Public Health Agency of Canada’s /E-Communications</h4>
         <ul class="job-details">
           <li>Creating web pages in both official languages for the Public Health Agency of Canada’s Web site in accordance with relevant government policies and standards on Web Accessibility (WCAG 2.0)</li>
@@ -78,10 +77,10 @@
       </article>
       <article>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">Sept. 2011</span>
             <span class="job-end">June 2012</span>
-          </div>Harrington (contract)</h3>
+          </span>Harrington (contract)</h3>
         <h4 class="job-title">Web developer, Environment Canada/Canadian Wildlife Service</h4>
         <ul class="job-details">
           <li>Conversion of the
@@ -96,10 +95,10 @@
       </article>
       <article>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">Jan. 2011</span>
             <span class="job-end">Sept. 2011</span>
-          </div>Harrington (contract)</h3>
+          </span>Harrington (contract)</h3>
         <h4 class="job-title">Desktop Publishing - Advanced, PWGSC/Gazette Canada</h4>
         <ul class="job-details">
           <li>Providing layout and formatting (bilingual, side by side) for the Canada Gazette, Parts I and II using MS Word and Part III using Adobe Acrobat</li>
@@ -110,10 +109,10 @@
       </article>
       <article>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">Jan. 2010</span>
             <span class="job-end">Dec. 2010</span>
-          </div>ExcelITR (contract)</h3>
+          </span>ExcelITR (contract)</h3>
         <h4 class="job-title">Website Support Advance, PWGSC/Gazette Canada</h4>
         <ul class="job-details">
           <li>Conversion of the
@@ -125,10 +124,10 @@
       </article>
       <article>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">May 2009</span>
             <span class="job-end">Dec. 2009</span>
-          </div>Raven Cameron Ballantyne &amp; Yazbeck llp s.r.l.</h3>
+          </span>Raven Cameron Ballantyne &amp; Yazbeck llp s.r.l.</h3>
         <h4 class="job-title">Freelance Graphic designer</h4>
         <ul class="job-details">
           <li>Graphic design for advertisement.</li>
@@ -137,10 +136,10 @@
       </article>
       <article>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">Jan. 2008</span>
             <span class="job-end">April 2009</span>
-          </div>Environment Canada (casual), Harrington (contract)</h3>
+          </span>Environment Canada (casual), Harrington (contract)</h3>
         <h4 class="job-title">Project Officer, Environment Canada/Greenhouse Gas Division</h4>
         <ul class="job-details">
           <li>Planning, scheduling and controlling the publication of the National Inventory Report 2009</li>
@@ -152,10 +151,10 @@
       </article>
       <article>
         <h3 class="job-location">
-          <div class="date-ranges">
+          <span class="date-ranges">
             <span class="job-start">Jan. 2006</span>
             <span class="job-end">Oct 2007</span>
-          </div>Calian (contracts)
+          </span>Calian (contracts)
           <br> Public Works Government Services, Department of Fisheries &amp; Oceans, Library of Parliament</h3>
         <h4 class="job-title">Web Designer/Graphic Artist</h4>
         <ul class="job-details">
@@ -167,7 +166,6 @@
           <li>Create, amend and adjust files in PDF format</li>
         </ul>
       </article>
-      <div>
         <article>
           <h2 id="a3">Education</h2>
           <dl>
@@ -238,14 +236,19 @@
 
         <form id="sgform" action="//formspree.io/sergeguilmette@gmail.com" method="POST">
           <!-- <input type="hidden" name="_next" value="http://sergeguilmette.me/index.html" /> -->
-          <label class="field-label" for="email">Name</label>
-          <input class="fields" id="name" type="text" name="name" required>
-          <label class="field-label" for="email">Email</label>
-          <input class="fields" type="email" name="_replyto" required>
-          <label class="field-label" for="message">Message</label>
-          <textarea id="message"></textarea>
-          <br>
-          <button class="btn btn-big open" id="submit_btn" type="submit" value="Send">Send</button>
+
+          <div class="field-group">
+              <label class="field-label" for="name">Name</label>
+            <input class="input-inline" id="name" type="text" name="name" required>
+
+                      <label class="field-label" for="email">Email</label>
+                      <input  class="input-inline" type="email" name="_replyto" required>
+                      <label class="field-label" for="message">Message</label>
+                      <textarea id="message"></textarea>
+          </div>
+
+
+          <button class="btn btn-large open" id="submit_btn" type="submit" value="Send">Send</button>
         </form>
         <!-- Modal -->
         <div class="modal-frame">

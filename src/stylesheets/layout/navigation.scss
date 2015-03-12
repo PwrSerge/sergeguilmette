@@ -2,18 +2,18 @@
    NAVIGATION
    ========================================================================== */
 
-.fix-body {
-/* this will adjust body top margin to prevent content jumping when nav gets fix  */
-  margin-top: 6em;
-}
-
+// .fix-body {
+// /* this will adjust body top margin to prevent content jumping when nav gets fix  */
+//   margin-top: 6em;
+// /* adjust as per height of your menu */;
+// }
 
 
 .inner-wrapper {
-  transform: translate3d(0, 6em, 0);
+  transform: translate3d(0, 0, 0);
 
-  &.open {
-    transform: translate3d(0, 18em, 0);
+  &.is-open {
+    transform: translate3d(0, 20em, 0);
   }
 }
 
@@ -22,7 +22,7 @@
   z-index: 2;
   display: inline-block;
   float: right;
-  height: 14em;
+  height: 6em;
   padding-top: 2em;
   cursor: pointer;
   background-color: #fff;
@@ -33,20 +33,21 @@
 }
 
 .nav-main {
-  height: 14em;
+  height: 6em;
   position: relative;
-  transform: translate3d(0, -18em, 0);
+  transform: translate3d(0, -20em, 0);
   z-index: 1;
-
-  &.open {
-    transform: translate3d(0, 0, 0);
-  }
 
   @include breakpoint($bp-medium) {
     height: 6em;
     transform: translate3d(0, 0, 0);
     background-color: #fff;
   }
+
+  &.is-open {
+    transform: translate3d(0, 0, 0);
+  }
+
 
 }
 
@@ -74,6 +75,7 @@
 .nav-main-item {
   width: 100%;
   padding: 1em;
+
   &:hover {
     //@include hover-style (red, 15%);
     background-color: $color-base;

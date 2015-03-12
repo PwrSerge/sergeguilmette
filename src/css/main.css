@@ -408,16 +408,16 @@ label {
   font-size: 1.25rem;
   line-height: 1.625rem;
   font-weight: 700;
-  width: 50%;
   color: #3e225b;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 
 input,
 textarea {
   font-size: 1.25rem;
   line-height: 1.625rem;
+  width: 100%;
   color: #000;
 }
 
@@ -427,6 +427,7 @@ textarea {
 .field-group {
   font-size: 1rem;
   line-height: 1.625rem;
+  margin-bottom: 1em;
 }
 
 .field-label {
@@ -444,43 +445,6 @@ textarea {
 .field-instructions a {
   color: #99a9b3;
   text-decoration: underline;
-}
-
-@media (min-width: 78.125em) {
-  .fields {
-    position: relative;
-  }
-
-  .fields .error-message {
-    position: absolute;
-    left: 100%;
-    top: 2px;
-    margin-top: 0;
-    margin-left: 12px;
-    white-space: nowrap;
-  }
-
-  .fields .error-message:after {
-    position: absolute;
-    top: 6px;
-    left: -12px;
-  }
-
-  .fields .error-message:after:before {
-    content: '';
-    width: 0;
-    height: 0;
-    -webkit-transform: rotate(360deg);
-    border-style: solid;
-    border-width: 10px 0 10px 16.25px;
-    border-color: transparent transparent transparent #fa5e5b;
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    -webkit-transform: translateY(-10px);
-    -ms-transform: translateY(-10px);
-    transform: translateY(-10px);
-  }
 }
 
 /* ==========================================================================
@@ -985,19 +949,14 @@ footer {
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
-.fix-body {
-  /* this will adjust body top margin to prevent content jumping when nav gets fix  */
-  margin-top: 10em;
-}
-
 .inner-wrapper {
-  -webkit-transform: translate3d(0, 6em, 0);
-  transform: translate3d(0, 6em, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
-.inner-wrapper.open {
-  -webkit-transform: translate3d(0, 18em, 0);
-  transform: translate3d(0, 18em, 0);
+.inner-wrapper.is-open {
+  -webkit-transform: translate3d(0, 20em, 0);
+  transform: translate3d(0, 20em, 0);
 }
 
 .nav-toggle {
@@ -1020,14 +979,9 @@ footer {
 .nav-main {
   height: 6em;
   position: relative;
-  -webkit-transform: translate3d(0, -18em, 0);
-  transform: translate3d(0, -18em, 0);
+  -webkit-transform: translate3d(0, -20em, 0);
+  transform: translate3d(0, -20em, 0);
   z-index: 1;
-}
-
-.nav-main.open {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
 }
 
 @media (min-width: 43.75em) {
@@ -1037,6 +991,11 @@ footer {
     transform: translate3d(0, 0, 0);
     background-color: #fff;
   }
+}
+
+.nav-main.is-open {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .nav-main.nav-activated,
@@ -1172,6 +1131,7 @@ footer {
 
 .header-container-fixed {
   position: fixed;
+  width: 100%;
 }
 
 .header-wrapper {

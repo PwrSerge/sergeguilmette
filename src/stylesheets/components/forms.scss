@@ -5,16 +5,17 @@
 label {
   @include type-scale(medium);
   @include type-weight(bold);
-  width: 50%;
   color: $color-base;
   font-family: $heading-font;
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 
 input,
 textarea {
   @include type-scale(medium);
+  width: 100%;
   color: #000;
+
 }
 
 /*
@@ -23,6 +24,7 @@ textarea {
 
 .field-group {
   @include type-scale(base);
+  margin-bottom: 1em;
 }
 
 .field-label {
@@ -43,30 +45,30 @@ textarea {
     text-decoration: underline;
   }
 }
-
-.fields {
-
-  @include breakpoint($bp-large) {
-    position: relative;
-
-    .error-message {
-      position: absolute;
-      left: 100%;
-      top: 2px;
-      margin-top: 0;
-      margin-left: 12px;
-      white-space: nowrap;
-
-      &:after {
-        @include triangle(right, 10px, $color-error, true, before);
-        position: absolute;
-        top: 6px;
-        left: -12px;
-      }
-    }
-  }
-}
-
+//
+// .fields {
+//
+//   @include breakpoint($bp-large) {
+//     position: relative;
+//
+//     .error-message {
+//       position: absolute;
+//       left: 100%;
+//       top: 2px;
+//       margin-top: 0;
+//       margin-left: 12px;
+//       white-space: nowrap;
+//
+//       &:after {
+//         @include triangle(right, 10px, $color-error, true, before);
+//         position: absolute;
+//         top: 6px;
+//         left: -12px;
+//       }
+//     }
+//   }
+// }
+//
 // .input-inline {
 //   display: inline-block;
 //   height: $form-input-height;

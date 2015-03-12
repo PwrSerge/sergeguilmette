@@ -58,14 +58,14 @@ $(function() {
 
       //Click event for sliding menu
       $navToggle.on('click', function() {
-        $page.toggleClass('open').addClass('nav-activated');
-        $mainNavigation.toggleClass('open').addClass('nav-activated');
+        $page.toggleClass('is-open').addClass('nav-activated');
+        $mainNavigation.toggleClass('is-open').addClass('nav-activated');
       });
 
       $page.on('click', function(e) {
         //$('.inner-wrapper').removeAttr('style');
-        $mainNavigation.removeClass('open', 'nav-activated');
-        $page.removeClass('open', 'nav-activated');
+        $mainNavigation.removeClass('is-open', 'nav-activated');
+        $page.removeClass('is-open', 'nav-activated');
         e.preventDefault();
       });
 
@@ -74,7 +74,7 @@ $(function() {
          */
 
 
-        //fixed  header  on scroll
+        // // fixed  header  on scroll
         // $(window).scroll(function() {
         //   if ($(this).scrollTop() > $headerHt) {
         //     $header.addClass("header-container-fixed");
@@ -93,14 +93,14 @@ $(function() {
           var href = $.attr(this, 'href');
 
           if ($(".nav-toggle").css("display") === "none") {
-            $root.stop().animate({
+            $root.animate({
               scrollTop: $(href).offset().top
             }, 600, function() {
               window.location.hash = href;
             });
 
           } else {
-            $root.stop().animate({
+            $root.animate({
               scrollTop: $(href).offset().top
             }, 600, function() {
               window.location.hash = href;
@@ -113,14 +113,18 @@ $(function() {
         //Form event
         $('#submit_btn').click(function(e) {
           // $("#sgform").submit();
+          return();
+          var $message = $('textarea#message').val(),
+          $name = $('name').val(),
+          $email =  $('email').val();
 
-          var $message = $('textarea#message').val();
-          console.log($message);
           $.ajax({
             url: "//formspree.io/sergeguilmette@gmail.com",
             method: "POST",
             data: {
+              _subject: "New Posts",
               message: $message
+
             },
             dataType: "json"
 
