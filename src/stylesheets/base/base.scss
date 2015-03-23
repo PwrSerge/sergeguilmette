@@ -48,11 +48,11 @@ h2 {
   @include font-feature;
   @include type-scale(xlarge);
   @include type-weight(bold);
-  @include apply-side-rhythm-border(bottom, 2px, 1);
+  @include apply-side-rhythm-border(bottom, 2px, 0.5);
 
   font-family: $heading-font;
   color: $color-base;
-  border-color: darken(white, 50%);
+  //border-color: darken(white, 50%);
 }
 
 h3 {

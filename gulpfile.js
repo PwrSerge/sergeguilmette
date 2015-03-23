@@ -396,7 +396,7 @@ gulp.task('watch', ['browser-sync'], function() {
   gulp.watch('src/scripts/**/*.js', ['scripts']);
 
   // Watch image files
-  gulp.watch('dist/image/**/*', ['image']);
+  gulp.watch('src/image/**/*', ['image']);
 
   // Watch .html files
   gulp.watch('src/*.html', ['html']);

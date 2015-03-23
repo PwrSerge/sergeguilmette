@@ -64,14 +64,17 @@ svg {
 
 // svg init
 .icon {
+  
   width: 1em;
   height: 1em;
 
   &-big {
+
   width: 1.5em;
   height: 1.5em;
 }
   &-primary {
+
   color: $color-secondary;
 }
 
@@ -87,4 +90,3 @@ svg {
 //         fill: $color-secondary;
 //     }
 // }
-

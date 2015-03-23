@@ -113,7 +113,7 @@ $(function() {
         //Form event
         $('#submit_btn').click(function(e) {
           // $("#sgform").submit();
-          return();
+          
           var $message = $('textarea#message').val(),
           $name = $('name').val(),
           $email =  $('email').val();
