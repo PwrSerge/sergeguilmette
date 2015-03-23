@@ -1,31 +1,29 @@
 //============================================================
 // Mixins
 //============================================================
-
 //
 // Typography
 //------------------------------------------------------------
-
 // Requires inline-block or block for proper styling
 @mixin text-truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 //emboss Dribble efet
 @mixin box-emboss($opacity, $opacity2) {
-    box-shadow: white($opacity) 0 1px 0, black($opacity2) 0 1px 0;
+  box-shadow: white($opacity) 0 1px 0, black($opacity2) 0 1px 0;
 }
 
 //text emboss
 @mixin text-emboss($opacity, $opacity2) {
-    text-shadow: white($opacity) 0 1px 1px, black($opacity2) -1px -1px 0;
+  text-shadow: white($opacity) 0 1px 1px, black($opacity2) -1px -1px 0;
 }
 
 //Letterpress Dribble efet
 @mixin letterpress($opacity) {
-    text-shadow: white($opacity) 0 1px 0;
+  text-shadow: white($opacity) 0 1px 0;
 }
 
 //@mixin alpha-attribute($attribute, $color, $background) {
@@ -33,7 +31,9 @@
   $percent: alpha($color) * 100%;
   $opaque: opacify($color, 1);
   $solid-color: mix($opaque, $background, $percent);
-  @if ($percent < 100%) { #{$attribute}: $solid-color; }
+  @if ($percent < 100%) {
+    #{$attribute}: $solid-color;
+  }
   #{$attribute}: $color;
 }
 
@@ -48,119 +48,113 @@
 
 // A mixin for scaling type that utilises the $type-scale map with the predefined values
 @mixin type-scale($scale, $map: $type-scale) {
-    $font-size: map-fetch($map, $scale font-size);
-    $base-lines: map-fetch($map, $scale base-lines);
-    @include adjust-font-size-to($font-size, $base-lines);
+  $font-size: map-fetch($map, $scale font-size);
+  $base-lines: map-fetch($map, $scale base-lines);
+  @include adjust-font-size-to($font-size, $base-lines);
 }
 
 @mixin type-weight($weight) {
-    font-weight: map-get($type-weight, $weight);
+  font-weight: map-get($type-weight, $weight);
 }
 
 // Web font ligature mixin
 // http://blustemy.io/sass-mixin-for-web-fonts-ligatures/
 @mixin font-feature($features...) {
-    $font-feature-settings: 'liga', 'dlig', 'onum';
-    @if length($features) > 0 {
-        $font-feature-settings: $features;
-    }
-    -webkit-font-feature-settings: $font-feature-settings;
-    -moz-font-feature-settings: $font-feature-settings;
-    -ms-font-feature-settings: $font-feature-settings;
-    font-feature-settings: $font-feature-settings;
-}
+  $font-feature-settings: 'liga', 'dlig', 'onum';
+  @if length($features) > 0 {
+    $font-feature-settings: $features;
+  }
 
+  font-feature-settings: $font-feature-settings;
+}
 // importing google fonts
 @mixin gwf($fonts...) {
-    $url: 'http://fonts.googleapis.com/css?family=';
-    $nb: 0;
-    @each $font-name in $fonts {
-        $nb: $nb + 1;
-        $nb-word: 0;
-        @each $word in $font-name {
-            $nb-word: $nb-word + 1;
-            $url: $url + $word;
-            @if $nb-word < length($font-name) {
-                $url: $url + '+';
-            }
-        }
-        @if $nb < length($fonts) {
-            $url: $url + '|';
-        }
+  $url: 'http://fonts.googleapis.com/css?family=';
+  $nb: 0;
+  @each $font-name in $fonts {
+    $nb: $nb + 1;
+    $nb-word: 0;
+    @each $word in $font-name {
+      $nb-word: $nb-word + 1;
+      $url: $url + $word;
+      @if $nb-word < length($font-name) {
+        $url: $url + '+';
+      }
     }
-    @import url(#{$url});
+    @if $nb < length($fonts) {
+      $url: $url + '|';
+    }
+  }
+  @import url(#{$url});
 }
 
 //
 //Utillity
 //--------------------------------------------------------------------
-
 //Modular Media Queries
 //http://www.impressivewebs.com/modular-css-media-queries-sass/
-
 @mixin modular-mq($breakpoint) {
-    @if $breakpoint == small {
-        @media #{$media} and ($feature: $bp-small) {
-            @content;
-        }
-    } @else if $breakpoint == medium {
-        @media #{$media} and ($feature: $bp-medium) {
-            @content;
-        }
-    } @else if $breakpoint == large {
-        @media #{$media} and ($feature: $bp-large) {
-            @content;
-        }
+  @if $breakpoint == small {
+    @media #{$media} and ($feature: $bp-small) {
+      @content;
     }
+  } @else if $breakpoint == medium {
+    @media #{$media} and ($feature: $bp-medium) {
+      @content;
+    }
+  } @else if $breakpoint == large {
+    @media #{$media} and ($feature: $bp-large) {
+      @content;
+    }
+  }
 }
 
 // Mixin for reset list
 @mixin reset-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-
 
 // double shadow box effect
 @mixin double-shadow($color) {
-    @include box-shadow(0 1px 0 lighten($color, 10%) inset, 0 -1px 0 darken($color, 10%) inset);
+  @include box-shadow(0 1px 0 lighten($color, 10%) inset, 0 -1px 0 darken($color, 10%) inset);
 }
 
 // hover style -- lighten bg
 @mixin hover-style($color, $amount: true) {
-    @if $amount {
-        &:hover {
-            background: lighten($color, $amount);
-        }
-    } @else {
-        &:hover {
-            background: lighten($color, 3%);
-        }
+  @if $amount {
+    &:hover {
+      background: lighten($color, $amount);
     }
+  } @else {
+    &:hover {
+      background: lighten($color, 3%);
+    }
+  }
 }
-
 
 // Clearfix mixin
 // set to  false to extend else inject mixin
 @mixin cf($extend: true) {
-    @if $extend {
-        @extend %cf;
-    } @else {
-        *zoom: 1;
-        &:before,
-        &:after {
-            content: ' ';
-            display: table;
-        }
+  @if $extend {
+    @extend %cf;
+  } @else {
+    *zoom: 1;
 
-        &:after {
-            clear: both;
-            line-height: 0;
-        }
+    &:before,
+    &:after {
+      content: ' ';
+      display: table;
     }
+
+    &:after {
+      clear: both;
+      line-height: 0;
+    }
+  }
 }
 
 %cf {
-    @include cf($extend: false);
+  @include cf($extend: false);
 }

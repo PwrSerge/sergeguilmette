@@ -8,14 +8,14 @@
   left: 0;
   height: 6em;
   background-color: #fff;
-  
+
   //@include alpha-attribute("background-color", rgba(white, .8), black);
   //@include alpha-attribute("border-color", rgba(white, .8), black);
 }
 
 .header-container-fixed {
   position: fixed;
-  width:100%
+  width: 100%;
 }
 
 .header-wrapper {
@@ -28,15 +28,12 @@
 
 .header-title {
   @extend %vertical-align;
-
-  font-size: 2em;
-  line-height: 0.9em;
+  @include type-scale(large);
   padding-left: 2em;
   vertical-align: middle;
 
   @include breakpoint($bp-large) {
-    font-size: 2.95em;
-    line-height: 3.2em;
+    @include type-scale(xxlarge);
   }
 
   &:after {

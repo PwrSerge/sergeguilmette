@@ -38,8 +38,8 @@
   transform: translate3d(0, -20em, 0);
   z-index: 1;
 
+
   @include breakpoint($bp-medium) {
-    height: 6em;
     transform: translate3d(0, 0, 0);
     background-color: #fff;
   }
@@ -47,7 +47,6 @@
   &.is-open {
     transform: translate3d(0, 0, 0);
   }
-
 
 }
 
@@ -57,52 +56,55 @@
 }
 
 .nav-main-list {
-  @include reset-list;
-
+  margin: 0;
+  height: 6em;
+  display: flex;
+  flex-flow: column;
+  padding: 0;
+  list-style: none;
   overflow: hidden;
   width: 100%;
-  text-align: center;
   color: #fff;
-  background-color: $color-secondary;
+
 
   @include breakpoint($bp-medium) {
-    display: inline-block;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
     color: $color-base;
-    background-color: transparent;
   }
+
+  @include breakpoint($bp-large) {
+    flex-flow: row wrap;
+    justify-content: flex-end;
+
+
+  }
+
 }
 
 .nav-main-item {
-  width: 100%;
+  width: auto;
   padding: 1em;
-
-  &:hover {
-    //@include hover-style (red, 15%);
-    background-color: $color-base;
-  }
+  height: 6em;
+  //line-height: 4em;
 
   @include breakpoint($bp-medium) {
-    line-height: 4em;
-    display: inline-block;
-    width: auto;
     height: 6em;
-    padding: 0.75em;
+    padding: 0.5em;
     transition: background-position 0.5s ease-out;
-    text-align: middle;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 51%, rgba(255, 255, 255, 1) 100%);
     background-position: 0 -100%;
     background-size: auto 200%;
-
-    &:hover {
-      background-color: darken(#fff, 10%);
-      background-position: 0 0;
     }
+
+  &:hover {
+    background-color: darken(white, 10%);
+    background-position: 0 0;
+
   }
-
-
-
-
 }
+
 
 /*
    Flex Navigation
