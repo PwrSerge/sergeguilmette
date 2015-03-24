@@ -812,6 +812,16 @@ svg {
   fill: currentColor;
 }
 
+.hex1 {
+  width: 3em;
+  height: 3em;
+  stroke: #8cc63e;
+  fill: #fff;
+  stroke-width: 15;
+  stroke-linejoin: round;
+  stroke-miterlimit: 50;
+}
+
 .icon {
   width: 1em;
   height: 1em;
@@ -942,8 +952,8 @@ footer {
 }
 
 .inner-wrapper.is-open {
-  -webkit-transform: translate3d(0, 20em, 0);
-  transform: translate3d(0, 20em, 0);
+  -webkit-transform: translate3d(0, 18em, 0);
+  transform: translate3d(0, 18em, 0);
 }
 
 .nav-toggle {
@@ -964,10 +974,9 @@ footer {
 }
 
 .nav-main {
-  height: 6em;
   position: relative;
-  -webkit-transform: translate3d(0, -20em, 0);
-  transform: translate3d(0, -20em, 0);
+  -webkit-transform: translate3d(0, -18em, 0);
+  transform: translate3d(0, -18em, 0);
   z-index: 1;
 }
 
@@ -991,7 +1000,7 @@ footer {
 }
 
 .nav-main-list {
-  height: 6em;
+  margin: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -999,16 +1008,15 @@ footer {
   -webkit-flex-flow: column;
   -ms-flex-flow: column;
   flex-flow: column;
-  margin: 0;
   padding: 0;
   list-style: none;
   overflow: hidden;
-  width: 100%;
   color: #fff;
 }
 
 @media (min-width: 43.75em) {
   .nav-main-list {
+    height: 6em;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
@@ -1016,34 +1024,26 @@ footer {
     -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
     color: #3e225b;
   }
 }
 
-@media (min-width: 78.125em) {
-  .nav-main-list {
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-  }
-}
-
 .nav-main-item {
-  width: auto;
   padding: 1em;
+  text-align: center;
+  background-color: #3e225b;
 }
 
 @media (min-width: 43.75em) {
   .nav-main-item {
-    height: 6em;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     padding: 0.5em;
     -webkit-transition: background-position 0.5s ease-out;
     transition: background-position 0.5s ease-out;
@@ -1052,11 +1052,15 @@ footer {
     background-position: 0 -100%;
     background-size: auto 200%;
   }
+
+  .nav-main-item:hover {
+    background-color: #e6e6e6;
+    background-position: 0 0;
+  }
 }
 
 .nav-main-item:hover {
-  background-color: #e6e6e6;
-  background-position: 0 0;
+  background-color: #8cc63e;
 }
 
 /*

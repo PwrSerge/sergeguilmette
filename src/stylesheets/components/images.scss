@@ -62,6 +62,16 @@ svg {
   fill: currentColor;
 }
 
+.hex1 {
+  width: 3em;
+  height: 3em;
+  stroke: $color-secondary;
+  fill:   #fff;
+  stroke-width: 15;
+  stroke-linejoin: round;
+  stroke-miterlimit: 50;
+  }
+
 .icon {
   width: 1em;
   height: 1em;

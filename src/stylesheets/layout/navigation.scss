@@ -13,7 +13,7 @@
   transform: translate3d(0, 0, 0);
 
   &.is-open {
-    transform: translate3d(0, 20em, 0);
+    transform: translate3d(0, 18em, 0);
   }
 }
 
@@ -33,9 +33,9 @@
 }
 
 .nav-main {
-  height: 6em;
+
   position: relative;
-  transform: translate3d(0, -20em, 0);
+  transform: translate3d(0, -18em, 0);
   z-index: 1;
 
 
@@ -56,53 +56,49 @@
 }
 
 .nav-main-list {
+  //  height: 6em;
   margin: 0;
-  height: 6em;
   display: flex;
   flex-flow: column;
   padding: 0;
   list-style: none;
   overflow: hidden;
-  width: 100%;
   color: #fff;
-
-
-  @include breakpoint($bp-medium) {
-    flex-flow: row wrap;
-    justify-content: flex-end;
-    align-items: center;
-    color: $color-base;
-  }
-
-  @include breakpoint($bp-large) {
-    flex-flow: row wrap;
-    justify-content: flex-end;
-
-
-  }
-
-}
-
-.nav-main-item {
-  width: auto;
-  padding: 1em;
-  height: 6em;
-  //line-height: 4em;
 
   @include breakpoint($bp-medium) {
     height: 6em;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    color: $color-base;
+  }
+}
+
+.nav-main-item {
+  padding: 1em;
+  text-align: center;
+  background-color: $color-base;
+
+
+  @include breakpoint($bp-medium) {
+    display: flex;
+    align-items: center;
     padding: 0.5em;
     transition: background-position 0.5s ease-out;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 51%, rgba(255, 255, 255, 1) 100%);
     background-position: 0 -100%;
     background-size: auto 200%;
+
+    &:hover {
+      background-color: darken(white, 10%);
+      background-position: 0 0;
     }
+  }
 
   &:hover {
-    background-color: darken(white, 10%);
-    background-position: 0 0;
+    background-color: $color-secondary;
 
   }
+
 }
 
 
