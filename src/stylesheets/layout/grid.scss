@@ -66,10 +66,17 @@ footer {
   //   //margin-left: span(2);
   // }
 
-  .nav-main {
-    @include span(16 of 24 last);
-    //margin-right: span(2);
+  .header-wrapper {
+    @include span(8 at 0 of 24);
+    margin-left: span(2);
   }
+
+  .nav-main {
+    @include span(12 at 10 of 24 last);
+    margin-right: span(2);
+  }
+
+
 
   main {
     @include span(12);
