@@ -66,8 +66,8 @@ svg {
   width: 3em;
   height: 3em;
   stroke: $color-secondary;
-  fill:   #fff;
-  stroke-width: 15;
+  fill: $color-secondary;
+  stroke-width: 25;
   stroke-linejoin: round;
   stroke-miterlimit: 50;
   }
@@ -75,6 +75,11 @@ svg {
 .icon {
   width: 1em;
   height: 1em;
+
+  &-small {
+    width: 0.5em;
+    height: 0.5em;
+}
 
   &-big {
     width: 1.5em;

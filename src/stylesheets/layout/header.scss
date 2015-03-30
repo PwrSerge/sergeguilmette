@@ -2,13 +2,13 @@
    HEADER
    ========================================================================== */
 .header-container {
+  margin: 0;
+  padding: 0;
   font-family: $heading-font;
-  z-index: 2;
   top: 0;
   left: 0;
   height: 6em;
-  background-color: #fff;
-
+  background-color: $color-secondary-background;
   //@include alpha-attribute("background-color", rgba(white, .8), black);
   //@include alpha-attribute("border-color", rgba(white, .8), black);
 }
@@ -20,26 +20,28 @@
 
 .header-wrapper {
   position: relative;
-  z-index: 2;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   height: 6em;
-  word-wrap: break-word;
-  background-color: #fff;
+
+  background-color: inherit;
+  z-index: map-get($zindex, header);
 }
 
 .header-title {
-  @extend %vertical-align;
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
   @include type-scale(large);
-  padding-left: 2em;
-  vertical-align: middle;
+  color: $color-base-background;
 
   @include breakpoint($bp-large) {
     @include type-scale(xxlarge);
   }
 
-  &:after {
-    content: ' Guilmette';
-    color: $color-secondary;
-  }
+
 }
 
 .header-logo {
@@ -47,6 +49,7 @@
   float: left;
   width: 3em;
   height: 3em;
+  fill: $color-primary;
 
   @include breakpoint($bp-large) {
     width: 4em;

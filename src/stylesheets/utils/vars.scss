@@ -38,7 +38,9 @@ $themes: (brand: (primary: $palette-blue-base, secondary: $palette-blue-dark, co
 $base-background-image: url('../image/newBG-grey2.svg');
 $color-base: $palette-purple-base;
 $color-base-background: $palette-neutral-base;
+$color-secondary-background: #1b1b1b;
 $color-muted: $palette-neutral-light;
+$color-primary: $palette-purple-light;
 $color-secondary: $palette-green-base;
 $color-tertiary: $palette-green-light;
 $color-accent: $palette-orange;
@@ -183,4 +185,4 @@ $easeinout-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 //Z-index
 //see http://css-tricks.com/handling-z-index/
 //--------------------------------------------------------------------
-$zindex: (modal : 9000, overlay : 8000, dropdown : 7000, header : 6000, footer : 5000);
+$zindex: (modal : 9000, overlay : 8000, dropdown : 4000, header : 6000, footer : 5000);

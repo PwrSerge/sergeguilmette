@@ -1,14 +1,11 @@
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
-
 // .fix-body {
 // /* this will adjust body top margin to prevent content jumping when nav gets fix  */
 //   margin-top: 6em;
 // /* adjust as per height of your menu */;
 // }
-
-
 .inner-wrapper {
   transform: translate3d(0, 0, 0);
 
@@ -18,38 +15,39 @@
 }
 
 .nav-toggle {
+  color: $color-primary;
   position: relative;
-  z-index: 2;
+  z-index: map-get($zindex, dropdown);
   display: inline-block;
   float: right;
   height: 6em;
   padding-top: 2em;
   cursor: pointer;
-  background-color: #fff;
-
+  background-color: inherit;
   @include breakpoint($bp-medium) {
     display: none;
   }
 }
 
 .nav-main {
+  margin: 0;
+  padding: 0;
   display: flex;
-  position: relative;
+  flex-flow: column;
   transform: translate3d(0, -18em, 0);
-  z-index: 1;
-
+  z-index: map-get($zindex, dropdown);
 
   @include breakpoint($bp-medium) {
+
+    position: relative;
     flex-flow: row wrap;
-    justify-content: flex-end;
+    justify-content: space-around;
     transform: translate3d(0, 0, 0);
-    background-color: #fff;
   }
 
   &.is-open {
     transform: translate3d(0, 0, 0);
   }
-
 }
 
 .nav-main.nav-activated,
@@ -66,116 +64,116 @@
   overflow: hidden;
   color: #fff;
 
+
+
   @include breakpoint($bp-medium) {
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-end;
+    justify-content: center;
     height: 6em;
-    color: $color-base;
+    color: $color-primary;
+
   }
 }
 
 .nav-main-item {
+  @include type-scale(base);
   padding: 1em;
   text-align: center;
   background-color: $color-base;
 
 
   @include breakpoint($bp-medium) {
+    // @include type-scale(medium);
     display: flex;
     align-items: center;
     padding: 0.5em;
-    transition: background-position 0.5s ease-out;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 51%, rgba(255, 255, 255, 1) 100%);
-    background-position: 0 -100%;
-    background-size: auto 200%;
+    background-color: $color-secondary-background;
+    position: relative;
+    transition: color 0.5s;
 
     &:hover {
-      background-color: darken(white, 10%);
-      background-position: 0 0;
+      color: $color-secondary;
+    }
+
+    &:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 25%;
+      width: 0;
+      height: 1px;
+      background-color: $color-secondary;
+      content: '';
+      transition: width 0.5s;
+    }
+
+    &:hover:after {
+      width: 100%;
     }
   }
-
-  &:hover {
-    background-color: $color-secondary;
-
-  }
-
 }
 
 .nav-social-list {
-  margin: 0;
-  display: flex;
-  flex-flow: column;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  color: #fff;
 
-  @include breakpoint($bp-medium) {
-    height: 6em;
-    color: $color-base;
-  }
+  @extend .nav-main-list;
+  content: none;
 }
 
 .nav-social-item {
-  padding: 1em;
-  text-align: center;
-
   @include breakpoint($bp-medium) {
+
     display: flex;
     align-items: center;
     padding: 0.5em;
+    background-color: $color-secondary-background;
+    position: relative;
+    transition: color 0.5s;
+
+    &:hover {
+      color: $color-secondary;
     }
 
+  }
+  content: none;
+
 }
-
-
-
 
 /*
    Flex Navigation
    ========================================================================== */
-
 .flex-nav {
   display: flex;
   width: 100%;
 }
-
 %flex-nav-item {
   display: flex;
   padding: 5px 10px;
   border: {
     left: 1px solid #999;
-  };
-
+  }
+  ;
   background-color: #ccc;
   align-items: center;
   justify-content: center;
 }
-
 .flex-nav-item {
   @extend %flex-nav-item;
-
   &:hover {
     background-color: #aaa;
   }
 }
-
 .flex-nav-item--search {
   @extend %flex-nav-item;
   @include flex(1);
-
   label {
     display: block;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
   }
-
   input {
     @include box-sizing(border-box);
-
     display: block;
     width: 100%;
   }

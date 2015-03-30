@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Kavoon|Wendy+One|Montserrat);
 
-.header-title, .header-logo {
+.header-logo {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -59,9 +59,9 @@ h2 {
   font-size: 1.95313rem;
   line-height: 2.4375rem;
   font-weight: 700;
-  border-bottom-width: 0.125rem;
+  border-bottom-width: 0.0625rem;
   border-bottom-style: solid;
-  padding-bottom: 0.6875rem;
+  padding-bottom: 0.75rem;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #3e225b;
 }
@@ -816,8 +816,8 @@ svg {
   width: 3em;
   height: 3em;
   stroke: #8cc63e;
-  fill: #fff;
-  stroke-width: 15;
+  fill: #8cc63e;
+  stroke-width: 25;
   stroke-linejoin: round;
   stroke-miterlimit: 50;
 }
@@ -825,6 +825,11 @@ svg {
 .icon {
   width: 1em;
   height: 1em;
+}
+
+.icon-small {
+  width: 0.5em;
+  height: 0.5em;
 }
 
 .icon-big {
@@ -892,14 +897,14 @@ footer {
    ========================================================================== */
 @media (min-width: 43.75em) {
   .header-wrapper {
-    width: 33.33333%;
+    width: 25%;
     float: left;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
   }
 
   .nav-main {
-    width: 66.66667%;
+    width: 75%;
     float: right;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
@@ -919,7 +924,7 @@ footer {
    ========================================================================== */
 @media (min-width: 78.125em) {
   .header-wrapper {
-    width: 33.33333%;
+    width: 25%;
     float: left;
     padding-left: 0.41667%;
     padding-right: 0.41667%;
@@ -927,7 +932,7 @@ footer {
   }
 
   .nav-main {
-    width: 50%;
+    width: 58.33333%;
     float: right;
     padding-left: 0.41667%;
     padding-right: 0.41667%;
@@ -966,14 +971,15 @@ footer {
 }
 
 .nav-toggle {
+  color: #9362c4;
   position: relative;
-  z-index: 2;
+  z-index: 4000;
   display: inline-block;
   float: right;
   height: 6em;
   padding-top: 2em;
   cursor: pointer;
-  background-color: #fff;
+  background-color: inherit;
 }
 
 @media (min-width: 43.75em) {
@@ -983,28 +989,31 @@ footer {
 }
 
 .nav-main {
+  margin: 0;
+  padding: 0;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
   -webkit-transform: translate3d(0, -18em, 0);
   transform: translate3d(0, -18em, 0);
-  z-index: 1;
+  z-index: 4000;
 }
 
 @media (min-width: 43.75em) {
   .nav-main {
+    position: relative;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    background-color: #fff;
   }
 }
 
@@ -1019,7 +1028,7 @@ footer {
   transition: transform 0.4s ease;
 }
 
-.nav-main-list {
+.nav-main-list, .nav-social-list {
   margin: 0;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1035,20 +1044,26 @@ footer {
 }
 
 @media (min-width: 43.75em) {
-  .nav-main-list {
+  .nav-main-list, .nav-social-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     height: 6em;
-    color: #3e225b;
+    color: #9362c4;
   }
 }
 
 .nav-main-item {
+  font-size: 1rem;
+  line-height: 1.625rem;
   padding: 1em;
   text-align: center;
   background-color: #3e225b;
@@ -1065,69 +1080,61 @@ footer {
     -ms-flex-align: center;
     align-items: center;
     padding: 0.5em;
-    -webkit-transition: background-position 0.5s ease-out;
-    transition: background-position 0.5s ease-out;
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #ffffff 51%, #ffffff 100%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, #ffffff 51%, #ffffff 100%);
-    background-position: 0 -100%;
-    background-size: auto 200%;
+    background-color: #1b1b1b;
+    position: relative;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
   }
 
   .nav-main-item:hover {
-    background-color: #e6e6e6;
-    background-position: 0 0;
+    color: #8cc63e;
   }
-}
 
-.nav-main-item:hover {
-  background-color: #8cc63e;
+  .nav-main-item:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 25%;
+    width: 0;
+    height: 1px;
+    background-color: #8cc63e;
+    content: '';
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+  }
+
+  .nav-main-item:hover:after {
+    width: 100%;
+  }
 }
 
 .nav-social-list {
-  margin: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  color: #fff;
-}
-
-@media (min-width: 43.75em) {
-  .nav-social-list {
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    height: 6em;
-    color: #3e225b;
-  }
+  content: none;
 }
 
 .nav-social-item {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 1em;
-  text-align: center;
+  content: none;
 }
 
 @media (min-width: 43.75em) {
   .nav-social-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
     padding: 0.5em;
+    background-color: #1b1b1b;
+    position: relative;
+    -webkit-transition: color 0.5s;
+    transition: color 0.5s;
+  }
+
+  .nav-social-item:hover {
+    color: #8cc63e;
   }
 }
 
@@ -1198,12 +1205,13 @@ footer {
    HEADER
    ========================================================================== */
 .header-container {
+  margin: 0;
+  padding: 0;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  z-index: 2;
   top: 0;
   left: 0;
   height: 6em;
-  background-color: #fff;
+  background-color: #1b1b1b;
 }
 
 .header-container-fixed {
@@ -1213,17 +1221,37 @@ footer {
 
 .header-wrapper {
   position: relative;
-  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   height: 6em;
-  word-wrap: break-word;
-  background-color: #fff;
+  background-color: inherit;
+  z-index: 6000;
 }
 
 .header-title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 1.5625rem;
   line-height: 1.625rem;
-  padding-left: 2em;
-  vertical-align: middle;
+  color: #f8f7f2;
 }
 
 @media (min-width: 78.125em) {
@@ -1233,15 +1261,11 @@ footer {
   }
 }
 
-.header-title:after {
-  content: ' Guilmette';
-  color: #8cc63e;
-}
-
 .header-logo {
   float: left;
   width: 3em;
   height: 3em;
+  fill: #9362c4;
 }
 
 @media (min-width: 78.125em) {
