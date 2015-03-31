@@ -18,11 +18,12 @@ header {
 }
 
 .header-wrapper {
-  @include span(10 at 0 of 12);
+  @include span(9 at 0 of 12);
+  margin-left: span(1) + gutter();
 }
 
 .nav-toggle {
-  @include span(2 at 11 of 12 last);
+  @include span(2 at 10 of 12);
 }
 
 .nav-main,
@@ -45,10 +46,13 @@ footer {
 @include susy-breakpoint($bp-medium, $mediumlayout) {
   .header-wrapper {
     @include span(3 at 0 of 12);
+    margin-left: span(1);
+
   }
 
   .nav-main {
-    @include span(9 at 5 of 12 last);
+    @include span(7 at 4 of 12);
+    margin-right: span(1);
   }
 
   main {
@@ -72,7 +76,7 @@ footer {
   }
 
   .nav-main {
-    @include span(14 at 8 of 24 last);
+    @include span(14 at 8 of 24);
     margin-right: span(2);
   }
 

@@ -16,7 +16,6 @@
 
 .nav-toggle {
   color: $color-primary;
-  position: relative;
   z-index: map-get($zindex, dropdown);
   display: inline-block;
   float: right;
@@ -24,6 +23,7 @@
   padding-top: 2em;
   cursor: pointer;
   background-color: inherit;
+
   @include breakpoint($bp-medium) {
     display: none;
   }
@@ -32,16 +32,10 @@
 .nav-main {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-flow: column;
   transform: translate3d(0, -18em, 0);
   z-index: map-get($zindex, dropdown);
 
   @include breakpoint($bp-medium) {
-
-    position: relative;
-    flex-flow: row wrap;
-    justify-content: space-around;
     transform: translate3d(0, 0, 0);
   }
 
@@ -56,9 +50,8 @@
 }
 
 .nav-main-list {
+
   margin: 0;
-  display: flex;
-  flex-flow: column;
   padding: 0;
   list-style: none;
   overflow: hidden;
@@ -67,9 +60,11 @@
 
 
   @include breakpoint($bp-medium) {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+
     height: 6em;
     color: $color-primary;
 
@@ -77,6 +72,7 @@
 }
 
 .nav-main-item {
+  @extend %vertical-align;
   @include type-scale(base);
   padding: 1em;
   text-align: center;
@@ -84,9 +80,8 @@
 
 
   @include breakpoint($bp-medium) {
-    // @include type-scale(medium);
-    display: flex;
-    align-items: center;
+
+    display: inline-block;
     padding: 0.5em;
     background-color: $color-secondary-background;
     position: relative;
@@ -121,10 +116,10 @@
 }
 
 .nav-social-item {
-  @include breakpoint($bp-medium) {
+  @extend %vertical-align;
 
-    display: flex;
-    align-items: center;
+  @include breakpoint($bp-medium) {
+    display: inline-block;
     padding: 0.5em;
     background-color: $color-secondary-background;
     position: relative;
@@ -133,10 +128,8 @@
     &:hover {
       color: $color-secondary;
     }
-
   }
-  content: none;
-
+    content: none;
 }
 
 /*

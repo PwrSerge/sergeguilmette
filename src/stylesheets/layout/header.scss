@@ -19,29 +19,27 @@
 }
 
 .header-wrapper {
-  position: relative;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  height: 6em;
 
+  position: relative;
+  // display: flex;
+  // flex-flow: row wrap;
+  // justify-content: flex-start;
+  height: 6em;
   background-color: inherit;
   z-index: map-get($zindex, header);
 }
 
 .header-title {
-
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
   @include type-scale(large);
+  @extend %vertical-align;
+  // display: flex;
+  // flex-flow: row wrap;
+  // align-items: center;
   color: $color-base-background;
 
   @include breakpoint($bp-large) {
-    @include type-scale(xxlarge);
+    @include type-scale(xlarge);
   }
-
-
 }
 
 .header-logo {

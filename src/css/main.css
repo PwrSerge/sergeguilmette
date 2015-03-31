@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Kavoon|Wendy+One|Montserrat);
 
-.header-logo {
+.nav-main-item, .nav-social-item, .header-title, .header-logo {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -855,15 +855,16 @@ header {
 }
 
 .header-wrapper {
-  width: 83.33333%;
+  width: 75%;
   float: left;
   padding-left: 0.83333%;
   padding-right: 0.83333%;
+  margin-left: 9.16667%;
 }
 
 .nav-toggle {
   width: 16.66667%;
-  float: right;
+  float: left;
   padding-left: 0.83333%;
   padding-right: 0.83333%;
 }
@@ -901,13 +902,15 @@ footer {
     float: left;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
+    margin-left: 8.33333%;
   }
 
   .nav-main {
-    width: 75%;
-    float: right;
+    width: 58.33333%;
+    float: left;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
+    margin-right: 8.33333%;
   }
 
   main {
@@ -933,7 +936,7 @@ footer {
 
   .nav-main {
     width: 58.33333%;
-    float: right;
+    float: left;
     padding-left: 0.41667%;
     padding-right: 0.41667%;
     margin-right: 8.33333%;
@@ -972,7 +975,6 @@ footer {
 
 .nav-toggle {
   color: #9362c4;
-  position: relative;
   z-index: 4000;
   display: inline-block;
   float: right;
@@ -991,13 +993,6 @@ footer {
 .nav-main {
   margin: 0;
   padding: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column;
   -webkit-transform: translate3d(0, -18em, 0);
   transform: translate3d(0, -18em, 0);
   z-index: 4000;
@@ -1005,13 +1000,6 @@ footer {
 
 @media (min-width: 43.75em) {
   .nav-main {
-    position: relative;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-justify-content: space-around;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
@@ -1030,13 +1018,6 @@ footer {
 
 .nav-main-list, .nav-social-list {
   margin: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column;
-  -ms-flex-flow: column;
-  flex-flow: column;
   padding: 0;
   list-style: none;
   overflow: hidden;
@@ -1045,17 +1026,9 @@ footer {
 
 @media (min-width: 43.75em) {
   .nav-main-list, .nav-social-list {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
     height: 6em;
     color: #9362c4;
   }
@@ -1071,14 +1044,7 @@ footer {
 
 @media (min-width: 43.75em) {
   .nav-main-item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+    display: inline-block;
     padding: 0.5em;
     background-color: #1b1b1b;
     position: relative;
@@ -1118,14 +1084,7 @@ footer {
 
 @media (min-width: 43.75em) {
   .nav-social-item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+    display: inline-block;
     padding: 0.5em;
     background-color: #1b1b1b;
     position: relative;
@@ -1221,34 +1180,12 @@ footer {
 
 .header-wrapper {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   height: 6em;
   background-color: inherit;
   z-index: 6000;
 }
 
 .header-title {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
   font-size: 1.5625rem;
   line-height: 1.625rem;
   color: #f8f7f2;
@@ -1256,8 +1193,8 @@ footer {
 
 @media (min-width: 78.125em) {
   .header-title {
-    font-size: 2.44141rem;
-    line-height: 3.25rem;
+    font-size: 1.95313rem;
+    line-height: 2.4375rem;
   }
 }
 
