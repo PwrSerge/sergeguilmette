@@ -1,3 +1,7 @@
+.modal-inset .close.pseudo-class-hover {
+  opacity: 1;
+}
+
 .btn.pseudo-class-hover {
   background: #8cc63e;
 }
@@ -13,20 +17,16 @@
   background: #3b444f;
 }
 
-.btn--brand.pseudo-class-hover {
+.btn-brand.pseudo-class-hover {
   background: #1d508d;
 }
 
-.btn--highlight.pseudo-class-hover {
+.btn-highlight.pseudo-class-hover {
   background: #ffc83c;
 }
 
-.btn--neutral.pseudo-class-hover {
+.btn-neutral.pseudo-class-hover {
   background: #dbe6ec;
-}
-
-.nav-main__item.pseudo-class-hover {
-  background-color: #3e225b;
 }
 
 .flex-nav-item.pseudo-class-hover {

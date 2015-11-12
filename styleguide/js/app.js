@@ -6,9 +6,16 @@ angular.module('sgApp', [
   'LocalStorageModule',
   'oc.lazyLoad',
   'ngProgress',
-  'rt.debounce'
+  'rt.debounce',
+  'duScroll'
 ])
+  .value('duScrollOffset', 30)
   .config(["$stateProvider", "$urlRouterProvider", "$locationProvider", "localStorageServiceProvider", "$ocLazyLoadProvider", function($stateProvider, $urlRouterProvider, $locationProvider, localStorageServiceProvider, $ocLazyLoadProvider) {
+    var styleguideConfig = {};
+    if (typeof window._styleguideConfig !== 'undefined') {
+      styleguideConfig = window._styleguideConfig;
+    }
+    $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('app', {
         template: '<ui-view />',
@@ -18,6 +25,26 @@ angular.module('sgApp', [
       .state('app.index', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
+      })
+      .state('app.index.section', {
+        url: '/section/:section',
+        templateUrl: 'views/sections.html',
+        controller: 'SectionsCtrl',
+        resolve: {
+          loadLazyModule: ["$ocLazyLoad", function($ocLazyLoad) {
+            loadModule($ocLazyLoad);
+          }]
+        }
+      })
+      .state('app.index.search', {
+        url: '/search/:section',
+        templateUrl: 'views/sections.html',
+        controller: 'SectionsCtrl',
+        resolve: {
+          loadLazyModule: ["$ocLazyLoad", function($ocLazyLoad) {
+            loadModule($ocLazyLoad);
+          }]
+        }
       })
       .state('app.index.overview', {
         url: '/',
@@ -39,27 +66,13 @@ angular.module('sgApp', [
           });
         }]
       })
-      .state('app.index.section', {
-        url: '/section/:section',
-        templateUrl: 'views/sections.html',
-        controller: 'SectionsCtrl',
-        resolve: {
-          loadLazyModule: ["$ocLazyLoad", function($ocLazyLoad) {
-            if (window.filesConfig && window.filesConfig.length) {
-              return $ocLazyLoad.load(window.filesConfig[0].name);
-            }
-          }]
-        }
-      })
       .state('app.index.variable', {
         url: '/variable/:variableName',
         templateUrl: 'views/variable-sections.html',
         controller: 'VariablesCtrl',
         resolve: {
           loadLazyModule: ["$ocLazyLoad", function($ocLazyLoad) {
-            if (window.filesConfig && window.filesConfig.length) {
-              return $ocLazyLoad.load(window.filesConfig[0].name);
-            }
+            loadModule($ocLazyLoad);
           }]
         }
       })
@@ -69,9 +82,7 @@ angular.module('sgApp', [
         controller: 'ElementCtrl',
         resolve: {
           loadLazyModule: ["$ocLazyLoad", function($ocLazyLoad) {
-            if (window.filesConfig && window.filesConfig.length) {
-              return $ocLazyLoad.load(window.filesConfig[0].name);
-            }
+            loadModule($ocLazyLoad);
           }]
         }
       }).state('app.index.404', {
@@ -79,8 +90,17 @@ angular.module('sgApp', [
         templateUrl: 'views/404.html'
       });
 
-    $locationProvider.html5Mode(true);
+    function loadModule($ocLazyLoad) {
+      if (window.filesConfig && window.filesConfig.length) {
+        var moduleNames = [];
+        angular.forEach(window.filesConfig, function(lazyLoadmodule) {
+          moduleNames.push(lazyLoadmodule.name);
+        });
+        return $ocLazyLoad.load(moduleNames);
+      }
+    }
 
+    $locationProvider.html5Mode(!styleguideConfig.disableHtml5Mode);
     localStorageServiceProvider.setPrefix('sgLs');
 
     $ocLazyLoadProvider.config({
@@ -89,11 +109,26 @@ angular.module('sgApp', [
       modules: window.filesConfig
     });
   }])
-  .run(["$rootScope", function($rootScope) {
+  .factory('lodash', ['$window',
+    function($window) {
+      // Use both methods to access _ so it will work eventhough $window is mocked
+      return $window._ || window._;
+    }
+  ])
+  .run(["$rootScope", "$window", "lodash", function($rootScope, $window, lodash) {
     $rootScope.currentReference = {
       section: {
       }
     };
+
+    // Create global throttled scorll
+    function broadcastScrollEvent(event) {
+      $rootScope.$broadcast('scroll', event);
+    }
+    // Some tests replace $window with a mock, make sure that we have real window
+    if (typeof $window.addEventListener === 'function') {
+      angular.element($window).bind('scroll', lodash.throttle(broadcastScrollEvent, 350));
+    }
   }])
   .filter('addWrapper', ['Styleguide', function(Styleguide) {
     return function(html) {
@@ -123,7 +158,9 @@ angular.module('sgApp', [
   // Replaces modifier markup's {$modifiers} with modifier's modifierClass
   .filter('setModifierClass', function() {
     return function(items, modifierClass) {
-      items = items.replace(/\{\$modifiers\}/g, modifierClass);
+      if (items) {
+        items = items.replace(/\{\$modifiers\}/g, modifierClass);
+      }
       return items;
     };
   })
@@ -133,8 +170,27 @@ angular.module('sgApp', [
       if (!str) {
         return '';
       }
-      angular.forEach(variables, function(variable) {
-        str = str.replace(new RegExp('\\$' + variable.name, 'g'), variable.value);
+
+      var sortedVariables;
+      if (variables) {
+        sortedVariables = variables.slice().sort(function(a, b) {
+          return b.name.length - a.name.length;
+        });
+      }
+
+      angular.forEach(sortedVariables, function(variable) {
+        var cleanedValue = variable.value.replace(/\s*\!default$/, '');
+
+        if (cleanedValue.match('\[\$\@]') !== null) {
+          var varName = cleanedValue.substring(1);
+          angular.forEach(sortedVariables, function(_var) {
+            if (_var.name === varName) {
+              cleanedValue = _var.value;
+            }
+          });
+        }
+
+        str = str.replace(new RegExp('\[\$\@]' + variable.name, 'g'), cleanedValue);
       });
       return str;
     };
@@ -144,53 +200,52 @@ angular.module('sgApp', [
 
 angular.module('sgApp')
   .controller('AppCtrl', ["$scope", "ngProgress", function($scope, ngProgress) {
+    // ngProgress do not respect styles assigned via CSS if we do not pass empty parameters
+    // See: https://github.com/VictorBjelkholm/ngProgress/issues/33
+    ngProgress.height('');
+    ngProgress.color('');
 
-      // ngProgress do not respect styles assigned via CSS if we do not pass empty parameters
-      // See: https://github.com/VictorBjelkholm/ngProgress/issues/33
-      ngProgress.height('');
-      ngProgress.color('');
+    // Scroll top when page is changed
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
 
-      // Scroll top when page is changed
-      $scope.$on('$viewContentLoaded', function() {
-        window.scrollTo(0, 0);
+    $scope.$on('progress start', function() {
+      ngProgress.start();
+    });
+
+    $scope.$on('progress end', function() {
+      ngProgress.complete();
+    });
+
+    // Reload styles when server notifies about the changes
+    // Add cache buster to every stylesheet on the page forcing them to reload
+    $scope.$on('styles changed', function() {
+      var links = Array.prototype.slice.call(document.getElementsByTagName('link'));
+      links.forEach(function(link) {
+        if (typeof link === 'object' && link.getAttribute('type') === 'text/css' && link.getAttribute('data-noreload') === null) {
+          link.href = link.href.split('?')[0] + '?id=' + new Date().getTime();
+        }
       });
+    });
 
-      $scope.$on('progress start', function() {
-        ngProgress.start();
-      });
+    $scope.$on('socket connected', function() {
+      console.log('Socket connection established');
+    });
 
-      $scope.$on('progress end', function() {
-        ngProgress.complete();
-      });
+    $scope.$on('socket disconnected', function() {
+      console.error('Socket connection dropped');
+      ngProgress.reset();
+    });
 
-      // Reload styles when server notifies about the changes
-      // Add cache buster to every stylesheet on the page forcing them to reload
-      $scope.$on('styles changed', function() {
-        var links = Array.prototype.slice.call(document.getElementsByTagName('link'));
-        links.forEach(function(link) {
-          if (typeof link === 'object' && link.getAttribute('type') === 'text/css' && link.getAttribute('data-noreload') === null) {
-            link.href = link.href.split('?')[0] + '?id=' + new Date().getTime();
-          }
-        });
-      });
+    $scope.$on('socket error', function(err) {
+      console.error('Socket error:', err);
+    });
 
-      $scope.$on('socket connected', function() {
-        console.log('Socket connection established');
-      });
-
-      $scope.$on('socket disconnected', function() {
-        console.error('Socket connection dropped');
-        ngProgress.reset();
-      });
-
-      $scope.$on('socket error', function(err) {
-        console.error('Socket error:', err);
-      });
-
-    }]);
+  }]);
 
 angular.module('sgApp')
-  .controller('ElementCtrl', ["$scope", "$rootScope", "$stateParams", "$state", "Styleguide", "Variables", "$filter", function($scope, $rootScope, $stateParams, $state, Styleguide, Variables, $filter) {
+  .controller('ElementCtrl', ["$scope", "$rootScope", "$stateParams", "$state", "Styleguide", "Variables", "$filter", "$location", function($scope, $rootScope, $stateParams, $state, Styleguide, Variables, $filter, $location) {
 
     var section = $stateParams.section.split('-'),
       reference = section[0],
@@ -208,16 +263,83 @@ angular.module('sgApp')
       updatePageData();
     });
 
+    function previousSection(sections, result) {
+      var sec, i, m;
+      sec = result[0];
+      m = modifier;
+      if (result.length > 0) {
+        if (!modifier || modifier <= 1) {
+          i = sections.indexOf(result[0]) - 1;
+          for (i; i >= 0; i--) {
+            sec = sections[i];
+            if (sec.hasOwnProperty('modifiers')) {
+              if (sec.modifiers.length > 0) {
+                break;
+              } else if (sec.hasOwnProperty('markup') && sec.markup) {
+                return sec.reference;
+              }
+            }
+          }
+          if (sec.hasOwnProperty('modifiers') && sec.modifiers.length > 0) {
+            m = sec.modifiers.length + 1;
+          } else {
+            return false;
+          }
+        }
+        return sec.reference + '-' + (parseInt(m) - 1);
+      }
+    }
+
+    function nextSection(sections, result) {
+      var sec, i, m;
+      sec = result[0];
+      m = modifier;
+      if (result.length > 0) {
+        if (!modifier || modifier >= sec.modifiers.length) {
+          i = sections.indexOf(result[0]) + 1;
+          for (i; i < sections.length; i++) {
+            sec = sections[i];
+            if (sec.hasOwnProperty('modifiers')) {
+              if (sec.modifiers.length > 0) {
+                m = 0;
+                break;
+              } else if (sec.hasOwnProperty('markup') && sec.markup) {
+                return sec.reference;
+              }
+            }
+          }
+        }
+        if (sec.modifiers.length === 0) {
+          return false;
+        }
+        return sec.reference + '-' + (parseInt(m) + 1);
+      }
+    }
+
+    function getSectionMarkup(section) {
+      return $filter('setVariables')($filter('setModifierClass')(section.renderMarkup, section.className), $scope.variables);
+    }
+
     function updatePageData() {
-      var sections, result, element;
+      var recursive = $location.search().recursive,
+        separator = '<br>',
+        sections, result, element, markup, modifierStr;
+
       if (!Styleguide.sections.data) {
         return;
       }
       sections = Styleguide.sections.data;
 
       // Find correct element definition from styleguide data
-      result = sections.filter(function(item) {
-        return reference === item.reference;
+      result = sections.filter(function(section) {
+        if (reference === 'all') {
+          return true;
+        }
+        if (recursive) {
+          return new RegExp('^' + reference + '(\\D|$)').test(section.reference);
+        } else {
+          return reference === section.reference;
+        }
       });
 
       if (result.length > 0) {
@@ -225,19 +347,39 @@ angular.module('sgApp')
 
         // Set page title
         if (Styleguide.config.data) {
-          var modifierStr = modifier ? '-' + modifier.toString() : '';
+          modifierStr = modifier ? '-' + modifier.toString() : '';
           $rootScope.pageTitle = element.reference + modifierStr + ' ' + element.header + ' - ' + Styleguide.config.data.title;
         }
 
-        // Select correct modifier element if one is defined
-        if (modifier) {
-          element = element.modifiers[modifier - 1];
+        // Set the actual page content
+        $scope.previousSection = previousSection(sections, result);
+        $scope.nextSection = nextSection(sections, result);
+        $scope.variables = Variables.variables;
+
+        // Collect every component markup when using recursive mode
+        if (recursive) {
+          markup = '';
+          angular.forEach(result, function(section) {
+            if (section.modifiers && section.modifiers.length > 0) {
+              // If section contains modifier, render every modifier
+              angular.forEach(section.modifiers, function(modifier) {
+                markup += getSectionMarkup(modifier) + separator;
+              });
+            } else {
+              // Otherwise just render the element
+              markup += getSectionMarkup(section) + separator;
+            }
+          });
+        } else {
+          // Select correct modifier element if one is defined
+          if (modifier) {
+            element = element.modifiers[modifier - 1];
+          }
+          markup = getSectionMarkup(element);
         }
 
-        // Set the actual page content
         $scope.section = element;
-        $scope.variables = Variables.variables;
-        $scope.markup = $filter('setVariables')(element.wrappedMarkup, $scope.variables);
+        $scope.markup = markup;
       }
     }
   }]);
@@ -264,8 +406,16 @@ angular.module('sgApp')
     $scope.socketService = Socket;
 
     // Check if section is a main section
-    $scope.filterMainSections = function(section) {
-      return /^[0-9]+$/.test(section.reference);
+    $scope.filterMainSections = function() {
+      return function(section) {
+        return !!section.reference && /^[A-Za-z0-9_-]+$/.test(section.reference);
+      };
+    };
+
+    $scope.filterSubsections = function(parentSection) {
+      return function(section) {
+        return new RegExp('^' + parentSection.reference + '\.[A-Za-z0-9_-]+$').test(section.reference);
+      };
     };
 
     // Toggle all markup boxes visible/hidden state
@@ -278,8 +428,8 @@ angular.module('sgApp')
 
     // Change route to /all when searching
     $scope.$watch('search.$', function(newVal) {
-      if (newVal && newVal.length > 0) {
-        $state.go('app.index.section', {section: 'all'});
+      if (typeof newVal === 'string') {
+        $state.go('app.index.search', {section: 'all'});
       }
     });
 
@@ -298,8 +448,6 @@ angular.module('sgApp')
     if ($stateParams.section) {
       $scope.currentSection = $stateParams.section;
       $rootScope.currentSection = $scope.currentSection;
-    } else {
-      $location.url('overview');
     }
 
     $rootScope.$watch(function() {
@@ -325,14 +473,16 @@ angular.module('sgApp')
           return item.reference === section;
         });
         if (result.length > 0) {
-          var element = result[0];
-          $rootScope.pageTitle = element.reference + ' ' + element.header + ' - ' + Styleguide.config.data.title;
+          $rootScope.pageTitle = result[0].reference + ' ' + result[0].header + ' - ' + Styleguide.config.data.title;
+
+          // Update current reference even before user starts scrolling
+          $rootScope.currentReference.section = result[0];
         }
       }
     }
 
     $scope.isEmptyMainSection = function(section) {
-      return section.reference.indexOf('.') === -1 && !section.wrappedMarkup && (!section.modifiers || section.modifiers.length === 0);
+      return section.reference.indexOf('.') === -1 && !section.renderMarkup && (!section.modifiers || section.modifiers.length === 0);
     };
 
     $scope.isActive = function(section) {
@@ -340,11 +490,17 @@ angular.module('sgApp')
     };
 
     $scope.filterSections = function(section) {
+      // Do not show anything with empty search. Showing all items have performance issues
+      if ($state.is('app.index.search') && (!$scope.search || !$scope.search.$ || $scope.search.$.length < 3)) {
+        return false;
+      }
       if ($scope.currentSection === 'all') {
         return true;
       }
       return new RegExp('^' + $scope.currentSection + '(\\D|$)').test(section.reference);
     };
+
+    setPageTitle();
   }]);
 
 angular.module('sgApp')
@@ -444,7 +600,7 @@ angular.module('sgApp')
 'use strict';
 
 angular.module('sgApp')
-  .directive('dynamicCompile', ["$compile", "$parse", function($compile, $parse) {
+  .directive('dynamicCompile', ["$compile", "$parse", "$window", function($compile, $parse, $window) {
     return {
       link: function(scope, element, attrs) {
         var parsed = $parse(attrs.ngBindHtml);
@@ -452,6 +608,17 @@ angular.module('sgApp')
         // Recompile if the template changes
         scope.$watch(getStringValue, function() {
           $compile(element, null, 0)(scope);
+          // Emit an event that an element is rendered
+          element.ready(function() {
+            var event = new CustomEvent('styleguide:onRendered', {
+              detail: {
+                elements: element
+              },
+              bubbles: true,
+              cancelable: true
+            });
+            $window.dispatchEvent(event);
+          });
         });
       }
     };
@@ -489,7 +656,7 @@ angular.module('sgApp')
         scope.section.showCSS = false;
 
         // Listen to scroll events and update currentReference if this section is currently focused
-        angular.element($window).bind('scroll', function() {
+        scope.$on('scroll', function() {
           updateCurrentReference();
         });
 
@@ -513,7 +680,7 @@ angular.module('sgApp')
 'use strict';
 
 angular.module('sgApp')
-  .directive('shadowDom', ["$templateCache", function($templateCache) {
+  .directive('shadowDom', ["Styleguide", "$templateCache", function(Styleguide, $templateCache) {
 
     var USER_STYLES_TEMPLATE = 'userStyles.html';
 
@@ -521,17 +688,26 @@ angular.module('sgApp')
       restrict: 'E',
       transclude: true,
       link: function(scope, element, attrs, controller, transclude) {
-        if (typeof element[0].createShadowRoot === 'function') {
-          var root = angular.element(element[0].createShadowRoot());
-          root.append($templateCache.get(USER_STYLES_TEMPLATE));
-          transclude(function(clone) {
-            root.append(clone);
-          });
-        } else {
-          transclude(function(clone) {
-            element.append(clone);
-          });
-        }
+
+        scope.$watch(function() {
+          return Styleguide.config;
+        }, function() {
+          if (typeof element[0].createShadowRoot === 'function' && (Styleguide.config && Styleguide.config.data && !Styleguide.config.data.disableEncapsulation)) {
+            angular.element(element[0]).empty();
+            var root = angular.element(element[0].createShadowRoot());
+            root.append($templateCache.get(USER_STYLES_TEMPLATE));
+            transclude(function(clone) {
+              root.append(clone);
+            });
+          } else {
+            transclude(function(clone) {
+              var root = angular.element(element[0]);
+              root.empty();
+              root.append(clone);
+            });
+          }
+        }, true);
+
       }
     };
   }]);
@@ -654,7 +830,7 @@ angular.module('sgApp')
           socket.disconnect();
         }
 
-        socket = $window.io.connect('/');
+        socket = $window.io.connect();
 
         deferredEventListeners.forEach(function(deferred) {
           socket.on(deferred.event, deferred.listener);
@@ -816,11 +992,11 @@ angular.module('sgApp')
     };
 
     this.refreshValues = function() {
+      var oldIndex, oldValue, newObject, i;
       if (serverData.length === 0) {
         this.variables = [];
       } else {
-        for (var i = 0; i < serverData.length; i++) {
-          var oldIndex;
+        for (i = 0; i < serverData.length; i++) {
           if (this.variables[i] && !this.variableMatches(this.variables[i], serverData[i])) {
             if (!this.getServerVar(this.variables[i])) {
               // This variable does not exists anymore on the server. Remove it
@@ -835,9 +1011,9 @@ angular.module('sgApp')
               // The variable already exists but in another position
               // It is changed so we need to keep the old values
               oldIndex = this.getLocalIndex(serverData[i]);
-              var oldValue = this.variables[oldIndex].value;
+              oldValue = this.variables[oldIndex].value;
               this.variables.splice(oldIndex, 1);
-              var newObject = angular.copy(serverData[i]);
+              newObject = angular.copy(serverData[i]);
               newObject.value = oldValue;
               this.variables.splice(i, 0, newObject);
             } else {
@@ -845,6 +1021,9 @@ angular.module('sgApp')
               this.variables.splice(i, 0, angular.copy(serverData[i]));
             }
           } else if (this.variables[i] && this.variableMatches(this.variables[i], serverData[i])) {
+            // The linenumber might have changed
+            this.variables[i].line = serverData[i].line;
+
             // Variable exists already locally
             // Update value if variable does not have any local changes
             if (!this.variables[i].dirty) {

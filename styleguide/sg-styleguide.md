@@ -1,6 +1,6 @@
 # Guilmette Design Style guide #
 
-##Table of Content  
+## Table of Content  
 
 Colors
 Text

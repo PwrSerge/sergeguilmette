@@ -100,10 +100,9 @@ var jsminTasks = gutil.lazypipe()
 /*
    Sass config
    ========================================================================== */
-var sassconfig = function sassconfig(Container) {
+var sassconfig = function sassconfig() {
   return {
     //style: 'expanded',
-    container: Container,
     sourcemap: true,
     trace: true,
     quiet: true,
@@ -202,7 +201,7 @@ gulp.task('styleguide:generate', function() {
       title: 'My Styleguide',
       server: true,
       rootPath: outputPath,
-      styleVariables: 'src/stylesheets/components/_vars.scss',
+      styleVariables: 'src/stylesheets/components/vars.scss',
       overviewPath: 'styleguide/sg-styleguide.md'
     }))
     .pipe(gulp.dest(outputPath));
@@ -221,7 +220,7 @@ gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
    STYLES
    ========================================================================== */
 gulp.task('sass-site', function() {
-  return sass('src/stylesheets/main.scss', sassconfig('gulp-ruby-sass-site'))
+  return sass('src/stylesheets/main.scss', sassconfig())
     .pipe(gp.changed(paths.styles.dest))
     .pipe(gp.plumber())
     .pipe(sassTasks())
@@ -237,7 +236,7 @@ gulp.task('sass-site', function() {
 });
 
 gulp.task('sass-print', function() {
-  return sass('src/stylesheets/print.scss', sassconfig('gulp-ruby-sass-print'))
+  return sass('src/stylesheets/print.scss', sassconfig())
     .pipe(gp.changed(paths.styles.dest))
     .pipe(gp.plumber())
     .pipe(sassTasks())
