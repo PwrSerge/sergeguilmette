@@ -35,10 +35,6 @@ article {
   line-height: 1.5em;
 }
 
-footer {
-  background: #ccc;
-}
-
 h1 {
   -webkit-font-feature-settings: "liga", "dlig", "onum";
   font-feature-settings: "liga", "dlig", "onum";
@@ -250,7 +246,7 @@ embed {
   transform-style: preserve-3d;
   position: relative;
   padding: 60px;
-  background-color: white;
+  background-color: #fff;
   min-width: 320px;
   min-height: 126px;
   margin: auto;
@@ -380,7 +376,7 @@ textarea {
   font-size: 1.25rem;
   line-height: 1.625rem;
   width: 100%;
-  color: #000;
+  color: #2c3643;
 }
 
 /*
@@ -474,7 +470,7 @@ button {
 }
 
 .btn-brand {
-  color: white;
+  color: #fff;
   background: #206fac;
 }
 
@@ -959,7 +955,7 @@ footer {
   transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }
 
-.nav-main-list, .nav-social-list {
+.nav-main-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -968,7 +964,7 @@ footer {
 }
 
 @media (min-width: 43.75em) {
-  .nav-main-list, .nav-social-list {
+  .nav-main-list {
     display: inline-block;
     vertical-align: middle;
     float: right;
@@ -1016,7 +1012,22 @@ footer {
 }
 
 .nav-social-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  color: #fff;
   content: none;
+}
+
+@media (min-width: 43.75em) {
+  .nav-social-list {
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    height: 6em;
+    color: #9362c4;
+  }
 }
 
 .nav-social-item {
@@ -1052,8 +1063,8 @@ footer {
   display: -ms-flexbox;
   display: flex;
   padding: 5px 10px;
-  border-left: 1px solid #999;
-  background-color: #ccc;
+  border-left: 1px solid #3b444f;
+  background-color: #99a9b3;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
@@ -1063,7 +1074,7 @@ footer {
 }
 
 .flex-nav-item:hover {
-  background-color: #aaa;
+  background-color: #140b1d;
 }
 
 .flex-nav-item--search {
@@ -1088,11 +1099,14 @@ footer {
 /* ==========================================================================
    FOOTER
    ========================================================================== */
+footer {
+  background: #1b1b1b;
+}
+
 .footer-main {
   position: relative;
   overflow: hidden;
   padding: 1em;
-  border-color: #e6e6e6;
 }
 
 /* ==========================================================================

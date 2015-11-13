@@ -12,8 +12,8 @@
   //@include cf($extend: false);
   height: 6em;
   background-color: #fff;
-  //@include alpha-attribute("background-color", rgba(white, .8), black);
-  //@include alpha-attribute("border-color", rgba(white, .8), black);
+  //@include alpha-attribute("background-color", rgba($palette-white .8), black);
+  //@include alpha-attribute("border-color", rgba($palette-white .8), black);
 }
 
 .header-container--fixed {

@@ -51,7 +51,7 @@ button {
   vertical-align: middle;
   white-space: nowrap;
   text-decoration: none;
-  color: #fff;
+  color: $palette-white;
   border: 0;
   border-radius: 5px;
   background: $color-base;
@@ -68,7 +68,7 @@ button {
   &:disabled,
   &.is-disabled {
     cursor: default;
-    color: #fff;
+    color: $palette-white;
     background: $palette-neutral-dark;
   }
 
@@ -112,6 +112,6 @@ button {
 // //   font-size: 14px;
 // //   padding: 0.4em 1em 0.5em;
 // //   -webkit-font-smoothing: antialiased;
-// //   @include color-button(rgba(white, 0.8), rgba(black, 0.5));
+// //   @include color-button(rgba($palette-white 0.8), rgba(black, 0.5));
 // //   cursor: pointer;
 // // }

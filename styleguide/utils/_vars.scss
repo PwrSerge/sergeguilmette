@@ -28,10 +28,11 @@ $palette-green-light: #cff898;
 $palette-red: #fa5e5b;
 $palette-orange: #ffc83c;
 $palette-yellow: #feef6d;
+$palette-white:#fff;
 // Themes
-$themes: ( brand: ( primary: $palette-blue--base, secondary: $palette-blue--dark, contrast: white ), highlight: ( primary: $palette-yellow, secondary: $palette-orange, contrast: $palette-neutral--dark ), neutral: ( primary: $palette-neutral--light, secondary: $palette-neutral--xlight, contrast: $palette-neutral--xdark ) );
+$themes: (brand: (primary: $palette-blue-base, secondary: $palette-blue-dark, contrast: $palette-white), highlight: (primary: $palette-yellow, secondary: $palette-orange, contrast: $palette-neutral-dark), neutral: (primary: $palette-neutral-light, secondary: $palette-neutral-xlight, contrast: $palette-neutral-xdark));
 // main colors
-$base-background-image: url("/image/newBG-grey2.svg");
+$base-background-image: url('/image/newBG-grey2.svg');
 $color-base: $palette-purple-base;
 $color-base-background: $palette-neutral-base;
 $color-muted: $palette-neutral-light;
@@ -41,7 +42,7 @@ $color-accent: $palette-orange;
 $color-error: $palette-red;
 //
 // Fonts
-//--------------------------------------------------------------------
+//-------------------------------------------------------------------
 //Google fonts
 //@include web-fonts('Poiret One');
 $font-p: Kavoon;
@@ -61,7 +62,7 @@ $fixed-line-height: $base-line-height;
 // type weights
 $type-weight: (thin: 200, light: 300, regular: 400, bold: 700, xtrabold: 900);
 //font size
-$font-size: (tiny: font-size: ms(-2), small: font-size: ms(-1), base: font-size: ms(0), medium: font-size: ms(1), large: font-size: ms(2), xlarge: font-size: ms(3), xxlarge: font-size: ms(4));
+$font-size: (tiny: (font-size: ms(-2)), small: (font-size: ms(-1)), base: (font-size: ms(0)), medium: (font-size: ms(1)), large: (font-size: ms(2)), xlarge: (font-size: ms(3)), xxlarge: (font-size: ms(4)));
 // Base Font
 $base-font-family: $sans-serif-font;
 $base-font-size: 16px;
@@ -148,4 +149,4 @@ $easeinout-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 //Z-index
 //see http://css-tricks.com/handling-z-index/
 //--------------------------------------------------------------------
-$zindex: ( modal : 9000, overlay : 8000, dropdown : 7000, header : 6000, footer : 5000 );
+$zindex: (modal : 9000, overlay : 8000, dropdown : 7000, header : 6000, footer : 5000);

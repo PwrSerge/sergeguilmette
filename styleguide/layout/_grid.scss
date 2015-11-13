@@ -1,31 +1,19 @@
 /* ==========================================================================
    GRID
    ========================================================================== */
-
-$susy: (
-  columns: 12,
-  gutters: 1/4,
-  math: fluid,
-  output: float,
-  global-box-sizing: border-box,
-  gutter-position: inside,
-  debug: (image: show, color: rgba(#66f, 0.25),
-  output: overlay, toggle: top right)
-);
+$susy: (columns: 12, gutters: 1/4, math: fluid, output: float, global-box-sizing: border-box, gutter-position: inside, debug: (image: show, color: rgba(#66f, 0.25), output: overlay, toggle: top right));
 $widelayout: 24 1/4 fluid float inside;
 $mediumlayout: 12 1/4 fluid float inside;
+
 // main {
 //  @include container(80%);
 // }
-
 // nav {
 //   @include container(100%);
 // }
-
 /*
    Small - Mobile first approach
    ========================================================================== */
-
 header {
   @include span(12);
 }
@@ -45,7 +33,6 @@ header {
 
 main {
   @include span(10);
-
   margin-right: span(1) + gutter();
   margin-left: span(1) + gutter();
 }
@@ -53,17 +40,17 @@ main {
 /*
    Medium
    ========================================================================== */
-
 @include susy-breakpoint($bp-medium, $mediumlayout) {
   .header-wrapper {
     @include span(5 at 0 of 12);
   }
+
   .nav-main {
     @include span(7 at 5 of 12 last);
   }
+
   main {
     @include span(8);
-
     margin-right: span(2) + gutter();
     margin-left: span(2) + gutter();
   }
@@ -74,26 +61,30 @@ main {
 @include susy-breakpoint($bp-large, $widelayout) {
   .header-wrapper {
     @include span(14 of 24);
+
     //margin-left: span(2);
   }
+
   .nav-main {
     @include span(10 of 24 last);
+
     //margin-right: span(2);
   }
+
   main {
     @include span(12);
-
     margin-right: span(6);
     margin-left: span(6);
   }
+
   .footer-main {
     @include span(24);
   }
+
   // aside {
   //   @include span(6  at 19);
   // }
 }
-
 
 // 960 px grid
 //@include layout (12 (60px 10px) split static);

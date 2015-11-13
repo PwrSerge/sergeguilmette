@@ -58,12 +58,12 @@
     position: relative;
     // 800px has to be the width of the source of the image
     @media (min-width: 800px) {
+      @include transform(translateY(-50%));
       width: 100%;
       // otherwise we get 'gaps' either side of the image
       top: 50%;
       left: 0;
       max-height: none;
-      @include transform(translateY(-50%));
     }
   }
 }
@@ -93,15 +93,13 @@
 }
 
 %txt--break {
-  word-break: break-all;
   word-break: break-word;
   word-wrap: break-word;
 }
 
 // Webkit-style focus
 %tab-focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
+  outline: 5px auto -webkit-focus-ring-color thin dotted $palette-neutral-dark;
   outline-offset: -2px;
 }
 

@@ -112,6 +112,6 @@ button {
 // //   font-size: 14px;
 // //   padding: 0.4em 1em 0.5em;
 // //   -webkit-font-smoothing: antialiased;
-// //   @include color-button(rgba(white, 0.8), rgba(black, 0.5));
+// //   @include color-button(rgba($palette-white 0.8), rgba(black, 0.5));
 // //   cursor: pointer;
 // // }

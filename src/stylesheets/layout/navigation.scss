@@ -50,24 +50,18 @@
 }
 
 .nav-main-list {
-
   margin: 0;
   padding: 0;
   list-style: none;
   overflow: hidden;
-  color: #fff;
-
-
+  color: $palette-white;
 
   @include breakpoint($bp-medium) {
-
     display: inline-block;
     vertical-align: middle;
     float: right;
-
     height: 6em;
     color: $color-primary;
-
   }
 }
 
@@ -78,9 +72,7 @@
   text-align: center;
   background-color: $color-base;
 
-
   @include breakpoint($bp-medium) {
-
     display: inline-block;
     padding: 0.5em;
     background-color: $color-secondary-background;
@@ -110,13 +102,25 @@
 }
 
 .nav-social-list {
-
-  @extend .nav-main-list;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  color: $palette-white;
   content: none;
+
+  @include breakpoint($bp-medium) {
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    height: 6em;
+    color: $color-primary;
+  }
 }
 
 .nav-social-item {
   @extend %vertical-align;
+  content: none;
 
   @include breakpoint($bp-medium) {
     display: inline-block;
@@ -129,7 +133,6 @@
       color: $color-secondary;
     }
   }
-    content: none;
 }
 
 /*
@@ -139,32 +142,37 @@
   display: flex;
   width: 100%;
 }
+
 %flex-nav-item {
   display: flex;
   padding: 5px 10px;
   border: {
-    left: 1px solid #999;
-  }
-  ;
-  background-color: #ccc;
+    left: 1px solid $palette-neutral-dark;
+  };
+  background-color: $palette-neutral-light;
   align-items: center;
   justify-content: center;
 }
+
 .flex-nav-item {
   @extend %flex-nav-item;
+
   &:hover {
-    background-color: #aaa;
+    background-color: $palette-purple-dark;
   }
 }
+
 .flex-nav-item--search {
   @extend %flex-nav-item;
   @include flex(1);
+
   label {
     display: block;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
   }
+
   input {
     @include box-sizing(border-box);
     display: block;

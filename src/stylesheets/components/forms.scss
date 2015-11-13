@@ -14,7 +14,7 @@ input,
 textarea {
   @include type-scale(medium);
   width: 100%;
-  color: #000;
+  color: $palette-neutral-xdark;
 
 }
 

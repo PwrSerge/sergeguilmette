@@ -1,35 +1,32 @@
 //============================================================
 // Functions
 //============================================================
-
-
 //
 // Convert font-size from px to rem with px fallback
 // * @param $size - the value in pixel you want to convert
 // * e.g. p {@include fontSize(12px);}
 //
-
 // Function for converting a px based font-size to rem.
-@function calculateRem($size) {
-  $remSize: $size / $base-font-size;
-//Default font size on html element is 100%, equivalent to 16px;
-  @return #{$remSize}rem;
+@function calculaterem($size) {
+  $remsize: $size / $base-font-size;
+
+  //Default font size on html element is 100%, equivalent to 16px;
+  @return #{$remsize}rem;
 }
 
-@function black($opacity){
-    @return rgba(0,0,0,$opacity)
+@function black($opacity) {
+  @return rgba(0, 0, 0, $opacity)
 };
 
-@function white($opacity){
-    @return rgba(255,255,255,$opacity)
+@function white($opacity) {
+  @return rgba(255, 255, 255, $opacity)
 };
-
 
 // Source: https://github.com/devatrox/Sunglass/
-$imgbase: "../img/" !default;
+$imgbase: '../img/' !default;
 
 @function img($filename) {
-    @return url(#{$imgbase}#{$filename});
+  @return url(#{$imgbase}#{$filename});
 }
 
 // Calculate fluid ratio based on two dimensions (width/height)
@@ -45,15 +42,14 @@ $imgbase: "../img/" !default;
   $height-small: nth($small-size, 2);
   $slope: ($height-large - $height-small) / ($width-large - $width-small);
   $height: $height-small - $width-small * $slope;
-
   padding-top: $slope * 100%;
   height: $height;
-
   background-size: cover;
-  -moz-background-size: cover;  /* Firefox 3.6 */
-  background-position: center;  /* Internet Explorer 7/8 */
-}
 
+  /* Firefox 3.6 */
+  background-position: center;
+  /* Internet Explorer 7/8 */
+}
 
 // An easy way to fetch a deep value in a multi-level map. Works much like
 // map-get() except that you pass multiple keys as the second parameter to
@@ -63,21 +59,22 @@ $imgbase: "../img/" !default;
   $key: nth($keys, 1);
   $length: length($keys);
   $value: map-get($map, $key);
+
   @if ($length > 1) {
     $rest: ();
+
     @for $i from 2 through $length {
-      $rest: append($rest, nth($keys, $i))
+      $rest: append($rest, nth($keys, $i));
     }
-    @return map-fetch($value, $rest)
+    @return map-fetch($value, $rest);
   } @else {
     @return $value;
   }
 }
 
-
 // get  z-index from map
 @function zindex($level: 'modal') {
-    @return map-get($zindex, $level);
+  @return map-get($zindex, $level);
 }
 
 // .modal {

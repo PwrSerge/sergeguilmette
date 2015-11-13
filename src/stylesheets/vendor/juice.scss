@@ -204,13 +204,13 @@ $breakpoints: (
 // Emboss effect
 // -------------
 @mixin box-emboss($opacity, $opacity2){
-	box-shadow: rgba(white,$opacity) 0 1px 0, inset rgba(black,$opacity2) 0 1px 0;
+	box-shadow: rgba($palette-white$opacity) 0 1px 0, inset rgba(black,$opacity2) 0 1px 0;
 }
 
 // Letterpress effect
 // ------------------
 @mixin letterpress($opacity){
-	text-shadow: rgba(white,$opacity) 0 1px 0;
+	text-shadow: rgba($palette-white$opacity) 0 1px 0;
 }
 
 // Placeholder text
@@ -496,10 +496,10 @@ $breakpoints: (
 // Functions
 // ----------------------------------
 
-// Mix white with another color
+// Mix $palette-whitewith another color
 // ----------------------------
 @function tint($color, $percent: $mix-percent-default){
-	@return mix(white, $color, $percent);
+	@return mix($palette-white $color, $percent);
 }
  
 // Mix black with another color

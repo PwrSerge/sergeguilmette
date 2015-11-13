@@ -60,7 +60,7 @@ linters:
 
   NameFormat:
     enabled: true
-    convention: BEM # or 'BEM', or a regex pattern
+    convention: hyphenated_lowercase # or 'BEM', or a regex pattern
 
   PlaceholderInExtend:
     enabled: true

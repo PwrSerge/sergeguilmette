@@ -10,17 +10,17 @@
 //
 
 // Function for converting a px based font-size to rem.
-@function calculateRem($size) {
-  $remSize: $size / $base-font-size;
+@function calculaterem($size) {
+  $remsize: $size / $base-font-size;
 //Default font size on html element is 100%, equivalent to 16px;
-  @return #{$remSize}rem;
+  @return #{$remsize}rem;
 }
 
 @function black($opacity){
     @return rgba(0,0,0,$opacity)
 };
 
-@function white($opacity){
+@function $palette-white$opacity){
     @return rgba(255,255,255,$opacity)
 };
 

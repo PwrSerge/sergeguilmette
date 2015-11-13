@@ -9,8 +9,9 @@
   left: 0;
   height: 6em;
   background-color: $color-secondary-background;
-  //@include alpha-attribute("background-color", rgba(white, .8), black);
-  //@include alpha-attribute("border-color", rgba(white, .8), black);
+
+  //@include alpha-attribute("background-color", rgba($palette-white .8), black);
+  //@include alpha-attribute("border-color", rgba($palette-white .8), black);
 }
 
 .header-container-fixed {
@@ -19,8 +20,8 @@
 }
 
 .header-wrapper {
-
   position: relative;
+
   // display: flex;
   // flex-flow: row wrap;
   // justify-content: flex-start;
@@ -30,8 +31,9 @@
 }
 
 .header-title {
-  @include type-scale(large);
   @extend %vertical-align;
+  @include type-scale(large);
+
   // display: flex;
   // flex-flow: row wrap;
   // align-items: center;
@@ -53,6 +55,7 @@
     width: 4em;
     height: 4em;
   }
+
   // @include breakpoint($bp-small) {
   //     display: block;
   // }

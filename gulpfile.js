@@ -89,7 +89,7 @@ var cssminTasks = gutil.lazypipe()
     //basename: 'main',
     suffix: '.min'
   })
-  .pipe(gp.minifyCss);
+  //.pipe(minifyCss);
 //.pipe(gp.sourcemaps,  'write()');
 
 var jsminTasks = gutil.lazypipe()

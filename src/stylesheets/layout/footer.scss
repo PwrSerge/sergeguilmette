@@ -1,10 +1,12 @@
 /* ==========================================================================
    FOOTER
    ========================================================================== */
+footer {
+  background: $color-secondary-background;
+}
 
 .footer-main {
   position: relative;
   overflow: hidden;
   padding: 1em;
-  border-color: darken(white, 10%);
 }

@@ -13,21 +13,21 @@
 
 //emboss Dribble efet
 @mixin box-emboss($opacity, $opacity2) {
-  box-shadow: white($opacity) 0 1px 0, black($opacity2) 0 1px 0;
+  box-shadow: $palette-white($opacity) 0 1px 0, black($opacity2) 0 1px 0;
 }
 
 //text emboss
 @mixin text-emboss($opacity, $opacity2) {
-  text-shadow: white($opacity) 0 1px 1px, black($opacity2) -1px -1px 0;
+  text-shadow: $palette-white($opacity) 0 1px 1px, black($opacity2) -1px -1px 0;
 }
 
 //Letterpress Dribble efet
 @mixin letterpress($opacity) {
-  text-shadow: white($opacity) 0 1px 0;
+  text-shadow: $palette-white($opacity) 0 1px 0;
 }
 
 //@mixin alpha-attribute($attribute, $color, $background) {
-@mixin alpha-attribute($attribute, $color, $background: white) {
+@mixin alpha-attribute($attribute, $color, $background: $palette-white) {
   $percent: alpha($color) * 100%;
   $opaque: opacify($color, 1);
   $solid-color: mix($opaque, $background, $percent);
@@ -38,12 +38,12 @@
 }
 
 // button color mixin
-@mixin color-button($text, $color, $background: white) {
+@mixin color-button($text, $color, $background: $palette-white) {
   @include alpha-attribute('background', $color, $background);
   border: 1px solid;
   @include alpha-attribute('border-color', rgba(black, 0.7), $background);
   @include alpha-attribute('color', $text, $background);
-  @include box-shadow(rgba(white, 0.2) 0 1px 0 inset);
+  @include box-shadow(rgba($palette-white 0.2) 0 1px 0 inset);
 }
 
 // A mixin for scaling type that utilises the $type-scale map with the predefined values

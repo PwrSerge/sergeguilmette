@@ -1,7 +1,6 @@
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
-
 .inner-wrapper {
   transform: translate3d(0, 6em, 0);
 
@@ -18,7 +17,7 @@
   height: 6em;
   padding-top: 2em;
   cursor: pointer;
-  background-color: #fff;
+  background-color: $palette-white;
 
   @include breakpoint($bp-medium) {
     display: none;
@@ -26,7 +25,6 @@
 }
 
 .nav-main {
-
   position: relative;
   z-index: 1;
   height: 6em;
@@ -35,7 +33,7 @@
   @include breakpoint($bp-medium) {
     height: 6em;
     transform: translate3d(0, 0, 0);
-    background-color: #fff;
+    background-color: $palette-white;
   }
 
   &.open {
@@ -48,13 +46,12 @@
   transition: transform 0.4s ease;
 }
 
-.nav-main__list {
+.nav-main-list {
   @include reset-list;
-
   overflow: hidden;
   width: 100%;
   text-align: center;
-  color: #fff;
+  color: $palette-white;
   background-color: $color-secondary;
 
   @include breakpoint($bp-medium) {
@@ -64,12 +61,11 @@
   }
 }
 
-.nav-main__item {
+.nav-main-item {
   width: 100%;
   padding: 1em;
 
   &:hover {
-    //@include hover-style (red, 15%);
     background-color: $color-base;
   }
 
@@ -90,13 +86,11 @@
       background-position: 0 0;
     }
   }
-
 }
 
 /*
    Flex Navigation
    ========================================================================== */
-
 .flex-nav {
   display: flex;
   width: 100%;
@@ -106,10 +100,9 @@
   display: flex;
   padding: 5px 10px;
   border: {
-    left: 1px solid #999;
+    left: 1px solid $palette-neutral-dark;
   };
-
-  background-color: #ccc;
+  background-color: $palette-neutral-light;
   align-items: center;
   justify-content: center;
 }
@@ -118,7 +111,7 @@
   @extend %flex-nav-item;
 
   &:hover {
-    background-color: #aaa;
+    background-color: $palette-neutral-xlight;
   }
 }
 
@@ -135,7 +128,6 @@
 
   input {
     @include box-sizing(border-box);
-
     display: block;
     width: 100%;
   }

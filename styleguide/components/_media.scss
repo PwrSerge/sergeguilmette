@@ -21,7 +21,7 @@
 .media {
   overflow: hidden;
 
-  .media__obj {
+  .media-obj {
     float: left;
 
     img {
@@ -29,18 +29,18 @@
     }
   }
 
-  .media__obj--ext {
+  .media-obj-ext {
     float: right;
   }
 }
 
-.media__bd {
+.media-bd {
   overflow: hidden;
 }
 
 /* Flexible media styles  (videos, ifram, object) */
 
-.flex__container {
+.flex-container {
   position: relative;
   display: block;
   overflow: hidden;
@@ -53,7 +53,7 @@
     content: '';
   }
 
-  .flex__item,
+  .flex-item,
   iframe,
   object,
   embed {
@@ -68,19 +68,18 @@
 
 // Added these based on @necolas FlexEmbed
 
-.flex__container--16x9:before {
+.flex-container-16x9:before {
   padding-bottom: 56.25%;
 }
 
-.flex__container--4x3:before {
+.flex-container-4x3:before {
   padding-bottom: 75%;
 }
 
 //  hides from  visual design but still accessible by screen reader
-.element--invisible {
-  position: absolute !important;
+.element-invisible {
+  position: absolute;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   width: 1px;
   height: 1px;
@@ -90,7 +89,7 @@
 //http://www.w3.org/TR/css3-flexbox/
 //http://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
-.container__centered-box {
+.container-centered-box {
   display: flex;
   width: 100%;
   height: 500px;

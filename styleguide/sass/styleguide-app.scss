@@ -219,7 +219,7 @@ button.sg {
 
   cursor: pointer;
 
-  color: white;
+  color: $palette-white;
   border-radius: 5px;
   background-color: $default-action-color;
 
@@ -231,7 +231,7 @@ button.sg {
   }
 
   &.sg-primary {
-    color: white;
+    color: $palette-white
     background-color: $primary-action-color;
     &:hover {
       background-color: lighten($primary-action-color, $action-color-change);
@@ -585,7 +585,7 @@ input.sg {
     color: $nav-item-text-color;
     display: block;
     width: 260px;
-    border-top: 1px solid white;
+    border-top: 1px solid $palette-white
     .sg-ref {
       color: $nav-item-ref-color;
     }
@@ -1046,7 +1046,7 @@ input.sg {
   height: 100%;
   padding: 1em;
 
-  background: white;
+  background: $palette-white
 
   ul {
     margin: 0;
@@ -1291,4 +1291,3 @@ Styleguide 4.4
 // styleguide:ignore:start
 @include styleguide_custom_styles;
 // styleguide:ignore:end
-

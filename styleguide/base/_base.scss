@@ -47,7 +47,7 @@ h2 {
 
   font-family: $heading-font;
   color: $color-base;
-  border-color: darken(white, 50%);
+  border-color: darken($palette-white 50%);
 }
 
 h3 {
