@@ -929,7 +929,7 @@
 			"imagemin",
 			"uglify",
 			"plumber",
-			".header-title",
+			".header-name",
 			"!default",
 			"box-sizing",
 			"box-border",

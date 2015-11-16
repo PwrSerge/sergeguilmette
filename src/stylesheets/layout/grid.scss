@@ -4,6 +4,7 @@
 $susy: (columns: 12, gutters: 1/4, math: fluid, output: float, global-box-sizing: border-box, gutter-position: inside, debug: (image: show, color: rgba(#66f, 0.25), output: overlay, toggle: top right));
 $widelayout: 24 1/4 fluid float inside;
 $mediumlayout: 12 1/4 fluid float inside;
+
 // main {
 //  @include container(80%);
 // }
@@ -13,12 +14,12 @@ $mediumlayout: 12 1/4 fluid float inside;
 /*
    Small - Mobile first approach
    ========================================================================== */
-header {
+.header-wrapper {
   @include span(12);
 }
 
-.header-wrapper {
-  @include span(9 at 0 of 12);
+.header-title {
+  @include span(8 at 0 of 12);
   margin-left: span(1) + gutter();
 }
 
@@ -26,8 +27,7 @@ header {
   @include span(2 at 10 of 12);
 }
 
-.nav-main,
-.footer-main {
+.nav-main {
   @include span(12);
 }
 
@@ -44,10 +44,13 @@ footer {
    Medium
    ========================================================================== */
 @include susy-breakpoint($bp-medium, $mediumlayout) {
+  .header-container {
+    @include span(12);
+  }
+
   .header-wrapper {
     @include span(3 at 0 of 12);
     margin-left: span(1);
-
   }
 
   .nav-main {
@@ -60,27 +63,39 @@ footer {
     margin-right: span(2) + gutter();
     margin-left: span(2) + gutter();
   }
+
+  .footer-main {
+    @include span(8);
+    margin-right: span(2) + gutter();
+    margin-left: span(2) + gutter();
+  }
 }
 /*
    large
    ========================================================================== */
 @include susy-breakpoint($bp-large, $widelayout) {
-  // .header-container {
-  //   @include span(24);
-  //   //margin-left: span(2);
-  // }
+  .header-container {
+    @include span(24);
+  }
 
   .header-wrapper {
-    @include span(6 at 0 of 24);
+    @include span(8 at 0 of 24);
     margin-left: span(2);
   }
 
+  //   .header-title {
+  //     @include span(8);
+  // }
   .nav-main {
-    @include span(14 at 8 of 24);
-    margin-right: span(2);
+    @include span(8 at 10 of 24);
+    margin-right: span(1);
+    margin-left: span(1);
   }
 
-
+  .nav-social-list {
+    @include span(4 at 20 of 24);
+    margin-right: span(2);
+  }
 
   main {
     @include span(12);
@@ -89,10 +104,11 @@ footer {
   }
 
   .footer-main {
-    @include span(14);
-    margin-right: span(5);
-    margin-left: span(5);
+    @include span(12);
+    margin-right: span(6);
+    margin-left: span(6);
   }
+
   // footer {
   //   @include span(24);
   //   }
@@ -100,5 +116,6 @@ footer {
   //   @include span(6  at 19);
   // }
 }
+
 // 960 px grid
 //@include layout (12 (60px 10px) split static);

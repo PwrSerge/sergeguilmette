@@ -18,7 +18,7 @@ header {
   @include span(12);
 }
 
-.header-wrapper {
+.header-title {
   @include span(10 at 0 of 12);
 }
 
@@ -41,7 +41,7 @@ main {
    Medium
    ========================================================================== */
 @include susy-breakpoint($bp-medium, $mediumlayout) {
-  .header-wrapper {
+  .header-title {
     @include span(5 at 0 of 12);
   }
 
@@ -59,7 +59,7 @@ main {
    large
    ========================================================================== */
 @include susy-breakpoint($bp-large, $widelayout) {
-  .header-wrapper {
+  .header-title {
     @include span(14 of 24);
 
     //margin-left: span(2);

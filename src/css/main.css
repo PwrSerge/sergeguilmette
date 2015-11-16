@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Kavoon|Wendy+One|Montserrat);
 
-.nav-main-item, .nav-social-item, .header-title, .header-logo {
+.nav-social-item, .header-name, .header-logo {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -746,10 +746,6 @@ button {
   left: 0;
 }
 
-svg {
-  fill: currentColor;
-}
-
 .hex1 {
   width: 3em;
   height: 3em;
@@ -776,6 +772,12 @@ svg {
 }
 
 .icon-primary {
+  fill: #9362c4;
+  color: #3e225b;
+}
+
+.icon-secondary {
+  fill: #f8f7f2;
   color: #8cc63e;
 }
 
@@ -785,15 +787,15 @@ svg {
 /*
    Small - Mobile first approach
    ========================================================================== */
-header {
+.header-wrapper {
   width: 100%;
   float: left;
   padding-left: 0.83333%;
   padding-right: 0.83333%;
 }
 
-.header-wrapper {
-  width: 75%;
+.header-title {
+  width: 66.66667%;
   float: left;
   padding-left: 0.83333%;
   padding-right: 0.83333%;
@@ -807,8 +809,7 @@ header {
   padding-right: 0.83333%;
 }
 
-.nav-main,
-.footer-main {
+.nav-main {
   width: 100%;
   float: left;
   padding-left: 0.83333%;
@@ -835,6 +836,13 @@ footer {
    Medium
    ========================================================================== */
 @media (min-width: 43.75em) {
+  .header-container {
+    width: 100%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+  }
+
   .header-wrapper {
     width: 25%;
     float: left;
@@ -859,13 +867,29 @@ footer {
     margin-right: 17.5%;
     margin-left: 17.5%;
   }
+
+  .footer-main {
+    width: 66.66667%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+    margin-right: 17.5%;
+    margin-left: 17.5%;
+  }
 }
 /*
    large
    ========================================================================== */
 @media (min-width: 78.125em) {
+  .header-container {
+    width: 100%;
+    float: left;
+    padding-left: 0.41667%;
+    padding-right: 0.41667%;
+  }
+
   .header-wrapper {
-    width: 25%;
+    width: 33.33333%;
     float: left;
     padding-left: 0.41667%;
     padding-right: 0.41667%;
@@ -873,7 +897,16 @@ footer {
   }
 
   .nav-main {
-    width: 58.33333%;
+    width: 33.33333%;
+    float: left;
+    padding-left: 0.41667%;
+    padding-right: 0.41667%;
+    margin-right: 4.16667%;
+    margin-left: 4.16667%;
+  }
+
+  .nav-social-list {
+    width: 16.66667%;
     float: left;
     padding-left: 0.41667%;
     padding-right: 0.41667%;
@@ -890,36 +923,26 @@ footer {
   }
 
   .footer-main {
-    width: 58.33333%;
+    width: 50%;
     float: left;
     padding-left: 0.41667%;
     padding-right: 0.41667%;
-    margin-right: 20.83333%;
-    margin-left: 20.83333%;
+    margin-right: 25%;
+    margin-left: 25%;
   }
 }
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
-.inner-wrapper {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.inner-wrapper.is-open {
-  -webkit-transform: translate3d(0, 18em, 0);
-  transform: translate3d(0, 18em, 0);
-}
-
 .nav-toggle {
   color: #9362c4;
-  z-index: 4000;
   display: inline-block;
   float: right;
-  height: 6em;
   padding-top: 2em;
+  position: relative;
   cursor: pointer;
-  background-color: inherit;
+  background-color: #0e0e0e;
+  z-index: inherit;
 }
 
 @media (min-width: 43.75em) {
@@ -929,42 +952,30 @@ footer {
 }
 
 .nav-main {
+  position: relative;
+  background-color: #3e225b;
+  z-index: 4000;
   margin: 0;
   padding: 0;
-  -webkit-transform: translate3d(0, -18em, 0);
-  transform: translate3d(0, -18em, 0);
-  z-index: 4000;
 }
 
 @media (min-width: 43.75em) {
   .nav-main {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+    background-color: inherit;
   }
 }
 
-.nav-main.is-open {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.nav-main.nav-activated,
-.inner-wrapper.nav-activated {
-  transition: -webkit-transform 0.4s ease;
-  transition: transform 0.4s ease;
-  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
-}
-
 .nav-main-list {
-  margin: 0;
-  padding: 0;
   list-style: none;
-  overflow: hidden;
   color: #fff;
+  text-align: center;
+  padding: 0;
+  margin: 0;
 }
 
 @media (min-width: 43.75em) {
   .nav-main-list {
+    line-height: 6em;
     display: inline-block;
     vertical-align: middle;
     float: right;
@@ -973,32 +984,41 @@ footer {
   }
 }
 
+@media (min-width: 78.125em) {
+  .nav-main-list {
+    margin: auto;
+  }
+}
+
 .nav-main-item {
   font-size: 1rem;
   line-height: 1.625rem;
-  padding: 1em;
-  text-align: center;
-  background-color: #3e225b;
+  padding: 1em 0;
+}
+
+@media (max-width: 43.75em) {
+  .nav-main-item {
+    background-color: #3e225b;
+  }
+
+  .nav-main-item:hover {
+    background-color: #8cc63e;
+  }
 }
 
 @media (min-width: 43.75em) {
   .nav-main-item {
     display: inline-block;
     padding: 0.5em;
-    background-color: #1b1b1b;
+    background-color: #0e0e0e;
     position: relative;
-    transition: color 0.5s;
-  }
-
-  .nav-main-item:hover {
-    color: #8cc63e;
   }
 
   .nav-main-item:after {
     display: block;
     position: absolute;
     left: 0;
-    bottom: 25%;
+    bottom: 15%;
     width: 0;
     height: 1px;
     background-color: #8cc63e;
@@ -1018,9 +1038,10 @@ footer {
   overflow: hidden;
   color: #fff;
   content: none;
+  display: none;
 }
 
-@media (min-width: 43.75em) {
+@media (min-width: 78.125em) {
   .nav-social-list {
     display: inline-block;
     vertical-align: middle;
@@ -1038,7 +1059,7 @@ footer {
   .nav-social-item {
     display: inline-block;
     padding: 0.5em;
-    background-color: #1b1b1b;
+    background-color: #0e0e0e;
     position: relative;
     transition: color 0.5s;
   }
@@ -1100,7 +1121,7 @@ footer {
    FOOTER
    ========================================================================== */
 footer {
-  background: #1b1b1b;
+  background: #0e0e0e;
 }
 
 .footer-main {
@@ -1113,35 +1134,33 @@ footer {
    HEADER
    ========================================================================== */
 .header-container {
-  margin: 0;
-  padding: 0;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  top: 0;
-  left: 0;
   height: 6em;
-  background-color: #1b1b1b;
-}
-
-.header-container-fixed {
-  position: fixed;
-  width: 100%;
+  background-color: #0e0e0e;
 }
 
 .header-wrapper {
-  position: relative;
   height: 6em;
   background-color: inherit;
+  position: relative;
   z-index: 6000;
 }
 
 .header-title {
+  height: 6em;
+  position: relative;
+  z-index: inherit;
+  background-color: #0e0e0e;
+}
+
+.header-name {
   font-size: 1.5625rem;
   line-height: 1.625rem;
   color: #f8f7f2;
 }
 
 @media (min-width: 78.125em) {
-  .header-title {
+  .header-name {
     font-size: 1.95313rem;
     line-height: 2.4375rem;
   }

@@ -1,19 +1,22 @@
 // Load plugins
-var gulp         = require('gulp'),
-  source         = require('vinyl-source-stream'),
-  browserify     = require('browserify'),
-  buffer         = require('vinyl-buffer'),
-  del            = require('del'),
-  stylish        = require('jshint-stylish'),
-  browserSync    = require('browser-sync'),
+var gulp = require('gulp'),
+  source = require('vinyl-source-stream'),
+  browserify = require('browserify'),
+  buffer = require('vinyl-buffer'),
+  del = require('del'),
+  stylish = require('jshint-stylish'),
+  browserSync = require('browser-sync'),
   mainBowerFiles = require('main-bower-files'),
-  styleguide     = require('sc5-styleguide'),
-  gulpFilter     = require('gulp-filter'),
-  runSequence    = require('run-sequence'),
-  deploy         = require('gulp-gh-pages'),
-  sass           = require('gulp-ruby-sass'),
-  gutil          = require('gulp-load-utils')(['colors', 'env', 'log', 'pipeline', 'lazypipe']),
-  gp             = require('gulp-load-plugins')({
+  styleguide = require('sc5-styleguide'),
+  gulpFilter = require('gulp-filter'),
+  runSequence = require('run-sequence'),
+  deploy = require('gulp-gh-pages'),
+  sass = require('gulp-ruby-sass'),
+  path = require('path'),
+  gutil = require('gulp-load-utils')(['colors',
+    'env', 'log', 'pipeline', 'lazypipe'
+  ]),
+  gp = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
   });
@@ -31,28 +34,28 @@ var paths = {
   dest: 'dist',
   scripts: {
     src: 'src/scripts/**/*.js',
-    dest: 'dist/scripts'
+    dest: 'dist/scripts',
   },
   styles: {
     src: 'src/stylesheets/*.scss',
-    dest: 'dist/css'
+    dest: 'dist/css',
   },
   image: {
     src: ['src/image/*.png', 'src/image/*.jpg'],
-    dest: 'dist/image'
+    dest: 'dist/image',
   },
   html: {
     src: 'src/*.html',
-    dest: 'dist/'
-  }
+    dest: 'dist/',
+  },
 };
 
 /*
-   fileinclude
+   Fileinclude
    ========================================================================== */
 var fileincludecfg = {
   prefix: '@@',
-  basepath: '@file'
+  basepath: '@file',
 };
 
 /*
@@ -65,20 +68,22 @@ var banner = ['/**',
   ' * @link <%= packg.homepage %>',
   ' * @license <%= packg.license %>',
   ' */',
-  ''
+  '',
 ].join('\n');
 
 /*
-   lazypipe tasks using gulp-load-utils
+   Lazypipe tasks using gulp-load-utils
    ========================================================================== */
 var sassTasks = gutil.lazypipe()
 
-.pipe(gp.autoprefixer, 'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4')
+.pipe(gp.autoprefixer, 'last 2 version', 'safari 5', 'ie 8', 'ie 9',
+    'opera 12.1', 'ios 6', 'android 4')
   .pipe(gp.cssbeautify, {
     indent: '  ',
     openbrace: 'end-of-line',
-    autosemicolon: true
+    autosemicolon: true,
   });
+
 // .pipe(gp.uncss, ({
 //     html: ['src/index.html'],
 //     ignore: ['[class~="nav-"]', '[class~="inner-"]', '[class~="header-"]', '.inner-wrapper.open', '.nav-main.open', '.nav-main.nav-activated', '.inner-wrapper.nav-activated']
@@ -86,15 +91,16 @@ var sassTasks = gutil.lazypipe()
 
 var cssminTasks = gutil.lazypipe()
   .pipe(gp.rename, {
-    //basename: 'main',
-    suffix: '.min'
-  })
-  //.pipe(minifyCss);
+    //Basename: 'main',
+    suffix: '.min',
+  });
+
+//.pipe(minifyCss);
 //.pipe(gp.sourcemaps,  'write()');
 
 var jsminTasks = gutil.lazypipe()
   .pipe(gp.rename, {
-    suffix: '.min'
+    suffix: '.min',
   })
   .pipe(gp.uglify);
 /*
@@ -102,14 +108,15 @@ var jsminTasks = gutil.lazypipe()
    ========================================================================== */
 var sassconfig = function sassconfig() {
   return {
-    //style: 'expanded',
+    //Style: 'expanded',
+
     sourcemap: true,
     trace: true,
     quiet: true,
     lineNumbers: false,
     compass: true,
-    require: ['susy', 'modular-scale', 'breakpoint']
-  }
+    require: ['susy', 'modular-scale', 'breakpoint'],
+  };
 };
 /*
    Notify config
@@ -128,10 +135,6 @@ var svgconfig = {
   className: '.icon-%f',
   fontSize: 16,
   templates: ['default-svg'],
-  svgoConfig: {
-    removeViewBox: false,
-    cleanupIDs: false
-  }
 };
 
 /* ==========================================================================
@@ -141,7 +144,7 @@ var svgconfig = {
 //Compile to HTML
 // var swig = require('gulp-swig');
 
-// gulp.task('templates', function() {
+// Gulp.task('templates', function() {
 //   gulp.src('./lib/*.html')
 //     .pipe(gp.swig())
 //     .pipe(gulp.dest('./dist/'))
@@ -152,42 +155,41 @@ var svgconfig = {
 //   return require('./examples/' + path.basename(file.path) + '.json');
 // };
 
-// gulp.task('json-test', function() {
+// Gulp.task('json-test', function() {
 //   return gulp.src('./examples/test1.html')
 //     .pipe(data(getJsonData))
 //     .pipe(swig())
 //     .pipe(gulp.dest('build'));
 // });
 
-
 /* ==========================================================================
    BOWER
    ========================================================================== */
 
-// grab libraries files from bower_components and push in /src
+// Grab libraries files from bower_components and push in /src
 gulp.task('bower', function() {
   var jsFilter = gulpFilter('*.js');
   var cssFilter = gulpFilter(['*.css', '*.scss']);
   var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf']);
 
   return gulp.src(mainBowerFiles({
-    debugging: true
+    debugging: true,
   }))
 
-  // grab vendor js files from bower_components and push in /src
+  // Grab vendor js files from bower_components and push in /src
   .pipe(jsFilter)
     .pipe(gulp.dest('src/scripts/vendor'))
     .pipe(jsFilter.restore())
 
-  // grab vendor css files from bower_components and push in /src
+  // Grab vendor css files from bower_components and push in /src
   .pipe(cssFilter)
     .pipe(gulp.dest('src/stylesheets/vendor'))
     .pipe(cssFilter.restore())
 
-  // grab vendor font files from bower_components and push in /src
+  // Grab vendor font files from bower_components and push in /src
   .pipe(fontFilter)
     .pipe(gp.flatten())
-    .pipe(gulp.dest('src/fonts'))
+    .pipe(gulp.dest('src/fonts'));
 });
 
 /* ==========================================================================
@@ -202,7 +204,7 @@ gulp.task('styleguide:generate', function() {
       server: true,
       rootPath: outputPath,
       styleVariables: 'src/stylesheets/components/vars.scss',
-      overviewPath: 'styleguide/sg-styleguide.md'
+      overviewPath: 'styleguide/sg-styleguide.md',
     }))
     .pipe(gulp.dest(outputPath));
 });
@@ -214,7 +216,6 @@ gulp.task('styleguide:applystyles', function() {
 });
 
 gulp.task('styleguide', ['styleguide:generate', 'styleguide:applystyles']);
-
 
 /* ==========================================================================
    STYLES
@@ -230,7 +231,7 @@ gulp.task('sass-site', function() {
     .pipe(gp.sourcemaps.write())
     .pipe(gulp.dest('./dist/css/'))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }))
     .pipe(gp.notify(notifycfg('STYLES')));
 });
@@ -246,10 +247,11 @@ gulp.task('sass-print', function() {
     .pipe(gp.sourcemaps.write())
     .pipe(gulp.dest('./dist/css/'))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }))
     .pipe(gp.notify(notifycfg('STYLES')));
 });
+
 gulp.task('sass', ['sass-site', 'sass-print']);
 
 /* ==========================================================================
@@ -263,7 +265,7 @@ var getBundleName = function() {
 gulp.task('scripts', function() {
   var bundler = browserify({
     entries: ['./src/scripts/main.js'],
-    debug: true
+    debug: true,
   });
 
   var bundle = function() {
@@ -272,45 +274,49 @@ gulp.task('scripts', function() {
       .pipe(source(getBundleName() + '.js'))
       .pipe(buffer())
       .pipe(gp.sourcemaps.init({
-        loadMaps: true
+        loadMaps: true,
       }))
-      // Add transformation tasks to the pipeline here.
-      .pipe(gulp.dest('./src/scripts/'))
+
+    // Add transformation tasks to the pipeline here.
+    .pipe(gulp.dest('./src/scripts/'))
       .pipe(gp.uglify())
       .pipe(gp.sourcemaps.write('./'))
       .pipe(gulp.dest('./dist/scripts/'))
+      .pipe(browserSync.reload({
+        stream: true,
+      }))
       .pipe(gp.notify(notifycfg('SCRIPTS')));
   };
+
   return bundle();
 });
 
-// gulp.task('modernizr', function() {
+// Gulp.task('modernizr', function() {
 //   gulp.src('./src/scripts/main.js')
 //     .pipe(gp.modernizr())
 //     .pipe(gulp.dest('./src/scripts/'));
 //
-// });
-
-
+//  });
 
 /* ==========================================================================
    IMAGES
    ========================================================================== */
 
-gulp.task('image', ['sprites'], function() {
+gulp.task('image', ['sprite'], function() {
   return gulp.src(paths.image.src)
     .pipe(gp.changed(paths.image.dest))
     .pipe(gp.plumber())
     .pipe(gp.cache(gp.imagemin({
       optimizationLevel: 3,
       progressive: true,
-      // use: [pngcrush()],
-      interlaced: true
+
+      // Use: [pngcrush()],
+      interlaced: true,
     })))
     .pipe(gp.size())
     .pipe(gulp.dest(paths.image.dest))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }))
     .pipe(gp.notify(notifycfg('IMAGES')));
 });
@@ -318,15 +324,46 @@ gulp.task('image', ['sprites'], function() {
 /* ==========================================================================
    SVG SPRITES
    ========================================================================== */
-gulp.task('sprites', function() {
-  return gulp.src('src/image/icons/*.svg')
-    .pipe(gp.changed(paths.image.dest))
-    .pipe(gp.plumber())
-    .pipe(gp.svgSymbols(svgconfig))
+// gulp.task('sprites', function() {
+//   return gulp.src('src/image/icons/*.svg')
+//     .pipe(gp.changed(paths.image.dest))
+//     .pipe(gp.plumber())
+//     .pipe(gp.svgSymbols(svgconfig))
+//     .pipe(gp.size())
+//     .pipe(gulp.dest('dist/image/sprites'))
+//     .pipe(gp.notify(notifycfg('IMAGES')));
+// });
+
+gulp.task('sprite', function() {
+
+  return gulp
+    .src('src/image/icon/*.svg', {
+      base: 'src/svg' + '-symbols'
+    })
+    .pipe(gp.rename(function(path) {
+      var name = path.dirname.split(path.sep);
+      name.push(path.basename);
+      path.basename = name.join('-');
+    }))
+  // .pipe(gp.svgmin({
+  //   js2svg: {
+  //     pretty: true
+  //   }
+  // }))
+    .pipe(gp.cheerio({
+      run: function($) {
+        $('[fill]').attr('fill', 'currentcolor');
+      },
+      parserOptions: {
+        xmlMode: true
+      }
+    }))
+    .pipe(gp.svgstore())
     .pipe(gp.size())
     .pipe(gulp.dest('dist/image/sprites'))
     .pipe(gp.notify(notifycfg('IMAGES')));
 });
+
 /* ==========================================================================
    HTML
    ========================================================================== */
@@ -335,17 +372,20 @@ gulp.task('html', ['sass'], function() {
     .pipe(gp.changed(paths.html.src))
     .pipe(gp.plumber())
     .pipe(gp.fileInclude(fileincludecfg))
-    // stylesheet and main javascripts injection
-    .pipe(gp.inject(gulp.src(['./dist/css/*.min.css', './dist/scripts/*.min.js'], {
-      read: false
+
+  // Stylesheet and main javascripts injection
+  .pipe(gp.inject(gulp.src(['./dist/css/*.min.css',
+      './dist/scripts/*.min.js'
+    ], {
+      read: false,
     }), {
       ignorePath: ['src/', 'dist/'],
-      addRootSlash: false
+      addRootSlash: false,
     }))
     .pipe(gp.size())
     .pipe(gulp.dest('./dist'))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }))
     .pipe(gp.notify(notifycfg('HTML')));
 
@@ -359,7 +399,7 @@ gulp.task('clean', function(cb) {
     'dist/image/**',
     'dist/scripts/**',
     'dist/index.html',
-    '!dist/CNAME'
+    '!dist/CNAME',
   ], cb);
 });
 
@@ -377,8 +417,8 @@ gulp.task('bump', function() {
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: './dist'
-    }
+      baseDir: './dist',
+    },
   });
 });
 /* ==========================================================================
@@ -405,9 +445,9 @@ gulp.task('watch', ['browser-sync'], function() {
    DEPLOY
    ========================================================================== */
 var options = {
-  remoteUrl: "https://github.com/PwrSerge/serguilmette.github.io.git",
-  branch: "gh-pages",
-  cacheDir: "./publish"
+  remoteUrl: 'https://github.com/PwrSerge/serguilmette.github.io.git',
+  branch: 'gh-pages',
+  cacheDir: './publish',
 };
 
 gulp.task('deploy', function() {

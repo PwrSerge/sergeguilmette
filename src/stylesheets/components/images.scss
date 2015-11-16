@@ -57,10 +57,8 @@
   //width: 100%; //only required for <img />
 }
 
-// icons
-svg {
-  fill: currentColor;
-}
+// iconss
+//svg { pointer-events: none; }
 
 .hex1 {
   width: 3em;
@@ -87,10 +85,12 @@ svg {
 }
 
   &-primary {
-    color: $color-secondary;
-}
+    @include svg-colors($color-primary, $color-base, true);
+    }
 
-
+  &-secondary {
+    @include svg-colors($color-base-background, $color-secondary, true);
+    }
 }
 
 // #icon-gd-logo2 {

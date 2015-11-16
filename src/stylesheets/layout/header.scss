@@ -2,38 +2,35 @@
    HEADER
    ========================================================================== */
 .header-container {
-  margin: 0;
-  padding: 0;
   font-family: $heading-font;
-  top: 0;
-  left: 0;
   height: 6em;
   background-color: $color-secondary-background;
-
-  //@include alpha-attribute("background-color", rgba($palette-white .8), black);
-  //@include alpha-attribute("border-color", rgba($palette-white .8), black);
-}
-
-.header-container-fixed {
-  position: fixed;
-  width: 100%;
 }
 
 .header-wrapper {
-  position: relative;
-
-  // display: flex;
-  // flex-flow: row wrap;
-  // justify-content: flex-start;
+  // margin: 0;
+  // padding: 0;
   height: 6em;
   background-color: inherit;
+  position: relative;
   z-index: map-get($zindex, header);
+
 }
 
 .header-title {
+  // margin: 0;
+  // padding: 0;
+  height: 6em;
+  position: relative;
+  z-index: inherit;
+  background-color: $color-secondary-background;
+  // display: flex;
+  // justify-content: flex-start;
+}
+
+.header-name {
   @extend %vertical-align;
   @include type-scale(large);
-
   // display: flex;
   // flex-flow: row wrap;
   // align-items: center;

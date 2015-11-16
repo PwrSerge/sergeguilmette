@@ -25,7 +25,7 @@
   background-color: #fff;
 }
 
-.header-wrapper {
+.header-title {
   position: relative;
   z-index: 2;
   height: 6em;
@@ -33,7 +33,7 @@
   background-color: #fff;
 }
 
-.header-title {
+.header-name {
   @extend %vertical-align;
 
   font-size: 2em;

@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Kavoon|Wendy+One|Montserrat);
 
-.nav-main-item, .nav-social-item, .header-title, .header-logo {
+.nav-main-item, .nav-social-item, .header-name, .header-logo {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -796,7 +796,7 @@ header {
   padding-right: 0.83333%;
 }
 
-.header-wrapper {
+.header-title {
   width: 75%;
   float: left;
   padding-left: 0.83333%;
@@ -839,7 +839,7 @@ footer {
    Medium
    ========================================================================== */
 @media (min-width: 43.75em) {
-  .header-wrapper {
+  .header-title {
     width: 25%;
     float: left;
     padding-left: 0.83333%;
@@ -868,7 +868,7 @@ footer {
    large
    ========================================================================== */
 @media (min-width: 78.125em) {
-  .header-wrapper {
+  .header-title {
     width: 25%;
     float: left;
     padding-left: 0.41667%;
@@ -1113,21 +1113,21 @@ footer {
   width: 100%;
 }
 
-.header-wrapper {
+.header-title {
   position: relative;
   height: 6em;
   background-color: inherit;
   z-index: 6000;
 }
 
-.header-title {
+.header-name {
   font-size: 1.5625rem;
   line-height: 1.625rem;
   color: #f8f7f2;
 }
 
 @media (min-width: 78.125em) {
-  .header-title {
+  .header-name {
     font-size: 1.95313rem;
     line-height: 2.4375rem;
   }
