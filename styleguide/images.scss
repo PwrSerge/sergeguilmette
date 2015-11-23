@@ -12,11 +12,11 @@
 
 .ui-img,
 %ui-img {
-  background-image: url('#{$img}/sprites/sprite.svg');
+  background-image: url("#{$img}/sprites/sprite.svg");
   background-repeat: no-repeat;
 
   .no-svg & {
-    background-image: url('#{$img}/ui-separate-std-sprite.png');
+    background-image: url("#{$img}/ui-separate-std-sprite.png");
   }
 }
 
@@ -25,7 +25,6 @@
 
   &:after {
     @extend %ui-img;
-
     position: absolute;
     top: 0;
     left: 0;
@@ -41,7 +40,6 @@
 /*
    Utiliy class for SVG
    ========================================================================== */
-
 //padding hack
 //@cudos: Sarah Soueidan
 .my-svg-container {
@@ -55,34 +53,51 @@
   position: absolute;
   top: 0;
   left: 0;
+
   //width: 100%; //only required for <img />
 }
 
-// icons
+// iconss
+//svg { pointer-events: none; }
 svg {
   fill: currentColor;
+  pointer-events: none;
 }
 
-// svg init
 .icon {
   width: 1em;
   height: 1em;
+
+  // &:hover {
+  //   @include svg-colors($color-base-background, $color-secondary, true);
+  //   transition: color 0.5s;
+  // }
+  &-small {
+    width: 0.5em;
+    height: 0.5em;
+  }
+
+  &-big {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  &-primary {
+    @include svg-colors($color-primary, $color-base, true);
+  }
+
+  &-secondary {
+    @include svg-colors($color-base-background, $color-secondary, true);
+  }
 }
+
+
 
 // #icon-gd-logo2 {
 //     path:nth-of-type(1) {
 //         fill: $color-base;
 //     }
-
 //     path:nth-of-type(2) {
 //         fill: $color-secondary;
 //     }
 // }
-.icon--big {
-  width: 1.5em;
-  height: 1.5em;
-}
-
-.icon--colorprimary {
-  color: $color-secondary;
-}

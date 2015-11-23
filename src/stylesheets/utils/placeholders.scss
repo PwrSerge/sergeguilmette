@@ -21,6 +21,7 @@
 }
 
 // element invisible
+.element-invisible,
 %element-invisible {
   position: absolute !important;
   overflow: hidden;
@@ -30,6 +31,7 @@
 }
 
 // Image Replacement - HTML5BP
+.ir,
 %ir {
   border: 0;
   color: transparent;

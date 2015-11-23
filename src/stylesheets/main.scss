@@ -15,7 +15,7 @@
 @import 'modular-scale';
 @import 'susy';
 @import 'vendor/juice';
-//@import 'vendor/normalize';
+@import 'vendor/normalize';
 //@import "vendor/_web-fonts";
 
 // ==========================================================================
@@ -48,6 +48,7 @@
 @import 'components/buttons';
 @import 'components/media';
 @import 'components/images';
+@import 'components/svg-symbols';
 
 // ==========================================================================
 //    LAYOUT

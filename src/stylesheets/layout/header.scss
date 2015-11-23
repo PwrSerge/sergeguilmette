@@ -2,14 +2,13 @@
    HEADER
    ========================================================================== */
 .header-container {
+  @extend %cf;
   font-family: $heading-font;
   height: 6em;
   background-color: $color-secondary-background;
 }
 
 .header-wrapper {
-  // margin: 0;
-  // padding: 0;
   height: 6em;
   background-color: inherit;
   position: relative;

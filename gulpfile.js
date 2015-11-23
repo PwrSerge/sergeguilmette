@@ -41,7 +41,7 @@ var paths = {
     dest: 'dist/css',
   },
   image: {
-    src: ['src/image/*.png', 'src/image/*.jpg'],
+    src: ['src/image/**/*.png', 'src/image/**/*.jpg'],
     dest: 'dist/image',
   },
   html: {
@@ -93,9 +93,9 @@ var cssminTasks = gutil.lazypipe()
   .pipe(gp.rename, {
     //Basename: 'main',
     suffix: '.min',
-  });
+  })
+  .pipe(gp.minifyCss);
 
-//.pipe(minifyCss);
 //.pipe(gp.sourcemaps,  'write()');
 
 var jsminTasks = gutil.lazypipe()
@@ -110,7 +110,7 @@ var sassconfig = function sassconfig() {
   return {
     //Style: 'expanded',
 
-    sourcemap: true,
+    //sourcemap: true,
     trace: true,
     quiet: true,
     lineNumbers: false,
@@ -273,9 +273,9 @@ gulp.task('scripts', function() {
       .bundle()
       .pipe(source(getBundleName() + '.js'))
       .pipe(buffer())
-      .pipe(gp.sourcemaps.init({
-        loadMaps: true,
-      }))
+      // .pipe(gp.sourcemaps.init({
+      //   loadMaps: true,
+      // }))
 
     // Add transformation tasks to the pipeline here.
     .pipe(gulp.dest('./src/scripts/'))
@@ -290,13 +290,6 @@ gulp.task('scripts', function() {
 
   return bundle();
 });
-
-// Gulp.task('modernizr', function() {
-//   gulp.src('./src/scripts/main.js')
-//     .pipe(gp.modernizr())
-//     .pipe(gulp.dest('./src/scripts/'));
-//
-//  });
 
 /* ==========================================================================
    IMAGES
@@ -324,35 +317,23 @@ gulp.task('image', ['sprite'], function() {
 /* ==========================================================================
    SVG SPRITES
    ========================================================================== */
-// gulp.task('sprites', function() {
-//   return gulp.src('src/image/icons/*.svg')
-//     .pipe(gp.changed(paths.image.dest))
-//     .pipe(gp.plumber())
-//     .pipe(gp.svgSymbols(svgconfig))
-//     .pipe(gp.size())
-//     .pipe(gulp.dest('dist/image/sprites'))
-//     .pipe(gp.notify(notifycfg('IMAGES')));
-// });
-
-gulp.task('sprite', function() {
+gulp.task('sprite', ['svgfallback'], function() {
 
   return gulp
-    .src('src/image/icon/*.svg', {
+    .src('src/image/icons/*.svg', {
       base: 'src/svg' + '-symbols'
     })
-    .pipe(gp.rename(function(path) {
-      var name = path.dirname.split(path.sep);
-      name.push(path.basename);
-      path.basename = name.join('-');
+    .pipe(gp.rename({
+      prefix: 'icon-'
     }))
-  // .pipe(gp.svgmin({
-  //   js2svg: {
-  //     pretty: true
-  //   }
-  // }))
+    .pipe(gp.svgmin({
+      js2svg: {
+        pretty: true
+      }
+    }))
     .pipe(gp.cheerio({
       run: function($) {
-        $('[fill]').attr('fill', 'currentcolor');
+        $('[fill]').removeAttr('fill');
       },
       parserOptions: {
         xmlMode: true
@@ -363,6 +344,44 @@ gulp.task('sprite', function() {
     .pipe(gulp.dest('dist/image/sprites'))
     .pipe(gp.notify(notifycfg('IMAGES')));
 });
+
+gulp.task('svgfallback', function() {
+  return gulp
+    .src('src/image/icons/*.svg', {
+      base: 'src/svg' + '-symbols'
+    })
+    .pipe(gp.rename({
+      prefix: 'no-svg .icon-'
+    }))
+    .pipe(gp.svgfallback({
+      backgroundUrl: '/image/sprites/svg-symbols.png'
+    }))
+    .pipe(gp.if(/[.]css$/, gp.cssScss()))
+    .pipe(gp.if(/[.]scss$/, gulp.dest('src/stylesheets/components')))
+    .pipe(gp.if(/[.]png$/, gulp.dest('src/image/sprites')));
+});
+
+// gulp.task('icons', function() {
+//   gp.iconify({
+//     src: 'src/image/icons/*.svg',
+//     pngOutput: 'src/image/icons/png',
+//     scssOutput: 'src/stylesheets/components',
+//     cssOutput: 'src/css',
+//     //styleTemplate: '_icon_gen.scss.mustache',
+//     defaultWidth: '32px',
+//     defaultHeight: '32px',
+//     svgoOptions: {
+//       enabled: true,
+//       options: {
+//         plugins: [{
+//           removeUnknownsAndDefaults: false
+//         }, {
+//           mergePaths: false
+//         }]
+//       }
+//     }
+//   });
+// });
 
 /* ==========================================================================
    HTML

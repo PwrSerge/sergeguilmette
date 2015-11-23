@@ -8,13 +8,13 @@
 /**
  * Browserify bundle modules
  */
-
-var $ = require('jquery');
-//require('./modernizr.js');
+require('polyfill');
+require('respond');
 require('./plugins.js');
 var Modernizr = require('modernizr');
+var $ = require('jquery');
 
-//require('svg4everybody');
+//var grunticon = require('grunticon');
 //var Snap = require('snapsvg')
 
 // First lets create our drawing surface out of existing SVG element
@@ -29,27 +29,93 @@ var Modernizr = require('modernizr');
 // });
 
 /*
+ *SVG fallback
+ */
+var supportsSvg = function() {
+  var div = document.createElement('div');
+  div.innerHTML = '<svg/>';
+  return (div.firstChild && div.firstChild.namespaceURI) === 'http://www.w3.org/2000/svg';
+};
+
+// if (!supportsSvg()) {
+//
+//   // Inline script of grunticon.load.js here
+//   grunticon(['', '/fallbacks/icons.data.png.css', '/fallbacks/icons.fallback.css']);
+//
+// } else {
+//   // Ajax for SVG sprite
+//   $.get('image/sprites/svg-symbols.svg', function(data) {
+//     var div = document.createElement('div');
+//     div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+//     document.body.insertBefore(div, document.body.childNodes[0]);
+//   });
+// }
+
+if (!supportsSvg()) {
+
+  // Inline script of grunticon.load.js here
+  console.log('no svg');
+  document.documentElemement.classList.add('no-svg');
+
+} else {
+  console.log('works');
+  // Ajax for SVG sprite
+  // $.get('image/sprites/svg-symbols.svg', function(data) {
+  //   var div = document.createElement('div');
+  //   div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
+  //   document.body.insertBefore(div, document.body.childNodes[0]);
+  // });
+}
+
+// Modernizr.load([
+//   {
+//     // The test: does the browser understand Media Queries?
+//     test : Modernizr.mq('only all'),
+//     // If not, load the respond.js file
+//     nope : '/js/respond.js'
+//   }
+// ]);
+
+// Modernizr.load([
+//   {
+//     // The test: does the browser understand Media Queries?
+//     test: Modernizr.mq('only all'),
+//     // If not, load the respond.js file
+//     nope: console.log('no mq')
+//     //nope : '/js/respond.js'
+//   }
+// ]);
+Modernizr.mq('only all');
+/*
  *  Header  -- Slide menu
  */
 
 $(function() {
 
-  var $page = $('.inner-wrapper'),
+  var
+    $page = $('.inner-wrapper'),
     $h2ht = $('h2').height(),
     $navToggle = $('.nav-toggle'),
     $mainNavigation = $('.nav-main'),
     $header = $('.header-container'),
-    $headerHt = $header.height(),
-    $menuHt = $mainNavigation.height(),
+    $headerHt = $header.outerHeight(),
+    $menuHt = $mainNavigation.outerHeight(),
     $totalmenuHt = $headerHt + $menuHt,
+    $dropdownHt = $headerHt - $menuHt,
     $main = $('main'),
     $root = $('html, body');
 
+  $mainNavigation.addClass('is-close');
   //remove transitions on window load and resize
   $(window).on('load resize', function() {
-    if (Modernizr.mq('(min-width:500px)')) {
-      $mainNavigation.removeClass('open');
-    }
+
+    // $mainNavigation.offset({
+    //   top: 0
+    // });
+    // $page.offset({
+    //   top: 0
+    // });
+
     if (Modernizr.mq('(min-width:700px)')) {
       $page.offset({
         top: 0
@@ -57,44 +123,37 @@ $(function() {
       $mainNavigation.offset({
         top: 0
       });
-    } else {
-      $mainNavigation.offset({
-        top: -$totalmenuHt
-      });
-      $page.offset({
-        top: -$menuHt + $headerHt
-      });
     }
   });
-
   //togle class for for sliding menu
   $navToggle.on('click', function() {
-    $page.toggleClass('is-open');
-    $mainNavigation.toggleClass('is-open');
+    $page.toggleClass('is-close');
+    $mainNavigation.toggleClass('is-close');
   });
 
-  $page.on('click', function(e) {
-    $mainNavigation.removeClass('is-open');
-    $page.removeClass('is-open');
-    e.preventDefault();
+  $main.on('click', function() {
+    $mainNavigation.removeClass('is-close');
+    $page.removeClass('is-close');
   });
 
   //animate main menu on click event
-  $('.nav-toggle').on('click', function(e) {
-    if ($mainNavigation.hasClass('is-open')) {
+  $navToggle.on('click', function(e) {
+    e.preventDefault();
+    if ($mainNavigation.hasClass('is-close')) {
+      $mainNavigation.show();
       $mainNavigation.animate({
-        top: 0
+        top: $totalmenuHt
       }, 300);
       $page.animate({
-        top: 0
+        top: $headerHt
       }, 300);
     } else {
       $mainNavigation.animate({
-        top: -$totalmenuHt
+        top: 0
       }, 300);
       $page.animate({
-        top: -$menuHt
-      }, 300);
+        top: $totalmenuHt
+      }, 0);
     }
   });
 
@@ -151,7 +210,6 @@ $(function() {
       data: {
         _subject: 'New Posts',
         message: $message
-
       },
       dataType: 'json'
 
