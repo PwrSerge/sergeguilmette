@@ -1,6 +1,17 @@
 /* ==========================================================================
    IMAGES
    ========================================================================== */
+// @namespace svg "http://www.w3.org/2000/svg";
+//
+// .hide-me-from-older-browsers {
+//   display: none;
+//   visibility: hidden;
+// }
+//
+// svg|g.hide-me-from-older-browsers {
+//   display: inline;
+//   visibility: visible;
+// }
 // background img using compass mixins
 .cover {
   @include background-size(cover);
@@ -12,11 +23,11 @@
 
 .ui-img,
 %ui-img {
-  background-image: url("#{$img}/sprites/sprite.svg");
+  background-image: url(#{$img}/sprites/sprite.svg);
   background-repeat: no-repeat;
 
   .no-svg & {
-    background-image: url("#{$img}/ui-separate-std-sprite.png");
+    background-image: url(#{$img}/ui-separate-std-sprite.png);
   }
 }
 
@@ -57,27 +68,48 @@
   //width: 100%; //only required for <img />
 }
 
-// [class^="icon-"] {
-//   color: red;
-//   z-index: 100000;
-// }
-
-// iconss
-//svg { pointer-events: none; }
-svg {
+// icons
+/**
+ * Hide icons by default to prevent blank spaces in unsupported browsers
+ */
+.icon {
+  display: inline-block;
   fill: currentColor;
-  pointer-events: none;
+  height: 0;
+  width: 0;
 }
 
-.icon {
+// .svg .icon-fallback-text {
+//     border: 0;
+//     clip: rect(0 0 0 0);
+//     height: 1px;
+//     margin: -1px;
+//     overflow: hidden;
+//     padding: 0;
+//     position: absolute;
+//     width: 1px;
+// }
+.icon-fallback {
+  display: none;
+}
+
+.no-svg .icon-fallback {
+  display: inline-block;
+}
+
+/**
+ * Display icons when browser supports SVG.
+ * Inherit height, width, and color.
+ */
+.svg .icon {
   width: 1em;
   height: 1em;
 
   &:hover {
-    @include svg-colors($color-base-background, $color-secondary, true);
+    @include svg-colors($color-secondary, true);
     transition: color 0.5s;
   }
-  
+
   &-small {
     width: 0.5em;
     height: 0.5em;
@@ -89,11 +121,11 @@ svg {
   }
 
   &-primary {
-    @include svg-colors($color-primary, $color-base, true);
+    @include svg-colors($color-primary, true);
   }
 
   &-secondary {
-    @include svg-colors($color-base-background, $color-secondary, true);
+    @include svg-colors($color-secondary, true);
   }
 }
 

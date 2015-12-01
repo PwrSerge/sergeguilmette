@@ -11,8 +11,8 @@
   "license": "ISC",
   "homepage": "http://www.sergeguilmette.com",
   "browser": {
-    "modernizr": "./bower_components/modernizr/modernizr.js",
-    "polyfill": "./bower_components/js-polyfills/polyfill.min.js",
+    "modernizr": "./bower_components/modernizr/modernizr-custom.js",
+    "svg4everybody": "./bower_components/svg4everybody/dist/svg4everybody.min.js",
     "respond": "./bower_components/respond/dest/respond.min.js"
   },
   "browserify": {
@@ -22,8 +22,8 @@
   },
   "browserify-shim": {
     "modernizr": "Modernizr",
-    "polyfill":"polyfill",
-    "respond":"respond"
+    "svg4everybody": "svg4everybody",
+    "respond": "respond"
   },
   "devDependencies": {
     "browserify-shim": "^3.8.11",
@@ -60,9 +60,10 @@
     "gulp-load-utils": "0.0.4",
     "gulp-minify": "0.0.5",
     "gulp-minify-css": "^1.2.1",
-    "gulp-modernizr": "^1.0.0-alpha",
+    "gulp-modulizr": "0.0.2",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-prettify": "^0.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^2.0.5",
     "gulp-shell": "~0.5.1",

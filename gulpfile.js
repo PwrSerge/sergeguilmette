@@ -291,9 +291,22 @@ gulp.task('scripts', function() {
   return bundle();
 });
 
+gulp.task('custom-modernizr', function() {
+  return gulp.src('bower_components/modernizr/modernizr.js')
+    .pipe(gp.modulizr([
+      'cssclasses',
+      'svg',
+      'inlinesvg',
+      'fontface',
+      'csstransitions'
+    ]))
+    .pipe(gp.concat('custom-modernizr.js'))
+    .pipe(gulp.dest('./src/scripts/'));
+});
+
 /* ==========================================================================
-   IMAGES
-   ========================================================================== */
+IMAGES
+========================================================================== */
 
 gulp.task('image', ['sprite'], function() {
   return gulp.src(paths.image.src)
@@ -331,15 +344,18 @@ gulp.task('sprite', ['svgfallback'], function() {
         pretty: true
       }
     }))
+    .pipe(gp.svgstore({
+      inlineSvg: true
+    }))
     .pipe(gp.cheerio({
       run: function($) {
         $('[fill]').removeAttr('fill');
+        $('svg').attr('display','none');
       },
       parserOptions: {
         xmlMode: true
       }
     }))
-    .pipe(gp.svgstore())
     .pipe(gp.size())
     .pipe(gulp.dest('dist/image/sprites'))
     .pipe(gp.notify(notifycfg('IMAGES')));
@@ -351,7 +367,7 @@ gulp.task('svgfallback', function() {
       base: 'src/svg' + '-symbols'
     })
     .pipe(gp.rename({
-      prefix: 'no-svg .icon-'
+      prefix: 'icon-'
     }))
     .pipe(gp.svgfallback({
       backgroundUrl: '/image/sprites/svg-symbols.png'
@@ -361,32 +377,12 @@ gulp.task('svgfallback', function() {
     .pipe(gp.if(/[.]png$/, gulp.dest('src/image/sprites')));
 });
 
-// gulp.task('icons', function() {
-//   gp.iconify({
-//     src: 'src/image/icons/*.svg',
-//     pngOutput: 'src/image/icons/png',
-//     scssOutput: 'src/stylesheets/components',
-//     cssOutput: 'src/css',
-//     //styleTemplate: '_icon_gen.scss.mustache',
-//     defaultWidth: '32px',
-//     defaultHeight: '32px',
-//     svgoOptions: {
-//       enabled: true,
-//       options: {
-//         plugins: [{
-//           removeUnknownsAndDefaults: false
-//         }, {
-//           mergePaths: false
-//         }]
-//       }
-//     }
-//   });
-// });
-
 /* ==========================================================================
    HTML
    ========================================================================== */
+
 gulp.task('html', ['sass'], function() {
+
   return gulp.src('src/*.html')
     .pipe(gp.changed(paths.html.src))
     .pipe(gp.plumber())
@@ -396,10 +392,20 @@ gulp.task('html', ['sass'], function() {
   .pipe(gp.inject(gulp.src(['./dist/css/*.min.css',
       './dist/scripts/*.min.js'
     ], {
-      read: false,
+      read: false
     }), {
       ignorePath: ['src/', 'dist/'],
       addRootSlash: false,
+    }))
+    // inline svg injection
+    .pipe(gp.inject(gulp.src(['./dist/image/sprites/*.svg']), {
+      starttag: '<!-- inject:head:{{ext}} -->',
+      transform: function(filePath, file) {
+        return file.contents.toString();
+      }
+    }))
+    .pipe(gp.prettify({
+      // indent_size: 2
     }))
     .pipe(gp.size())
     .pipe(gulp.dest('./dist'))

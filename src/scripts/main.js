@@ -8,13 +8,12 @@
 /**
  * Browserify bundle modules
  */
-require('polyfill');
-require('respond');
-require('./plugins.js');
+
 var Modernizr = require('modernizr');
 var $ = require('jquery');
+require('./plugins.js');
+require('respond');
 
-//var grunticon = require('grunticon');
 //var Snap = require('snapsvg')
 
 // First lets create our drawing surface out of existing SVG element
@@ -31,61 +30,33 @@ var $ = require('jquery');
 /*
  *SVG fallback
  */
-var supportsSvg = function() {
-  var div = document.createElement('div');
-  div.innerHTML = '<svg/>';
-  return (div.firstChild && div.firstChild.namespaceURI) === 'http://www.w3.org/2000/svg';
-};
 
-// if (!supportsSvg()) {
-//
-//   // Inline script of grunticon.load.js here
-//   grunticon(['', '/fallbacks/icons.data.png.css', '/fallbacks/icons.fallback.css']);
+// if (!Modernizr.svg) {
+//   console.log('not working');
 //
 // } else {
+//   console.log(' working');
 //   // Ajax for SVG sprite
-//   $.get('image/sprites/svg-symbols.svg', function(data) {
+//
+//   $.get('/image/sprites/svg-symbols.svg', function(data) {
 //     var div = document.createElement('div');
 //     div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
 //     document.body.insertBefore(div, document.body.childNodes[0]);
 //   });
 // }
 
-if (!supportsSvg()) {
+// if (!Modernizr.svg) {
+//     var imgs = document.getElementsByTagName('img');
+//     var svgExtension = /.*\.svg$/
+//     var l = imgs.length;
+//     for(var i = 0; i < l; i++) {
+//         if(imgs[i].src.match(svgExtension)) {
+//             imgs[i].src = imgs[i].src.slice(0, -3) + 'png';
+//             console.log(imgs[i].src);
+//         }
+//     }
+// }
 
-  // Inline script of grunticon.load.js here
-  console.log('no svg');
-  document.documentElemement.classList.add('no-svg');
-
-} else {
-  console.log('works');
-  // Ajax for SVG sprite
-  // $.get('image/sprites/svg-symbols.svg', function(data) {
-  //   var div = document.createElement('div');
-  //   div.innerHTML = new XMLSerializer().serializeToString(data.documentElement);
-  //   document.body.insertBefore(div, document.body.childNodes[0]);
-  // });
-}
-
-// Modernizr.load([
-//   {
-//     // The test: does the browser understand Media Queries?
-//     test : Modernizr.mq('only all'),
-//     // If not, load the respond.js file
-//     nope : '/js/respond.js'
-//   }
-// ]);
-
-// Modernizr.load([
-//   {
-//     // The test: does the browser understand Media Queries?
-//     test: Modernizr.mq('only all'),
-//     // If not, load the respond.js file
-//     nope: console.log('no mq')
-//     //nope : '/js/respond.js'
-//   }
-// ]);
-Modernizr.mq('only all');
 /*
  *  Header  -- Slide menu
  */
@@ -107,24 +78,25 @@ $(function() {
 
   $mainNavigation.addClass('is-close');
   //remove transitions on window load and resize
-  $(window).on('load resize', function() {
+  //  $(window).on('load resize', function() {
 
-    // $mainNavigation.offset({
-    //   top: 0
-    // });
-    // $page.offset({
-    //   top: 0
-    // });
+  // $mainNavigation.offset({
+  //   top: 0
+  // });
+  // $page.offset({
+  //   top: 0
+  // });
 
-    if (Modernizr.mq('(min-width:700px)')) {
-      $page.offset({
-        top: 0
-      });
-      $mainNavigation.offset({
-        top: 0
-      });
-    }
-  });
+  //   if (Modernizr.mq('screen and (min-width: 700px)')) {
+  //     $page.offset({
+  //       top: 0
+  //     });
+  //     $mainNavigation.offset({
+  //       top: 0
+  //     });
+  //   }
+  // });
+
   //togle class for for sliding menu
   $navToggle.on('click', function() {
     $page.toggleClass('is-close');
@@ -160,17 +132,6 @@ $(function() {
   /**
    * Smooth scrolling when clicking anchor link
    */
-
-  // // fixed  header  on scroll
-  // $(window).scroll(function() {
-  //   if ($(this).scrollTop() > $headerHt) {
-  //     $header.addClass("header-container-fixed");
-  //     $('body').addClass("fix-body");
-  //   } else {
-  //     $header.removeClass("header-container-fixed");
-  //     $('body').removeClass("fix-body");
-  //   }
-  // });
 
   //Click event for inner anchor scrolling
   $('a[href^="#"]').click(function(e) {

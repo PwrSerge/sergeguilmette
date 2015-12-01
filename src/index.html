@@ -16,7 +16,9 @@
   <!-- endinject -->
   <!--[if lt IE 9]>
 
-    <![endif]-->
+  <![endif]-->
+  <!-- inject:head:svg -->
+  <!-- endinject -->
 </head>
 
 <body>
@@ -25,32 +27,35 @@
       <div class="header-title">
         <h1 class="header-name">Serge Guilmette</h1>
       </div>
-      <div class="nav-toggle" >
-        <svg xmlns="http://www.w3.org/2000/svg" role="img" class="icon icon-big ">
-          <use xlink:href="image/sprites/svg-symbols.svg#icon-menu"></use>
+      <div class="nav-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" role="img" class="icon icon-big">
+          <use xlink:href="#icon-menu"></use>
         </svg>
+
       </div>
     </div>
+
     <ul class="nav-social-list">
       <li class="nav-social-item">
-          <a href="https://www.linkedin.com/hp/?dnr=hQQraGPhp97ndK-QAQH6aGyiDi7jqF-VqTIX" class="nav-expand-link">
+        <a href="https://www.linkedin.com/hp/?dnr=hQQraGPhp97ndK-QAQH6aGyiDi7jqF-VqTIX" class="nav-expand-link">
           <svg xmlns="http://www.w3.org/2000/svg" role="img" class="icon">
-          <use xlink:href="image/sprites/svg-symbols.svg#icon-linkedin"></use>
-        </svg>
+            <use xlink:href="image/sprites/svg-symbols.svg#icon-linkedin" />
+          </svg>  test
+          <div class="icon-fallback icon-linkedin"></div>
         </a>
       </li>
       <li class="nav-social-item">
         <a href="https://twitter.com/SergeGuilmette" class="nav-expand-link">
-        <svg xmlns="http://www.w3.org/2000/svg" role="img" class="icon">
-          <use xlink:href="image/sprites/svg-symbols.svg#icon-twitter"></use>
-        </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" role="img" class="icon">
+            <use xlink:href="image/sprites/svg-symbols.svg#icon-twitter" />
+          </svg>
         </a>
       </li>
       <li class="nav-social-item">
         <a href="https://github.com/PwrSerge/" class="nav-expand-link">
-        <svg role="img" class="icon ">
-          <use xlink:href="image/sprites/svg-symbols.svg#icon-github" ></use>
-        </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" role="img" class="icon">
+            <use xlink:href="image/sprites/svg-symbols.svg#icon-github" />
+          </svg>
         </a>
       </li>
     </ul>
@@ -68,7 +73,7 @@
       </ul>
     </nav>
   </header>
-<br>
+  <br>
 
 
   <div class="inner-wrapper">

@@ -1133,11 +1133,11 @@ button {
 
 .ui-img,
 .no-bleed:after {
-  background-image: url("../image//sprites/sprite.svg");
+  background-image: url(../image//sprites/sprite.svg);
   background-repeat: no-repeat; }
   .no-svg .ui-img, .no-svg
   .no-bleed:after {
-    background-image: url("../image//ui-separate-std-sprite.png"); }
+    background-image: url(../image//ui-separate-std-sprite.png); }
 
 .no-bleed {
   position: relative; }
@@ -1166,261 +1166,138 @@ button {
   top: 0;
   left: 0; }
 
-svg {
-  fill: currentColor;
-  pointer-events: none; }
-
+/**
+ * Hide icons by default to prevent blank spaces in unsupported browsers
+ */
 .icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 0;
+  width: 0; }
+
+.icon-fallback {
+  display: none; }
+
+.no-svg .icon-fallback {
+  display: inline-block; }
+
+/**
+ * Display icons when browser supports SVG.
+ * Inherit height, width, and color.
+ */
+.svg .icon {
   width: 1em;
   height: 1em; }
-  .icon:hover {
-    fill: #f8f7f2;
-    color: #8cc63e;
+  .svg .icon:hover {
+    fill: #8cc63e;
+    color: true;
     transition: color 0.5s; }
-  .icon-small {
+  .svg .icon-small {
     width: 0.5em;
     height: 0.5em; }
-  .icon-big {
+  .svg .icon-big {
     width: 1.5em;
     height: 1.5em; }
-  .icon-primary {
+  .svg .icon-primary {
     fill: #9362c4;
-    color: #3e225b; }
-  .icon-secondary {
-    fill: #f8f7f2;
-    color: #8cc63e; }
+    color: true; }
+  .svg .icon-secondary {
+    fill: #8cc63e;
+    color: true; }
 
-.no-svg .icon-address-book {
+.icon-cancel-circle {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: 0px 0px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-bubble {
+.icon-checkmark {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -32px 0px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-cancel-circle {
+.icon-envelop {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -64px 0px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-cart {
+.icon-facebook2 {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -96px 0px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-checkmark {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -128px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-cog {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -160px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-coin-dollar {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -192px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-cross {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -224px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-envelop {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -256px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-facebook2 {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -288px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-folder-download {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -320px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-folder-minus {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -352px 0px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-folder-open {
+.icon-GD-logo2 {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: 0px -32px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-folder-plus {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -32px -32px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-folder-upload {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -64px -32px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-folder {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -96px -32px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-GD-logo2 {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: 0px -64px;
   width: 310px;
   height: 380px; }
 
-.no-svg .icon-github {
+.icon-github {
+  background-image: url(/image/sprites/svg-symbols.png);
+  background-position: -310px -32px;
+  width: 32px;
+  height: 32px; }
+
+.icon-home {
+  background-image: url(/image/sprites/svg-symbols.png);
+  background-position: -342px -32px;
+  width: 32px;
+  height: 32px; }
+
+.icon-linkedin {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -310px -64px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-github2 {
+.icon-mail {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -342px -64px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-google-plus2 {
+.icon-menu {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -310px -96px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-hexagon {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -96px;
-  width: 0px;
-  height: 1px; }
-
-.no-svg .icon-home {
+.icon-minus {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -342px -96px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-html5 {
+.icon-paypal {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -310px -128px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-image {
+.icon-phone {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -342px -128px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-images {
+.icon-spinner {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -310px -160px;
-  width: 36px;
-  height: 32px; }
-
-.no-svg .icon-info {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -346px -160px;
   width: 32px;
   height: 32px; }
 
-.no-svg .icon-linkedin {
+.icon-spinner2 {
+  background-image: url(/image/sprites/svg-symbols.png);
+  background-position: -342px -160px;
+  width: 32px;
+  height: 32px; }
+
+.icon-twitter {
   background-image: url(/image/sprites/svg-symbols.png);
   background-position: -310px -192px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-location2 {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -192px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-mail {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -310px -224px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-menu {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -224px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-minus {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -310px -256px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-notification {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -256px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-paypal {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -310px -288px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-phone {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -288px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-plus {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -310px -320px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-spinner {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -320px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-spinner2 {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -310px -352px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-twitter {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -342px -352px;
-  width: 32px;
-  height: 32px; }
-
-.no-svg .icon-warning {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -310px -384px;
   width: 32px;
   height: 32px; }
 
