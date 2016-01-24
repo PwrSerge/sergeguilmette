@@ -1,17 +1,25 @@
 // Load plugins
-var gulp = require('gulp'),
+var _ = require('underscore'),
+  argv = require('yargs').argv,
+  gulp = require('gulp'),
   source = require('vinyl-source-stream'),
   browserify = require('browserify'),
   buffer = require('vinyl-buffer'),
   del = require('del'),
   stylish = require('jshint-stylish'),
   browserSync = require('browser-sync'),
+  marked = require('gulp-marked'),
+  merge = require('merge-stream'),
   mainBowerFiles = require('main-bower-files'),
   styleguide = require('sc5-styleguide'),
   gulpFilter = require('gulp-filter'),
   runSequence = require('run-sequence'),
   deploy = require('gulp-gh-pages'),
   sass = require('gulp-ruby-sass'),
+  swig = require('swig'),
+  swigExtras = require('swig-extras'),
+  slugify = require('slug'),
+  through = require('through2'),
   path = require('path'),
   gutil = require('gulp-load-utils')(['colors',
     'env', 'log', 'pipeline', 'lazypipe'
@@ -94,9 +102,8 @@ var cssminTasks = gutil.lazypipe()
     //Basename: 'main',
     suffix: '.min',
   })
-  .pipe(gp.minifyCss);
-
-//.pipe(gp.sourcemaps,  'write()');
+  .pipe(gp.cssnano)
+  .pipe(gp.sourcemaps.write('.'));
 
 var jsminTasks = gutil.lazypipe()
   .pipe(gp.rename, {
@@ -109,7 +116,6 @@ var jsminTasks = gutil.lazypipe()
 var sassconfig = function sassconfig() {
   return {
     //Style: 'expanded',
-
     //sourcemap: true,
     trace: true,
     quiet: true,
@@ -137,30 +143,144 @@ var svgconfig = {
   templates: ['default-svg'],
 };
 
+/**
+ * Debug mode may be set in one of these manners:
+ * - gulp --debug=[true | false]
+ * - export NODE_DEBUG=[true | false]
+ */
+var DEBUG,
+  USER_DEBUG = (argv.debug || process.env.NODE_DEBUG);
+if (USER_DEBUG === undefined && argv._.indexOf('deploy') > -1) {
+  DEBUG = false;
+} else {
+  DEBUG = USER_DEBUG !== 'false';
+}
+
+var site = {
+  'title': 'Wunderdog K-9 Care & Training',
+  'url': 'http://localhost:9000',
+  'urlRoot': '/',
+  'author': 'Lynn Wunderli',
+  'email': 'wunderdogwi@yahoo.com',
+  'time': new Date()
+};
+
+// This is deployed to blog.crushingpennies.com/thewunderdog/ (for now).
+if (argv._.indexOf('deploy') > -1) {
+  site.url = 'http://blog.crushingpennies.com/wunderdog';
+  site.urlRoot = '/wunderdog/';
+}
+swig.setDefaults({
+  loader: swig.loaders.fs(__dirname + '/assets/templates'),
+  cache: false
+});
+swigExtras.useFilter(swig, 'truncate');
+swig.setFilter('slugify', slugify);
+
+function summarize(marker) {
+  return through.obj(function(file, enc, cb) {
+    var summary = file.contents.toString().split(marker)[0];
+    file.page.summary = summary;
+    this.push(file);
+    cb();
+  });
+}
+
+function applyTemplate(templateFile) {
+  var tpl = swig.compileFile(path.join(__dirname, templateFile));
+
+  return through.obj(function(file, enc, cb) {
+    var data = {
+      site: site,
+      page: file.page,
+      content: file.contents.toString()
+    };
+    file.contents = new Buffer(tpl(data), 'utf8');
+    this.push(file);
+    cb();
+  });
+}
+
 /* ==========================================================================
    TEMPLATE
    ========================================================================== */
 
-//Compile to HTML
-// var swig = require('gulp-swig');
+gulp.task('testimonials', function() {
+  return gulp.src('content/testimonials/*.md')
+    .pipe(gp.frontMatter({
+      property: 'page',
+      remove: true
+    }))
+    .pipe(gp.marked())
+    // Collect all the testimonials and place them on the site object.
+    .pipe((function() {
+      var testimonials = [];
+      return gp.through.obj(function(file, enc, cb) {
+          testimonials.push(file.page);
+          testimonials[testimonials.length - 1].content = file.contents.toString();
+          this.push(file);
+          cb();
+        },
+        function(cb) {
+          testimonials.sort(function(a, b) {
+            if (a.author < b.author) {
+              return -1;
+            }
+            if (a.author > b.author) {
+              return 1;
+            }
+            return 0;
+          });
+          site.testimonials = testimonials;
+          cb();
+        });
+    })());
+});
 
-// Gulp.task('templates', function() {
-//   gulp.src('./lib/*.html')
-//     .pipe(gp.swig())
-//     .pipe(gulp.dest('./dist/'))
-// });
+gulp.task('pages', ['cleanpages', 'testimonials'], function() {
+  var html = gulp.src(['content/pages/*.html'])
+    .pipe(gp.frontMatter({
+      property: 'page',
+      remove: true
+    }))
+    .pipe(through.obj(function(file, enc, cb) {
+      var data = {
+        site: site,
+        page: {}
+      };
+      var tpl = gp.swig.compileFile(file.path);
+      file.contents = new Buffer(tpl(data), 'utf8');
+      this.push(file);
+      cb();
+    }));
 
-// //Get data via JSON file, keyed on filename.
-// var getJsonData = function(file) {
-//   return require('./examples/' + path.basename(file.path) + '.json');
-// };
+  var markdown = gulp.src('content/pages/*.md')
+    .pipe(gp.frontMatter({
+      property: 'page',
+      remove: true
+    }))
+    .pipe(gp.marked())
+    .pipe(applyTemplate('assets/templates/page.html'))
+    .pipe(gp.rename({
+      extname: '.html'
+    }));
 
-// Gulp.task('json-test', function() {
-//   return gulp.src('./examples/test1.html')
-//     .pipe(data(getJsonData))
-//     .pipe(swig())
-//     .pipe(gulp.dest('build'));
-// });
+  return gp.merge(html, markdown)
+    .pipe(gp.if(!DEBUG, gp.htmlmin({
+      // This option seems logical, but it breaks gulp-rev-all
+      removeAttributeQuotes: false,
+
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true
+    })))
+    .pipe(gulp.dest('dist'))
+    .pipe(gp.connect.reload());
+});
 
 /* ==========================================================================
    BOWER
@@ -350,7 +470,7 @@ gulp.task('sprite', ['svgfallback'], function() {
     .pipe(gp.cheerio({
       run: function($) {
         $('[fill]').removeAttr('fill');
-        $('svg').attr('display','none');
+        $('svg').attr('display', 'none');
       },
       parserOptions: {
         xmlMode: true

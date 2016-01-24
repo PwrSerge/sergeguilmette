@@ -791,7 +791,6 @@ embed {
   transform: translateY(0) scale(0.8, 0.8);
   transition-property: opacity, -webkit-transform;
   transition-property: opacity, transform;
-  transition-property: opacity, transform, -webkit-transform;
   transition-duration: 0.25s;
   transition-delay: 0.1s;
   margin: auto;
