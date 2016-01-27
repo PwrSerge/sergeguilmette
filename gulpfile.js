@@ -48,9 +48,9 @@ var paths = {
     src: 'src/stylesheets/*.scss',
     dest: 'dist/css',
   },
-  image: {
-    src: ['src/image/**/*.png', 'src/image/**/*.jpg'],
-    dest: 'dist/image',
+  images: {
+    src: ['src/images/**/*.png', 'src/images/**/*.jpg'],
+    dest: 'dist/images',
   },
   html: {
     src: 'src/*.html',
@@ -157,21 +157,20 @@ if (USER_DEBUG === undefined && argv._.indexOf('deploy') > -1) {
 }
 
 var site = {
-  'title': 'Wunderdog K-9 Care & Training',
+  'title': 'Serge Guilmettesite',
   'url': 'http://localhost:9000',
   'urlRoot': '/',
-  'author': 'Lynn Wunderli',
-  'email': 'wunderdogwi@yahoo.com',
+  'author': 'Serge Guilmette',
+  'email': 'sergeguilmette@gmail.com',
   'time': new Date()
 };
 
-// This is deployed to blog.crushingpennies.com/thewunderdog/ (for now).
 if (argv._.indexOf('deploy') > -1) {
-  site.url = 'http://blog.crushingpennies.com/wunderdog';
-  site.urlRoot = '/wunderdog/';
+  site.url = 'https://github.com/PwrSerge/sergeguilmette';
+  site.urlRoot = '/sergeguilmette/';
 }
 swig.setDefaults({
-  loader: swig.loaders.fs(__dirname + '/assets/templates'),
+  loader: swig.loaders.fs(__dirname + '/src/templates'),
   cache: false
 });
 swigExtras.useFilter(swig, 'truncate');
@@ -237,6 +236,11 @@ gulp.task('testimonials', function() {
     })());
 });
 
+gulp.task('cleanpages', function() {
+  return gulp.src(['dist/*.html'], {read: false})
+      .pipe(del());
+});
+
 gulp.task('pages', ['cleanpages', 'testimonials'], function() {
   var html = gulp.src(['content/pages/*.html'])
     .pipe(gp.frontMatter({
@@ -269,7 +273,6 @@ gulp.task('pages', ['cleanpages', 'testimonials'], function() {
     .pipe(gp.if(!DEBUG, gp.htmlmin({
       // This option seems logical, but it breaks gulp-rev-all
       removeAttributeQuotes: false,
-
       removeComments: true,
       collapseWhitespace: true,
       removeRedundantAttributes: true,
@@ -428,9 +431,9 @@ gulp.task('custom-modernizr', function() {
 IMAGES
 ========================================================================== */
 
-gulp.task('image', ['sprite'], function() {
-  return gulp.src(paths.image.src)
-    .pipe(gp.changed(paths.image.dest))
+gulp.task('images', ['sprite'], function() {
+  return gulp.src(paths.images.src)
+    .pipe(gp.changed(paths.images.dest))
     .pipe(gp.plumber())
     .pipe(gp.cache(gp.imagemin({
       optimizationLevel: 3,
@@ -440,7 +443,7 @@ gulp.task('image', ['sprite'], function() {
       interlaced: true,
     })))
     .pipe(gp.size())
-    .pipe(gulp.dest(paths.image.dest))
+    .pipe(gulp.dest(paths.images.dest))
     .pipe(browserSync.reload({
       stream: true,
     }))
@@ -453,7 +456,7 @@ gulp.task('image', ['sprite'], function() {
 gulp.task('sprite', ['svgfallback'], function() {
 
   return gulp
-    .src('src/image/icons/*.svg', {
+    .src('src/images/icons/*.svg', {
       base: 'src/svg' + '-symbols'
     })
     .pipe(gp.rename({
@@ -477,24 +480,24 @@ gulp.task('sprite', ['svgfallback'], function() {
       }
     }))
     .pipe(gp.size())
-    .pipe(gulp.dest('dist/image/sprites'))
+    .pipe(gulp.dest('dist/images/sprites'))
     .pipe(gp.notify(notifycfg('IMAGES')));
 });
 
 gulp.task('svgfallback', function() {
   return gulp
-    .src('src/image/icons/*.svg', {
+    .src('src/images/icons/*.svg', {
       base: 'src/svg' + '-symbols'
     })
     .pipe(gp.rename({
       prefix: 'icon-'
     }))
     .pipe(gp.svgfallback({
-      backgroundUrl: '/image/sprites/svg-symbols.png'
+      backgroundUrl: '/images/sprites/svg-symbols.png'
     }))
     .pipe(gp.if(/[.]css$/, gp.cssScss()))
     .pipe(gp.if(/[.]scss$/, gulp.dest('src/stylesheets/components')))
-    .pipe(gp.if(/[.]png$/, gulp.dest('src/image/sprites')));
+    .pipe(gp.if(/[.]png$/, gulp.dest('src/images/sprites')));
 });
 
 /* ==========================================================================
@@ -518,7 +521,7 @@ gulp.task('html', ['sass'], function() {
       addRootSlash: false,
     }))
     // inline svg injection
-    .pipe(gp.inject(gulp.src(['./dist/image/sprites/*.svg']), {
+    .pipe(gp.inject(gulp.src(['./dist/images/sprites/*.svg']), {
       starttag: '<!-- inject:head:{{ext}} -->',
       transform: function(filePath, file) {
         return file.contents.toString();
@@ -541,7 +544,7 @@ gulp.task('html', ['sass'], function() {
 gulp.task('clean', function(cb) {
   del([
     'dist/css/**',
-    'dist/image/**',
+    'dist/images/**',
     'dist/scripts/**',
     'dist/index.html',
     '!dist/CNAME',
@@ -579,8 +582,8 @@ gulp.task('watch', ['browser-sync'], function() {
   // Watch .js files
   gulp.watch('src/scripts/**/*.js', ['scripts']);
 
-  // Watch image files
-  gulp.watch('src/image/**/*', ['image']);
+  // Watch images files
+  gulp.watch('src/images/**/*', ['images']);
 
   // Watch .html files
   gulp.watch('src/*.html', ['html']);
@@ -604,11 +607,11 @@ gulp.task('deploy', function() {
    BUILD TASK
    ========================================================================== */
 gulp.task('build', function() {
-  runSequence('clean', ['modernizr', 'scripts', 'image', 'html'], 'deploy');
+  runSequence('clean', ['modernizr', 'scripts', 'images', 'html'], 'deploy');
 });
 /* ==========================================================================
    DEFAULT TASK
    ========================================================================== */
 gulp.task('default', function() {
-  runSequence('scripts', 'image', 'html', 'watch');
+  runSequence('scripts', 'images', 'html', 'watch');
 });

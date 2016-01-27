@@ -196,84 +196,91 @@
 	"buffers":
 	[
 		{
-			"file": "src/stylesheets/components/forms.scss",
+			"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 7198,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/stylesheets/components/images.scss",
-			"settings":
-			{
-				"buffer_size": 1449,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/stylesheets/utils/vars.scss",
-			"settings":
-			{
-				"buffer_size": 6125,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/stylesheets/components/buttons.scss",
-			"settings":
-			{
-				"buffer_size": 2354,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/stylesheets/components/media.scss",
-			"settings":
-			{
-				"buffer_size": 2854,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/stylesheets/components/modal.scss",
-			"settings":
-			{
-				"buffer_size": 3229,
+				"buffer_size": 1057,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/SassBeautify.sublime-settings",
+			"contents": "/**\n * @title WET-BOEW Responsive equal height\n * @overview Sets the same height for all elements in a container that are rendered on the same baseline (row). Adapted from http://codepen.io/micahgodbolt/pen/FgqLc.\n * @license wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html\n * @author @thomasgohard\n */\n( function( $, window, wb ) {\n\"use strict\";\n\n/*\n * Variable and function definitions.\n * These are global to the plugin - meaning that they will be initialized once per page,\n * not once per instance of plugin on the page. So, this is a good place to define\n * variables that are common to all instances of the plugin on a page.\n */\nvar componentName = \"wb-eqht\",\n  selector = \".\" + componentName,\n  $document = wb.doc,\n  eventTimerpoke = \"timerpoke.wb\",\n  initEvent = \"wb-init\" + selector,\n  vAlignCSS = \"vertical-align\",\n  vAlignDefault = \"top\",\n  minHeightCSS = \"min-height\",\n  minHeightDefault = \"0\",\n  cssValueSeparator = \":\",\n  cssPropertySeparator = \";\",\n  regexCSSValue = \" ?[^;]+\",\n  regexVAlign = new RegExp( vAlignCSS + cssValueSeparator + \" ?\" + regexCSSValue + cssPropertySeparator + \"?\", \"i\" ),\n  regexMinHeight = new RegExp( minHeightCSS + cssValueSeparator + \" ?\" + regexCSSValue + cssPropertySeparator + \"?\", \"i\" ),\n\n  /**\n   * @method init\n   * @param {jQuery Event} event Event that triggered the function call\n   */\n  init = function( event ) {\n\n    // Start initialization\n    // returns DOM object = proceed with init\n    // returns undefined = do not proceed with init (e.g., already initialized)\n    var elm = wb.init( event, componentName, selector );\n\n    if ( elm ) {\n\n      // Remove the event handler since only want init fired once per page (not per element)\n      $document.off( eventTimerpoke, selector );\n\n      onResize();\n\n      // Identify that initialization has completed\n      wb.ready( $document, componentName );\n    }\n  },\n\n  /**\n   * Re-equalise any time the window/document or a child element of 'selector' is resized.\n   * @method onResize\n   */\n  onResize = function() {\n    var $elm, $children, $anchor, currentChild, childCSS, minHeight, i, j,\n      $elms = $( selector ),\n      row = [],\n      rowTop = -1,\n      currentChildTop = -1,\n      currentChildHeight = -1,\n      tallestHeight = -1;\n\n    for ( i = $elms.length - 1; i !== -1; i -= 1 ) {\n      $elm = $elms.eq( i );\n      $children = $elm.children();\n\n      $anchor = detachElement( $elm );\n      for ( j = $children.length - 1; j !== -1; j -= 1 ) {\n        currentChild = $children[ j ];\n        childCSS = currentChild.style.cssText.toLowerCase();\n\n        //Ensure the CSS string ends by a seperator\n        if ( childCSS.length > 0 && childCSS.substr( childCSS.length - 1 ) !== cssPropertySeparator ) {\n          childCSS += cssPropertySeparator;\n        }\n\n        // Ensure all children that are on the same baseline have the same 'top' value.\n        if ( childCSS.indexOf( vAlignCSS ) !== -1 ) {\n          childCSS = childCSS.replace( regexVAlign, vAlignCSS + cssValueSeparator + vAlignDefault + cssPropertySeparator );\n        } else {\n          childCSS += \" \" + vAlignCSS + cssValueSeparator + vAlignDefault + cssPropertySeparator;\n        }\n\n        // Remove any previously set min height\n        if ( childCSS.indexOf( minHeightCSS ) !== -1 ) {\n          childCSS = childCSS.replace( regexMinHeight, minHeightCSS + cssValueSeparator + minHeightDefault + cssPropertySeparator );\n        } else {\n          childCSS += \" \" + minHeightCSS + cssValueSeparator + minHeightDefault + cssPropertySeparator;\n        }\n\n        currentChild.style.cssText = childCSS;\n        $children.eq( j ).data( minHeightCSS, minHeightDefault );\n      }\n      $elm = reattachElement( $anchor );\n\n      for ( j = $children.length - 1; j !== -1; j -= 1 ) {\n        currentChild = $children[ j ];\n\n        currentChildTop = currentChild.offsetTop;\n        currentChildHeight = currentChild.offsetHeight;\n\n        if ( currentChildTop !== rowTop ) {\n          recordRowHeight( row, tallestHeight );\n\n          rowTop = currentChildTop;\n          tallestHeight = currentChildHeight;\n        } else {\n          tallestHeight = ( currentChildHeight > tallestHeight ) ? currentChildHeight : tallestHeight;\n        }\n\n        row.push( $children.eq( j ) );\n      }\n      recordRowHeight( row, tallestHeight );\n\n      $anchor = detachElement( $elm );\n      for ( j = $children.length - 1; j !== -1; j -= 1 ) {\n        minHeight = $children.eq( j ).data( minHeightCSS );\n\n        if ( minHeight ) {\n          $children[ j ].style.minHeight = minHeight + \"px\";\n        }\n      }\n      $elm = reattachElement( $anchor );\n\n      // Identify that the height equalization was updated\n      $document.trigger( \"wb-updated\" + selector );\n    }\n  },\n\n  /**\n   * @method detachElement\n   * @param {jQuery object} $elm The element to detach\n   * @returns {object} The detached element\n   */\n  detachElement = function( $elm ) {\n    var $prev = $elm.prev(),\n      $next = $elm.next(),\n      $parent = $elm.parent();\n\n    if ( $prev.length ) {\n      $elm.data( { anchor: $prev, anchorRel: \"prev\" } );\n    } else if ( $next.length ) {\n      $elm.data( { anchor: $next, anchorRel: \"next\" } );\n    } else if ( $parent.length ) {\n      $elm.data( { anchor: $parent, anchorRel: \"parent\" } );\n    }\n\n    return $elm.detach();\n  },\n\n  /**\n   * @method reattachElement\n   * @param {jQuery object} $elm The element to reattach\n   * @returns {object} The reattached element\n   */\n  reattachElement = function( $elm ) {\n    var $anchor = $elm.data( \"anchor\" ),\n      anchorRel = $elm.data( \"anchorRel\" );\n\n    switch ( anchorRel ) {\n    case \"prev\":\n      $anchor.after( $elm );\n      break;\n    case \"next\":\n      $anchor.before( $elm );\n      break;\n    case \"parent\":\n      $anchor.append( $elm );\n      break;\n    }\n\n    return $elm;\n  },\n\n  /**\n   * @method recordRowHeight\n   * @param {array} row The elements for which to record the height\n   * @param {integer} height The height to record\n   */\n  recordRowHeight = function( row, height ) {\n    var i = row.length - 1;\n\n    // only set a height if more than one element exists in the row\n    if ( i ) {\n      for ( ; i !== -1; i -= 1 ) {\n        row[ i ].data( minHeightCSS, height );\n      }\n    }\n    row.length = 0;\n  };\n\n// Bind the init event of the plugin\n$document.on( eventTimerpoke + \" \" + initEvent, selector, init );\n\n// Handle text and window resizing\n$document.on( \"txt-rsz.wb win-rsz-width.wb win-rsz-height.wb wb-updated.wb-tables wb-update\" + selector, onResize );\n\n// Add the timer poke to initialize the plugin\nwb.add( selector );\n\n} )( jQuery, window, wb );",
+			"file": "/C/Users/guilmets/Desktop/cleaned_up.js",
+			"file_size": 9911,
+			"file_write_time": 130869635443582803,
 			"settings":
 			{
-				"buffer_size": 160,
+				"buffer_size": 6643,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Package Control Messages\n========================\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n",
+			"contents": "Package Control Messages\n========================\n\nPackage Control:\n---------------\n\n  Version 3.1 Release Notes\n  \n  Package Control continues its focus on polish and fixing edge-case bugs. Some\n  of the changes in this version include:\n  \n   - quick panel for Install Package now stays open on Windows with recent\n     versions of ST3, even when focus is lost\n   - new \"downloader_precedence\" setting to allow users to use specific HTTP\n     backend due to network proxy or SSL issues\n   - added Install Local Dependency command for package developers to more\n     easily deal with dependencies during development\n   - improved handling of git/hg package upgrade errors\n   - better handling of locked .sublime-package files on Windows\n   - performance improvements for users with a large number of open windows\n  \n  For package developers, the list of available dependencies has been growing:\n  https://github.com/wbond/package_control_channel/blob/master/repository/dependencies.json\n  \n  Enjoy!\n  \n  ",
 			"settings":
 			{
-				"buffer_size": 4837,
+				"buffer_size": 1004,
 				"line_ending": "Windows",
 				"name": "Package Control Messages",
 				"scratch": true
 			}
+		},
+		{
+			"contents": "<!DOCTYPE html>\n<!--[if IE 7]><html lang=\"en\" class=\"no-js ie7\"><![endif]-->\n<!--[if IE 8]><html lang=\"en\" class=\"no-js ie8\"><![endif]-->\n<!--[if gt IE 8]><!-->\n<html lang=\"en\" class=\"no-js\">\n<!--<![endif]--><head>\n<meta charset=\"utf-8\" />\n<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)\nwet-boew.github.com/wet-boew/License-eng.txt / wet-boew.github.com/wet-boew/Licence-fra.txt -->\n<!-- WET 3.0, PWGSC 1.0 file: 2col-eng.html -->\n<!-- TitleStart -->\n<title>Domestic and international Request for Visit Forms - Industrial Security Program - Public Works and Government Services Canada (PWGSC)</title>\n<!-- TitleEnd -->\n<!-- MetadataStart -->\n<meta name=\"description\" content=\"Domestic and international Request for Visit Forms\" />\n<meta name=\"dcterms.description\" content=\"Domestic and international Request for Visit Forms\" />\n<meta name=\"dcterms.creator\" content=\"Public Works and Government Services Canada, Industrial Security Program\" />\n<meta name=\"dcterms.title\" content=\"Request for Visit Form - Industrial Security Program - Public Works and Government Services Canada (PWGSC)\" />\n<meta name=\"dcterms.issued\" title=\"W3CDTF\" content=\"2015-04-24\" />\n<meta name=\"dcterms.modified\" title=\"W3CDTF\" content=\"<!--#config timefmt=\"%Y-%m-%d\"--><!--#echo var=\"LAST_MODIFIED\"-->\" />\n<meta name=\"dcterms.subject\" title=\"gccore\" content=\"Security Services; Information Services; Business services; Government services\" />\n<meta name=\"dcterms.language\" title=\"ISO639-2\" content=\"eng\" />\n<meta name=\"keywords\" content=\"Industrial Security, form, visit request, domestic, international\" />\n<!-- MetadataEnd --> \n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/tete-head.html\" --> \n\n<!-- CustomScriptsCSSStart --> \n\n\n<!-- CustomScriptsCSSEnd -->\n</head><body>\n<div id=\"wb-body-sec\">\n  <div id=\"wb-skip\">\n    <ul id=\"wb-tphp\">\n      <li id=\"wb-skip1\"><a href=\"#wb-cont\">Passer au contenu principal</a></li>\n      <li id=\"wb-skip2\"><a href=\"#wb-nav\">Passer au menu secondaire</a></li>\n    </ul>\n  </div>\n  <div id=\"wb-head\">\n    <div id=\"wb-head-in\">\n      <header>\n        <!-- HeaderStart --> \n        <!--#include virtual=\"/boew-wet/wet3.0/html5/includes/banner_gc-gc_banner-eng.html\" --> \n        <!--#include virtual=\"/site/wet3.0/html5/includes/banner_site-site_banner-eng.html\" -->\n        <nav role=\"navigation\"> \n          <!--#include virtual=\"/site/wet3.0/html5/includes/nav_mega-mega_nav-eng.html\" -->\n          \n          <div id=\"gcwu-bc\">\n            <h2>Breadcrumb trail</h2>\n            <div id=\"gcwu-bc-in\">\n              <ol>\n                <!--#include virtual=\"/site/wet3.0/html5/includes/pain-bread-eng.html\" --> \n                <!--#include virtual=\"/includes/pain-bread-section-eng.html\" -->\n                <li><a href=\"/formulaires-forms/index-eng.html\">Forms</a></li>\n                <li>Domestic and international Request for Visit Forms</li>\n              </ol>\n            </div>\n          </div>\n        </nav>\n        <!-- HeaderEnd --> \n      </header>\n    </div>\n  </div>\n  <div id=\"wb-core\">\n    <div id=\"wb-core-in\" class=\"equalize\">\n      <div id=\"wb-main\" role=\"main\">\n        <div id=\"wb-main-in\"> \n          <!-- MainContentStart -->\n          <h1 id=\"wb-cont\">Domestic and international Request for Visit Forms</h1>\n          <div class=\"span-6 module-refer\">\n            <p><a href=\"/pdf/visite-visits-eng.pdf\" target=\"_blank\" rel=\"alternate\" type=\"application/pdf\"><abbr title=\"Portable document format\">PDF</abbr>: Domestic and international Request for Visit Forms</a> (<!--#fsize virtual=\"/pdf/visite-visits-eng.pdf\"-->Kb) <br>\n              (<a href=\"http://www.tpsgc-pwgsc.gc.ca/comm/aformats-eng.html\">alternative formats and plug-ins</a>)</p>\n            <ul>\n              <li>Consult the <a href=\"/formulaires-forms/domestique-domestic-eng.html\">Instructions for completing the domestic Request for Visit form</a> for more guidance.</li>\n              <li>Consult the <a href=\"/formulaires-forms/internationale-international-eng.html\">Instructions for completing the international Request for Visit form</a> for more guidance.</li>\n            </ul>\n          </div>\n          <p>All fields of the Request for Visit form (RFV) must be completed and the form communicated via Government-to-Government.</p>\n          <div class=\"wet-boew-formvalid\">\n            <form id=\"RFVform\" action=\"#\" method=\"post\">\n              <h2 class=\"background-accent\">1. Type of visit request</h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 1  options</span></legend>\n             \n                <label class=\"lrfv1 form-radio\" for=\"radio-1a\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option1\" id=\"radio-1a\">\n                  One-time </label>\n                <label class=\"lrfv1 form-radio\" for=\"radio-1b\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option2\" id=\"radio-1b\">\n                  Recurring</label>\n                <label class=\"lrfv1 form-radio\" for=\"radio-1c\">\n                  <input type=\"radio\" name=\"rfv1\"  value=\"option3\" id=\"radio-1c\">\n                  Emergency </label>\n                <label class=\"lrfv1 form-radio\" for=\"radio-1d\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option4\" id=\"radio-1d\">\n                  Amendment</label>\n                  </fieldset>\n                  \n               \n                <div id=\"sect1-amendment\">\n                <fieldset><legend><span class=\"wb-invisible\">section 1 - Amendment options</span></legend>\n                  <label class=\"form-checkbox\" for=\"checkbox-1da\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4a\" id=\"checkbox-1da\">\n                    Dates</label>\n                  <label class=\"form-checkbox\" for=\"checkbox-1db\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4b\" id=\"checkbox-1db\">\n                    Visitors</label>\n                  <label class=\"form-checkbox\" for=\"checkbox-1dc\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4c\" id=\"checkbox-1dc\">\n                    Agency / Facility</label>\n                  <label for=\"NSA/DSA\">For an amendment, insert the <abbr title=\"National Security Authority\">NSA</abbr>/<abbr title=\"Designated Security Authority\">DSA</abbr> original <abbr title=\"Request for Visit\">RFV</abbr> Reference <abbr title=\"Number\">N<sup>o</sup>.</abbr></label>\n                  <input id=\"NSA/DSA\" type=\"text\" class=\"width-30\"></fieldset>\n                </div>\n             \n              <h2 class=\"background-accent\">2. Types of information/material or site access</h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 2 options</span></legend>\n\n                <label class=\"form-radio\" for=\"radio-2a\">\n                  <input type=\"radio\" name=\"rfv2\" value=\"option1\" id=\"radio-2a\">Confidential or above</label>\n                <label class=\"form-radio\" for=\"radio-2b\">\n                  <input type=\"radio\" name=\"rfv2\" value=\"option2\" id=\"radio-2b\">\n                  Access to security areas without access to classified information / material</label>\n              \n                <p><em>Only if required by the laws / regulations of the countries involved</em></p>\n                <label class=\"form-radio\" for=\"radio-2c\"><input type=\"radio\" name=\"rfv2\" value=\"option3\" id=\"radio-2c\">Unclassified / Restricted</label>\n              </fieldset>\n              <h2 class=\"background-accent\">3. Summary</h2>\n              <label for=\"no_sites\"><abbr title=\"Number\">N<sup>o</sup>.</abbr> of sites </label>\n              <input type=\"text\" id=\"no_sites\" value=\"1\" class=\"width-10\"  disabled/>\n              <label for=\"no_visitors\"><abbr title=\"Number\">N<sup>o</sup>.</abbr> of visitors</label>\n              <input type=\"text\" id=\"no_visitors\" value=\"1\" class=\"width-10\" disabled />\n              <h2 class=\"background-accent\">4. Administrative data </h2>\n              <label for=\"requestor\">Requestor:</label>\n              <input type=\"text\" id=\"requestor\" class=\"width-30\" />\n              <label for=\"to\">To:</label>\n              <input type=\"text\" id=\"to\" class=\"width-30\" />\n              <label for=\"reference\"><abbr title=\"National Security Authority\">NSA</abbr>/<abbr title=\"Designated Security Authority\">DSA</abbr> <abbr title=\"Request for Visit\">RFV</abbr> Reference <abbr title=\"Number\">N<sup>o</sup>.</abbr>:</label>\n              <input type=\"text\" id=\"reference\" class=\"width-30\" />\n              <label for=\"date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"date\" class=\"width-30\" />\n              <div class=\"clear\"></div>\n              <h2 class=\"background-accent\">5. Requesting government agency, organization or industrial facility </h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 5  options</span></legend>\n              \n                <label class=\"form-radio\" for=\"radio-5a\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option1\" id=\"radio-5a\">\n                  Military</label>\n                <label class=\"form-radio\" for=\"radio-5b\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option2\" id=\"radio-5b\">\n                  Government</label>\n                <label class=\"form-radio\" for=\"radio-5c\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option3\" id=\"radio-5c\">\n                  Industry</label>\n                <label class=\"form-radio\" for=\"radio-5d\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5d\">\n                  <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr></label>\n                <label class=\"form-radio\" for=\"radio-5e\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5e\">\n                  <abbr title=\"European Union\">EU</abbr></label>\n                <label class=\"form-radio\" for=\"radio-5f\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5f\">\n                  Other</label>\n                <label for=\"radio-5g\">If other, specify</label>\n                <input type=\"text\" id=\"radio-5g\" class=\"width-30\">\n              </fieldset>\n              <fieldset> \n                <legend> <span class=\"wb-invisible\">section 5 information</span></legend>\n                <label for=\"name\">Name:</label>\n                <input type=\"text\" id=\"name\" class=\"width-30\" />\n                <label for=\"postal\">Postal address:</label>\n                <input type=\"text\" id=\"postal\" class=\"width-30\" />\n                <label for=\"email\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>E-mail address:</span></label>\n                <input type=\"email\" id=\"email\" class=\"width-30\" />\n                <label for=\"fax\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>Fax <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                <input type=\"tel\" id=\"fax\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                <label for=\"telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                <input type=\"tel\" id=\"telephone\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n               \n              </fieldset>\n              <h2 class=\"background-accent\">6. Government agency(ies), organization(s) or industrial facility(ies) to be visited</h2>\n              <p>(<a href=\"#ann1\">Annex 1 to be completed</a>)</p>\n              <h2 class=\"background-accent\">7. Date of visit </h2>\n              <h3>Date of visit (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>):</h3>\n              <label for=\"6-from\"><span class=\"field-name\">From</span>:</label>\n              <input type=\"date\" id=\"6-from\" class=\"width-30\" />\n              <label for=\"6-to\"><span class=\"field-name\">To</span>:</label>\n              <input type=\"date\" id=\"6-to\" class=\"width-30\" />\n              <h2 class=\"background-accent\">8. Type of initiative (Select one from each column):<br>\n              </h2>\n              <fieldset>\n              <legend><span class=\"wb-invisible\">section 8  options</span></legend>\n<div class=\"span-3 row-start\">\n  <label class=\"form-radio\" for=\"radio-8a\">\n                  <input type=\"radio\" name=\"rfv8a\" value=\"option1\" id=\"radio-8a\">\n                  Government initiative </label>\n                <label class=\"form-radio\" for=\"radio-8b\">\n                  <input type=\"radio\" name=\"rfv8a\" value=\"option2\" id=\"radio-8b\">\n                  Commercial initiative</label>\n            </div>\n              <div class=\"span-3 row-end\">\n                <label class=\"form-radio\" for=\"radio-8c\">\n                  <input type=\"radio\" name=\"rfv8b\"  value=\"option3\" id=\"radio-8c\">\n                  Initiated by requesting agency or facility By</label>\n                <label class=\"form-radio\" for=\"radio-8d\">\n                  <input type=\"radio\" name=\"rfv8b\" value=\"option4\" id=\"radio-8d\">\n                  invitation of the facility to be visited</label>\n              </div>\n              </fieldset>\n              <div class=\"clear\"></div>\n              <h2 class=\"background-accent\">9. Is the visit pertinent to </h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 9  options</span></legend>\n              <label class=\"form-radio\" for=\"radio-9a\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option1\" id=\"radio-9a\">\n                Specific equipment or weapon system</label>\n              <label class=\"form-radio\" for=\"radio-9b\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option2\" id=\"radio-9b\">\n                Foreign military sales or export licence</label>\n              <label class=\"form-radio\" for=\"radio-9c\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option3\" id=\"radio-9c\">\n                A programme or agreement</label>\n              <label class=\"form-radio\" for=\"radio-9d\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option4\" id=\"radio-9d\">\n                A defence acquisition process</label>\n              <label class=\"form-radio\" for=\"radio-9e\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option4\" id=\"radio-9e\">\n                Other</label>\n              \n                <label for=\"specification\">Specification of the selected subject:</label>\n                <textarea name=\"specification\" id=\"specification\" rows=\"3\" class=\"width-90\"></textarea>\n              </fieldset>\n              <h2 class=\"background-accent\">10. Subject to be discussed/justification/purpose</h2>\n              <label for=\"details\">(To include details of host Government/Project Authority and solicitation/contract number if known and any other relevant information. Abbreviations should be avoided):</label>\n              <textarea name=\"details\" id=\"details\" rows=\"3\" class=\"width-90\"></textarea>\n              <h2 class=\"background-accent\">11. Anticipated highest level of information/material or site access to be involved</h2>\n              <p>Only if required by the laws/regulations of the countries involved</p>\n               <fieldset>\n                <legend><span class=\"wb-invisible\">section 11  options</span></legend>\n              <label class=\"form-radio\" for=\"radio-11a\">\n                <input type=\"radio\" value=\"option1\" id=\"radio-11a\">\n                Unclassified</label>\n              <label class=\"form-radio\" for=\"radio-11b\">\n                <input type=\"radio\" name=\"rfv11\" value=\"option2\" id=\"radio-11b\">\n                Restricted</label>\n              <label class=\"form-radio\" for=\"radio-11c\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option3\" id=\"radio-11c\">\n                Confidential</label>\n              <label class=\"form-radio\" for=\"radio-11d\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option4\" id=\"radio-11d\">\n                Top Secret</label>\n              <label class=\"form-radio\" for=\"radio-11e\">\n                <input type=\"radio\" name=\"rfv11\"  value=\"option4\" id=\"radio-11e\">\n                Secret</label>\n              <label class=\"form-radio\" for=\"radio-11f\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option4\" id=\"radio-11f\">\n                Other</label>\n              \n              <label for=\"radio-11g\">If other, specify</label>\n              <input type=\"text\" id=\"radio-11g\" class=\"width-30\">  </fieldset>\n              \n              <h2 class=\"background-accent\">12. Particulars of visitor(s)</h2>\n              <p>(<a href=\"#ann2\">Annex 2 to be completed</a>)</p>\n              \n              <h2 class=\"background-accent\">13. The security officer of the requesting agency, organization or industrial facility</h2>\n              <label for=\"13-name\">Name:</label>\n              <input type=\"text\" id=\"13-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"13-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">13.</span>Telephone n<sup>o </sup>(999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"13-telephone\" class=\"width-30 90 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n              <label for=\"13-email\"><span class=\"field-name\"><span class=\"wb-invisible\">13.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"13-email\" class=\"width-30\" />\n              <label for=\"signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <h2 class=\"background-accent\">14. Certification of security clearance level</h2>\n              <label for=\"14-name\">Name:</label>\n              <input type=\"text\" id=\"14-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"14-Address\">Address:</label>\n              <input type=\"text\" id=\"14-Address\" class=\"width-30\" />\n              <label for=\"14-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">14.</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"14-telephone\" class=\"width-30 90 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n              <label for=\"14-email\"><span class=\"field-name\"><span class=\"wb-invisible\">14.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"14-email\" class=\"width-30\" />\n              <label for=\"14-signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"14-signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <label for=\"14-date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"14-date\" class=\"width-30\" />\n              <h2 class=\"background-accent\">15. Requesting Security Authority</h2>\n              <label for=\"15-name\">Name:</label>\n              <input type=\"text\" id=\"15-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"15-Address\">Address:</label>\n              <input type=\"text\" id=\"15-Address\" class=\"width-30\" />\n              <label for=\"15-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">15.</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"15-telephone\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n              <label for=\"15-email\"><span class=\"field-name\"><span class=\"wb-invisible\">15.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"15-email\" class=\"width-30\" />\n              <label for=\"15-signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"15-signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <label for=\"15-date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"15-date\" class=\"width-30\" />\n              <h2 class=\"background-accent\">16. Remarks</h2>\n              <label for=\"remarks\">(Mandatory justification required in case of an emergency visit)</label>\n              <textarea name=\"remarks\" id=\"remarks\" rows=\"6\" class=\"width-90\"></textarea>\n              <h2 class=\"background-accent\" id=\"ann1\" >Annex 1 to <abbr title=\"Request for Visit\">RFV</abbr> form government agency(ies), organization(s) or industrial facility(ies) to be visited </h2>\n              <h3>Gorvernment agency(ies), Organisation(s) or Industrial facility(ies) to be visited</h3>\n              <button class=\"margin-bottom-medium button button-confirm\" id=\"add-ann1RFV\" type=\"button\" value=\"Add another RFV form for government agency(ies), organization(s) or industrial facility(ies)\">Add</button>\n              <div id=\"ann1RFV\" tabindex=\"-1\" >\n                <div class=\"border-all span-6 row-start\">\n                  <div class=\"indent-large margin-top-large\">\n                  <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 1 - Type of contact - Site 1</span></legend>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1a\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1a\">\n                      Military</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1b\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1b\">\n                      Government</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1c\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1c\">\n                      Industry</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1d\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1d\">\n                      <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr></label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1e\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1e\">\n                      <abbr title=\"European Union\">EU</abbr></label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1f\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1f\">\n                      Other</label>\n              <label for=\"radio-ann1RFV-1g\">If other, specify</label>\n              <input type=\"text\" id=\"radio-ann1RFV-1g\" class=\"width-30\">\n                    </fieldset>\n                    <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 1 - Contact Information - Site 1</span></legend>\n                      <label for=\"ann1RFV-name1\">Name:</label>\n                      <input type=\"text\" id=\"ann1RFV-name1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-Address1\">Address:</label>\n                      <input type=\"text\" id=\"ann1RFV-Address1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephone1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephone1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                      <label for=\"ann1RFV-fax1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1</span>Fax <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999):</span></label>\n                      <input type=\"tel\" id=\"ann1RFV-fax1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n                      <label for=\"ann1RFV-contact1\">Name of point contact:</label>\n                      <input type=\"text\" id=\"ann1RFV-contact1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-email1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1.</span>E-mail address</span>:</label>\n                      <input type=\"email\" id=\"ann1RFV-email1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephoneb1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1a</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephoneb1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                      <label for=\"ann1RFV-secondary1\">Name of security officer or secondary point of contact:</label>\n                      <input type=\"text\" id=\"ann1RFV-secondary1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-emailb1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1a.</span>E-mail address</span>:</label>\n                      <input type=\"email\" id=\"ann1RFV-emailb1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephonec1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1b</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephonec1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                    </fieldset>\n                  </div>\n                </div>\n              </div>\n              <div class=\"clear\"></div>\n              <h2 id=\"ann2\" class=\"background-accent\">Annex 2 to <abbr title=\"Request for Visit\">RFV</abbr> form particulars of visitor(s)</h2>\n              <h3>Particulars of visitor(s)</h3>\n              <button class=\"margin-bottom-medium button button-confirm\" id=\"add-ann2RFV\" type=\"button\" value=\"Add another RFV form for Particulars of visitor(s)\">Add</button>\n              <div id=\"ann2RFV\">\n                <div class=\"border-all span-6 row-start\">\n                  <div class=\"indent-large margin-top-large\">\n                   <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 2 - Type of contact - Site 1</span></legend>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1a\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option1\" id=\"radio-ann2RFV-1a\">\n                      Military</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1b\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option2\" id=\"radio-ann2RFV-1b\">\n                      Defence Public Servant</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1c\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option3\" id=\"radio-ann2RFV-1c\">\n                      Government</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1d\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1d\">\n                      Industry/Embedded Contractor</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1e\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1e\">\n                      <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr> Employee</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1f\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1f\">\n                      <abbr title=\"European Union\">EU</abbr> Employee</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1g\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1g\">\n                      Other</label>\n                      <label for=\"radio-ann2RFV-1h\">If other, specify</label>\n              <input type=\"text\" id=\"radio-ann2RFV-1h\" class=\"width-30\"><br>\n</fieldset>\n                    <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 2 - Contact Information - Site 1</span></legend>\n                      <label for=\"ann2RFV-surname1\">Surname:</label>\n                      <input type=\"text\" id=\"ann2RFV-surname1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-forenames1\">Forenames (as per passport):</label>\n                      <input type=\"text\" id=\"ann2RFV-forenames1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-rank1\">Rank (if applicable):</label>\n                      <input type=\"text\" id=\"ann2RFV-rank1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-dob1\"><span class=\"field-name\">Date of birth (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n                      <input type=\"date\" id=\"ann2RFV-dob1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-pob1\">Place of birth:</label>\n                      <input type=\"text\" id=\"ann2RFV-pob1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-nationality1\">Nationality:</label>\n                      <input type=\"text\" id=\"ann2RFV-nationality1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-clearance1\">Security clearance level:</label>\n                      <input type=\"text\" id=\"ann2RFV-clearance1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-pp-id1\"><span class=\"field-name\">PP-ID Number</span>:</label>\n                      <input type=\"text\" id=\"ann2RFV-pp-id1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-position1\">Position:</label>\n                      <input type=\"text\" id=\"ann2RFV-position1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-company1\">Company/Agency:</label>\n                      <input type=\"text\" id=\"ann2RFV-company1\" class=\"width-30\" />\n                    </fieldset>\n                  </div>\n                </div>\n              </div>\n              <div class=\"span-2 row-start\"></div>\n              <div class=\"span-4 row-end\">\n                <div class=\"form-inline\">\n                  <input type=\"submit\" value=\"Clear Data\" class=\"button button-accent\" />\n                  <input type=\"submit\" value=\"Print\" class=\"button button-accent\" onclick=\"window.print()\" />\n                </div>\n              </div>\n            </form>\n          </div>\n          <!-- EndEditableContent -->\n          <dl id=\"gcwu-date-mod\" role=\"contentinfo\">\n            <dt>Date modified:</dt>\n            <dd><span>\n              <time> \n                <!--#config timefmt=\"%Y-%m-%d\"--> \n                <!--#echo var=\"LAST_MODIFIED\"--> \n              </time>\n              </span></dd>\n          </dl>\n          <div class=\"clear\"></div>\n          <!-- MainContentEnd --> \n        </div>\n      </div>\n      <div id=\"wb-sec\">\n        <div id=\"wb-sec-in\"> \n          <!--#include virtual=\"/includes/nav_gauche-nav_left-eng.html\" --> \n        </div>\n      </div>\n    </div>\n  </div>\n  <div id=\"wb-foot\">\n    <div id=\"wb-foot-in\">\n      <footer>\n        <h2>Footer</h2>\n        <!-- FooterStart --> \n        <!--#include virtual=\"/site/wet3.0/html5/includes/pied_site-site_footer-eng.html\" --><!-- FooterEnd --> \n      </footer>\n    </div>\n  </div>\n</div>\n\n<!-- ScriptsStart --> \n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/pied_gc-gc_footer-eng.html\" --> \n\n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/script_pied-script_footer.html\" --> \n<!-- ScriptsEnd --> \n<!-- Piwik --> \n<script type=\"text/javascript\">\nvar _paq = _paq || [];\n_paq.push(['trackPageView']);\n_paq.push(['enableLinkTracking']);\n(function() {\nvar u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://stats.tpsgc-pwgsc.gc.ca/\";\n_paq.push(['setTrackerUrl', u+'piwik.php']);\n_paq.push(['setSiteId', 13]);\nvar d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';\ng.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);\n})();\n\n<!-- Add forms -->\n$(function() {\n\n  var $RFVann1 = $('#ann1RFV'),\n    $RFVann2 = $('#ann2RFV')\n    $no_sites = $('#no_sites'),\n    $no_visitors = $('#no_visitors'),\n    $form = $('.wet-boew-formvalid'),\n    $email = $('input[type=\"email\"]');\n    RFV1n = 2, // starts with 2 as there is already an id of 1 in the body\n    RFV2n = RFV1n;\n\n  // appends @example.com string on email inputs only if value is entered\n//  $email.on('blur', function() {\n//\n//    var $this = $(this),\n//      thisval = $this.val(),\n//      ex = '@example.com',\n//      ph_ex = $this.val().indexOf(ex); // value of the field contains the string \"@example of\"\n//\n//    if (thisval && (ph_ex == -1)) {\n//      $(this).val(thisval + ex);\n//    }\n//  });\n\n  // update the section 3 fields\n  var updateNumber = function(el, target) {\n    var RFVlength = el.children().length || 1;\n    target.val(RFVlength);\n  };\n\n  \n//show hide function on click event with radiobutton\n  var toggle_radio_btn = function(el, labels, target) {\n     // initial display\n    $(\"#sect1-amendment\").hide();\n    var $radio1d = $(\"[for='\" + el + \"']\"),\n        $radio1dlabel = $(\"[for='\" + el + \"'][class*='lrfv1'] \"),\n        $el_label = $(\"[for^='\" + labels + \"'][class*='lrfv1'] \").not( \"[for='\" + el + \"']\" );\n            $radio1dlabel.on('click',function() {\n           if ( ($(target).css('display') == 'none' || $(target).css('display') == 'block')&& !($(\"#radio-1d\").hasClass('checked'))) {$(target).show();\n           }  else  {\n             $(target).hide();\n           }\n  });\n        $el_label.on('click',function() {\n            $(target).hide();\n  });\n}\ntoggle_radio_btn('radio-1d', 'radio-1', \"#sect1-amendment\");\n\n  //Add annex 1 RFV form for site\n  $('#add-ann1RFV').on('click', function() {\n    var DocRFV1 = \"<div id='RFVsite' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 1 - Type of contact - Site \" + RFV1n + \"<\\/span><\\/legend><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"a'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"b'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"b'>Government<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"c'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"c'>Industry<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"d'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"d'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"e'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"e'><abbr title='European Union'>EU<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"f'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"f'>Other<\\/label> <label for='radio-ann1RFV-\" + RFV1n + \"h'>If other, specify</label><input type='text' id='radio-ann1RFV-\" + RFV1n + \"h' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 1 - Contact Information - Site \" + RFV1n + \"<\\/span><\\/legend><label for='ann1RFV-name\" + RFV1n + \"'>Name:<\\/label><input type='text' id='ann1RFV-name\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-Address\" + RFV1n + \"'>Address:<\\/label><input type='text' id='ann1RFV-Address\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephone\" + RFV1n + \"'><span class='wb-invisible'>Annex-1<\\/span><span class='field-name'>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephone\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-fax\" + RFV1n + \"'><span class='wb-invisible'>Annex1<\\/span>Fax <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-fax\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-contact\" + RFV1n + \"'>Name of point contact:<\\/label><input type='text' id='ann1RFV-contact\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-email\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-email\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephoneb\" + RFV1n + \"'><span class='wb-invisible'>Annex-1a<\\/span>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephoneb\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-secondary\" + RFV1n + \"'>Name of security officer or secondary point of contact:<\\/label><input type='text' id='ann1RFV-secondary\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-emailb\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1a.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-emailb\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephonec\" + RFV1n + \"'><span class='wb-invisible'>Annex-1b<\\/span>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephonec\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' /><\\/fieldset><button  id='rem-ann1RFV' type='button' class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n    $(\"#ann1RFV\").append(DocRFV1);\n    RFV1n++;\n    updateNumber($RFVann1, $no_sites);\n  });\n\n  //Add annex 2 RFV form for site\n  $('#add-ann2RFV').on('click', function() {\n    var DocRFV2 = \"<div id='RFVVisitor' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 2 - Type of contact - Site \" + RFV2n + \"</span></legend><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"a'><input type='radio' name='ann-2' value='option1' id='radio-ann2RFV-\" + RFV2n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"b'><input type='radio' name='ann-2' value='option2' id='radio-ann2RFV-\" + RFV2n + \"b'>Defence Public Servant<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"c'><input type='radio' name='ann-2' value='option3' id='radio-ann2RFV-\" + RFV2n + \"c'>Government<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"d'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"d'>Industry/Embedded Contractor<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"e'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"e'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"f'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"f'><abbr title='European Union'>EU<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"g'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"g'>Other<\\/label><label for='radio-ann2RFV-\" + RFV2n + \"g'>If other, specify</label><input type='text' id='radio-ann2RFV-\" + RFV2n + \"g' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><label for='ann2RFV-surname\" + RFV2n + \"'>Surname:<\\/label><input type='text' id='ann2RFV-surname\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-forenames\" + RFV2n + \"'>Forenames (as per passport):<\\/label><input type='text' id='ann2RFV-forenames\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-rank\" + RFV2n + \"'>Rank (if applicable):<\\/label><input type='text' id='ann2RFV-rank\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-dob\" + RFV2n + \"'><span class='field-name'>Date of birth (<abbr title='day'>dd<\\/abbr>/<abbr title='month'>mm<\\/abbr>/<abbr title='year'>yyyy<\\/abbr>)<\\/span>:<\\/label><input type='date' id='ann2RFV-dob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pob\" + RFV2n + \"'>Place of birth:<\\/label><input type='text' id='ann2RFV-pob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-nationality\" + RFV2n + \"'>Nationality:<\\/label><input type='text' id='ann2RFV-nationality\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-clearance\" + RFV2n + \"'>Security clearance level:<\\/label><input type='text' id='ann2RFV-clearance\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pp-id\" + RFV2n + \"'><span class='field-name'>PP-ID Number<\\/span>:<\\/label><input type='text' id='ann2RFV-pp-id\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-position\" + RFV2n + \"'>Position:<\\/label><input type='text' id='ann2RFV-position\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-company\" + RFV2n + \"'>Company/Agency:<\\/label><input type='text' id='ann2RFV-company\" + RFV2n + \"' class='width-30' /><\\/fieldset><button id='rem-ann2RFV' type='button'  class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n    $(\"#ann2RFV\").append(DocRFV2);\n    RFV2n++;\n    updateNumber($RFVann2, $no_visitors);\n  });\n\n  //Remove last RFV1 site on click event\n  $RFVann1.on('click', '#rem-ann1RFV', function(e) {\n    var $RFVann1 = $('#ann1RFV'),\n      $RFVSite = $('#RFVsite'),\n      $this = $(this),\n      RFVsites = $RFVann1.children().length;\n    (RFVsites > 1) ? $this.parent().parent().remove(): false;\n    e.preventDefault();\n    updateNumber($RFVann1, $no_sites);\n    RFV1n--;\n    });\n\n  //Remove last RFV2 site on click event\n  $RFVann2.on('click', '#rem-ann2RFV', function(e) {\n    var $RFVann2 = $('#ann2RFV'),\n      $RFVvisitor = $('#RFVVisitor'),\n      $this = $(this),\n      RFVvisitors = $RFVann2.children().length;\n    (RFVvisitors > 1) ? $this.parent().parent().remove(): false;\n    e.preventDefault();\n    updateNumber($RFVann2, $no_visitors);\n    RFV2n--;\n  });\n});\n\n</script>\n<noscript>\n<p><img src=\"http://stats.tpsgc-pwgsc.gc.ca/piwik.php?idsite=13\" style=\"border:0;\" alt=\"\" /></p>\n</noscript>\n<!-- End Piwik Code -->\n</body>\n</html><!DOCTYPE html>\n<!--[if IE 7]><html lang=\"en\" class=\"no-js ie7\"><![endif]-->\n<!--[if IE 8]><html lang=\"en\" class=\"no-js ie8\"><![endif]-->\n<!--[if gt IE 8]><!-->\n<html lang=\"en\" class=\"no-js\">\n<!--<![endif]--><head>\n<meta charset=\"utf-8\" />\n<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)\nwet-boew.github.com/wet-boew/License-eng.txt / wet-boew.github.com/wet-boew/Licence-fra.txt -->\n<!-- WET 3.0, PWGSC 1.0 file: 2col-eng.html -->\n<!-- TitleStart -->\n<title>Domestic and international Request for Visit Forms - Industrial Security Program - Public Works and Government Services Canada (PWGSC)</title>\n<!-- TitleEnd -->\n<!-- MetadataStart -->\n<meta name=\"description\" content=\"Domestic and international Request for Visit Forms\" />\n<meta name=\"dcterms.description\" content=\"Domestic and international Request for Visit Forms\" />\n<meta name=\"dcterms.creator\" content=\"Public Works and Government Services Canada, Industrial Security Program\" />\n<meta name=\"dcterms.title\" content=\"Request for Visit Form - Industrial Security Program - Public Works and Government Services Canada (PWGSC)\" />\n<meta name=\"dcterms.issued\" title=\"W3CDTF\" content=\"2015-04-24\" />\n<meta name=\"dcterms.modified\" title=\"W3CDTF\" content=\"<!--#config timefmt=\"%Y-%m-%d\"--><!--#echo var=\"LAST_MODIFIED\"-->\" />\n<meta name=\"dcterms.subject\" title=\"gccore\" content=\"Security Services; Information Services; Business services; Government services\" />\n<meta name=\"dcterms.language\" title=\"ISO639-2\" content=\"eng\" />\n<meta name=\"keywords\" content=\"Industrial Security, form, visit request, domestic, international\" />\n<!-- MetadataEnd --> \n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/tete-head.html\" --> \n\n<!-- CustomScriptsCSSStart --> \n\n\n<!-- CustomScriptsCSSEnd -->\n</head><body>\n<div id=\"wb-body-sec\">\n  <div id=\"wb-skip\">\n    <ul id=\"wb-tphp\">\n      <li id=\"wb-skip1\"><a href=\"#wb-cont\">Passer au contenu principal</a></li>\n      <li id=\"wb-skip2\"><a href=\"#wb-nav\">Passer au menu secondaire</a></li>\n    </ul>\n  </div>\n  <div id=\"wb-head\">\n    <div id=\"wb-head-in\">\n      <header>\n        <!-- HeaderStart --> \n        <!--#include virtual=\"/boew-wet/wet3.0/html5/includes/banner_gc-gc_banner-eng.html\" --> \n        <!--#include virtual=\"/site/wet3.0/html5/includes/banner_site-site_banner-eng.html\" -->\n        <nav role=\"navigation\"> \n          <!--#include virtual=\"/site/wet3.0/html5/includes/nav_mega-mega_nav-eng.html\" -->\n          \n          <div id=\"gcwu-bc\">\n            <h2>Breadcrumb trail</h2>\n            <div id=\"gcwu-bc-in\">\n              <ol>\n                <!--#include virtual=\"/site/wet3.0/html5/includes/pain-bread-eng.html\" --> \n                <!--#include virtual=\"/includes/pain-bread-section-eng.html\" -->\n                <li><a href=\"/formulaires-forms/index-eng.html\">Forms</a></li>\n                <li>Domestic and international Request for Visit Forms</li>\n              </ol>\n            </div>\n          </div>\n        </nav>\n        <!-- HeaderEnd --> \n      </header>\n    </div>\n  </div>\n  <div id=\"wb-core\">\n    <div id=\"wb-core-in\" class=\"equalize\">\n      <div id=\"wb-main\" role=\"main\">\n        <div id=\"wb-main-in\"> \n          <!-- MainContentStart -->\n          <h1 id=\"wb-cont\">Domestic and international Request for Visit Forms</h1>\n          <div class=\"span-6 module-refer\">\n            <p><a href=\"/pdf/visite-visits-eng.pdf\" target=\"_blank\" rel=\"alternate\" type=\"application/pdf\"><abbr title=\"Portable document format\">PDF</abbr>: Domestic and international Request for Visit Forms</a> (<!--#fsize virtual=\"/pdf/visite-visits-eng.pdf\"-->Kb) <br>\n              (<a href=\"http://www.tpsgc-pwgsc.gc.ca/comm/aformats-eng.html\">alternative formats and plug-ins</a>)</p>\n            <ul>\n              <li>Consult the <a href=\"/formulaires-forms/domestique-domestic-eng.html\">Instructions for completing the domestic Request for Visit form</a> for more guidance.</li>\n              <li>Consult the <a href=\"/formulaires-forms/internationale-international-eng.html\">Instructions for completing the international Request for Visit form</a> for more guidance.</li>\n            </ul>\n          </div>\n          <p>All fields of the Request for Visit form (RFV) must be completed and the form communicated via Government-to-Government.</p>\n          <div class=\"wet-boew-formvalid\">\n            <form id=\"RFVform\" action=\"#\" method=\"post\">\n              <h2 class=\"background-accent\">1. Type of visit request</h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 1  options</span></legend>\n             \n                <label class=\"lrfv1 form-radio\" for=\"radio-1a\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option1\" id=\"radio-1a\">\n                  One-time </label>\n                <label class=\"lrfv1 form-radio\" for=\"radio-1b\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option2\" id=\"radio-1b\">\n                  Recurring</label>\n                <label class=\"lrfv1 form-radio\" for=\"radio-1c\">\n                  <input type=\"radio\" name=\"rfv1\"  value=\"option3\" id=\"radio-1c\">\n                  Emergency </label>\n                <label class=\"lrfv1 form-radio\" for=\"radio-1d\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option4\" id=\"radio-1d\">\n                  Amendment</label>\n                  </fieldset>\n                  \n               \n                <div id=\"sect1-amendment\">\n                <fieldset><legend><span class=\"wb-invisible\">section 1 - Amendment options</span></legend>\n                  <label class=\"form-checkbox\" for=\"checkbox-1da\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4a\" id=\"checkbox-1da\">\n                    Dates</label>\n                  <label class=\"form-checkbox\" for=\"checkbox-1db\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4b\" id=\"checkbox-1db\">\n                    Visitors</label>\n                  <label class=\"form-checkbox\" for=\"checkbox-1dc\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4c\" id=\"checkbox-1dc\">\n                    Agency / Facility</label>\n                  <label for=\"NSA/DSA\">For an amendment, insert the <abbr title=\"National Security Authority\">NSA</abbr>/<abbr title=\"Designated Security Authority\">DSA</abbr> original <abbr title=\"Request for Visit\">RFV</abbr> Reference <abbr title=\"Number\">N<sup>o</sup>.</abbr></label>\n                  <input id=\"NSA/DSA\" type=\"text\" class=\"width-30\"></fieldset>\n                </div>\n             \n              <h2 class=\"background-accent\">2. Types of information/material or site access</h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 2 options</span></legend>\n\n                <label class=\"form-radio\" for=\"radio-2a\">\n                  <input type=\"radio\" name=\"rfv2\" value=\"option1\" id=\"radio-2a\">Confidential or above</label>\n                <label class=\"form-radio\" for=\"radio-2b\">\n                  <input type=\"radio\" name=\"rfv2\" value=\"option2\" id=\"radio-2b\">\n                  Access to security areas without access to classified information / material</label>\n              \n                <p><em>Only if required by the laws / regulations of the countries involved</em></p>\n                <label class=\"form-radio\" for=\"radio-2c\"><input type=\"radio\" name=\"rfv2\" value=\"option3\" id=\"radio-2c\">Unclassified / Restricted</label>\n              </fieldset>\n              <h2 class=\"background-accent\">3. Summary</h2>\n              <label for=\"no_sites\"><abbr title=\"Number\">N<sup>o</sup>.</abbr> of sites </label>\n              <input type=\"text\" id=\"no_sites\" value=\"1\" class=\"width-10\"  disabled/>\n              <label for=\"no_visitors\"><abbr title=\"Number\">N<sup>o</sup>.</abbr> of visitors</label>\n              <input type=\"text\" id=\"no_visitors\" value=\"1\" class=\"width-10\" disabled />\n              <h2 class=\"background-accent\">4. Administrative data </h2>\n              <label for=\"requestor\">Requestor:</label>\n              <input type=\"text\" id=\"requestor\" class=\"width-30\" />\n              <label for=\"to\">To:</label>\n              <input type=\"text\" id=\"to\" class=\"width-30\" />\n              <label for=\"reference\"><abbr title=\"National Security Authority\">NSA</abbr>/<abbr title=\"Designated Security Authority\">DSA</abbr> <abbr title=\"Request for Visit\">RFV</abbr> Reference <abbr title=\"Number\">N<sup>o</sup>.</abbr>:</label>\n              <input type=\"text\" id=\"reference\" class=\"width-30\" />\n              <label for=\"date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"date\" class=\"width-30\" />\n              <div class=\"clear\"></div>\n              <h2 class=\"background-accent\">5. Requesting government agency, organization or industrial facility </h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 5  options</span></legend>\n              \n                <label class=\"form-radio\" for=\"radio-5a\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option1\" id=\"radio-5a\">\n                  Military</label>\n                <label class=\"form-radio\" for=\"radio-5b\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option2\" id=\"radio-5b\">\n                  Government</label>\n                <label class=\"form-radio\" for=\"radio-5c\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option3\" id=\"radio-5c\">\n                  Industry</label>\n                <label class=\"form-radio\" for=\"radio-5d\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5d\">\n                  <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr></label>\n                <label class=\"form-radio\" for=\"radio-5e\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5e\">\n                  <abbr title=\"European Union\">EU</abbr></label>\n                <label class=\"form-radio\" for=\"radio-5f\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5f\">\n                  Other</label>\n                <label for=\"radio-5g\">If other, specify</label>\n                <input type=\"text\" id=\"radio-5g\" class=\"width-30\">\n              </fieldset>\n              <fieldset> \n                <legend> <span class=\"wb-invisible\">section 5 information</span></legend>\n                <label for=\"name\">Name:</label>\n                <input type=\"text\" id=\"name\" class=\"width-30\" />\n                <label for=\"postal\">Postal address:</label>\n                <input type=\"text\" id=\"postal\" class=\"width-30\" />\n                <label for=\"email\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>E-mail address:</span></label>\n                <input type=\"email\" id=\"email\" class=\"width-30\" />\n                <label for=\"fax\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>Fax <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                <input type=\"tel\" id=\"fax\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                <label for=\"telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                <input type=\"tel\" id=\"telephone\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n               \n              </fieldset>\n              <h2 class=\"background-accent\">6. Government agency(ies), organization(s) or industrial facility(ies) to be visited</h2>\n              <p>(<a href=\"#ann1\">Annex 1 to be completed</a>)</p>\n              <h2 class=\"background-accent\">7. Date of visit </h2>\n              <h3>Date of visit (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>):</h3>\n              <label for=\"6-from\"><span class=\"field-name\">From</span>:</label>\n              <input type=\"date\" id=\"6-from\" class=\"width-30\" />\n              <label for=\"6-to\"><span class=\"field-name\">To</span>:</label>\n              <input type=\"date\" id=\"6-to\" class=\"width-30\" />\n              <h2 class=\"background-accent\">8. Type of initiative (Select one from each column):<br>\n              </h2>\n              <fieldset>\n              <legend><span class=\"wb-invisible\">section 8  options</span></legend>\n<div class=\"span-3 row-start\">\n  <label class=\"form-radio\" for=\"radio-8a\">\n                  <input type=\"radio\" name=\"rfv8a\" value=\"option1\" id=\"radio-8a\">\n                  Government initiative </label>\n                <label class=\"form-radio\" for=\"radio-8b\">\n                  <input type=\"radio\" name=\"rfv8a\" value=\"option2\" id=\"radio-8b\">\n                  Commercial initiative</label>\n            </div>\n              <div class=\"span-3 row-end\">\n                <label class=\"form-radio\" for=\"radio-8c\">\n                  <input type=\"radio\" name=\"rfv8b\"  value=\"option3\" id=\"radio-8c\">\n                  Initiated by requesting agency or facility By</label>\n                <label class=\"form-radio\" for=\"radio-8d\">\n                  <input type=\"radio\" name=\"rfv8b\" value=\"option4\" id=\"radio-8d\">\n                  invitation of the facility to be visited</label>\n              </div>\n              </fieldset>\n              <div class=\"clear\"></div>\n              <h2 class=\"background-accent\">9. Is the visit pertinent to </h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 9  options</span></legend>\n              <label class=\"form-radio\" for=\"radio-9a\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option1\" id=\"radio-9a\">\n                Specific equipment or weapon system</label>\n              <label class=\"form-radio\" for=\"radio-9b\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option2\" id=\"radio-9b\">\n                Foreign military sales or export licence</label>\n              <label class=\"form-radio\" for=\"radio-9c\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option3\" id=\"radio-9c\">\n                A programme or agreement</label>\n              <label class=\"form-radio\" for=\"radio-9d\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option4\" id=\"radio-9d\">\n                A defence acquisition process</label>\n              <label class=\"form-radio\" for=\"radio-9e\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option4\" id=\"radio-9e\">\n                Other</label>\n              \n                <label for=\"specification\">Specification of the selected subject:</label>\n                <textarea name=\"specification\" id=\"specification\" rows=\"3\" class=\"width-90\"></textarea>\n              </fieldset>\n              <h2 class=\"background-accent\">10. Subject to be discussed/justification/purpose</h2>\n              <label for=\"details\">(To include details of host Government/Project Authority and solicitation/contract number if known and any other relevant information. Abbreviations should be avoided):</label>\n              <textarea name=\"details\" id=\"details\" rows=\"3\" class=\"width-90\"></textarea>\n              <h2 class=\"background-accent\">11. Anticipated highest level of information/material or site access to be involved</h2>\n              <p>Only if required by the laws/regulations of the countries involved</p>\n               <fieldset>\n                <legend><span class=\"wb-invisible\">section 11  options</span></legend>\n              <label class=\"form-radio\" for=\"radio-11a\">\n                <input type=\"radio\" value=\"option1\" id=\"radio-11a\">\n                Unclassified</label>\n              <label class=\"form-radio\" for=\"radio-11b\">\n                <input type=\"radio\" name=\"rfv11\" value=\"option2\" id=\"radio-11b\">\n                Restricted</label>\n              <label class=\"form-radio\" for=\"radio-11c\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option3\" id=\"radio-11c\">\n                Confidential</label>\n              <label class=\"form-radio\" for=\"radio-11d\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option4\" id=\"radio-11d\">\n                Top Secret</label>\n              <label class=\"form-radio\" for=\"radio-11e\">\n                <input type=\"radio\" name=\"rfv11\"  value=\"option4\" id=\"radio-11e\">\n                Secret</label>\n              <label class=\"form-radio\" for=\"radio-11f\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option4\" id=\"radio-11f\">\n                Other</label>\n              \n              <label for=\"radio-11g\">If other, specify</label>\n              <input type=\"text\" id=\"radio-11g\" class=\"width-30\">  </fieldset>\n              \n              <h2 class=\"background-accent\">12. Particulars of visitor(s)</h2>\n              <p>(<a href=\"#ann2\">Annex 2 to be completed</a>)</p>\n              \n              <h2 class=\"background-accent\">13. The security officer of the requesting agency, organization or industrial facility</h2>\n              <label for=\"13-name\">Name:</label>\n              <input type=\"text\" id=\"13-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"13-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">13.</span>Telephone n<sup>o </sup>(999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"13-telephone\" class=\"width-30 90 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n              <label for=\"13-email\"><span class=\"field-name\"><span class=\"wb-invisible\">13.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"13-email\" class=\"width-30\" />\n              <label for=\"signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <h2 class=\"background-accent\">14. Certification of security clearance level</h2>\n              <label for=\"14-name\">Name:</label>\n              <input type=\"text\" id=\"14-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"14-Address\">Address:</label>\n              <input type=\"text\" id=\"14-Address\" class=\"width-30\" />\n              <label for=\"14-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">14.</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"14-telephone\" class=\"width-30 90 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n              <label for=\"14-email\"><span class=\"field-name\"><span class=\"wb-invisible\">14.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"14-email\" class=\"width-30\" />\n              <label for=\"14-signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"14-signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <label for=\"14-date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"14-date\" class=\"width-30\" />\n              <h2 class=\"background-accent\">15. Requesting Security Authority</h2>\n              <label for=\"15-name\">Name:</label>\n              <input type=\"text\" id=\"15-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"15-Address\">Address:</label>\n              <input type=\"text\" id=\"15-Address\" class=\"width-30\" />\n              <label for=\"15-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">15.</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"15-telephone\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n              <label for=\"15-email\"><span class=\"field-name\"><span class=\"wb-invisible\">15.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"15-email\" class=\"width-30\" />\n              <label for=\"15-signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"15-signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <label for=\"15-date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"15-date\" class=\"width-30\" />\n              <h2 class=\"background-accent\">16. Remarks</h2>\n              <label for=\"remarks\">(Mandatory justification required in case of an emergency visit)</label>\n              <textarea name=\"remarks\" id=\"remarks\" rows=\"6\" class=\"width-90\"></textarea>\n              <h2 class=\"background-accent\" id=\"ann1\" >Annex 1 to <abbr title=\"Request for Visit\">RFV</abbr> form government agency(ies), organization(s) or industrial facility(ies) to be visited </h2>\n              <h3>Gorvernment agency(ies), Organisation(s) or Industrial facility(ies) to be visited</h3>\n              <button class=\"margin-bottom-medium button button-confirm\" id=\"add-ann1RFV\" type=\"button\" value=\"Add another RFV form for government agency(ies), organization(s) or industrial facility(ies)\">Add</button>\n              <div id=\"ann1RFV\" tabindex=\"-1\" >\n                <div class=\"border-all span-6 row-start\">\n                  <div class=\"indent-large margin-top-large\">\n                  <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 1 - Type of contact - Site 1</span></legend>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1a\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1a\">\n                      Military</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1b\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1b\">\n                      Government</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1c\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1c\">\n                      Industry</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1d\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1d\">\n                      <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr></label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1e\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1e\">\n                      <abbr title=\"European Union\">EU</abbr></label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1f\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1f\">\n                      Other</label>\n              <label for=\"radio-ann1RFV-1g\">If other, specify</label>\n              <input type=\"text\" id=\"radio-ann1RFV-1g\" class=\"width-30\">\n                    </fieldset>\n                    <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 1 - Contact Information - Site 1</span></legend>\n                      <label for=\"ann1RFV-name1\">Name:</label>\n                      <input type=\"text\" id=\"ann1RFV-name1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-Address1\">Address:</label>\n                      <input type=\"text\" id=\"ann1RFV-Address1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephone1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephone1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                      <label for=\"ann1RFV-fax1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1</span>Fax <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999):</span></label>\n                      <input type=\"tel\" id=\"ann1RFV-fax1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n                      <label for=\"ann1RFV-contact1\">Name of point contact:</label>\n                      <input type=\"text\" id=\"ann1RFV-contact1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-email1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1.</span>E-mail address</span>:</label>\n                      <input type=\"email\" id=\"ann1RFV-email1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephoneb1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1a</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephoneb1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                      <label for=\"ann1RFV-secondary1\">Name of security officer or secondary point of contact:</label>\n                      <input type=\"text\" id=\"ann1RFV-secondary1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-emailb1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1a.</span>E-mail address</span>:</label>\n                      <input type=\"email\" id=\"ann1RFV-emailb1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephonec1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1b</span>Telephone <abbr title=\"Number\">N<sup>o</sup>.</abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephonec1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                    </fieldset>\n                  </div>\n                </div>\n              </div>\n              <div class=\"clear\"></div>\n              <h2 id=\"ann2\" class=\"background-accent\">Annex 2 to <abbr title=\"Request for Visit\">RFV</abbr> form particulars of visitor(s)</h2>\n              <h3>Particulars of visitor(s)</h3>\n              <button class=\"margin-bottom-medium button button-confirm\" id=\"add-ann2RFV\" type=\"button\" value=\"Add another RFV form for Particulars of visitor(s)\">Add</button>\n              <div id=\"ann2RFV\">\n                <div class=\"border-all span-6 row-start\">\n                  <div class=\"indent-large margin-top-large\">\n                   <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 2 - Type of contact - Site 1</span></legend>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1a\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option1\" id=\"radio-ann2RFV-1a\">\n                      Military</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1b\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option2\" id=\"radio-ann2RFV-1b\">\n                      Defence Public Servant</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1c\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option3\" id=\"radio-ann2RFV-1c\">\n                      Government</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1d\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1d\">\n                      Industry/Embedded Contractor</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1e\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1e\">\n                      <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr> Employee</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1f\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1f\">\n                      <abbr title=\"European Union\">EU</abbr> Employee</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1g\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1g\">\n                      Other</label>\n                      <label for=\"radio-ann2RFV-1h\">If other, specify</label>\n              <input type=\"text\" id=\"radio-ann2RFV-1h\" class=\"width-30\"><br>\n</fieldset>\n                    <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 2 - Contact Information - Site 1</span></legend>\n                      <label for=\"ann2RFV-surname1\">Surname:</label>\n                      <input type=\"text\" id=\"ann2RFV-surname1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-forenames1\">Forenames (as per passport):</label>\n                      <input type=\"text\" id=\"ann2RFV-forenames1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-rank1\">Rank (if applicable):</label>\n                      <input type=\"text\" id=\"ann2RFV-rank1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-dob1\"><span class=\"field-name\">Date of birth (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n                      <input type=\"date\" id=\"ann2RFV-dob1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-pob1\">Place of birth:</label>\n                      <input type=\"text\" id=\"ann2RFV-pob1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-nationality1\">Nationality:</label>\n                      <input type=\"text\" id=\"ann2RFV-nationality1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-clearance1\">Security clearance level:</label>\n                      <input type=\"text\" id=\"ann2RFV-clearance1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-pp-id1\"><span class=\"field-name\">PP-ID Number</span>:</label>\n                      <input type=\"text\" id=\"ann2RFV-pp-id1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-position1\">Position:</label>\n                      <input type=\"text\" id=\"ann2RFV-position1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-company1\">Company/Agency:</label>\n                      <input type=\"text\" id=\"ann2RFV-company1\" class=\"width-30\" />\n                    </fieldset>\n                  </div>\n                </div>\n              </div>\n              <div class=\"span-2 row-start\"></div>\n              <div class=\"span-4 row-end\">\n                <div class=\"form-inline\">\n                  <input type=\"submit\" value=\"Clear Data\" class=\"button button-accent\" />\n                  <input type=\"submit\" value=\"Print\" class=\"button button-accent\" onclick=\"window.print()\" />\n                </div>\n              </div>\n            </form>\n          </div>\n          <!-- EndEditableContent -->\n          <dl id=\"gcwu-date-mod\" role=\"contentinfo\">\n            <dt>Date modified:</dt>\n            <dd><span>\n              <time> \n                <!--#config timefmt=\"%Y-%m-%d\"--> \n                <!--#echo var=\"LAST_MODIFIED\"--> \n              </time>\n              </span></dd>\n          </dl>\n          <div class=\"clear\"></div>\n          <!-- MainContentEnd --> \n        </div>\n      </div>\n      <div id=\"wb-sec\">\n        <div id=\"wb-sec-in\"> \n          <!--#include virtual=\"/includes/nav_gauche-nav_left-eng.html\" --> \n        </div>\n      </div>\n    </div>\n  </div>\n  <div id=\"wb-foot\">\n    <div id=\"wb-foot-in\">\n      <footer>\n        <h2>Footer</h2>\n        <!-- FooterStart --> \n        <!--#include virtual=\"/site/wet3.0/html5/includes/pied_site-site_footer-eng.html\" --><!-- FooterEnd --> \n      </footer>\n    </div>\n  </div>\n</div>\n\n<!-- ScriptsStart --> \n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/pied_gc-gc_footer-eng.html\" --> \n\n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/script_pied-script_footer.html\" --> \n<!-- ScriptsEnd --> \n<!-- Piwik --> \n<script type=\"text/javascript\">\nvar _paq = _paq || [];\n_paq.push(['trackPageView']);\n_paq.push(['enableLinkTracking']);\n(function() {\nvar u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://stats.tpsgc-pwgsc.gc.ca/\";\n_paq.push(['setTrackerUrl', u+'piwik.php']);\n_paq.push(['setSiteId', 13]);\nvar d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';\ng.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);\n})();\n\n<!-- Add forms -->\n$(function() {\n\n  var $RFVann1 = $('#ann1RFV'),\n    $RFVann2 = $('#ann2RFV')\n    $no_sites = $('#no_sites'),\n    $no_visitors = $('#no_visitors'),\n    $form = $('.wet-boew-formvalid'),\n    $email = $('input[type=\"email\"]');\n    RFV1n = 2, // starts with 2 as there is already an id of 1 in the body\n    RFV2n = RFV1n;\n\n  // appends @example.com string on email inputs only if value is entered\n//  $email.on('blur', function() {\n//\n//    var $this = $(this),\n//      thisval = $this.val(),\n//      ex = '@example.com',\n//      ph_ex = $this.val().indexOf(ex); // value of the field contains the string \"@example of\"\n//\n//    if (thisval && (ph_ex == -1)) {\n//      $(this).val(thisval + ex);\n//    }\n//  });\n\n  // update the section 3 fields\n  var updateNumber = function(el, target) {\n    var RFVlength = el.children().length || 1;\n    target.val(RFVlength);\n  };\n\n  \n//show hide function on click event with radiobutton\n  var toggle_radio_btn = function(el, labels, target) {\n     // initial display\n    $(\"#sect1-amendment\").hide();\n    var $radio1d = $(\"[for='\" + el + \"']\"),\n        $radio1dlabel = $(\"[for='\" + el + \"'][class*='lrfv1'] \"),\n        $el_label = $(\"[for^='\" + labels + \"'][class*='lrfv1'] \").not( \"[for='\" + el + \"']\" );\n            $radio1dlabel.on('click',function() {\n           if ( ($(target).css('display') == 'none' || $(target).css('display') == 'block')&& !($(\"#radio-1d\").hasClass('checked'))) {$(target).show();\n           }  else  {\n             $(target).hide();\n           }\n  });\n        $el_label.on('click',function() {\n            $(target).hide();\n  });\n}\ntoggle_radio_btn('radio-1d', 'radio-1', \"#sect1-amendment\");\n\n  //Add annex 1 RFV form for site\n  $('#add-ann1RFV').on('click', function() {\n    var DocRFV1 = \"<div id='RFVsite' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 1 - Type of contact - Site \" + RFV1n + \"<\\/span><\\/legend><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"a'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"b'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"b'>Government<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"c'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"c'>Industry<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"d'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"d'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"e'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"e'><abbr title='European Union'>EU<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"f'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"f'>Other<\\/label> <label for='radio-ann1RFV-\" + RFV1n + \"h'>If other, specify</label><input type='text' id='radio-ann1RFV-\" + RFV1n + \"h' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 1 - Contact Information - Site \" + RFV1n + \"<\\/span><\\/legend><label for='ann1RFV-name\" + RFV1n + \"'>Name:<\\/label><input type='text' id='ann1RFV-name\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-Address\" + RFV1n + \"'>Address:<\\/label><input type='text' id='ann1RFV-Address\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephone\" + RFV1n + \"'><span class='wb-invisible'>Annex-1<\\/span><span class='field-name'>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephone\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-fax\" + RFV1n + \"'><span class='wb-invisible'>Annex1<\\/span>Fax <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-fax\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-contact\" + RFV1n + \"'>Name of point contact:<\\/label><input type='text' id='ann1RFV-contact\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-email\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-email\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephoneb\" + RFV1n + \"'><span class='wb-invisible'>Annex-1a<\\/span>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephoneb\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-secondary\" + RFV1n + \"'>Name of security officer or secondary point of contact:<\\/label><input type='text' id='ann1RFV-secondary\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-emailb\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1a.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-emailb\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephonec\" + RFV1n + \"'><span class='wb-invisible'>Annex-1b<\\/span>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephonec\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' /><\\/fieldset><button  id='rem-ann1RFV' type='button' class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n    $(\"#ann1RFV\").append(DocRFV1);\n    RFV1n++;\n    updateNumber($RFVann1, $no_sites);\n  });\n\n  //Add annex 2 RFV form for site\n  $('#add-ann2RFV').on('click', function() {\n    var DocRFV2 = \"<div id='RFVVisitor' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 2 - Type of contact - Site \" + RFV2n + \"</span></legend><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"a'><input type='radio' name='ann-2' value='option1' id='radio-ann2RFV-\" + RFV2n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"b'><input type='radio' name='ann-2' value='option2' id='radio-ann2RFV-\" + RFV2n + \"b'>Defence Public Servant<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"c'><input type='radio' name='ann-2' value='option3' id='radio-ann2RFV-\" + RFV2n + \"c'>Government<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"d'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"d'>Industry/Embedded Contractor<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"e'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"e'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"f'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"f'><abbr title='European Union'>EU<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"g'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"g'>Other<\\/label><label for='radio-ann2RFV-\" + RFV2n + \"g'>If other, specify</label><input type='text' id='radio-ann2RFV-\" + RFV2n + \"g' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><label for='ann2RFV-surname\" + RFV2n + \"'>Surname:<\\/label><input type='text' id='ann2RFV-surname\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-forenames\" + RFV2n + \"'>Forenames (as per passport):<\\/label><input type='text' id='ann2RFV-forenames\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-rank\" + RFV2n + \"'>Rank (if applicable):<\\/label><input type='text' id='ann2RFV-rank\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-dob\" + RFV2n + \"'><span class='field-name'>Date of birth (<abbr title='day'>dd<\\/abbr>/<abbr title='month'>mm<\\/abbr>/<abbr title='year'>yyyy<\\/abbr>)<\\/span>:<\\/label><input type='date' id='ann2RFV-dob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pob\" + RFV2n + \"'>Place of birth:<\\/label><input type='text' id='ann2RFV-pob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-nationality\" + RFV2n + \"'>Nationality:<\\/label><input type='text' id='ann2RFV-nationality\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-clearance\" + RFV2n + \"'>Security clearance level:<\\/label><input type='text' id='ann2RFV-clearance\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pp-id\" + RFV2n + \"'><span class='field-name'>PP-ID Number<\\/span>:<\\/label><input type='text' id='ann2RFV-pp-id\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-position\" + RFV2n + \"'>Position:<\\/label><input type='text' id='ann2RFV-position\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-company\" + RFV2n + \"'>Company/Agency:<\\/label><input type='text' id='ann2RFV-company\" + RFV2n + \"' class='width-30' /><\\/fieldset><button id='rem-ann2RFV' type='button'  class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n    $(\"#ann2RFV\").append(DocRFV2);\n    RFV2n++;\n    updateNumber($RFVann2, $no_visitors);\n  });\n\n  //Remove last RFV1 site on click event\n  $RFVann1.on('click', '#rem-ann1RFV', function(e) {\n    var $RFVann1 = $('#ann1RFV'),\n      $RFVSite = $('#RFVsite'),\n      $this = $(this),\n      RFVsites = $RFVann1.children().length;\n    (RFVsites > 1) ? $this.parent().parent().remove(): false;\n    e.preventDefault();\n    updateNumber($RFVann1, $no_sites);\n    RFV1n--;\n    });\n\n  //Remove last RFV2 site on click event\n  $RFVann2.on('click', '#rem-ann2RFV', function(e) {\n    var $RFVann2 = $('#ann2RFV'),\n      $RFVvisitor = $('#RFVVisitor'),\n      $this = $(this),\n      RFVvisitors = $RFVann2.children().length;\n    (RFVvisitors > 1) ? $this.parent().parent().remove(): false;\n    e.preventDefault();\n    updateNumber($RFVann2, $no_visitors);\n    RFV2n--;\n  });\n});\n\n</script>\n<noscript>\n<p><img src=\"http://stats.tpsgc-pwgsc.gc.ca/piwik.php?idsite=13\" style=\"border:0;\" alt=\"\" /></p>\n</noscript>\n<!-- End Piwik Code -->\n</body>\n</html>",
+			"settings":
+			{
+				"buffer_size": 88280,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<!DOCTYPE html>\n<!--[if IE 7]><html lang=\"en\" class=\"no-js ie7\"><![endif]-->\n<!--[if IE 8]><html lang=\"en\" class=\"no-js ie8\"><![endif]-->\n<!--[if gt IE 8]><!-->\n<html lang=\"en\" class=\"no-js\">\n<!--<![endif]--><head>\n<meta charset=\"utf-8\" />\n<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)\nwet-boew.github.com/wet-boew/License-eng.txt / wet-boew.github.com/wet-boew/Licence-fra.txt -->\n<!-- WET 3.0, PWGSC 1.0 file: 2col-eng.html -->\n<!-- TitleStart -->\n<title>Domestic and international Request for Visit Forms - Industrial Security Program - Public Works and Government Services Canada (PWGSC)</title>\n<!-- TitleEnd -->\n<!-- MetadataStart -->\n<meta name=\"description\" content=\"Domestic and international Request for Visit Forms\" />\n<meta name=\"dcterms.description\" content=\"Domestic and international Request for Visit Forms\" />\n<meta name=\"dcterms.creator\" content=\"Public Works and Government Services Canada, Industrial Security Program\" />\n<meta name=\"dcterms.title\" content=\"Request for Visit Form - Industrial Security Program - Public Works and Government Services Canada (PWGSC)\" />\n<meta name=\"dcterms.issued\" title=\"W3CDTF\" content=\"2015-04-24\" />\n<meta name=\"dcterms.modified\" title=\"W3CDTF\" content=\"<!--#config timefmt=\"%Y-%m-%d\"--><!--#echo var=\"LAST_MODIFIED\"-->\" />\n<meta name=\"dcterms.subject\" title=\"gccore\" content=\"Security Services; Information Services; Business services; Government services\" />\n<meta name=\"dcterms.language\" title=\"ISO639-2\" content=\"eng\" />\n<meta name=\"keywords\" content=\"Industrial Security, form, visit request, domestic, international\" />\n<!-- MetadataEnd --> \n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/tete-head.html\" --> \n\n<!-- CustomScriptsCSSStart --> \n\n\n<!-- CustomScriptsCSSEnd -->\n</head><body>\n<div id=\"wb-body-sec\">\n  <div id=\"wb-skip\">\n    <ul id=\"wb-tphp\">\n      <li id=\"wb-skip1\"><a href=\"#wb-cont\">Passer au contenu principal</a></li>\n      <li id=\"wb-skip2\"><a href=\"#wb-nav\">Passer au menu secondaire</a></li>\n    </ul>\n  </div>\n  <div id=\"wb-head\">\n    <div id=\"wb-head-in\">\n      <header>\n        <!-- HeaderStart --> \n        <!--#include virtual=\"/boew-wet/wet3.0/html5/includes/banner_gc-gc_banner-eng.html\" --> \n        <!--#include virtual=\"/site/wet3.0/html5/includes/banner_site-site_banner-eng.html\" -->\n        <nav role=\"navigation\"> \n          <!--#include virtual=\"/site/wet3.0/html5/includes/nav_mega-mega_nav-eng.html\" -->\n          \n          <div id=\"gcwu-bc\">\n            <h2>Breadcrumb trail</h2>\n            <div id=\"gcwu-bc-in\">\n              <ol>\n                <!--#include virtual=\"/site/wet3.0/html5/includes/pain-bread-eng.html\" --> \n                <!--#include virtual=\"/includes/pain-bread-section-eng.html\" -->\n                <li><a href=\"/formulaires-forms/index-eng.html\">Forms</a></li>\n                <li>Domestic and international Request for Visit Forms</li>\n              </ol>\n            </div>\n          </div>\n        </nav>\n        <!-- HeaderEnd --> \n      </header>\n    </div>\n  </div>\n  <div id=\"wb-core\">\n    <div id=\"wb-core-in\" class=\"equalize\">\n      <div id=\"wb-main\" role=\"main\">\n        <div id=\"wb-main-in\"> \n          <!-- MainContentStart -->\n          <h1 id=\"wb-cont\">Domestic and international Request for Visit Forms</h1>\n          <div class=\"span-6 module-refer\">\n            <p><a href=\"/pdf/visite-visits-eng.pdf\" target=\"_blank\" rel=\"alternate\" type=\"application/pdf\"><abbr title=\"Portable document format\">PDF</abbr>: Domestic and international Request for Visit Forms</a> ( \n              <!--#fsize virtual=\"/pdf/visite-visits-eng.pdf\"--> \n              Kb) <br>\n              (<a href=\"http://www.tpsgc-pwgsc.gc.ca/comm/aformats-eng.html\">alternative formats and plug-ins</a>)</p>\n            <ul>\n              <li>Consult the <a href=\"/formulaires-forms/domestique-domestic-eng.html\">Instructions for completing the domestic Request for Visit form</a> for more guidance.</li>\n              <li>Consult the <a href=\"/formulaires-forms/internationale-international-eng.html\">Instructions for completing the international Request for Visit form</a> for more guidance.</li>\n            </ul>\n          </div>\n          <p>All fields of the Request for Visit form (RFV) must be completed and the form communicated via Government-to-Government.</p>\n          <div class=\"wet-boew-formvalid\">\n            <form id=\"RFVform\" action=\"#\" method=\"post\">\n              <h2 class=\"background-accent\">1. Type of visit request</h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 1  options</span></legend>\n             \n                <label name=\"lrfv1\" class=\"form-radio\" for=\"radio-1a\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option1\" id=\"radio-1a\">\n                  One-time </label>\n                <label name=\"lrfv1\" class=\"form-radio\" for=\"radio-1b\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option2\" id=\"radio-1b\">\n                  Recurring</label>\n                <label name=\"lrfv1\" class=\"form-radio\" for=\"radio-1c\">\n                  <input type=\"radio\"name=\"rfv1\"  value=\"option3\" id=\"radio-1c\">\n                  Emergency </label>\n                <label name=\"lrfv1\" class=\"form-radio\" for=\"radio-1d\">\n                  <input type=\"radio\" name=\"rfv1\" value=\"option4\" id=\"radio-1d\">\n                  Amendment</label>\n                  </fieldset>\n                  \n               \n                <div id=\"sect1-amendment\">\n                <fieldset><legend><span class=\"wb-invisible\">section 1 - Amendment options</span></legend>\n                  <label class=\"form-checkbox\" for=\"checkbox-1da\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4a\" id=\"checkbox-1da\">\n                    Dates</label>\n                  <label class=\"form-checkbox\" for=\"checkbox-1db\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4b\" id=\"checkbox-1db\">\n                    Visitors</label>\n                  <label class=\"form-checkbox\" for=\"checkbox-1dc\">\n                    <input type=\"checkbox\" name=\"rfv1\" value=\"option4c\" id=\"checkbox-1dc\">\n                    Agency / Facility</label>\n                  <label for=\"NSA/DSA\">For an amendment, insert the <abbr title=\"National Security Authority\">NSA</abbr>/<abbr title=\"Designated Security Authority\">DSA</abbr> original <abbr title=\"Request for Visit\">RFV</abbr> Reference <abbr title=\"Number\">N<sup>o</sup>.</abbr></label>\n                  <input id=\"NSA/DSA\" type=\"text\" class=\"width-30\"></fieldset>\n                </div>\n             \n              <h2 class=\"background-accent\">2. Types of information/material or site access</h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 2 options</span></legend>\n\n                <label class=\"form-radio\" for=\"radio-2a\">\n                  <input type=\"radio\" name=\"rfv2\" value=\"option1\" id=\"radio-2a\">Confidential or above</label>\n                <label class=\"form-radio\" for=\"radio-2b\">\n                  <input type=\"radio\" name=\"rfv2\" value=\"option2\" id=\"radio-2b\">\n                  Access to security areas without access to classified information / material</label>\n              \n                <p><em>Only if required by the laws / regulations of the countries involved</em></p>\n                <label class=\"form-radio\" for=\"radio-2c\"><input type=\"radio\" name=\"rfv2\" value=\"option3\" id=\"radio-2c\">Unclassified / Restricted</label>\n              </fieldset>\n              <h2 class=\"background-accent\">3. Summary</h2>\n              <label for=\"no_sites\"><abbr title=\"Number\">N<sup>o</sup></abbr> of sites </label>\n              <input type=\"text\" id=\"no_sites\" value=\"1\" class=\"width-10\"  disabled/>\n              <label for=\"no_visitors\"><abbr title=\"Number\">N<sup>o</sup>.</abbr> of visitors</label>\n              <input type=\"text\" id=\"no_visitors\" value=\"1\" class=\"width-10\" disabled />\n              <h2 class=\"background-accent\">4. Administrative data </h2>\n              <label for=\"requestor\">Requestor:</label>\n              <input type=\"text\" id=\"requestor\" class=\"width-30\" />\n              <label for=\"to\">To:</label>\n              <input type=\"text\" id=\"to\" class=\"width-30\" />\n              <label for=\"reference\"><abbr title=\"National Security Authority\">NSA</abbr>/<abbr title=\"Designated Security Authority\">DSA</abbr> <abbr title=\"Request for Visit\">RFV</abbr> Reference <abbr title=\"Number\">N<sup>o</sup></abbr>:</label>\n              <input type=\"text\" id=\"reference\" class=\"width-30\" />\n              <label for=\"date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"date\" class=\"width-30\" />\n              <div class=\"clear\"></div>\n              <h2 class=\"background-accent\">5. Requesting government agency, organization or industrial facility </h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 5  options</span></legend>\n              \n                <label class=\"form-radio\" for=\"radio-5a\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option1\" id=\"radio-5a\">\n                  Military</label>\n                <label class=\"form-radio\" for=\"radio-5b\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option2\" id=\"radio-5b\">\n                  Government</label>\n                <label class=\"form-radio\" for=\"radio-5c\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option3\" id=\"radio-5c\">\n                  Industry</label>\n                <label class=\"form-radio\" for=\"radio-5d\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5d\">\n                  <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr></label>\n                <label class=\"form-radio\" for=\"radio-5e\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5e\">\n                  <abbr title=\"European Union\">EU</abbr></label>\n                <label class=\"form-radio\" for=\"radio-5f\">\n                  <input type=\"radio\" name=\"rfv5\" value=\"option4\" id=\"radio-5f\">\n                  Other</label>\n                <label for=\"radio-5g\">If other, specify</label>\n                <input type=\"text\" id=\"radio-5g\" class=\"width-30\">\n              </fieldset>\n              <fieldset> \n                <legend> <span class=\"wb-invisible\">section 5 information</span></legend>\n                <label for=\"name\">Name:</label>\n                <input type=\"text\" id=\"name\" class=\"width-30\" />\n                <label for=\"postal\">Postal address:</label>\n                <input type=\"text\" id=\"postal\" class=\"width-30\" />\n                <label for=\"email\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>E-mail address:</span></label>\n                <input type=\"email\" id=\"email\" class=\"width-30\" />\n                <label for=\"fax\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>Fax <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n                <input type=\"tel\" id=\"fax\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                <label for=\"telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">5.</span>Telephone <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n                <input type=\"tel\" id=\"telephone\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n               \n              </fieldset>\n              <h2 class=\"background-accent\">6. Government agency(ies), organization(s) or industrial facility(ies) to be visited</h2>\n              <p>(<a href=\"#ann1\">Annex 1 to be completed</a>)</p>\n              <h2 class=\"background-accent\">7. Date of visit </h2>\n              <h3>Date of visit (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>):</h3>\n              <label for=\"6-from\"><span class=\"field-name\">From</span>:</label>\n              <input type=\"date\" id=\"6-from\" class=\"width-30\" />\n              <label for=\"6-to\"><span class=\"field-name\">To</span>:</label>\n              <input type=\"date\" id=\"6-to\" class=\"width-30\" />\n              <h2 class=\"background-accent\">8. Type of initiative (Select one from each column):<br>\n              </h2>\n              <fieldset>\n              <legend><span class=\"wb-invisible\">section 8  options</span></legend>\n<div class=\"span-3 row-start\">\n  <label class=\"form-radio\" for=\"radio-8a\">\n                  <input type=\"radio\" name=\"rfv8a\" value=\"option1\" id=\"radio-8a\">\n                  Government initiative </label>\n                <label class=\"form-radio\" for=\"radio-8b\">\n                  <input type=\"radio\" name=\"rfv8a\" value=\"option2\" id=\"radio-8b\">\n                  Commercial initiative</label>\n            </div>\n              <div class=\"span-3 row-end\">\n                <label class=\"form-radio\" for=\"radio-8c\">\n                  <input type=\"radio\" name=\"rfv8b\"  value=\"option3\" id=\"radio-8c\">\n                  Initiated by requesting agency or facility By</label>\n                <label class=\"form-radio\" for=\"radio-8d\">\n                  <input type=\"radio\" name=\"rfv8b\" value=\"option4\" id=\"radio-8d\">\n                  invitation of the facility to be visited</label>\n              </div>\n              </fieldset>\n              <div class=\"clear\"></div>\n              <h2 class=\"background-accent\">9. Is the visit pertinent to </h2>\n              <fieldset>\n                <legend><span class=\"wb-invisible\">section 9  options</span></legend>\n              <label class=\"form-radio\" for=\"radio-9a\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option1\" id=\"radio-9a\">\n                Specific equipment or weapon system</label>\n              <label class=\"form-radio\" for=\"radio-9b\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option2\" id=\"radio-9b\">\n                Foreign military sales or export licence</label>\n              <label class=\"form-radio\" for=\"radio-9c\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option3\" id=\"radio-9c\">\n                A programme or agreement</label>\n              <label class=\"form-radio\" for=\"radio-9d\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option4\" id=\"radio-9d\">\n                A defence acquisition process</label>\n              <label class=\"form-radio\" for=\"radio-9e\">\n                <input type=\"radio\" name=\"rfv9\" value=\"option4\" id=\"radio-9e\">\n                Other</label>\n              \n                <label for=\"specification\">Specification of the selected subject:</label>\n                <textarea name=\"specification\" id=\"specification\" rows=\"3\" class=\"width-90\"></textarea>\n              </fieldset>\n              <h2 class=\"background-accent\">10. Subject to be discussed/justification/purpose</h2>\n              <label for=\"details\">(To include details of host Government/Project Authority and solicitation/contract number if known and any other relevant information. Abbreviations should be avoided):</label>\n              <textarea name=\"details\" id=\"details\" rows=\"3\" class=\"width-90\"></textarea>\n              <h2 class=\"background-accent\">11. Anticipated highest level of information/material or site access to be involved</h2>\n              <p>Only if required by the laws/regulations of the countries involved</p>\n               <fieldset>\n                <legend><span class=\"wb-invisible\">section 11  options</span></legend>\n              <label class=\"form-radio\" for=\"radio-11a\">\n                <input type=\"radio\" value=\"option1\" id=\"radio-11a\">\n                Unclassified</label>\n              <label class=\"form-radio\" for=\"radio-11b\">\n                <input type=\"radio\" name=\"rfv11\" value=\"option2\" id=\"radio-11b\">\n                Restricted</label>\n              <label class=\"form-radio\" for=\"radio-11c\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option3\" id=\"radio-11c\">\n                Confidential</label>\n              <label class=\"form-radio\" for=\"radio-11d\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option4\" id=\"radio-11d\">\n                Top Secret</label>\n              <label class=\"form-radio\" for=\"radio-11e\">\n                <input type=\"radio\" name=\"rfv11\"  value=\"option4\" id=\"radio-11e\">\n                Secret</label>\n              <label class=\"form-radio\" for=\"radio-11f\">\n                <input type=\"radio\"  name=\"rfv11\" value=\"option4\" id=\"radio-11f\">\n                Other</label>\n              \n              <label for=\"radio-11g\">If other, specify</label>\n              <input type=\"text\" id=\"radio-11g\" class=\"width-30\">  </fieldset>\n              \n              <h2 class=\"background-accent\">12. Particulars of visitor(s)</h2>\n              <p>(<a href=\"#ann2\">Annex 2 to be completed</a>)</p>\n              \n              <h2 class=\"background-accent\">13. The security officer of the requesting agency, organization or industrial facility</h2>\n              <label for=\"13-name\">Name:</label>\n              <input type=\"text\" id=\"13-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"13-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">13.</span>Telephone n<sup>o </sup>(999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"13-telephone\" class=\"width-30 90 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n              <label for=\"13-email\"><span class=\"field-name\"><span class=\"wb-invisible\">13.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"13-email\" class=\"width-30\" />\n              <label for=\"signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <h2 class=\"background-accent\">14. Certification of security clearance level</h2>\n              <label for=\"14-name\">Name:</label>\n              <input type=\"text\" id=\"14-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"14-Address\">Address:</label>\n              <input type=\"text\" id=\"14-Address\" class=\"width-30\" />\n              <label for=\"14-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">14.</span>Telephone <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"14-telephone\" class=\"width-30 90 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n              <label for=\"14-email\"><span class=\"field-name\"><span class=\"wb-invisible\">14.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"14-email\" class=\"width-30\" />\n              <label for=\"14-signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"14-signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <label for=\"14-date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"14-date\" class=\"width-30\" />\n              <h2 class=\"background-accent\">15. Requesting Security Authority</h2>\n              <label for=\"15-name\">Name:</label>\n              <input type=\"text\" id=\"15-name\" class=\"width-30\" />\n              <div class=\"width-30 float-right margin-top-medium indent-xlarge\">\n                <p>Stamp</p>\n                <div class=\"border-all width-30\">\n                  <div class=\"margin-top-large indent-medium margin-bottom-xlarge height130\">&nbsp;</div>\n                </div>\n              </div>\n              <label for=\"15-Address\">Address:</label>\n              <input type=\"text\" id=\"15-Address\" class=\"width-30\" />\n              <label for=\"15-telephone\"><span class=\"field-name\"><span class=\"wb-invisible\">15.</span>Telephone <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n              <input type=\"tel\" id=\"15-telephone\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n              <label for=\"15-email\"><span class=\"field-name\"><span class=\"wb-invisible\">15.</span>E-mail address</span>:</label>\n              <input type=\"email\" id=\"15-email\" class=\"width-30\" />\n              <label for=\"15-signaturedisabled\">Signature:</label>\n              <input type=\"text\" id=\"15-signaturedisabled\" disabled=\"disabled\" class=\"width-30 form-uneditable-input\" />\n              <label for=\"15-date\"><span class=\"field-name\">Date (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n              <input type=\"date\" id=\"15-date\" class=\"width-30\" />\n              <h2 class=\"background-accent\">16. Remarks</h2>\n              <label for=\"remarks\">(Mandatory justification required in case of an emergency visit)</label>\n              <textarea name=\"remarks\" id=\"remarks\" rows=\"6\" class=\"width-90\"></textarea>\n              <h2 class=\"background-accent\" id=\"ann1\" >Annex 1 to <abbr title=\"Request for Visit\">RFV</abbr> form government agency(ies), organization(s) or industrial facility(ies) to be visited </h2>\n              <h3>Gorvernment agency(ies), Organisation(s) or Industrial facility(ies) to be visited</h3>\n              <button class=\"margin-bottom-medium button button-confirm\" id=\"add-ann1RFV\" type=\"button\" value=\"Add another RFV form for government agency(ies), organization(s) or industrial facility(ies)\">Add</button>\n              <div id=\"ann1RFV\" tabindex=\"-1\" >\n                <div class=\"border-all span-6 row-start\">\n                  <div class=\"indent-large margin-top-large\">\n                  <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 1 - Type of contact - Site 1</span></legend>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1a\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1a\">\n                      Military</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1b\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1b\">\n                      Government</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1c\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1c\">\n                      Industry</label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1d\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1d\">\n                      <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr></label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1e\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1e\">\n                      <abbr title=\"European Union\">EU</abbr></label>\n                    <label class=\"form-radio\" for=\"radio-ann1RFV-1f\">\n                      <input type=\"radio\" name=\"ann1RFV-1\" id=\"radio-ann1RFV-1f\">\n                      Other</label>\n              <label for=\"radio-ann1RFV-1g\">If other, specify</label>\n              <input type=\"text\" id=\"radio-ann1RFV-1g\" class=\"width-30\">\n                    </fieldset>\n                    <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 1 - Contact Information - Site 1</span></legend>\n                      <label for=\"ann1RFV-name1\">Name:</label>\n                      <input type=\"text\" id=\"ann1RFV-name1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-Address1\">Address:</label>\n                      <input type=\"text\" id=\"ann1RFV-Address1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephone1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1</span>Telephone <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephone1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                      <label for=\"ann1RFV-fax1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1</span>Fax <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999):</span></label>\n                      <input type=\"tel\" id=\"ann1RFV-fax1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\"/>\n                      <label for=\"ann1RFV-contact1\">Name of point contact:</label>\n                      <input type=\"text\" id=\"ann1RFV-contact1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-email1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1.</span>E-mail address</span>:</label>\n                      <input type=\"email\" id=\"ann1RFV-email1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephoneb1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1a</span>Telephone <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephoneb1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                      <label for=\"secondary\">Name of security officer or secondary point of contact:</label>\n                      <input type=\"text\" id=\"secondary\" class=\"width-30\" />\n                      <label for=\"ann1RFV-emailb1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex1a.</span>E-mail address</span>:</label>\n                      <input type=\"email\" id=\"ann1RFV-emailb1\" class=\"width-30\" />\n                      <label for=\"ann1RFV-telephonec1\"><span class=\"field-name\"><span class=\"wb-invisible\">Annex-1b</span>Telephone <abbr title=\"Number\">N<sup>o</sup></abbr> (999-999-9999)</span>:</label>\n                      <input type=\"tel\" id=\"ann1RFV-telephonec1\" class=\"width-30 {validate:{pattern: /^\\d{3}-\\d{3}-\\d{4}$/}}\" title=\"The value entered does not matched the format of the field = 999-999-9999\" />\n                    </fieldset>\n                  </div>\n                </div>\n              </div>\n              <div class=\"clear\"></div>\n              <h2 id=\"ann2\" class=\"background-accent\">Annex 2 to <abbr title=\"Request for Visit\">RFV</abbr> form particulars of visitor(s)</h2>\n              <h3>Particulars of visitor(s)</h3>\n              <button class=\"margin-bottom-medium button button-confirm\" id=\"add-ann2RFV\" type=\"button\" value=\"Add another RFV form for Particulars of visitor(s)\">Add</button>\n              <div id=\"ann2RFV\">\n                <div class=\"border-all span-6 row-start\">\n                  <div class=\"indent-large margin-top-large\">\n                   <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 2 - Type of contact - Site 1</span></legend>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1a\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option1\" id=\"radio-ann2RFV-1a\">\n                      Military</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1b\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option2\" id=\"radio-ann2RFV-1b\">\n                      Defence Public Servant</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1c\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option3\" id=\"radio-ann2RFV-1c\">\n                      Government</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1d\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1d\">\n                      Industry/Embedded Contractor</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1e\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1e\">\n                      <abbr title=\"North Atlantic Treaty Organization\">NATO</abbr> Employee</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1f\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1f\">\n                      <abbr title=\"European Union\">EU</abbr> Employee</label>\n                    <label class=\"form-radio\" for=\"radio-ann2RFV-1g\">\n                      <input type=\"radio\" name=\"ann-2\" value=\"option4\" id=\"radio-ann2RFV-1g\">\n                      Other</label>\n                      <label for=\"radio-ann2RFV-1h\">If other, specify</label>\n              <input type=\"text\" id=\"radio-ann2RFV-1h\" class=\"width-30\"><br>\n</fieldset>\n                    <fieldset>\n                      <legend><span class=\"wb-invisible\">Annex 2 - Contact Information - Site 1</span></legend>\n                      <label for=\"ann2RFV-surname1\">Surname:</label>\n                      <input type=\"text\" id=\"ann2RFV-surname1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-forenames1\">Forenames (as per passport):</label>\n                      <input type=\"text\" id=\"ann2RFV-forenames1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-rank1\">Rank (if applicable):</label>\n                      <input type=\"text\" id=\"ann2RFV-rank1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-dob1\"><span class=\"field-name\">Date of birth (<abbr title=\"day\">dd</abbr>/<abbr title=\"month\">mm</abbr>/<abbr title=\"year\">yyyy</abbr>)</span>:</label>\n                      <input type=\"date\" id=\"ann2RFV-dob1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-pob1\">Place of birth:</label>\n                      <input type=\"text\" id=\"ann2RFV-pob1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-nationality1\">Nationality:</label>\n                      <input type=\"text\" id=\"ann2RFV-nationality1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-clearance1\">Security clearance level:</label>\n                      <input type=\"text\" id=\"ann2RFV-clearance1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-pp-id1\"><span class=\"field-name\">PP-ID Number</span>:</label>\n                      <input type=\"text\" id=\"ann2RFV-pp-id1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-position1\">Position:</label>\n                      <input type=\"text\" id=\"ann2RFV-position1\" class=\"width-30\" />\n                      <label for=\"ann2RFV-company1\">Company/Agency:</label>\n                      <input type=\"text\" id=\"ann2RFV-company1\" class=\"width-30\" />\n                    </fieldset>\n                  </div>\n                </div>\n              </div>\n              <div class=\"span-2 row-start\"></div>\n              <div class=\"span-4 row-end\">\n                <div class=\"form-inline\">\n                  <input type=\"submit\" value=\"Clear Data\" class=\"button button-accent\" />\n                  <input type=\"submit\" value=\"Print\" class=\"button button-accent\" onclick=\"window.print()\" />\n                </div>\n              </div>\n            </form>\n          </div>\n          <!-- EndEditableContent -->\n          <dl id=\"gcwu-date-mod\" role=\"contentinfo\">\n            <dt>Date modified:</dt>\n            <dd><span>\n              <time> \n                <!--#config timefmt=\"%Y-%m-%d\"--> \n                <!--#echo var=\"LAST_MODIFIED\"--> \n              </time>\n              </span></dd>\n          </dl>\n          <div class=\"clear\"></div>\n          <!-- MainContentEnd --> \n        </div>\n      </div>\n      <div id=\"wb-sec\">\n        <div id=\"wb-sec-in\"> \n          <!--#include virtual=\"/includes/nav_gauche-nav_left-eng.html\" --> \n        </div>\n      </div>\n    </div>\n  </div>\n  <div id=\"wb-foot\">\n    <div id=\"wb-foot-in\">\n      <footer>\n        <h2>Footer</h2>\n        <!-- FooterStart --> \n        <!--#include virtual=\"/site/wet3.0/html5/includes/pied_site-site_footer-eng.html\" --><!-- FooterEnd --> \n      </footer>\n    </div>\n  </div>\n</div>\n\n<!-- ScriptsStart --> \n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/pied_gc-gc_footer-eng.html\" --> \n\n<!--#include virtual=\"/boew-wet/wet3.0/html5/includes/script_pied-script_footer.html\" --> \n<!-- ScriptsEnd --> \n<!-- Piwik --> \n<script type=\"text/javascript\">\nvar _paq = _paq || [];\n_paq.push(['trackPageView']);\n_paq.push(['enableLinkTracking']);\n(function() {\nvar u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://stats.tpsgc-pwgsc.gc.ca/\";\n_paq.push(['setTrackerUrl', u+'piwik.php']);\n_paq.push(['setSiteId', 13]);\nvar d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';\ng.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);\n})();\n\n<!-- Add forms -->\n$(function() {\n\n  var $RFVann1 = $('#ann1RFV'),\n    $RFVann2 = $('#ann2RFV')\n    $no_sites = $('#no_sites'),\n    $no_visitors = $('#no_visitors'),\n    $form = $('.wet-boew-formvalid'),\n    $email = $('input[type=\"email\"]');\n    RFV1n = 2, // starts with 2 as there is already an id of 1 in the body\n    RFV2n = RFV1n;\n\n  // appends @example.com string on email inputs only if value is entered\n  $email.on('blur', function() {\n\n    var $this = $(this),\n      thisval = $this.val(),\n      ex = '@example.com',\n      ph_ex = $this.val().indexOf(ex); // value of the field contains the string \"@example of\"\n\n    if (thisval && (ph_ex == -1)) {\n      $(this).val(thisval + ex);\n    }\n  });\n\n  // update the section 3 fields\n  var updateNumber = function(el, target) {\n    var RFVlength = el.children().length || 1;\n    target.val(RFVlength);\n  };\n\n  // initial display\n$(\"#sect1-amendment\").hide();\n  \n//show hide function on click event with radiobutton\n  var toggle_radio_btn = function(el, labels, target) {\n    var $radio1d = $(\"[for='\" + el + \"']\"),\n        $el_label = $(\"[for^='\" + labels + \"'][name='lrfv1'] \").not( \"[for='\" + el + \"']\" );\n        $radio1d.on('click', function() { \n        $(target).toggle();\n      });\n        $el_label.on('click',function() {\n        $(target).hide();\n  });\n}\ntoggle_radio_btn('radio-1d', 'radio-1', \"#sect1-amendment\");\n\n  //Add annex 1 RFV form for site\n  $('#add-ann1RFV').on('click', function() {\n    var DocRFV1 = \"<div id='RFVsite' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 1 - Type of contact - Site \" + RFV1n + \"<\\/span><\\/legend><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"a'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"b'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"b'>Government<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"c'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"c'>Industry<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"d'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"d'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"e'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"e'><abbr title='European Union'>EU<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"f'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"f'>Other<\\/label> <label for='radio-ann1RFV-\" + RFV1n + \"h'>If other, specify</label><input type='text' id='radio-ann1RFV-\" + RFV1n + \"h' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 1 - Contact Information - Site \" + RFV1n + \"<\\/span><\\/legend><label for='ann1RFV-name\" + RFV1n + \"'>Name:<\\/label><input type='text' id='ann1RFV-name\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-Address\" + RFV1n + \"'>Address:<\\/label><input type='text' id='ann1RFV-Address\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephone\" + RFV1n + \"'><span class='wb-invisible'>Annex-1<\\/span><span class='field-name'>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephone\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-fax\" + RFV1n + \"'><span class='wb-invisible'>Annex1<\\/span>Fax <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-fax\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-contact\" + RFV1n + \"'>Name of point contact:<\\/label><input type='text' id='ann1RFV-contact\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-email\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-email\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephoneb\" + RFV1n + \"'><span class='wb-invisible'>Annex-1a<\\/span>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephoneb\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='secondary'>Name of security officer or secondary point of contact:<\\/label><input type='text' id='secondary' class='width-30' \\/><label for='ann1RFV-emailb\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1a.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-emailb\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephonec\" + RFV1n + \"'><span class='wb-invisible'>Annex-1b<\\/span>Telephone <abbr title='Number'>N<sup>o<\\/sup><\\/abbr> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephonec\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' /><\\/fieldset><button  id='rem-ann1RFV' type='button' class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n    $(\"#ann1RFV\").append(DocRFV1);\n    RFV1n++;\n    updateNumber($RFVann1, $no_sites);\n  });\n\n  //Add annex 2 RFV form for site\n  $('#add-ann2RFV').on('click', function() {\n    var DocRFV2 = \"<div id='RFVVisitor' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 2 - Type of contact - Site \" + RFV2n + \"</span></legend><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"a'><input type='radio' name='ann-2' value='option1' id='radio-ann2RFV-\" + RFV2n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"b'><input type='radio' name='ann-2' value='option2' id='radio-ann2RFV-\" + RFV2n + \"b'>Defence Public Servant<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"c'><input type='radio' name='ann-2' value='option3' id='radio-ann2RFV-\" + RFV2n + \"c'>Government<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"d'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"d'>Industry/Embedded Contractor<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"e'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"e'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"f'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"f'><abbr title='European Union'>EU<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"g'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"g'>Other<\\/label><label for='radio-ann2RFV-\" + RFV2n + \"g'>If other, specify</label><input type='text' id='radio-ann2RFV-\" + RFV2n + \"g' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><label for='ann2RFV-surname\" + RFV2n + \"'>Surname:<\\/label><input type='text' id='ann2RFV-surname\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-forenames\" + RFV2n + \"'>Forenames (as per passport):<\\/label><input type='text' id='ann2RFV-forenames\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-rank\" + RFV2n + \"'>Rank (if applicable):<\\/label><input type='text' id='ann2RFV-rank\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-dob\" + RFV2n + \"'><span class='field-name'>Date of birth (<abbr title='day'>dd<\\/abbr>/<abbr title='month'>mm<\\/abbr>/<abbr title='year'>yyyy<\\/abbr>)<\\/span>:<\\/label><input type='date' id='ann2RFV-dob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pob\" + RFV2n + \"'>Place of birth:<\\/label><input type='text' id='ann2RFV-pob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-nationality\" + RFV2n + \"'>Nationality:<\\/label><input type='text' id='ann2RFV-nationality\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-clearance\" + RFV2n + \"'>Security clearance level:<\\/label><input type='text' id='ann2RFV-clearance\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pp-id\" + RFV2n + \"'><span class='field-name'>PP-ID Number<\\/span>:<\\/label><input type='text' id='ann2RFV-pp-id\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-position\" + RFV2n + \"'>Position:<\\/label><input type='text' id='ann2RFV-position\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-company\" + RFV2n + \"'>Company/Agency:<\\/label><input type='text' id='ann2RFV-company\" + RFV2n + \"' class='width-30' /><\\/fieldset><button id='rem-ann2RFV' type='button'  class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n    $(\"#ann2RFV\").append(DocRFV2);\n    RFV2n++;\n    updateNumber($RFVann2, $no_visitors);\n  });\n\n  //Remove last RFV1 site on click event\n  $RFVann1.on('click', '#rem-ann1RFV', function(e) {\n    var $RFVann1 = $('#ann1RFV'),\n      $RFVSite = $('#RFVsite'),\n      $this = $(this),\n      RFVsites = $RFVann1.children().length;\n    (RFVsites > 1) ? $this.parent().parent().remove(): false;\n    e.preventDefault();\n    updateNumber($RFVann1, $no_sites);\n    RFV1n--;\n    });\n\n  //Remove last RFV2 site on click event\n  $RFVann2.on('click', '#rem-ann2RFV', function(e) {\n    var $RFVann2 = $('#ann2RFV'),\n      $RFVvisitor = $('#RFVVisitor'),\n      $this = $(this),\n      RFVvisitors = $RFVann2.children().length;\n    (RFVvisitors > 1) ? $this.parent().parent().remove(): false;\n    e.preventDefault();\n    updateNumber($RFVann2, $no_visitors);\n    RFV2n--;\n  });\n});\n\n</script>\n<noscript>\n<p><img src=\"http://stats.tpsgc-pwgsc.gc.ca/piwik.php?idsite=13\" style=\"border:0;\" alt=\"\" /></p>\n</noscript>\n<!-- End Piwik Code -->\n</body>\n</html>",
+			"settings":
+			{
+				"buffer_size": 43835,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "$(function() {\n    \nvar   $RFVann1 = $('#ann1RFV'),\n      $RFVann2 = $('#ann2RFV')\n      $no_sites = $('#no_sites'),\n      $no_visitors = $('#no_visitors'),\n      $form = $('.wet-boew-formvalid'),\n      $email = $('input[type=\"email\"]');\n      RFV1n = 2, // starts with 2 as there is already an id of 1 in the body\n      RFV2n = RFV1n;\n\n\n// appends @example.com string on email inputs only if value is entered\n$email.on('blur', function() {\n  \n  var $this = $(this),\n      thisval = $this.val(),\n      ex = '@example.com',\n      ph_ex = $this.val().indexOf(ex); // value of the field contains the string \"@example of\"\n  \n  if (thisval && (ph_ex == -1)) {\n    $(this).val(thisval + ex);\n  }\n});\n\n// update the section 3 fields \nvar updateNumber = function(el, target) {\n      var RFVlength = el.children().length || 1;\n    target.val(RFVlength);\n};\n\n// initial display\n$(\"#sect1-amendment\").hide();\n\n// show hide function on click event with radiobutton \n\nvar toggle_radio_btn = function (el, target) {\n  var el_label = $(\"[for^=\"+el+\"]\");\n  el_label.click(function(){\n        ($(\"input:radio[id='radio-1d']\").is(\":checked\"))? $(target).show(): $(target).hide();\n        \n  });\n}\ntoggle_radio_btn('radio-1',\"#sect1-amendment\");\n\n//Add annex 1 RFV form for site\n  $('#add-ann1RFV').on ('click', function () {\n   var DocRFV1 = \"<div id='RFVsite' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><fieldset><legend><span class='wb-invisible'>Annex 1 - Type of contact - Site \" + RFV1n + \"<\\/span><\\/legend><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"a'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"b'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"b'>Government<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"c'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"c'>Industry<\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"d'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"d'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"e'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"e'><abbr title='European Union'>EU<\\/abbr><\\/label><label class='form-radio' for='radio-ann1RFV-\" + RFV1n + \"f'><input type='radio' name='ann1RFV-\" + RFV1n + \"' id='radio-ann1RFV-\" + RFV1n + \"f'>Other<\\/label> <label for='radio-ann1RFV-\" + RFV1n + \"h'>If other, specify</label><input type='text' id='radio-ann1RFV-\" + RFV1n + \"h' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 1 - Contact Information - Site \" + RFV1n + \"<\\/span><\\/legend><label for='ann1RFV-name\" + RFV1n + \"'>Name:<\\/label><input type='text' id='ann1RFV-name\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-Address\" + RFV1n + \"'>Address:<\\/label><input type='text' id='ann1RFV-Address\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephone\" + RFV1n + \"'><span class='wb-invisible'>Annex-1<\\/span><span class='field-name'>Telephone n<sup>o<\\/sup> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephone\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-fax\" + RFV1n + \"'><span class='wb-invisible'>Annex1<\\/span>Fax n<sup>o<\\/sup> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-fax\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='ann1RFV-contact\" + RFV1n + \"'>Name of point contact:<\\/label><input type='text' id='ann1RFV-contact\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-email\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-email\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephoneb\" + RFV1n + \"'><span class='wb-invisible'>Annex-1a<\\/span>Telephone n<sup>o<\\/sup> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephoneb\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' \\/><label for='secondary'>Name of security officer or secondary point of contact:<\\/label><input type='text' id='secondary' class='width-30' \\/><label for='ann1RFV-emailb\" + RFV1n + \"'><span class='field-name'><span class='wb-invisible'>Annex1a.<\\/span>E-mail address<\\/span>:<\\/label><input type='email' id='ann1RFV-emailb\" + RFV1n + \"' class='width-30' \\/><label for='ann1RFV-telephonec\" + RFV1n + \"'><span class='wb-invisible'>Annex-1b<\\/span>Telephone n<sup>o<\\/sup> (999-999-9999):<\\/label><input type='tel' id='ann1RFV-telephonec\" + RFV1n + \"' class='width-30 {validate:{pattern: \\/^\\\\d{3}-\\\\d{3}-\\\\d{4}$\\/}}' title='The value entered does not matched the format of the field = 999-999-9999' /><\\/fieldset><button  id='rem-ann1RFV' type='button' class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n  $(\"#ann1RFV\").append(DocRFV1);\n  RFV1n++;\n  updateNumber($RFVann1,$no_sites);\n});\n\n//Add annex 2 RFV form for site\n  $('#add-ann2RFV').on ('click', function () {\nvar DocRFV2 = \"<div id='RFVVisitor' class='border-all span-6 row-start'><div class='indent-large margin-top-large'><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"a'><input type='radio' name='ann-2' value='option1' id='radio-ann2RFV-\" + RFV2n + \"a'>Military<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"b'><input type='radio' name='ann-2' value='option2' id='radio-ann2RFV-\" + RFV2n + \"b'>Defence Public Servant<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"c'><input type='radio' name='ann-2' value='option3' id='radio-ann2RFV-\" + RFV2n + \"c'>Government<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"d'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"d'>Industry/Embedded Contractor<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"e'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"e'><abbr title='North Atlantic Treaty Organization'>NATO<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"f'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"f'><abbr title='European Union'>EU<\\/abbr> Employee<\\/label><label class='form-radio' for='radio-ann2RFV-\" + RFV2n + \"g'><input type='radio' name='ann-2' value='option4' id='radio-ann2RFV-\" + RFV2n + \"g'>Other<\\/label><label for='radio-ann2RFV-\" + RFV2n + \"g'>If other, specify</label><input type='text' id='radio-ann2RFV-\" + RFV2n + \"g' class='width-30'><\\/fieldset><fieldset><legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><span class='wb-invisible'>Annex 2 - Contact Information - Site \" + RFV2n + \"<\\/span><\\/legend><label for='ann2RFV-surname\" + RFV2n + \"'>Surname:<\\/label><input type='text' id='ann2RFV-surname\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-forenames\" + RFV2n + \"'>Forenames (as per passport):<\\/label><input type='text' id='ann2RFV-forenames\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-rank\" + RFV2n + \"'>Rank (if applicable):<\\/label><input type='text' id='ann2RFV-rank\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-dob\" + RFV2n + \"'><span class='field-name'>Date of birth (<abbr title='day'>dd<\\/abbr>/<abbr title='month'>mm<\\/abbr>/<abbr title='year'>yyyy<\\/abbr>)<\\/span>:<\\/label><input type='date' id='ann2RFV-dob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pob\" + RFV2n + \"'>Place of birth:<\\/label><input type='text' id='ann2RFV-pob\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-nationality\" + RFV2n + \"'>Nationality:<\\/label><input type='text' id='ann2RFV-nationality\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-clearance\" + RFV2n + \"'>Security clearance level:<\\/label><input type='text' id='ann2RFV-clearance\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-pp-id\" + RFV2n + \"'><span class='field-name'>PP-ID Number<\\/span>:<\\/label><input type='text' id='ann2RFV-pp-id\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-position\" + RFV2n + \"'>Position:<\\/label><input type='text' id='ann2RFV-position\" + RFV2n + \"' class='width-30' /><label for='ann2RFV-company\" + RFV2n + \"'>Company/Agency:<\\/label><input type='text' id='ann2RFV-company\" + RFV2n + \"' class='width-30' /><\\/fieldset><button id='rem-ann2RFV' type='button'  class='margin-bottom-medium button button-alert'>Delete<\\/button><\\/div><\\/div>\";\n$(\"#ann2RFV\").append(DocRFV2);\n  RFV2n++;\n  updateNumber($RFVann2,$no_visitors);\n});\n\n//Remove last RFV1 site on click event\n$RFVann1.on( 'click', '#rem-ann1RFV', function (e) {\nvar   $RFVann1 = $('#ann1RFV'),\n      $RFVSite =  $('#RFVsite'),\n      $this = $(this),\n      RFVsites = $RFVann1.children().length;\n      (RFVsites > 1) ? $this.parent().parent().remove() : false;\n  e.preventDefault();\n  updateNumber($RFVann1,$no_sites);\n  RFV1n--;\n  document.getElementById($RFVann1).scrollIntoView() \n});\n\n//Remove last RFV2 site on click event\n$RFVann2.on( 'click', '#rem-ann2RFV', function (e) {\nvar   $RFVann2 = $('#ann2RFV'),\n      $RFVvisitor =  $('#RFVVisitor'),\n      $this = $(this),\n      RFVvisitors = $RFVann2.children().length;\n    (RFVvisitors > 1) ? $this.parent().parent().remove() : false;\n  e.preventDefault();\n  updateNumber($RFVann2,$no_visitors);\n  RFV2n--;\n});\n\n}); \n",
+			"file": "src/scripts/plugins.js",
+			"file_size": 702,
+			"file_write_time": 130939823794932970,
+			"settings":
+			{
+				"buffer_size": 9775,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 400.0,
+		"last_filter": "insta",
 		"selected_items":
 		[
 			[
-				"sass",
-				"SassBeautify"
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Syncing: Pull Settings"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
 			],
 			[
 				"sas",
+				"SassBeautify"
+			],
+			[
+				"sass",
 				"SassBeautify"
 			],
 			[
@@ -303,10 +310,6 @@
 			[
 				"list",
 				"Package Control: List Packages"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
 			],
 			[
 				"git push",
@@ -565,10 +568,6 @@
 				"Git: Fetch"
 			],
 			[
-				"ins",
-				"Package Control: Install Package"
-			],
-			[
 				"rem",
 				"Package Control: Remove Package"
 			],
@@ -700,6 +699,7 @@
 		"height": 219.0,
 		"history":
 		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
 			"git remote set-url origin https://PwrSerge@bitbucket.org/PwrSerge/guilmette-design.git",
 			"git init",
 			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
@@ -717,21 +717,40 @@
 	"expanded_folders":
 	[
 		"/C/Users/guilmets/Documents/sergeguilmette",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/css",
-		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts",
 		"/C/Users/guilmets/Documents/sergeguilmette/src",
 		"/C/Users/guilmets/Documents/sergeguilmette/src/css",
-		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets",
-		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components",
-		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/utils",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/image",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/image/sprites",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/scripts",
 		"/C/Users/guilmets/Documents/sergeguilmette/styleguide"
 	],
 	"file_history":
 	[
 		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components/images.scss",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/SassBeautify/SassBeautify.sublime-settings",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components/forms.scss",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_acc.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_val.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_meta.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_dept.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_int.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_urls.txt",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components/buttons.scss",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components/media.scss",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/guilmets/Downloads/AnimatedSVGIcons/AnimatedSVGIcons/index.html",
+		"/C/Users/guilmets/Downloads/AnimatedSVGIcons/AnimatedSVGIcons/css/demo.css",
+		"/C/Users/guilmets/Downloads/AnimatedSVGIcons/AnimatedSVGIcons/js/svgicons.js",
+		"/C/Users/guilmets/Downloads/AnimatedSVGIcons/AnimatedSVGIcons/js/svgicons-config.js",
+		"/C/Users/guilmets/Downloads/AnimatedSVGIcons/AnimatedSVGIcons/css/component.css",
+		"/C/Users/guilmets/Documents/sergeguilmette/src/stylesheets/components/modal.scss",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/SassBeautify.sublime-settings",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_link.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_crawl.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_clf.txt",
+		"/C/Users/guilmets/Desktop/AB-210/AB-667_feat.txt",
+		"/C/Users/guilmets/Downloads/AnimatedSVGIcons/AnimatedSVGIcons/js/snap.svg-min.js",
+		"/C/Program Files/Brackets/Brackets.exe",
+		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/SassBeautify/SassBeautify.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
 		"/C/Users/guilmets/Documents/sergeguilmette/gulpfile.js",
@@ -751,7 +770,6 @@
 		"/C/Users/guilmets/Documents/sergeguilmette/dist/tyret.js",
 		"/C/Users/guilmets/Documents/sergeguilmette/bower.json",
 		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Local/Session.sublime_session",
-		"/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/guilmets/Documents/guilmette-design/bower.json",
 		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/Guilmette-design-site.min.js.map",
 		"/C/Users/guilmets/Documents/sergeguilmette/dist/scripts/Guilmette-design-site.min.js",
@@ -835,28 +853,7 @@
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_placeholders.scss",
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_vars.scss",
 		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/twitter.svg",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/github.svg",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/sprites/svgsprite.svg",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/sprites/svg-symbols.css",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/home.svg",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/vendor/font-awesome.css",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/home.svg",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/npm-debug.log",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/bower_components/trmix/.bower.json",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/templates/index.tpl.html",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/vendor/_normalize.scss",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_animations.scss",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/helpers/_functions.scss",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/bower_components/trmix/bower.json",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/print.scss",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/scripts/vendor/trmix.min.js",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/pages/_resume.scss",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/.sass-cache/09cc5a257dce716df73455ff8b24a3ca1e7d5c4f/_vars.scssc",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/pages/_footer.scss",
-		"/C/Documents and Settings/guilmets/Desktop/cleanup.js",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/dist/image/icons/folder.svg",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/stylesheets/layout/function chkform().js",
-		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/config.rb"
+		"/C/Documents and Settings/guilmets/Desktop/Serge/guilmette-design/src/image/icons/github.svg"
 	],
 	"find":
 	{
@@ -879,6 +876,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\\'",
+			"La valeur entr&eacute;e n'est",
+			"champ =",
+			"=",
+			"la valeur",
+			"identit",
+			"::",
+			"Forename",
+			"Surname:",
+			"<abbr title='Nombre'>N<sup>o</sup></abbr>",
+			"<abbr title='Nombre'>N<sup>o</sup><\\/abbr>",
 			"zindex",
 			"$zindex",
 			"mq",
@@ -929,7 +937,7 @@
 			"imagemin",
 			"uglify",
 			"plumber",
-			".header-name",
+			".header-title",
 			"!default",
 			"box-sizing",
 			"box-border",
@@ -995,18 +1003,7 @@
 			"sprite",
 			"sprite.png",
 			"css/sprite.png",
-			"../css/sprite.png",
-			"sprite.png",
-			"image",
-			"images",
-			"Images",
-			"images",
-			"div",
-			"me",
-			"about",
-			"li",
-			"projects",
-			"GRID"
+			"../css/sprite.png"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1014,6 +1011,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"&#39;",
+			"La valeur entr&eacute;e n\\'est",
+			"<abbr title='Num&eacute;ro'>N<sup>o</sup><\\/abbr>",
 			"gp.notify",
 			"gp.plumber",
 			"gulp.dest",
@@ -1035,24 +1035,143 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/stylesheets/components/forms.scss",
+					"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7198,
+						"buffer_size": 1057,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								811,
-								811
+								366,
+								366
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"codeintel": true,
+							"codeintel_database_dir": "~/.codeintel",
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Node.js",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_exclude_scopes_from_complete_triggers":
+							[
+								"comment"
+							],
+							"codeintel_language_settings":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_exclude_dir":
+									[
+										"/build/",
+										"/min/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": false,
+									"codeintel_selected_catalogs":
+									[
+										"jQuery"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 15,
+									"codeintel_scan_exclude_dir":
+									[
+										"/Applications/MAMP/bin/php/php5.5.3/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": true,
+									"php": "/Applications/MAMP/bin/php/php5.5.3/bin/php"
+								},
+								"Python3":
+								{
+									"codeintel_scan_extra_dir":
+									[
+										"/Applications/Sublime Text.app/Contents/MacOS",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/arch",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs"
+									],
+									"codeintel_scan_files_in_project": true,
+									"codeintel_selected_catalogs":
+									[
+									],
+									"python3": "/usr/local/bin/python3.3"
+								}
+							},
+							"codeintel_live": true,
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							[
+							],
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"codeintel_word_completions": "buffer",
+							"color_scheme": "Packages/User/Color Highlighter/themes/Seti.tmTheme",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/guilmets/Desktop/cleaned_up.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6643,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								430,
+								430
 							]
 						],
 						"settings":
@@ -1146,223 +1265,66 @@
 							},
 							"codeintel_tooltips": "popup",
 							"codeintel_word_completions": "buffer",
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 96.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/stylesheets/components/images.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1449,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1187,
-								1187
-							]
-						],
-						"settings":
-						{
-							"auto_complete": true,
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 72.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/stylesheets/utils/vars.scss",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 6125,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1370,
-								1359
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 720.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/stylesheets/components/buttons.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2354,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1609,
-								1610
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1512.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/stylesheets/components/media.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2854,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								533,
-								533
-							]
-						],
-						"settings":
-						{
-							"auto_complete": true,
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 288.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "src/stylesheets/components/modal.scss",
+					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3229,
+						"buffer_size": 1004,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2617,
-								2617
+								815,
+								0
 							]
 						],
 						"settings":
 						{
 							"auto_complete": true,
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3600.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/C/Users/guilmets/AppData/Roaming/Sublime Text 3/Packages/User/SassBeautify.sublime-settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 160,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								158,
-								158
-							]
-						],
-						"settings":
-						{
-							"auto_complete": true,
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"auto_indent": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 3,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4837,
+						"buffer_size": 88280,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4837,
-								4837
+								37159,
+								37202
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
+							"auto_complete": false,
 							"codeintel": true,
 							"codeintel_database_dir": "~/.codeintel",
 							"codeintel_enabled_languages":
@@ -1451,15 +1413,250 @@
 							},
 							"codeintel_tooltips": "popup",
 							"codeintel_word_completions": "buffer",
-							"color_scheme": "Packages/User/Color Highlighter/themes/Seti (SL).tmTheme",
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": true
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 216.0,
+						"translation.y": 14494.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 43835,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39545,
+								39545
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"codeintel": true,
+							"codeintel_database_dir": "~/.codeintel",
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Node.js",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_exclude_scopes_from_complete_triggers":
+							[
+								"comment"
+							],
+							"codeintel_language_settings":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_exclude_dir":
+									[
+										"/build/",
+										"/min/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": false,
+									"codeintel_selected_catalogs":
+									[
+										"jQuery"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 15,
+									"codeintel_scan_exclude_dir":
+									[
+										"/Applications/MAMP/bin/php/php5.5.3/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": true,
+									"php": "/Applications/MAMP/bin/php/php5.5.3/bin/php"
+								},
+								"Python3":
+								{
+									"codeintel_scan_extra_dir":
+									[
+										"/Applications/Sublime Text.app/Contents/MacOS",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/arch",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs"
+									],
+									"codeintel_scan_files_in_project": true,
+									"codeintel_selected_catalogs":
+									[
+									],
+									"python3": "/usr/local/bin/python3.3"
+								}
+							},
+							"codeintel_live": true,
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							[
+							],
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"codeintel_word_completions": "buffer",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 15046.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/scripts/plugins.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9775,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8527,
+								8527
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_database_dir": "~/.codeintel",
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Node.js",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_exclude_scopes_from_complete_triggers":
+							[
+								"comment"
+							],
+							"codeintel_language_settings":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_exclude_dir":
+									[
+										"/build/",
+										"/min/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": false,
+									"codeintel_selected_catalogs":
+									[
+										"jQuery"
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 15,
+									"codeintel_scan_exclude_dir":
+									[
+										"/Applications/MAMP/bin/php/php5.5.3/"
+									],
+									"codeintel_scan_extra_dir":
+									[
+									],
+									"codeintel_scan_files_in_project": true,
+									"php": "/Applications/MAMP/bin/php/php5.5.3/bin/php"
+								},
+								"Python3":
+								{
+									"codeintel_scan_extra_dir":
+									[
+										"/Applications/Sublime Text.app/Contents/MacOS",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/arch",
+										"~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs"
+									],
+									"codeintel_scan_files_in_project": true,
+									"codeintel_selected_catalogs":
+									[
+									],
+									"python3": "/usr/local/bin/python3.3"
+								}
+							},
+							"codeintel_live": true,
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							[
+							],
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"codeintel_word_completions": "buffer",
+							"color_scheme": "Packages/Seti_UX/Seti.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2692.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1536,15 +1733,17 @@
 	{
 		"height": 140.0
 	},
+	"pinned_build_system": "",
 	"project": "sergeguilmette.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 89.0
 	},
 	"save_all_on_build": true,
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1573,6 +1772,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1585,6 +1785,7 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -1598,7 +1799,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 290.0,
+	"side_bar_width": 303.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
