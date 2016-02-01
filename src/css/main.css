@@ -645,7 +645,6 @@ p {
   line-height: 1.625rem;
   margin-bottom: 1.625rem;
   word-break: break-word;
-  -moz-hyphens: auto;
   -ms-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto; }
@@ -932,6 +931,9 @@ button {
   .btn-full {
     display: block;
     width: 100%; }
+  .btn-small {
+    font-size: 0.8rem;
+    line-height: 1.21875rem; }
   .btn-medium {
     font-size: 1.25rem;
     line-height: 1.625rem; }
@@ -1204,99 +1206,99 @@ button {
     fill: #8cc63e;
     color: true; }
 
-.icon-cancel-circle {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-GD-logo2 {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: 0px 0px;
+  width: 310px;
+  height: 380px; }
+
+.icon-cancel-circle {
+  background-image: url(/images/sprites/svg-symbols.png);
+  background-position: -310px 0px;
   width: 32px;
   height: 32px; }
 
 .icon-checkmark {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -32px 0px;
+  background-image: url(/images/sprites/svg-symbols.png);
+  background-position: -342px 0px;
   width: 32px;
   height: 32px; }
 
 .icon-envelop {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -64px 0px;
-  width: 32px;
-  height: 32px; }
-
-.icon-facebook2 {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: -96px 0px;
-  width: 32px;
-  height: 32px; }
-
-.icon-GD-logo2 {
-  background-image: url(/image/sprites/svg-symbols.png);
-  background-position: 0px -32px;
-  width: 310px;
-  height: 380px; }
-
-.icon-github {
-  background-image: url(/image/sprites/svg-symbols.png);
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -310px -32px;
   width: 32px;
   height: 32px; }
 
-.icon-home {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-facebook2 {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -342px -32px;
   width: 32px;
   height: 32px; }
 
-.icon-linkedin {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-github {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -310px -64px;
   width: 32px;
   height: 32px; }
 
-.icon-mail {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-home {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -342px -64px;
   width: 32px;
   height: 32px; }
 
-.icon-menu {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-linkedin {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -310px -96px;
   width: 32px;
   height: 32px; }
 
-.icon-minus {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-mail {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -342px -96px;
   width: 32px;
   height: 32px; }
 
-.icon-paypal {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-menu {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -310px -128px;
   width: 32px;
   height: 32px; }
 
-.icon-phone {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-minus {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -342px -128px;
   width: 32px;
   height: 32px; }
 
-.icon-spinner {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-paypal {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -310px -160px;
   width: 32px;
   height: 32px; }
 
-.icon-spinner2 {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-phone {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -342px -160px;
   width: 32px;
   height: 32px; }
 
-.icon-twitter {
-  background-image: url(/image/sprites/svg-symbols.png);
+.icon-spinner {
+  background-image: url(/images/sprites/svg-symbols.png);
   background-position: -310px -192px;
+  width: 32px;
+  height: 32px; }
+
+.icon-spinner2 {
+  background-image: url(/images/sprites/svg-symbols.png);
+  background-position: -342px -192px;
+  width: 32px;
+  height: 32px; }
+
+.icon-twitter {
+  background-image: url(/images/sprites/svg-symbols.png);
+  background-position: -310px -224px;
   width: 32px;
   height: 32px; }
 

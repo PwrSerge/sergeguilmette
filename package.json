@@ -11,7 +11,7 @@
   "license": "ISC",
   "homepage": "http://www.sergeguilmette.com",
   "browser": {
-    "modernizr": "./bower_components/modernizr/modernizr-custom.js",
+    "modernizr": "./bower_components/modernizr/modernizr.js",
     "svg4everybody": "./bower_components/svg4everybody/dist/svg4everybody.min.js",
     "respond": "./bower_components/respond/dest/respond.min.js"
   },
@@ -26,6 +26,7 @@
     "respond": "respond"
   },
   "devDependencies": {
+    "browser-sync": "^2.11.1",
     "browserify-shim": "^3.8.11",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -66,6 +67,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
     "gulp-prettify": "^0.3.0",
+    "gulp-real-favicon": "^0.2.1",
     "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^2.0.5",
     "gulp-shell": "~0.5.1",
@@ -79,7 +81,14 @@
     "gulp-template": "~3.0.0",
     "gulp-uglify": "^1.5.1",
     "gulp-uncss": "^1.0.4",
-    "gulp-util": "^3.0.7"
+    "gulp-util": "^3.0.7",
+    "jshint-stylish": "^2.1.0",
+    "lazypipe": "^1.0.1",
+    "sc5-styleguide": "^0.3.41",
+    "swig": "^1.4.2",
+    "swig-extras": "0.0.1",
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^3.32.0"
   },
   "dependencies": {
     "browser-sync": "^2.10.0",

@@ -83,6 +83,10 @@ button {
     width: 100%;
   }
 
+  &-small {
+    @include type-scale(small);
+  }
+
   &-medium {
     @include type-scale(medium);
   }

@@ -12,7 +12,7 @@
 var Modernizr = require('modernizr');
 var $ = require('jquery');
 require('./plugins.js');
-require('respond');
+//require('respond');
 
 //var Snap = require('snapsvg')
 

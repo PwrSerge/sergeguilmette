@@ -13,6 +13,7 @@ var _ = require('underscore'),
   mainBowerFiles = require('main-bower-files'),
   styleguide = require('sc5-styleguide'),
   gulpFilter = require('gulp-filter'),
+  htmlmin = require('htmlmin'),
   runSequence = require('run-sequence'),
   deploy = require('gulp-gh-pages'),
   sass = require('gulp-ruby-sass'),
@@ -21,6 +22,8 @@ var _ = require('underscore'),
   slugify = require('slug'),
   through = require('through2'),
   path = require('path'),
+  realfavicon = require('gulp-real-favicon'),
+  fs = require('fs'),
   gutil = require('gulp-load-utils')(['colors',
     'env', 'log', 'pipeline', 'lazypipe'
   ]),
@@ -59,14 +62,6 @@ var paths = {
 };
 
 /*
-   Fileinclude
-   ========================================================================== */
-var fileincludecfg = {
-  prefix: '@@',
-  basepath: '@file',
-};
-
-/*
    Baner
    ========================================================================== */
 var packg = require('./package.json');
@@ -102,8 +97,8 @@ var cssminTasks = gutil.lazypipe()
     //Basename: 'main',
     suffix: '.min',
   })
-  .pipe(gp.cssnano)
-  .pipe(gp.sourcemaps.write('.'));
+  .pipe(gp.cssnano);
+//.pipe(gp.sourcemaps.write, '.');
 
 var jsminTasks = gutil.lazypipe()
   .pipe(gp.rename, {
@@ -143,6 +138,9 @@ var svgconfig = {
   templates: ['default-svg'],
 };
 
+/* ==========================================================================
+   TEMPLATE
+   ========================================================================== */
 /**
  * Debug mode may be set in one of these manners:
  * - gulp --debug=[true | false]
@@ -157,9 +155,9 @@ if (USER_DEBUG === undefined && argv._.indexOf('deploy') > -1) {
 }
 
 var site = {
-  'title': 'Serge Guilmettesite',
+  'title': 'Serge Guilmette',
   'url': 'http://localhost:9000',
-  'urlRoot': '/',
+  'urlRoot': './',
   'author': 'Serge Guilmette',
   'email': 'sergeguilmette@gmail.com',
   'time': new Date()
@@ -200,21 +198,74 @@ function applyTemplate(templateFile) {
   });
 }
 
-/* ==========================================================================
-   TEMPLATE
-   ========================================================================== */
+gulp.task('cleanposts', function(cb) {
+  del('dist/posts/', cb);
+});
 
-gulp.task('testimonials', function() {
-  return gulp.src('content/testimonials/*.md')
+gulp.task('posts', ['cleanposts'], function() {
+  // Copy blog images over.
+  var images = gulp.src(['images/posts/*.jpg', 'images/posts/*.png'])
+    .pipe(gulp.dest('dist/images/posts'));
+
+  var posts = gulp.src('content/posts/*.md')
     .pipe(gp.frontMatter({
       property: 'page',
       remove: true
     }))
-    .pipe(gp.marked())
+    .pipe(marked())
+    .pipe(summarize('<!--more-->'))
+    // Collect all the posts and place them on the site object.
+    .pipe((function() {
+      var posts = [];
+      var tags = [];
+      return through.obj(function(file, enc, cb) {
+          file.page.url = 'posts/' + path.basename(file.path, '.md');
+          posts.push(file.page);
+          posts[posts.length - 1].content = file.contents.toString();
+
+          if (file.page.tags) {
+            file.page.tags.forEach(function(tag) {
+              if (tags.indexOf(tag) === -1) {
+                tags.push(tag);
+              }
+            });
+          }
+
+          this.push(file);
+          cb();
+        },
+        function(cb) {
+          posts.sort(function(a, b) {
+            return b.date - a.date;
+          });
+          site.posts = posts;
+          site.tags = tags;
+          cb();
+        });
+    })())
+    .pipe(applyTemplate('assets/templates/post.html'))
+    .pipe(gulp.dest('dist/posts'))
+    .pipe(browserSync.reload({
+      stream: true,
+    }));
+
+  return merge(images, posts)
+    .pipe(browserSync.reload({
+      stream: true,
+    }));
+});
+
+gulp.task('testimonials', function() {
+  return gulp.src('src/content/testimonials/*.md')
+    .pipe(gp.frontMatter({
+      property: 'page',
+      remove: true
+    }))
+    .pipe(marked())
     // Collect all the testimonials and place them on the site object.
     .pipe((function() {
       var testimonials = [];
-      return gp.through.obj(function(file, enc, cb) {
+      return through.obj(function(file, enc, cb) {
           testimonials.push(file.page);
           testimonials[testimonials.length - 1].content = file.contents.toString();
           this.push(file);
@@ -236,13 +287,12 @@ gulp.task('testimonials', function() {
     })());
 });
 
-gulp.task('cleanpages', function() {
-  return gulp.src(['dist/*.html'], {read: false})
-      .pipe(del());
+gulp.task('cleanpages', function(cb) {
+  del('dist/*.html', cb);
 });
 
-gulp.task('pages', ['cleanpages', 'testimonials'], function() {
-  var html = gulp.src(['content/pages/*.html'])
+gulp.task('pages', function() {
+  var html = gulp.src(['src/content/pages/*.html'])
     .pipe(gp.frontMatter({
       property: 'page',
       remove: true
@@ -252,37 +302,40 @@ gulp.task('pages', ['cleanpages', 'testimonials'], function() {
         site: site,
         page: {}
       };
-      var tpl = gp.swig.compileFile(file.path);
+      var tpl = swig.compileFile(file.path);
       file.contents = new Buffer(tpl(data), 'utf8');
       this.push(file);
       cb();
     }));
 
-  var markdown = gulp.src('content/pages/*.md')
+  var markdown = gulp.src('src/content/pages/*.md')
     .pipe(gp.frontMatter({
       property: 'page',
       remove: true
     }))
-    .pipe(gp.marked())
-    .pipe(applyTemplate('assets/templates/page.html'))
+    .pipe(marked())
+    .pipe(applyTemplate('src/templates/page.html'))
     .pipe(gp.rename({
       extname: '.html'
     }));
 
-  return gp.merge(html, markdown)
-    .pipe(gp.if(!DEBUG, gp.htmlmin({
-      // This option seems logical, but it breaks gulp-rev-all
-      removeAttributeQuotes: false,
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      minifyJS: true,
-      minifyCSS: true,
-      minifyURLs: true
-    })))
-    .pipe(gulp.dest('dist'))
-    .pipe(gp.connect.reload());
+  return merge(html, markdown)
+    // .pipe(gp.if(!DEBUG, htmlmin({
+    //   // This option seems logical, but it breaks gulp-rev-all
+    //   removeAttributeQuotes: false,
+    //   removeComments: true,
+    //   collapseWhitespace: true,
+    //   removeRedundantAttributes: true,
+    //   removeStyleLinkTypeAttributes: true,
+    //   minifyJS: true,
+    //   minifyCSS: true,
+    //   minifyURLs: true
+    // })))
+    .pipe(gulp.dest('./dist/'))
+    .pipe(browserSync.reload({
+      stream: true,
+    }))
+    .pipe(gp.notify(notifycfg('PAGES')));
 });
 
 /* ==========================================================================
@@ -501,6 +554,88 @@ gulp.task('svgfallback', function() {
 });
 
 /* ==========================================================================
+   FAVICONS
+   ========================================================================== */
+
+var realfavicon = require('gulp-real-favicon');
+var fs = require('fs');
+
+// File where the favicon markups are stored
+var FAVICON_DATA_FILE = 'faviconData.json';
+
+// Generate the icons. This task takes a few seconds to complete.
+// You should run it at least once to create the icons. Then,
+// you should run it whenever RealFaviconGenerator updates its
+// package (see the check-for-favicon-update task below).
+gulp.task('generate-favicon', function(done) {
+  realfavicon.generateFavicon({
+    masterPicture: 'src/images/icons/GD-logo2.svg',
+    dest: 'dist/images/favicon/',
+    iconsPath: '{{site.urlRoot}}images/favicon/',
+    design: {
+      ios: {
+        pictureAspect: 'backgroundAndMargin',
+        backgroundColor: '#ffffff',
+        margin: '14%'
+      },
+      desktopBrowser: {},
+      windows: {
+        pictureAspect: 'noChange',
+        backgroundColor: '#da532c',
+        onConflict: 'override'
+      },
+      androidChrome: {
+        pictureAspect: 'backgroundAndMargin',
+        margin: '6%',
+        backgroundColor: '#ffffff',
+        themeColor: '#ffffff',
+        manifest: {
+          name: 'Guilmette Design',
+          display: 'browser',
+          orientation: 'notSet',
+          onConflict: 'override',
+          declared: true
+        }
+      },
+      safariPinnedTab: {
+        pictureAspect: 'silhouette',
+        themeColor: '#5bbad5'
+      }
+    },
+    settings: {
+      scalingAlgorithm: 'Mitchell',
+      errorOnImageTooSmall: false
+    },
+    markupFile: FAVICON_DATA_FILE
+  }, function() {
+    done();
+  });
+});
+
+// Inject the favicon markups in your HTML pages. You should run
+// this task whenever you modify a page. You can keep this task
+// as is or refactor your existing HTML pipeline.
+gulp.task('inject-favicon-markups', function() {
+  gulp.src(['src/templates/base.html'])
+    .pipe(realfavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
+    .pipe(gulp.dest('./src/templates/'));
+
+});
+
+// Check for updates on RealFaviconGenerator (think: Apple has just
+// released a new Touch icon along with the latest version of iOS).
+// Run this task from time to time. Ideally, make it part of your
+// continuous integration system.
+gulp.task('check-for-favicon-update', function(done) {
+  var currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
+  realfavicon.checkForUpdates(currentVersion, function(err) {
+    if (err) {
+      throw err;
+    }
+  });
+});
+
+/* ==========================================================================
    HTML
    ========================================================================== */
 
@@ -509,24 +644,23 @@ gulp.task('html', ['sass'], function() {
   return gulp.src('src/*.html')
     .pipe(gp.changed(paths.html.src))
     .pipe(gp.plumber())
-    .pipe(gp.fileInclude(fileincludecfg))
 
   // Stylesheet and main javascripts injection
-  .pipe(gp.inject(gulp.src(['./dist/css/*.min.css',
-      './dist/scripts/*.min.js'
-    ], {
-      read: false
-    }), {
-      ignorePath: ['src/', 'dist/'],
-      addRootSlash: false,
-    }))
-    // inline svg injection
-    .pipe(gp.inject(gulp.src(['./dist/images/sprites/*.svg']), {
-      starttag: '<!-- inject:head:{{ext}} -->',
-      transform: function(filePath, file) {
-        return file.contents.toString();
-      }
-    }))
+  // .pipe(gp.inject(gulp.src(['./dist/css/*.min.css',
+  //     './dist/scripts/*.min.js'
+  //   ], {
+  //     read: false
+  //   }), {
+  //     ignorePath: ['src/', 'dist/'],
+  //     addRootSlash: false,
+  //   }))
+  //   // inline svg injection
+  //   .pipe(gp.inject(gulp.src(['./dist/images/sprites/*.svg']), {
+  //     starttag: '<!-- inject:head:{{ext}} -->',
+  //     transform: function(filePath, file) {
+  //       return file.contents.toString();
+  //     }
+  //   }))
     .pipe(gp.prettify({
       // indent_size: 2
     }))
@@ -562,11 +696,30 @@ gulp.task('bump', function() {
 /* ==========================================================================
    BROWSER_SYNC
    ========================================================================== */
+// Configure the proxy server for livereload
+var proxyServer = 'http://localhost',
+  port = 8000;
+
+// Array of files to watch
+var arrAddFiles = [
+  './app/**/*.php'
+];
+
+// browser-sync task for starting the server.
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: './dist',
+      baseDir: './dist/' // Change this to your web root dir
     },
+    //proxy: proxyServer,
+    port: port,
+    //files: arrAddFiles,
+    ghostMode: {
+      clicks: true,
+      location: true,
+      forms: true,
+      scroll: true
+    }
   });
 });
 /* ==========================================================================
