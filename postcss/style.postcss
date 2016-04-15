@@ -1,0 +1,177 @@
+@import url(http://fonts.googleapis.com/css?family=Kavoon|Wendy+One|Montserrat);
+
+@use postcss-nested;
+@use postcss-simple-vars;
+@use postcss-discard-comments;
+/*--------------------------------------------------------------*/
+/* variables */
+$color-base: #3e225b;
+$color-base-background: #f8f7f2;
+$color-secondary-background: #0e0e0e;
+$color-muted: #99a9b3;
+$color-primary: #9362c4;
+$color-secondary: #8cc63e;
+$color-tertiary: #cff898;
+$color-accent: #ffc83c;
+$color-error: #fa5e5b;
+
+/*--------------------------------------------------------------*/
+/*Base*/
+
+html,
+body {
+	width:100%;
+	height:100%;
+	background: $color-base-background;
+	margin:0;
+	border:0;
+	color: $color-base;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  margin-bottom: 1.625rem;
+  color: $color-secondary-background;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+li > a {
+    color: inherit;
+		&:hover, &:active, &:focus  {
+		color: $color-secondary;
+	}
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 3.25rem;
+  font-weight: 900;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   color: $color-primary;
+}
+
+h2 {
+  font-size: 1.95rem;
+  line-height: 3.43rem;
+  font-weight: 700;
+  border-bottom-width: 0.0625rem;
+  border-bottom-style: solid;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: $color-primary;
+}
+
+.button {
+	background: $color-primary;
+	color: $color-secondary-background;
+ 	font-weight: 800;
+	&:hover, &:active, &:focus  {
+		background: $color-secondary;
+		color: $color-secondary-background;
+	}
+}
+
+img {
+  padding: 1rem;
+}
+
+.columns {
+	padding-left: 0;
+}
+/*--------------------------------------------------------------*/
+/* header */
+header {
+background: $color-secondary-background;
+box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.750);
+width: 100%;
+  
+}
+/*navigation*/
+
+.main-nav-item {
+      display: inline-block;
+      padding: 0.5em;      
+      position: relative;
+      :after {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 15%;
+        width: 0;
+        height: 1px;
+        background-color: $color-secondary;
+        content: '';
+        transition: width 0.5s; }
+      :hover:after {
+        width: 100%; } 
+	 }
+
+.main-nav {
+	padding: 1rem 0;
+  background-color: inherit;
+  ul {
+    color: $color-primary;
+	  background-color: transparent;
+    font-weight: bold;
+    
+  }
+  
+}
+.icon-logo {
+	width: 4em;
+  height: 4em;
+	padding: 0.3em;
+ }
+
+
+/*--------------------------------------------------------------*/
+/*  Main page */
+section {
+  padding: 3rem;
+  &:nth-child(2n+1){
+    background: lightgray;
+  }
+	p {
+		
+	}
+	
+}
+
+
+/*--------------------------------------------------------------*/
+/* footer */
+
+footer {
+  margin: 0;
+  padding-top: 3rem;
+  width: 100%;  
+  color:  $color-primary;
+	background-color: $color-secondary-background;
+  p {
+    color: lightgray;
+  }
+}
+
+.contact-list{
+  font-size: 3em;
+  list-style: none;
+}
+
+.contact-item{
+  padding: 0 .5em;
+  i{
+    padding-right: 1em;
+  }
+ 
+}
+
+
+
+
