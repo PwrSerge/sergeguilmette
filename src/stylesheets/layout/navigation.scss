@@ -149,7 +149,7 @@
   }
 
   &:hover svg,
-  &:active svg{
+  &:active svg {
     @include svg-colors($color-secondary, true);
   }
 }

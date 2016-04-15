@@ -646,21 +646,21 @@ gulp.task('html', ['sass'], function() {
     .pipe(gp.plumber())
 
   // Stylesheet and main javascripts injection
-  // .pipe(gp.inject(gulp.src(['./dist/css/*.min.css',
-  //     './dist/scripts/*.min.js'
-  //   ], {
-  //     read: false
-  //   }), {
-  //     ignorePath: ['src/', 'dist/'],
-  //     addRootSlash: false,
-  //   }))
-  //   // inline svg injection
-  //   .pipe(gp.inject(gulp.src(['./dist/images/sprites/*.svg']), {
-  //     starttag: '<!-- inject:head:{{ext}} -->',
-  //     transform: function(filePath, file) {
-  //       return file.contents.toString();
-  //     }
-  //   }))
+  .pipe(gp.inject(gulp.src(['./dist/css/*.min.css',
+      './dist/scripts/*.min.js'
+    ], {
+      read: false
+    }), {
+      ignorePath: ['src/', 'dist/'],
+      addRootSlash: false,
+    }))
+    // inline svg injection
+    .pipe(gp.inject(gulp.src(['./dist/images/sprites/*.svg']), {
+      starttag: '<!-- inject:head:{{ext}} -->',
+      transform: function(filePath, file) {
+        return file.contents.toString();
+      }
+    }))
     .pipe(gp.prettify({
       // indent_size: 2
     }))
