@@ -76,7 +76,6 @@ header{
 background:#0e0e0e;
 box-shadow:0px 0px 0px 3px rgba(0,0,0,0.750);
 width:100%;
-  
 }
 
 .main-nav-item{
@@ -120,7 +119,6 @@ width:100%;
  }
 section{
   padding:3rem;
-	
 }
 section:nth-child(2n+1){
 	background:lightgray;
@@ -131,22 +129,25 @@ footer{
   margin:0;
   padding-top:3rem;
   width:100%;  
-  color:#9362c4;
-	background-color:#0e0e0e;
+  background-color:#0e0e0e;
 }
 
-footer p{
+footer p, footer label{
 	color:lightgray;
 }
-
+.field-group{
+	padding:2em;
+}
+.field-group label{
+	font-size:1.25em;
+}
 .contact-list{
   font-size:3em;
-  list-style:none;
+  list-style:none;	
 }
 
 .contact-item{
   padding:0 .5em;
- 
 }
 
 .contact-item i{

@@ -26,7 +26,7 @@ body {
 	margin:0;
 	border:0;
 	color: $color-base;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Montserrat", Helvetica, Arial, sans-serif;
 }
 
 p {
@@ -91,7 +91,6 @@ header {
 background: $color-secondary-background;
 box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.750);
 width: 100%;
-  
 }
 /*navigation*/
 
@@ -141,7 +140,6 @@ section {
 	p {
 		
 	}
-	
 }
 
 
@@ -152,16 +150,20 @@ footer {
   margin: 0;
   padding-top: 3rem;
   width: 100%;  
-  color:  $color-primary;
-	background-color: $color-secondary-background;
-  p {
+  background-color: $color-secondary-background;
+  p, label {
     color: lightgray;
   }
 }
-
+.field-group {
+	padding: 2em;
+	label {
+	font-size: 1.25em;
+	}
+}
 .contact-list{
   font-size: 3em;
-  list-style: none;
+  list-style: none;	
 }
 
 .contact-item{
@@ -169,7 +171,6 @@ footer {
   i{
     padding-right: 1em;
   }
- 
 }
 
 
