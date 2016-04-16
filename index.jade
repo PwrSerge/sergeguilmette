@@ -52,20 +52,20 @@ section#projects
 footer#contact
 	.row
 		.large-12.columns
-			h2 Contact me Form
+			h2 Contact
 	.row.align-middle
-		.small-12.medium-8.columns
+		.small-12.large-8.columns
 			form#sgform(action='//formspree.io/sergeguilmette@gmail.com', method='POST')
 				// <input type="hidden" name="_next" value="http://sergeguilmette.me/index.html" />
-			.field-group
-				label.field-label(for='name') Name
-				input#name.input-inline(type='text', name='name', required='')
-				label.field-label(for='email') Email
-				input.input-inline(type='email', name='_replyto', required='')
-				label.field-label(for='message') Message
-				textarea#message
-				button.button.open(type='submit', value='Send') Send
-		.small-12.medium-4.columns
+				.field-group
+					label.field-label(for='name') Name
+					input#name.input-inline(type='text', name='name', required='')
+					label.field-label(for='email') Email
+					input.input-inline(type='email', name='_replyto', required='')
+					label.field-label(for='message') Message
+					textarea#message
+					button.button.open(type='submit', value='Send') Send
+		.small-12.large-4.columns
 			ul.contact-list
 				li.contact-item
 					p

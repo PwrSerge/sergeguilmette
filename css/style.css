@@ -126,17 +126,12 @@ section:nth-child(2n+1){
 section p{}
 
 footer{
-  margin:0;
-  padding-top:3rem;
-  width:100%;  
+  padding:3rem;
   background-color:#0e0e0e;
 }
 
 footer p, footer label{
 	color:lightgray;
-}
-.field-group{
-	padding:2em;
 }
 .field-group label{
 	font-size:1.25em;
@@ -144,10 +139,6 @@ footer p, footer label{
 .contact-list{
   font-size:3em;
   list-style:none;	
-}
-
-.contact-item{
-  padding:0 .5em;
 }
 
 .contact-item i{
